@@ -67,9 +67,9 @@ $doktype = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'][$_EXTKEY]['doktypeId'];
 $TCA['pages']['columns']['doktype']['config']['items'][] = Array ('Blog', $doktype, t3lib_extMgm::extRelPath($_EXTKEY). 'res/pageicon.png');
 
 if (t3lib_div::int_from_ver(TYPO3_version) >= 4004000) {
-    t3lib_SpriteManager::addTcaTypeIcon('pages', $doktype, t3lib_extMgm::extRelPath($_EXTKEY) . 'res/pageicon.png');
+	t3lib_SpriteManager::addTcaTypeIcon('pages', $doktype, t3lib_extMgm::extRelPath($_EXTKEY) . 'res/pageicon.png');
 }else{
-    $PAGES_TYPES[$doktype] = Array ('icon' => t3lib_extMgm::extRelPath($_EXTKEY) . 'res/pageicon.gif');
+	$PAGES_TYPES[$doktype] = Array ('icon' => t3lib_extMgm::extRelPath($_EXTKEY) . 'res/pageicon.gif');
 }
 
 $GLOBALS['TYPO3_CONF_VARS']['BE']['defaultUserTSconfig'] .= '
