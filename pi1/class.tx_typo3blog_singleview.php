@@ -26,15 +26,16 @@
  *
  *
  *
- *   54: class tx_typo3blog_singleview extends tslib_pibase
+ *   55: class tx_typo3blog_singleview extends tslib_pibase
  *   72:     function init()
- *   98:     function main($content, $conf)
- *  122:     function mergeConfiguration()
- *  160:     public function fetchConfigValue($param)
- *  181:     private function getPostByRootLine()
- *  197:     private function getPostCategoryName($pid, $field = 'title')
+ *  100:     function main($content, $conf)
+ *  151:     function mergeConfiguration()
+ *  164:     public function fetchConfigValue($param)
+ *  185:     private function getPageContent()
+ *  208:     private function getPostCategoryName($pid, $field = 'title')
+ *  226:     private function substituteMarkersAndSubparts($template, array $markers, array $subparts)
  *
- * TOTAL FUNCTIONS: 6
+ * TOTAL FUNCTIONS: 7
  * (This index is automatically created/updated by the extension "extdeveval")
  *
  */
@@ -54,20 +55,19 @@ include_once(PATH_site . 'typo3/sysext/cms/tslib/class.tslib_content.php');
 class tx_typo3blog_singleview extends tslib_pibase
 {
 	public $prefixId = 'tx_typo3blog_pi1'; // Same as class name
-	public $scriptRelPath = 'pi1/class.tx_typo3blog_pi1.php'; // Path to this script relative to the extension dir.
+	public $scriptRelPath = 'pi1/class.tx_typo3blog_singleview.php'; // Path to this script relative to the extension dir.
 	public $extKey = 'typo3_blog'; // The extension key.
 	public $pi_checkCHash = TRUE;
 
-	private $typo3blog_func = NULL;
 	private $template = NULL;
 	private $extConf = NULL;
 	private $page_uid = NULL;
-	private $blog_doktype_id = NULL;
+	private $typo3BlogFunc = NULL;
 
 	/**
 	 * initializes this class
 	 *
-	 * @return	void
+	 * @return    void
 	 */
 	function init()
 	{
@@ -84,15 +84,18 @@ class tx_typo3blog_singleview extends tslib_pibase
 		$this->page_uid = intval($GLOBALS['TSFE']->page['uid']);
 
 		// Read template file
-		$this->template = $this->cObj->fileResource($this->conf['blogList.']['templateFile']);
+		$this->template = $this->cObj->fileResource($this->conf['blogSingle.']['templateFile']);
+
+		// Make instance of tslib_cObj
+		$this->typo3BlogFunc = t3lib_div::makeInstance('typo3blog_func');
 	}
 
 	/**
 	 * The main method of the PlugIn
 	 *
-	 * @param	string		$content: The PlugIn content
-	 * @param	array		$conf: The PlugIn configuration
-	 * @return	string
+	 * @param    string        $content: The PlugIn content
+	 * @param    array        $conf: The PlugIn configuration
+	 * @return    string
 	 */
 	function main($content, $conf)
 	{
@@ -101,26 +104,49 @@ class tx_typo3blog_singleview extends tslib_pibase
 		$this->pi_loadLL();
 		$this->init();
 
-		$query = 'SELECT uid FROM tt_content WHERE pid = ' . $this->page_uid . ' ' . $this->cObj->enableFields('tt_content') . ' ORDER BY sorting' ;
-		$res = mysql(TYPO3_db, $query) ;
+		// Get subparts from HTML template BLOGLIST_TEMPLATE
+		$template = $this->cObj->getSubpart($this->template, '###BLOGSINGLE_TEMPLATE###');
 
-		$content = 'Typo3 Blog Single View' ;
+		// Define array and vars for template
+		$subparts = array();
+		$markers = array();
+
+		// Query to load all blog pages
+		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+			"*", "pages",
+			"uid = " . $this->page_uid . "
+			AND hidden = 0 AND deleted = 0 "
+		);
+
+		$content = '';
 		while ($row = mysql_fetch_assoc($res)) {
-			$conf['tables'] = 'tt_content';
-			$conf['source'] = intval($row['uid']);
-			$conf['dontCheckPid'] = 1;
-
-			$content .= $this->cObj->RECORDS($conf);
+			$row['category'] = $this->typo3BlogFunc->getPostCategoryName($row['pid'], 'title');
+			$row['pagecontent'] = $this->getPageContent();
+			$this->cObj->data = $row;
+			foreach ($row as $column => $value) {
+				if ($this->conf['blogList.'][$column]) {
+					$this->cObj->setCurrentVal($value);
+					$value = $this->cObj->cObjGetSingle($this->conf['blogSingle.'][$column], $this->conf['blogSingle.'][$column . '.']);
+					$this->cObj->setCurrentVal(false);
+				}
+				else {
+					$value = $this->cObj->stdWrap($value, $this->conf['blogSingle.'][$column . '.']);
+				}
+				$markers['###BLOGSINGLE_' . strtoupper($column) . '###'] = $value;
+			}
 		}
 
-		return $content;
+		// Complete the template expansion by replacing the "content" marker in the template
+		$content .= $this->substituteMarkersAndSubparts($template, $markers, $subparts);
+
+		return $this->pi_wrapInBaseClass($content);
 	}
 
 	/**
 	 * THIS NICE PART IS FROM TYPO3 comments EXTENSION
 	 * Merges TS configuration with configuration from flexform (latter takes precedence).
 	 *
-	 * @return	void
+	 * @return    void
 	 */
 	function mergeConfiguration()
 	{
@@ -132,8 +158,8 @@ class tx_typo3blog_singleview extends tslib_pibase
 	 * Fetches configuration value from flexform. If value exists, value in
 	 * <code>$this->conf</code> is replaced with this value.
 	 *
-	 * @param	string	$param    Parameter name. If <code>.</code> is found, the first part is section name, second is key (applies only to $this->conf)
-	 * @return	void
+	 * @param    string        $param    Parameter name. If <code>.</code> is found, the first part is section name, second is key (applies only to $this->conf)
+	 * @return    void
 	 */
 	public function fetchConfigValue($param)
 	{
@@ -152,32 +178,61 @@ class tx_typo3blog_singleview extends tslib_pibase
 	}
 
 	/**
-	 * Get all pages from current page_id as string (123,124,125)
+	 * Retrieve all records from tt_content by current page uid
 	 *
-	 * @return	string
+	 * @return    string
 	 */
-	private function getPostByRootLine()
+	private function getPageContent()
 	{
-		// Read all posts (pages with doktype 1) from rootline
-		$this->cObj->data['recursive'] = 4;
-		$pidList = $this->pi_getPidList(intval($this->page_uid), $this->cObj->data['recursive']);
+		$query = 'SELECT uid FROM tt_content WHERE pid = ' . intval($this->page_uid) . ' ' . $this->cObj->enableFields('tt_content') . ' ORDER BY sorting';
+		$res = mysql(TYPO3_db, $query);
 
-		return $GLOBALS['TYPO3_DB']->cleanIntList($pidList);
+		$content = '';
+		while ($row = mysql_fetch_assoc($res)) {
+			$conf['tables'] = 'tt_content';
+			$conf['source'] = intval($row['uid']);
+			$conf['dontCheckPid'] = 1;
+
+			$content .= $this->cObj->RECORDS($conf);
+		}
+		return $content;
 	}
 
 	/**
 	 * Return the category name
 	 *
-	 * @param	int		$pid
-	 * @param	string	$field
-	 * @return	string
+	 * @param    int        $pid
+	 * @param    string        $field
+	 * @return    string
 	 */
 	private function getPostCategoryName($pid, $field = 'title')
 	{
-		$categoryPage_sql = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*', 'pages', 'uid=' . intval($pid), '', '');
+		$categoryPage_sql = $GLOBALS['TYPO3_DB']->exec_SELECTquery('$field', 'pages', 'uid=' . intval($pid), '', '');
 		$categoryPage = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($categoryPage_sql);
 
 		return $categoryPage[$field];
+	}
+
+	/**
+	 * THIS NICE PART IS FROM TYPO3 comments EXTENSION
+	 * Replaces $this->cObj->substituteArrayMarkerCached() because substitued
+	 * function polutes cache_hash table a lot.
+	 *
+	 * @param    string        $template    Template
+	 * @param    array        $markers    Markers
+	 * @param    array        $subparts    Subparts
+	 * @return    string        HTML
+	 */
+	private function substituteMarkersAndSubparts($template, array $markers, array $subparts)
+	{
+		$content = $this->cObj->substituteMarkerArray($template, $markers);
+		if (count($subparts) > 0) {
+			foreach ($subparts as $name => $subpart) {
+				$content = $this->cObj->substituteSubpart($content, $name, $subpart);
+			}
+		}
+
+		return $content;
 	}
 }
 

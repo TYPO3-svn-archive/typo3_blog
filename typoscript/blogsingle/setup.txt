@@ -1,5 +1,139 @@
 plugin.tx_typo3blog_pi1 {
-    blogSingle {
+	blogSingle {
 
-    }
+		# Bloglist template file
+		templateFile = EXT:typo3_blog/res/blogsingle/template.html
+
+		# SECTION TEMPLATE MARKER FOR BLOGLIST TEMPLATE
+		#----------------------------------------------------
+
+		# page field uid setup for templatemarker '###BLOGSINGLE_UID###'
+		uid = TEXT
+		uid {
+			wrap = |
+			field = uid
+		}
+
+		# page field pid setup for templatemarker '###BLOGSINGLE_PID###'
+		pid = TEXT
+		pid {
+			wrap = |
+			field = pid
+		}
+
+		# page field starttime setup for templatemarker '###BLOGSINGLE_STARTTIME###'
+		starttime = TEXT
+		starttime {
+			wrap = |
+			strftime = %H.%I.%S
+			field = starttime
+		}
+
+		# page field endtime setup for templatemarker '###BLOGSINGLE_ENDTIME###'
+		endtime = TEXT
+		endtime {
+			wrap = |
+			format = %d.%m.%Y
+			field = endtime
+		}
+
+		# page field subtitle setup for templatemarker '###BLOGSINGLE_SUBTITLE###'
+		subtitle = TEXT
+		subtitle {
+			wrap = |
+			field = subtitle
+		}
+
+		# page field title setup for templatemarker '###BLOGSINGLE_TITLE###'
+		title = TEXT
+		title {
+			wrap = <h2>|</h2>
+			field = title
+		}
+
+		# page field crdate (format as date '%d.%m.%Y' via strftime) setup for templatemarker '###BLOGSINGLE_CRDATE###'
+		crdate = TEXT
+		crdate {
+			wrap = |
+			field = crdate
+			strftime = %d.%m.%Y
+		}
+
+		# page field author setup for templatemarker '###BLOGSINGLE_AUTHOR###'
+		author = TEXT
+		author {
+		   wrap = |
+		   field = author
+		}
+
+		# page field autor_email setup for templatemarker '###BLOGSINGLE_AUTHOR_EMAIL###'
+		authore_mail = TEXT
+		authore_mail {
+			wrap = |
+			field = author_email
+		}
+
+		# page field nav_title setup for templatemarker '###BLOGSINGLE_NAV_TITLE###'
+		nav_title = TEXT
+		nav_title {
+			wrap = |
+			field = nav_title
+		}
+
+		# page field title (from parent page) setup for templatemarker '###BLOGSINGLE_CATEGORY###'
+		category = TEXT
+		category {
+			wrap = |
+			field = category
+			typolink {
+				parameter.dataWrap = {field:pid}
+				useCacheHash = 1
+			}
+		}
+
+		# page field image setup for templatemarker '###BLOGSINGLE_TX_TYPO3BLOG_IMAGE###'
+		tx_typo3blog_image = IMAGE
+		tx_typo3blog_image {
+			wrap = |
+			field = tx_typo3blog_image
+
+		}
+
+		# page field tx_typo3_tagcloud setup for templatemarker '###BLOGSINGLE_TX_TYPO3BLOG_TAGCLOUD###'
+		tx_typo3blog_tagcloud = TEXT
+		tx_typo3blog_tagcloud {
+			wrap = |
+			field = tx_typo3blog_tagcloud
+		}
+
+		# page field tx_typo3blog_viewcount setup for templatemarker '###BLOGSINGLE_VIEWCOUNT###'
+		viewcount = TEXT
+		viewcount {
+			wrap = |
+		}
+
+		# tt_content items setup for templatemarker '###BLOGSINGLE_PAGECONTENT###'
+		content = TEXT
+		content {
+		   wrap  = |
+		}
+
+		# gravatar setup for templatemarker '###BLOGSINGLE_GRAVATAR###'
+		gravatar = IMAGE
+		gravatar {
+			wrap = |
+		}
+
+		# link to post setup for templatemarker '###BLOGSINGLE_LINKTOPOST###'
+		linktopost = TEXT
+		linktopost {
+			wrap = |
+		}
+
+		# showMore setup for templatemarker '###BLOGSINGLE_SHOWMORE###'
+		showMore = TEXT
+		showMore {
+			wrap = |
+		}
+	}
 }

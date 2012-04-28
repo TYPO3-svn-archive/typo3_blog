@@ -27,16 +27,16 @@
  *
  *
  *   59: class tx_typo3blog_listview extends tslib_pibase
- *   76:     private function init()
- *  104:     public function main($content, $conf)
- *  166:     private function mergeConfiguration()
- *  186:     private function fetchConfigValue($param)
- *  209:     private function getContentElementsAsPreview($pid, $limit = 1)
- *  241:     private function getPageBrowseLimit()
- *  258:     private function getListGetPageBrowser($numberOfPages)
- *  279:     private function getNumberOfPosts($page_id)
- *  297:     private function getPostByRootLine()
- *  313:     private function getPostCategoryName($pid, $field = 'title')
+ *   77:     private function init()
+ *  108:     public function main($content, $conf)
+ *  171:     private function getFilterQuery()
+ *  182:     private function mergeConfiguration()
+ *  201:     private function fetchConfigValue($param)
+ *  224:     private function getContentElementsAsPreview($pid, $limit = 1)
+ *  256:     private function getPageBrowseLimit()
+ *  273:     private function getListGetPageBrowser($numberOfPages)
+ *  294:     private function getNumberOfPosts($page_id)
+ *  312:     private function getPostByRootLine()
  *  331:     private function substituteMarkersAndSubparts($template, array $markers, array $subparts)
  *
  * TOTAL FUNCTIONS: 11
@@ -59,7 +59,7 @@ include_once(PATH_site . 'typo3/sysext/cms/tslib/class.tslib_content.php');
 class tx_typo3blog_listview extends tslib_pibase
 {
 	public $prefixId = 'tx_typo3blog_pi1'; // Same as class name
-	public $scriptRelPath = 'pi1/class.tx_typo3blog_pi1.php'; // Path to this script relative to the extension dir.
+	public $scriptRelPath = 'pi1/class.tx_typo3blog_listview.php'; // Path to this script relative to the extension dir.
 	public $extKey = 'typo3_blog'; // The extension key.
 	public $pi_checkCHash = TRUE;
 
@@ -67,11 +67,12 @@ class tx_typo3blog_listview extends tslib_pibase
 	private $extConf = NULL;
 	private $page_uid = NULL;
 	private $blog_doktype_id = NULL;
+	private $typo3BlogFunc = NULL;
 
 	/**
 	 * initializes this class
 	 *
-	 * @return	void
+	 * @return    void
 	 */
 	private function init()
 	{
@@ -92,14 +93,17 @@ class tx_typo3blog_listview extends tslib_pibase
 
 		// Read template file
 		$this->template = $this->cObj->fileResource($this->conf['blogList.']['templateFile']);
+
+		// Make instance of tslib_cObj
+		$this->typo3BlogFunc = t3lib_div::makeInstance('typo3blog_func');
 	}
 
 	/**
 	 * The main method of the PlugIn
 	 *
-	 * @param	string		$content: The PlugIn content
-	 * @param	array		$conf: The PlugIn configuration
-	 * @return	string		content that is displayed on the website
+	 * @param    string        $content: The PlugIn content
+	 * @param    array        $conf: The PlugIn configuration
+	 * @return    string        content that is displayed on the website
 	 */
 	public function main($content, $conf)
 	{
@@ -113,7 +117,7 @@ class tx_typo3blog_listview extends tslib_pibase
 		$subpartItem = $this->cObj->getSubpart($template, '###ITEM###');
 
 		// Define array and vars for template
-		$subparts= array();
+		$subparts = array();
 		$subparts['###ITEM###'] = '';
 		$markerArray = array();
 		$markers = array();
@@ -122,7 +126,7 @@ class tx_typo3blog_listview extends tslib_pibase
 		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			"*", "pages",
 			"pid IN (" . $this->getPostByRootLine() . ")
-			AND doktype != " . $this->blog_doktype_id . " AND hidden = 0 AND deleted = 0 " . $this->getFilterQuery() ."
+			AND doktype != " . $this->blog_doktype_id . " AND hidden = 0 AND deleted = 0 " . $this->getFilterQuery() . "
 			ORDER BY crdate DESC
 			LIMIT " . intval($this->getPageBrowseLimit()) . "," . intval($this->conf['blogList.']['itemsToDisplay'])
 		);
@@ -130,7 +134,7 @@ class tx_typo3blog_listview extends tslib_pibase
 
 		// Set retrieved records in marker for bloglist
 		while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {
-			$row['category'] = $this->getPostCategoryName($row['pid'], 'title');
+			$row['category'] = $this->typo3BlogFunc->getPostCategoryName($row['pid'], 'title');
 			$row['pagecontent'] = $this->getContentElementsAsPreview($row['uid'], $this->conf['blogList.']['contentItemsToDisplay']);
 			$this->cObj->data = $row;
 			foreach ($row as $column => $value) {
@@ -150,7 +154,7 @@ class tx_typo3blog_listview extends tslib_pibase
 		// Set pagebrowser marker from HTML Template
 		$markers['###BLOGLIST_PAGEBROWSER###'] = $this->getListGetPageBrowser(
 			intval($this->getNumberOfPosts(intval($GLOBALS['TSFE']->page['pid'])) / $this->conf['blogList.']['itemsToDisplay']) +
-			((intval($this->getNumberOfPosts(intval($GLOBALS['TSFE']->page['pid']))) % $this->conf['blogList.']['itemsToDisplay']) == 0 ? 0 : 1)
+				((intval($this->getNumberOfPosts(intval($GLOBALS['TSFE']->page['pid']))) % $this->conf['blogList.']['itemsToDisplay']) == 0 ? 0 : 1)
 		);
 
 		// Complete the template expansion by replacing the "content" marker in the template
@@ -159,6 +163,11 @@ class tx_typo3blog_listview extends tslib_pibase
 		return $this->pi_wrapInBaseClass($content);
 	}
 
+	/**
+	 * [Describe function...]
+	 *
+	 * @return    [type]        ...
+	 */
 	private function getFilterQuery()
 	{
 		return "";
@@ -168,7 +177,7 @@ class tx_typo3blog_listview extends tslib_pibase
 	 * THIS NICE PART IS FROM TYPO3 comments EXTENSION
 	 * Merges TS configuration with configuration from flexform (latter takes precedence).
 	 *
-	 * @return	void
+	 * @return    void
 	 */
 	private function mergeConfiguration()
 	{
@@ -186,8 +195,8 @@ class tx_typo3blog_listview extends tslib_pibase
 	 * Fetches configuration value from flexform. If value exists, value in
 	 * <code>$this->conf</code> is replaced with this value.
 	 *
-	 * @param	string		$param    Parameter name. If <code>.</code> is found, the first part is section name, second is key (applies only to $this->conf)
-	 * @return	void
+	 * @param    string        $param    Parameter name. If <code>.</code> is found, the first part is section name, second is key (applies only to $this->conf)
+	 * @return    void
 	 */
 	private function fetchConfigValue($param)
 	{
@@ -208,9 +217,9 @@ class tx_typo3blog_listview extends tslib_pibase
 	/**
 	 * Get tt_content elements for post page with a limit
 	 *
-	 * @param	$pid
-	 * @param	int		$limit
-	 * @return	string
+	 * @param    $pid
+	 * @param    int        $limit
+	 * @return    string
 	 */
 	private function getContentElementsAsPreview($pid, $limit = 1)
 	{
@@ -222,7 +231,7 @@ class tx_typo3blog_listview extends tslib_pibase
 			"pid = " . $pid . " LIMIT " . intval($limit)
 		);
 
-		$content = '' ;
+		$content = '';
 		$i = 0;
 		while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {
 			if ($i == intval($limit)) {
@@ -240,9 +249,9 @@ class tx_typo3blog_listview extends tslib_pibase
 	}
 
 	/**
-	 * Return the limit to display
+	 * Return the start limit for pagebrowser
 	 *
-	 * @return	int
+	 * @return    int
 	 */
 	private function getPageBrowseLimit()
 	{
@@ -258,8 +267,8 @@ class tx_typo3blog_listview extends tslib_pibase
 	/**
 	 * Return pagebrowse
 	 *
-	 * @param	int		$numberOfPages
-	 * @return	string
+	 * @param    int        $numberOfPages
+	 * @return    string
 	 */
 	private function getListGetPageBrowser($numberOfPages)
 	{
@@ -279,16 +288,16 @@ class tx_typo3blog_listview extends tslib_pibase
 	/**
 	 * Return the number of posts in category page
 	 *
-	 * @param	integer		$page_id
-	 * @return	integer
+	 * @param    integer        $page_id
+	 * @return    integer
 	 */
 	private function getNumberOfPosts($page_id)
 	{
 		$sql = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			"*", "pages",
 			"pid IN (" . $this->getPostByRootLine($page_id) . ")"
-			. " AND doktype !=" . $this->extConf['doktypeId']
-			. " ORDER BY crdate DESC"
+				. " AND doktype !=" . $this->extConf['doktypeId']
+				. " ORDER BY crdate DESC"
 		);
 		$posts = $GLOBALS['TYPO3_DB']->sql_num_rows($sql);
 
@@ -298,7 +307,7 @@ class tx_typo3blog_listview extends tslib_pibase
 	/**
 	 * Get all pages from current page_id as string "123,124,125"
 	 *
-	 * @return	string
+	 * @return    string
 	 */
 	private function getPostByRootLine()
 	{
@@ -310,31 +319,17 @@ class tx_typo3blog_listview extends tslib_pibase
 	}
 
 	/**
-	 * Return the category name
-	 *
-	 * @param	int			$pid
-	 * @param	string		$field
-	 * @return	string
-	 */
-	private function getPostCategoryName($pid, $field = 'title')
-	{
-		$sql = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*', 'pages', 'uid=' . intval($pid), '', '');
-		$page = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($sql);
-
-		return $page[$field];
-	}
-
-	/**
 	 * THIS NICE PART IS FROM TYPO3 comments EXTENSION
 	 * Replaces $this->cObj->substituteArrayMarkerCached() because substitued
 	 * function polutes cache_hash table a lot.
 	 *
-	 * @param	string		$template	Template
-	 * @param	array		$markers	Markers
-	 * @param	array		$subparts	Subparts
-	 * @return	string		HTML
+	 * @param    string        $template    Template
+	 * @param    array        $markers    Markers
+	 * @param    array        $subparts    Subparts
+	 * @return    string        HTML
 	 */
-	private function substituteMarkersAndSubparts($template, array $markers, array $subparts) {
+	private function substituteMarkersAndSubparts($template, array $markers, array $subparts)
+	{
 		$content = $this->cObj->substituteMarkerArray($template, $markers);
 		if (count($subparts) > 0) {
 			foreach ($subparts as $name => $subpart) {

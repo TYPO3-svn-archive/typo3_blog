@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>News example template</title>
+</head>
+
+<body>
+
+<h1>BLOGLIST TEMPLATES</h1>
+
+<h2>EXAMPLE</h2>
+
+
+<br/>
+<br/>
+<br/>
+<strong>Global markers, as set up in TypoScript:</strong>
+These are substituted throughout the whole template.
+
+<em>Markers:</em>
+BLOGSINGLE_UID - uid number of the blogsingle page
+BLOGSINGLE_PID - pid number of the blogsingle page
+BLOGSINGLE_STARTTIME - starttime of the blogsingle page
+BLOGSINGLE_ENDTIME - endtime of the blogsingle page
+BLOGSINGLE_SUBTITLE - subtitle of the blogsingle page
+BLOGSINGLE_TITLE - title of the blogsingle page
+BLOGSINGLE_CRDATE - crdate of the blogsingle page
+BLOGSINGLE_AUTHOR - author of the blogsingle page
+BLOGSINGLE_AUTHOR_EMAIL - author_email of the blogsingle page
+BLOGSINGLE_NAVTITLE - navtitle of the blogsingle page
+BLOGSINGLE_CATEGORY - category name of the blogsingle page
+BLOGSINGLE_CATEGORYIMAGE - tx_typo3blog_image of the blogsingle page
+BLOGSINGLE_TAGCLOUD - tx_typo3blog_tagcloud of the blogsingle page
+BLOGSINGLE_VIEWCOUNT - tx_typo3blog_viewcount of the blogsingle page
+BLOGSINGLE_CONTENT - tt_content of the blogsingle page
+BLOGSINGLE_GRAVATAR - gravatar image from gravatar.com by author_email
+BLOGSINGLE_LINKTOPOST - url to blogpage
+
+
+<br/><br/><br/><br/>
+<hr/>
+<br/>
+
+<h3>BLOGSINGLE_TEMPLATE</h3>
+<em>This is the template for the list of posts, typically displayed on a frontpage.</em>
+<br/>
+<br/>
+<br/>
+<br/>
+
+
+<!-- ###BLOGSINGLE_TEMPLATE### begin-->
+<!--###ITEM### begin -->
+###BLOGSINGLE_TITLE###
+<ul>
+	<li>###BLOGSINGLE_CATEGORY###</li>
+	<li>###BLOGSINGLE_AUTHOR###</li>
+	<li>###BLOGSINGLE_AUTHOR_EMAIL###</li>
+	<li>###BLOGSINGLE_CRDATE###</li>
+	<li>###BLOGSINGLE_TX_TYPO3BLOG_TAGCLOUD###</li>
+</ul>
+
+###BLOGSINGLE_PAGECONTENT###
+
+<!-- ###BLOGSINGLE_TEMPLATE### end -->
+
+</body>
+</html>

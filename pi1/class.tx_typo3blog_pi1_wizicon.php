@@ -24,7 +24,15 @@
 /**
  * [CLASS/FUNCTION INDEX of SCRIPT]
  *
- * Hint: use extdeveval to insert/update function index above.
+ *
+ *
+ *   48: class tx_typo3blog_pi1_wizicon
+ *   56:     function proc($wizardItems)
+ *   76:     function includeLocalLang()
+ *
+ * TOTAL FUNCTIONS: 2
+ * (This index is automatically created/updated by the extension "extdeveval")
+ *
  */
 
 
@@ -40,11 +48,11 @@
 class tx_typo3blog_pi1_wizicon {
 
 					/**
-					 * Processing the wizard items array
-					 *
-					 * @param	array		$wizardItems: The wizard items
-					 * @return	Modified array with wizard items
-					 */
+ * Processing the wizard items array
+ *
+ * @param	array		$wizardItems: The wizard items
+ * @return	Modified		array with wizard items
+ */
 					function proc($wizardItems)	{
 						global $LANG;
 
@@ -61,10 +69,10 @@ class tx_typo3blog_pi1_wizicon {
 					}
 
 					/**
-					 * Reads the [extDir]/locallang.xml and returns the $LOCAL_LANG array found in that file.
-					 *
-					 * @return	The array with language labels
-					 */
+ * Reads the [extDir]/locallang.xml and returns the $LOCAL_LANG array found in that file.
+ *
+ * @return	The		array with language labels
+ */
 					function includeLocalLang()	{
 						$llFile = t3lib_extMgm::extPath('typo3_blog').'locallang.xml';
 						$LOCAL_LANG = t3lib_div::readLLXMLfile($llFile, $GLOBALS['LANG']->lang);

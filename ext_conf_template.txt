@@ -1,3 +1,2 @@
-
-	# cat=basic; type=integer; label=doktype Id: The doktype id for the new Blog page type
+# cat=basic; type=integer; label=doktype Id: The doktype id for the new Blog page type
 doktypeId = 
