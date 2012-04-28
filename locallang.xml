@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>module</type>
+		<description>Language labels for extension 'typo3_blog'</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="pi1_title">Typo3 Blog</label>
+			<label index="pi1_plus_wiz_description">Widgets for Typo3 Blog</label>
+		</languageKey>
+	</data>
+</T3locallang>

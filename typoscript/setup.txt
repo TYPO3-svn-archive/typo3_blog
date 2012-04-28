@@ -1,0 +1,7 @@
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/typoscript/bloglist/setup.txt">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/typoscript/blogsingle/setup.txt">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/typoscript/category/setup.txt">
+
+plugin.tx_typo3blog_pi1 {
+	what_to_display =
+}

@@ -1,0 +1,217 @@
+plugin.tx_typo3blog_pi1 {
+    blogList {
+
+        # SECTION BLOGLIST SETTINGS
+        #----------------------------------------------------
+
+        # Displaying posts in bloglist
+        itemsToDisplay = 10
+
+        #Displaying elements from tt_content as preview
+        contentItemsToDisplay = 2
+
+        # Bloglist template file
+        templateFile = EXT:typo3_blog/res/bloglist/template.html
+
+
+
+        # SECTION TEMPLATE MARKER FOR BLOGLIST TEMPLATE
+        #----------------------------------------------------
+
+        # page field uid setup for templatemarker '###BLOGLIST_UID###'
+        uid = TEXT
+        uid {
+            wrap = |
+            field = uid
+        }
+
+        # page field pid setup for templatemarker '###BLOGLIST_PID###'
+        pid = TEXT
+        pid {
+            wrap = |
+            field = pid
+        }
+
+        # page field starttime setup for templatemarker '###BLOGLIST_STARTTIME###'
+        starttime = TEXT
+        starttime {
+            wrap = |
+            strftime = %H.%I.%S
+            field = starttime
+        }
+
+        # page field endtime setup for templatemarker '###BLOGLIST_ENDTIME###'
+        endtime = TEXT
+        endtime {
+            wrap = |
+            format = %d.%m.%Y
+            field = endtime
+        }
+
+        # page field subtitle setup for templatemarker '###BLOGLIST_SUBTITLE###'
+        subtitle = TEXT
+        subtitle {
+            wrap = |
+            field = subtitle
+        }
+
+        # page field title setup for templatemarker '###BLOGLIST_TITLE###'
+        title = TEXT
+        title {
+            wrap = |
+            field = title
+            typolink {
+                parameter.dataWrap = {field:uid}
+                useCacheHash = 1
+            }
+        }
+
+        # page field crdate (format as date '%d.%m.%Y' via strftime) setup for templatemarker '###BLOGLIST_CRDATE###'
+        crdate = TEXT
+        crdate {
+            wrap = |
+            field = crdate
+            strftime = %d.%m.%Y
+        }
+
+        # page field author setup for templatemarker '###BLOGLIST_AUTHOR###'
+        author = TEXT
+        author {
+           wrap = |
+           field = author
+        }
+
+        # page field autor_email setup for templatemarker '###BLOGLIST_AUTHOR_EMAIL###'
+        authore_mail = TEXT
+        authore_mail {
+            wrap = |
+            field = author_email
+        }
+
+        # page field nav_title setup for templatemarker '###BLOGLIST_NAV_TITLE###'
+        nav_title = TEXT
+        nav_title {
+            wrap = |
+            field = nav_title
+        }
+
+        # page field title (from parent page) setup for templatemarker '###BLOGLIST_CATEGORY###'
+        category = TEXT
+        category {
+            wrap = |
+            field = category
+            typolink {
+            	parameter.dataWrap = {field:pid}
+                useCacheHash = 1
+            }
+        }
+
+        # page field image setup for templatemarker '###BLOGLIST_TX_TYPO3BLOG_IMAGE###'
+        tx_typo3blog_image = IMAGE
+        tx_typo3blog_image {
+            wrap = |
+            field = tx_typo3blog_image
+
+        }
+
+        # page field tx_typo3_tagcloud setup for templatemarker '###BLOGLIST_TX_TYPO3BLOG_TAGCLOUD###'
+        tx_typo3blog_tagcloud = TEXT
+        tx_typo3blog_tagcloud {
+            wrap = |
+            field = tx_typo3blog_tagcloud
+        }
+
+        # page field tx_typo3blog_viewcount setup for templatemarker '###BLOGLIST_VIEWCOUNT###'
+        viewcount = TEXT
+        viewcount {
+            wrap = |
+        }
+
+        # tt_content items setup for templatemarker '###BLOGLIST_PAGECONTENT###'
+        content = TEXT
+        content {
+           wrap  = |
+        }
+
+        # gravatar setup for templatemarker '###BLOGLIST_GRAVATAR###'
+        gravatar = IMAGE
+        gravatar {
+            wrap = |
+        }
+
+        # link to post setup for templatemarker '###BLOGLIST_LINKTOPOST###'
+        linktopost = TEXT
+        linktopost {
+            wrap = |
+        }
+
+        # showMore setup for templatemarker '###BLOGLIST_SHOWMORE###'
+        showMore = TEXT
+        showMore {
+            wrap = |
+        }
+
+        # SECTION RENDER BLOGLIST BY TYPOSCRIPT
+        #----------------------------------------------------
+        render = COA
+        render {
+
+        }
+    }
+
+
+    BlogList_temp = COA
+    BlogList_temp {
+        5=TEXT
+            # Titel der Übergeordneten Seite
+        5.data = leveltitle:-1
+        5.wrap = <h1>|</h1>
+        # erstes CONTENT Objekt zum Auslesen der Unterseiten.
+
+        # erstes CONTENT Objekt zum Auslesen der Unterseiten.
+        10=CONTENT
+        10{
+            stdWrap.wrap=<h3>|</h3>
+            table=pages
+            select.orderBy=sorting
+
+            # falls dieses Element als Sitemap eingefügt wird, den Startpunkt berücksichtigen
+            select.pidInList.if.isTrue.field=pages
+            select.pidInList.field=pages
+            renderObj=COA
+            renderObj {
+            stdWrap.wrap=<p>|</p>
+
+            # Titel (und link auf die) Seite
+            5=TEXT
+            5.wrap=<h2>|</h2>
+            5.field=title
+            5.typolink.parameter.field=uid
+                        # 2. CONTENT Objekt zum Auslesen des erstes Content Element der Seite
+            10=CONTENT
+            10{
+                table=tt_content
+                select.pidInList.field=uid
+                select.where=colPos=0
+                select.orderBy=sorting
+                select.max=1
+                renderObj=COA
+
+                #auslesen des bodytext
+                renderObj.10=TEXT
+                renderObj.10{
+                field=bodytext
+
+                #bodytext nach 20 zeichen abschneiden, wenn möglich ganze wörter
+                crop=500 | ... |1
+                }
+            }
+                        # mehr link
+            20=TEXT
+            20.wrap=<b>|</b>
+            20.value=[mehr]
+            20.typolink.parameter.field=uid
+            }
+        }
+    }
+}

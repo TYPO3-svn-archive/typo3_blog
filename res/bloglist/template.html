@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>News example template</title>
+</head>
+
+<body>
+
+<h1>BLOGLIST TEMPLATES</h1>
+<h2>EXAMPLE</h2>
+
+
+
+
+
+
+<br />
+<br />
+<br />
+<strong>Global markers, as set up in TypoScript:</strong>
+These are substituted throughout the whole template.
+
+<em>Markers:</em>
+BLOGLIST_UID             - uid number of the bloglist page
+BLOGLIST_PID             - pid number of the bloglist page
+BLOGLIST_STARTTIME       - starttime of the bloglist page
+BLOGLIST_ENDTIME         - endtime of the bloglist page
+BLOGLIST_SUBTITLE        - subtitle of the bloglist page
+BLOGLIST_TITLE           - title of the bloglist page
+BLOGLIST_CRDATE          - crdate of the bloglist page
+BLOGLIST_AUTHOR          - author of the bloglist page
+BLOGLIST_AUTHOR_EMAIL    - author_email of the bloglist page
+BLOGLIST_NAVTITLE        - navtitle of the bloglist page
+BLOGLIST_CATEGORY        - category name of the bloglist page
+BLOGLIST_CATEGORYIMAGE   - tx_typo3blog_image of the bloglist page
+BLOGLIST_TAGCLOUD        - tx_typo3blog_tagcloud of the bloglist page
+BLOGLIST_VIEWCOUNT       - tx_typo3blog_viewcount of the bloglist page
+BLOGLIST_CONTENT         - tt_content of the blogpage page
+BLOGLIST_GRAVATAR        - gravatar image from gravatar.com by author_email
+BLOGLIST_LINKTOPOST      - url to blogpage
+BLOGLIST_SHOWMORE        - show more link to blog page
+
+
+<br /><br /><br /><br /><hr />
+<br />
+<h3>BLOGLIST_TEMPLATE</h3>
+<em>This is the template for the list of posts, typically displayed on a frontpage.</em>
+<br />
+<br />
+<br />
+<br />
+
+
+
+<!-- ###BLOGLIST_TEMPLATE### begin-->
+    <!--###ITEM### begin -->
+        <h3>###BLOGLIST_TITLE###</h3>
+        <div>
+        <ul>
+            <li>###BLOGLIST_CATEGORY###</li>
+            <li>###BLOGLIST_AUTHOR###</li>
+            <li>###BLOGLIST_AUTHOR_EMAIL###</li>
+            <li>###BLOGLIST_CRDATE###</li>
+            <li>###BLOGLIST_TX_TYPO3BLOG_TAGCLOUD###</li>
+        </ul>
+
+        </div>
+        ###BLOGLIST_PAGECONTENT###
+        <a class="btn btn-small btn-primary" href="###LINKTOPOST###">weiter ...</a>
+
+    <hr />
+    <!--###ITEM### end -->
+
+    ###BLOGLIST_PAGEBROWSER###
+
+
+<!-- ###BLOGLIST_TEMPLATE### end -->
+
+</body>
+</html>
