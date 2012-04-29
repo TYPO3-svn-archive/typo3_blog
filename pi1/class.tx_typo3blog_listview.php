@@ -141,15 +141,15 @@ class tx_typo3blog_listview extends tslib_pibase
 				if ($this->conf['blogList.'][$column]) {
 					$this->cObj->setCurrentVal($value);
 					if ($column == 'pagecontent') {
-						$value = $this->cObj->stdWrap($value, $this->conf['blogList.'][$column . '.']);
+						$value = $this->cObj->stdWrap($value, $this->conf['blogList.']['marker.'][$column . '.']);
 					} else {
-						$value = $this->cObj->cObjGetSingle($this->conf['blogList.'][$column], $this->conf['blogList.'][$column . '.']);
+						$value = $this->cObj->cObjGetSingle($this->conf['blogList.']['marker.'][$column], $this->conf['blogList.']['marker.'][$column . '.']);
 					}
 
 					$this->cObj->setCurrentVal(false);
 				}
 				else {
-					$value = $this->cObj->stdWrap($value, $this->conf['blogList.'][$column . '.']);
+					$value = $this->cObj->stdWrap($value, $this->conf['blogList.']['marker.'][$column . '.']);
 				}
 				$markerArray['###BLOGLIST_' . strtoupper($column) . '###'] = $value;
 			}
