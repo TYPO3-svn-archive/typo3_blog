@@ -133,7 +133,7 @@ plugin.tx_typo3blog_pi1 {
 			}
 
 			# comments setup for templatemarker '###BLOGSINGLE_COMMENTS###'
-			#comments < plugin.tx_comments_pi1
+			comments < plugin.tx_comments_pi1
 		}
 	}
 }

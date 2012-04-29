@@ -21,37 +21,88 @@
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+
 /**
  * [CLASS/FUNCTION INDEX of SCRIPT]
  *
  *
  *
- *   36: class typo3blog_func
- *   46:     public function getPostCategoryName($pid, $field = 'title')
+ *   38: class typo3blog_func
+ *   48:     public function setCobj(tslib_cObj $cObj)
+ *   63:     public function substituteMarkersAndSubparts($template, array $markers, array $subparts)
+ *   82:     public function getPostCategoryName($pid, $field = 'title')
  *
- * TOTAL FUNCTIONS: 1
+ * TOTAL FUNCTIONS: 3
  * (This index is automatically created/updated by the extension "extdeveval")
  *
  */
+
+/**
+ * Plugin 'Typo3 Blog lib' for the 'typo3_blog' extension.
+ *
+ * @author        Roland Schmidt <rsch73@gmail.com>
+ * @package       TYPO3
+ * @subpackage    tx_typo3blog
+ */
 class typo3blog_func
 {
+	private $cObj = NULL;
 
 	/**
-	 * Return the category name
+	 * Set the tslib_cObj class
 	 *
-	 * @param    int        $pid
-	 * @param    string        $field
-	 * @return    string
+	 * @param     tslib_cObj    $cObj    tslib_cObj class
+	 * @return    void
+	 */
+	public function setCobj(tslib_cObj $cObj)
+	{
+		$this->cObj = $cObj;
+	}
+
+	/**
+	 * THIS NICE PART IS FROM TYPO3 comments EXTENSION
+	 * Replaces $this->cObj->substituteArrayMarkerCached() because substitued
+	 * function polutes cache_hash table a lot.
+	 *
+	 * @param    string        $template    Template
+	 * @param    array         $markers     Markers
+	 * @param    array         $subparts    Subparts
+	 * @return   string        $content     HTML
+	 */
+	public function substituteMarkersAndSubparts($template, array $markers, array $subparts)
+	{
+		$content = $this->cObj->substituteMarkerArray($template, $markers);
+		if (count($subparts) > 0) {
+			foreach ($subparts as $name => $subpart) {
+				$content = $this->cObj->substituteSubpart($content, $name, $subpart);
+			}
+		}
+
+		return $content;
+	}
+
+	/**
+	 * Return the category name from parent page
+	 * The parent page is the category page
+	 *
+	 * @param    int        $pid             Page ID
+	 * @param    string     $field           Column from table pages
+	 * @return   string     $page[$field]    Value from field in table pages
 	 */
 	public function getPostCategoryName($pid, $field = 'title')
 	{
-		$sql = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*', 'pages', 'uid=' . intval($pid), '', '');
+		$sql = $GLOBALS['TYPO3_DB']->exec_SELECT_queryArray(array(
+				'SELECT'	=> '*',
+				'FROM'		=> 'pages',
+				'WHERE'		=> 'uid=' . intval($pid),
+				'GROUPBY'	=> '',
+				'ORDERBY'	=> '',
+				'LIMIT'		=> ''
+			)
+		);
 		$page = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($sql);
 
 		return $page[$field];
 	}
-
-
 }
-
 ?>
