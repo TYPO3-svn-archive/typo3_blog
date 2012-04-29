@@ -26,19 +26,18 @@
  *
  *
  *
- *   58: class tx_typo3blog_listview extends tslib_pibase
+ *   57: class tx_typo3blog_listview extends tslib_pibase
  *   76:     private function init()
- *  108:     public function main($content, $conf)
- *  182:     private function getFilterQuery()
- *  193:     private function mergeConfiguration()
- *  211:     public function fetchConfigValue($param)
- *  234:     private function getContentElementsAsPreview($pid, $limit = 1)
- *  271:     private function getPageBrowseLimit()
- *  288:     private function getListGetPageBrowser($numberOfPages)
- *  309:     private function getNumberOfPosts($page_id)
- *  330:     private function getPostByRootLine()
+ *  109:     public function main($content, $conf)
+ *  184:     private function getFilterQuery()
+ *  196:     private function mergeConfiguration()
+ *  215:     private function fetchConfigValue($param)
+ *  237:     private function getPageBrowseLimit()
+ *  255:     private function getListGetPageBrowser($numberOfPages)
+ *  278:     private function getNumberOfPostsInCategoryPage($page_id)
+ *  300:     private function getPostByRootLine()
  *
- * TOTAL FUNCTIONS: 10
+ * TOTAL FUNCTIONS: 9
  * (This index is automatically created/updated by the extension "extdeveval")
  *
  */
@@ -71,6 +70,7 @@ class tx_typo3blog_listview extends tslib_pibase
 	/**
 	 * initializes this class
 	 *
+	 * @access    private
 	 * @return    void
 	 */
 	private function init()
@@ -101,9 +101,10 @@ class tx_typo3blog_listview extends tslib_pibase
 	/**
 	 * The main method of the PlugIn
 	 *
-	 * @param    string     $content        The PlugIn content
-	 * @param    array      $conf           The PlugIn configuration
-	 * @return   string     $content        content that is displayed on the website
+	 * @access    public
+	 * @param     string    $content:    The PlugIn content
+	 * @param     array     $conf:       The PlugIn configuration
+	 * @return    string    $content:    The content that is displayed on the website
 	 */
 	public function main($content, $conf)
 	{
@@ -164,8 +165,8 @@ class tx_typo3blog_listview extends tslib_pibase
 
 		// Set pagebrowser marker from HTML Template
 		$markers['###BLOGLIST_PAGEBROWSER###'] = $this->getListGetPageBrowser(
-			intval($this->getNumberOfPosts(intval($GLOBALS['TSFE']->page['pid'])) / $this->conf['blogList.']['itemsToDisplay']) +
-			((intval($this->getNumberOfPosts(intval($GLOBALS['TSFE']->page['pid']))) % $this->conf['blogList.']['itemsToDisplay']) == 0 ? 0 : 1)
+			intval($this->getNumberOfPostsInCategoryPage(intval($GLOBALS['TSFE']->page['pid'])) / $this->conf['blogList.']['itemsToDisplay']) +
+			((intval($this->getNumberOfPostsInCategoryPage(intval($GLOBALS['TSFE']->page['pid']))) % $this->conf['blogList.']['itemsToDisplay']) == 0 ? 0 : 1)
 		);
 
 		// Complete the template expansion by replacing the "content" marker in the template
@@ -177,7 +178,8 @@ class tx_typo3blog_listview extends tslib_pibase
 	/**
 	 * Get the where clause for filter
 	 *
-	 * @return string
+	 * @access    private
+	 * @return    string
 	 */
 	private function getFilterQuery()
 	{
@@ -188,7 +190,8 @@ class tx_typo3blog_listview extends tslib_pibase
 	 * THIS NICE PART IS FROM TYPO3 comments EXTENSION
 	 * Merges TS configuration with configuration from flexform (latter takes precedence).
 	 *
-	 * @return void
+	 * @access    private
+	 * @return    void
 	 */
 	private function mergeConfiguration()
 	{
@@ -205,10 +208,11 @@ class tx_typo3blog_listview extends tslib_pibase
 	 * Fetches configuration value from flexform. If value exists, value in
 	 * <code>$this->conf</code> is replaced with this value.
 	 *
-	 * @param    string    $param    Parameter name. If <code>.</code> is found, the first part is section name, second is key (applies only to $this->conf)
-	 * @return   void
+	 * @access    private
+	 * @param     string    $param:    Parameter name. If <code>.</code> is found, the first part is section name, second is key (applies only to $this->conf)
+	 * @return    void
 	 */
-	public function fetchConfigValue($param)
+	private function fetchConfigValue($param)
 	{
 		if (strchr($param, '.')) {
 			list($section, $param) = explode('.', $param, 2);
@@ -227,7 +231,8 @@ class tx_typo3blog_listview extends tslib_pibase
 	/**
 	 * Return the start limit for pagebrowser
 	 *
-	 * @return    int    $limit    The limit to display tt_content as preview
+	 * @access    private
+	 * @return    int       $limit:    The limit to display tt_content as preview
 	 */
 	private function getPageBrowseLimit()
 	{
@@ -243,8 +248,10 @@ class tx_typo3blog_listview extends tslib_pibase
 	/**
 	 * Return pagebrowse
 	 *
-	 * @param    int        $numberOfPages    the number of display page
-	 * @return   string     $content          HTML OUTPUT from pagebrowse plugin
+	 * @access    private
+	 * @param     int       $numberOfPages:    The number of display page
+	 * @return    string    $content:          The HTML output from pagebrowse plugin
+	 *
 	 */
 	private function getListGetPageBrowser($numberOfPages)
 	{
@@ -265,10 +272,11 @@ class tx_typo3blog_listview extends tslib_pibase
 	/**
 	 * Return the number of posts in category page
 	 *
-	 * @param    int    $page_id    The category page id
-	 * @return   int    $posts      Count of current posts in current category page
+	 * @access    private
+	 * @param     int       $page_id:    The category page id
+	 * @return    int       $posts:      Count of current posts in category page
 	 */
-	private function getNumberOfPosts($page_id)
+	private function getNumberOfPostsInCategoryPage($page_id)
 	{
 		$sql = $GLOBALS['TYPO3_DB']->exec_SELECT_queryArray(array(
 			'SELECT'	=> '*',
@@ -285,9 +293,10 @@ class tx_typo3blog_listview extends tslib_pibase
 	}
 
 	/**
-	 * Get all pages from current page_id as string "123,124,125"
+	 * Get all sub pages from current page_id as string "123,124,125"
 	 *
-	 * @return string
+	 * @access    private
+	 * @return    string
 	 */
 	private function getPostByRootLine()
 	{

@@ -27,10 +27,10 @@
  *
  *
  *   52: class tx_typo3blog_pi1 extends tslib_pibase
- *   65:     function init()
- *   78:     function mergeConfiguration()
- *   93:     public function fetchConfigValue($param)
- *  115:     function main($content, $conf)
+ *   67:     private function init()
+ *   82:     private function mergeConfiguration()
+ *   99:     public function fetchConfigValue($param)
+ *  123:     public function main($content, $conf)
  *
  * TOTAL FUNCTIONS: 4
  * (This index is automatically created/updated by the extension "extdeveval")
@@ -61,9 +61,10 @@ class tx_typo3blog_pi1 extends tslib_pibase
 	/**
 	 * initializes this class
 	 *
-	 * @return    void
+	 * @return	void
+	 * @access private
 	 */
-	function init()
+	private function init()
 	{
 		$this->typo3blog_func = new typo3blog_func();
 		$this->mergeConfiguration();
@@ -75,9 +76,10 @@ class tx_typo3blog_pi1 extends tslib_pibase
 	 * THIS NICE PART IS FROM TYPO3 comments EXTENSION
 	 * Merges TS configuration with configuration from flexform (latter takes precedence).
 	 *
-	 * @return    void
+	 * @return	void
+	 * @access private
 	 */
-	function mergeConfiguration()
+	private function mergeConfiguration()
 	{
 		$this->pi_initPIflexForm();
 
@@ -90,8 +92,9 @@ class tx_typo3blog_pi1 extends tslib_pibase
 	 * Fetches configuration value from flexform. If value exists, value in
 	 * <code>$this->conf</code> is replaced with this value.
 	 *
-	 * @param    string        $param    Parameter name. If <code>.</code> is found, the first part is section name, second is key (applies only to $this->conf)
-	 * @return    void
+	 * @param	string		$param    Parameter name. If <code>.</code> is found, the first part is section name, second is key (applies only to $this->conf)
+	 * @return	void
+	 * @access public
 	 */
 	public function fetchConfigValue($param)
 	{
@@ -112,11 +115,12 @@ class tx_typo3blog_pi1 extends tslib_pibase
 	/**
 	 * The main method of the PlugIn
 	 *
-	 * @param    string        $content: The PlugIn content
-	 * @param    array        $conf: The PlugIn configuration
-	 * @return    The        content that is displayed on the website
+	 * @param	string		$content:   The PlugIn content
+	 * @param	array		$conf:      The PlugIn configuration
+	 * @return	string		$content:   That is displayed on the website
+	 * @access public
 	 */
-	function main($content, $conf)
+	public function main($content, $conf)
 	{
 		$this->conf = $conf;
 		$this->pi_setPiVarDefaults();

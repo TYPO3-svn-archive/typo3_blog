@@ -26,16 +26,13 @@
  *
  *
  *
- *   55: class tx_typo3blog_singleview extends tslib_pibase
- *   72:     function init()
- *  100:     function main($content, $conf)
- *  151:     function mergeConfiguration()
- *  164:     public function fetchConfigValue($param)
- *  185:     private function getPageContent()
- *  208:     private function getPostCategoryName($pid, $field = 'title')
- *  226:     private function substituteMarkersAndSubparts($template, array $markers, array $subparts)
+ *   52: class tx_typo3blog_singleview extends tslib_pibase
+ *   70:     private function init()
+ *  100:     public function main($content, $conf)
+ *  158:     private function mergeConfiguration()
+ *  172:     private function fetchConfigValue($param)
  *
- * TOTAL FUNCTIONS: 7
+ * TOTAL FUNCTIONS: 4
  * (This index is automatically created/updated by the extension "extdeveval")
  *
  */
@@ -67,9 +64,10 @@ class tx_typo3blog_singleview extends tslib_pibase
 	/**
 	 * Initializes this class
 	 *
+	 * @access    private
 	 * @return    void
 	 */
-	function init()
+	private function init()
 	{
 		// Make instance of tslib_cObj
 		$this->cObj = t3lib_div::makeInstance('tslib_cObj');
@@ -94,11 +92,12 @@ class tx_typo3blog_singleview extends tslib_pibase
 	/**
 	 * The main method of the PlugIn
 	 *
-	 * @param    string        $content: The PlugIn content
-	 * @param    array         $conf: The PlugIn configuration
-	 * @return   string
+	 * @access    public
+	 * @param     string    $content:      The PlugIn content
+	 * @param     array     $conf:         The PlugIn configuration
+	 * @return    string    $content:      That is displayed on the website
 	 */
-	function main($content, $conf)
+	public function main($content, $conf)
 	{
 		$this->conf = $conf;
 		$this->pi_setPiVarDefaults();
@@ -153,9 +152,10 @@ class tx_typo3blog_singleview extends tslib_pibase
 	 * THIS NICE PART IS FROM TYPO3 comments EXTENSION
 	 * Merges TS configuration with configuration from flexform (latter takes precedence).
 	 *
+	 * @access    private
 	 * @return    void
 	 */
-	function mergeConfiguration()
+	private function mergeConfiguration()
 	{
 		$this->pi_initPIflexForm();
 	}
@@ -165,10 +165,11 @@ class tx_typo3blog_singleview extends tslib_pibase
 	 * Fetches configuration value from flexform. If value exists, value in
 	 * <code>$this->conf</code> is replaced with this value.
 	 *
-	 * @param    string        $param    Parameter name. If <code>.</code> is found, the first part is section name, second is key (applies only to $this->conf)
+	 * @access    private
+	 * @param     string     $param:    Parameter name. If <code>.</code> is found, the first part is section name, second is key (applies only to $this->conf)
 	 * @return    void
 	 */
-	public function fetchConfigValue($param)
+	private function fetchConfigValue($param)
 	{
 		if (strchr($param, '.')) {
 			list($section, $param) = explode('.', $param, 2);

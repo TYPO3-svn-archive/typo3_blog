@@ -27,12 +27,13 @@
  *
  *
  *
- *   38: class typo3blog_func
- *   48:     public function setCobj(tslib_cObj $cObj)
- *   63:     public function substituteMarkersAndSubparts($template, array $markers, array $subparts)
- *   82:     public function getPostCategoryName($pid, $field = 'title')
+ *   48: class typo3blog_func
+ *   59:     public function setCobj(tslib_cObj $cObj)
+ *   75:     public function substituteMarkersAndSubparts($template, array $markers, array $subparts)
+ *   95:     public function getPageContent($id, $limit)
+ *  135:     public function getPostCategoryName($pid, $field = 'title')
  *
- * TOTAL FUNCTIONS: 3
+ * TOTAL FUNCTIONS: 4
  * (This index is automatically created/updated by the extension "extdeveval")
  *
  */
@@ -51,8 +52,9 @@ class typo3blog_func
 	/**
 	 * Set the tslib_cObj class
 	 *
-	 * @param     tslib_cObj    $cObj    tslib_cObj class
-	 * @return    void
+	 * @param	tslib_cObj		$cObj    tslib_cObj class
+	 * @return	void
+	 * @access public
 	 */
 	public function setCobj(tslib_cObj $cObj)
 	{
@@ -64,10 +66,11 @@ class typo3blog_func
 	 * Replaces $this->cObj->substituteArrayMarkerCached() because substitued
 	 * function polutes cache_hash table a lot.
 	 *
-	 * @param    string        $template    Template
-	 * @param    array         $markers     Markers
-	 * @param    array         $subparts    Subparts
-	 * @return   string        $content     HTML
+	 * @param	string		$template    Template
+	 * @param	array		$markers     Markers
+	 * @param	array		$subparts    Subparts
+	 * @return	string		$content     HTML
+	 * @access public
 	 */
 	public function substituteMarkersAndSubparts($template, array $markers, array $subparts)
 	{
@@ -84,7 +87,10 @@ class typo3blog_func
 	/**
 	 * Retrieve all records from tt_content by current page uid
 	 *
-	 * @return    string
+	 * @param	[type]		$id: ...
+	 * @param	[type]		$limit: ...
+	 * @return	string
+	 * @access public
 	 */
 	public function getPageContent($id, $limit)
 	{
@@ -121,9 +127,10 @@ class typo3blog_func
 	 * Return the category name from parent page
 	 * The parent page is the category page
 	 *
-	 * @param    int        $pid             Page ID
-	 * @param    string     $field           Column from table pages
-	 * @return   string     $page[$field]    Value from field in table pages
+	 * @param	int		$pid             Page ID
+	 * @param	string		$field           Column from table pages
+	 * @return	string		$page[$field]    Value from field in table pages
+	 * @access public
 	 */
 	public function getPostCategoryName($pid, $field = 'title')
 	{
