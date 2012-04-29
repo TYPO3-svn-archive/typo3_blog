@@ -48,8 +48,8 @@ include_once(PATH_site . 'typo3/sysext/cms/tslib/class.tslib_content.php');
 /**
  * Plugin 'Typo3 Blog' for the 'typo3_blog' extension.
  *
- * @author    Roland Schmidt <rsch73@gmail.com>
- * @package    TYPO3
+ * @author        Roland Schmidt <rsch73@gmail.com>
+ * @package       TYPO3
  * @subpackage    tx_typo3blog
  */
 class tx_typo3blog_singleview extends tslib_pibase
@@ -65,7 +65,7 @@ class tx_typo3blog_singleview extends tslib_pibase
 	private $typo3BlogFunc = NULL;
 
 	/**
-	 * initializes this class
+	 * Initializes this class
 	 *
 	 * @return    void
 	 */
@@ -73,6 +73,10 @@ class tx_typo3blog_singleview extends tslib_pibase
 	{
 		// Make instance of tslib_cObj
 		$this->cObj = t3lib_div::makeInstance('tslib_cObj');
+
+		// Make instance of tslib_cObj
+		$this->typo3BlogFunc = t3lib_div::makeInstance('typo3blog_func');
+		$this->typo3BlogFunc->setCobj($this->cObj);
 
 		// Merge current configuration from flexform and typoscript
 		$this->mergeConfiguration();
@@ -85,17 +89,14 @@ class tx_typo3blog_singleview extends tslib_pibase
 
 		// Read template file
 		$this->template = $this->cObj->fileResource($this->conf['blogSingle.']['templateFile']);
-
-		// Make instance of tslib_cObj
-		$this->typo3BlogFunc = t3lib_div::makeInstance('typo3blog_func');
 	}
 
 	/**
 	 * The main method of the PlugIn
 	 *
 	 * @param    string        $content: The PlugIn content
-	 * @param    array        $conf: The PlugIn configuration
-	 * @return    string
+	 * @param    array         $conf: The PlugIn configuration
+	 * @return   string
 	 */
 	function main($content, $conf)
 	{
@@ -143,7 +144,7 @@ class tx_typo3blog_singleview extends tslib_pibase
 		}
 
 		// Complete the template expansion by replacing the "content" marker in the template
-		$content .= $this->substituteMarkersAndSubparts($template, $markers, $subparts);
+		$content .= $this->typo3BlogFunc->substituteMarkersAndSubparts($template, $markers, $subparts);
 
 		return $this->pi_wrapInBaseClass($content);
 	}
@@ -181,64 +182,6 @@ class tx_typo3blog_singleview extends tslib_pibase
 				$this->conf[$param] = $value;
 			}
 		}
-	}
-
-	/**
-	 * Retrieve all records from tt_content by current page uid
-	 *
-	 * @return    string
-	 */
-	private function getPageContent()
-	{
-		$query = 'SELECT uid FROM tt_content WHERE pid = ' . intval($this->page_uid) . ' ' . $this->cObj->enableFields('tt_content') . ' ORDER BY sorting';
-		$res = mysql(TYPO3_db, $query);
-
-		$content = '';
-		while ($row = mysql_fetch_assoc($res)) {
-			$conf['tables'] = 'tt_content';
-			$conf['source'] = intval($row['uid']);
-			$conf['dontCheckPid'] = 1;
-
-			$content .= $this->cObj->RECORDS($conf);
-		}
-		return $content;
-	}
-
-	/**
-	 * Return the category name
-	 *
-	 * @param    int        $pid
-	 * @param    string        $field
-	 * @return    string
-	 */
-	private function getPostCategoryName($pid, $field = 'title')
-	{
-		$categoryPage_sql = $GLOBALS['TYPO3_DB']->exec_SELECTquery('$field', 'pages', 'uid=' . intval($pid), '', '');
-		$categoryPage = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($categoryPage_sql);
-
-		return $categoryPage[$field];
-	}
-
-	/**
-	 * THIS NICE PART IS FROM TYPO3 comments EXTENSION
-	 * Replaces $this->cObj->substituteArrayMarkerCached() because substitued
-	 * function polutes cache_hash table a lot.
-	 *
-	 * @param    string        $template    Template
-	 * @param    array        $markers    Markers
-	 * @param    array        $subparts    Subparts
-	 * @return    string        HTML
-	 */
-	private function substituteMarkersAndSubparts($template, array $markers, array $subparts)
-	{
-		$content = $this->cObj->substituteMarkerArray($template, $markers);
-		if (count($subparts) > 0) {
-			foreach ($subparts as $name => $subpart) {
-				$content = $this->cObj->substituteSubpart($content, $name, $subpart);
-			}
-		}
-
-		return $content;
 	}
 }
 

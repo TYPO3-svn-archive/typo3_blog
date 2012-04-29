@@ -82,6 +82,42 @@ class typo3blog_func
 	}
 
 	/**
+	 * Retrieve all records from tt_content by current page uid
+	 *
+	 * @return    string
+	 */
+	public function getPageContent($id, $limit)
+	{
+		if (!t3lib_div::testInt($limit)) {
+			$limit = false;
+		}
+
+		$sql = $GLOBALS['TYPO3_DB']->exec_SELECT_queryArray(array(
+				'SELECT'	=> 'uid',
+				'FROM'		=> 'tt_content',
+				'WHERE'		=> 'pid=' . intval($id) . ' ' . $this->cObj->enableFields('tt_content'),
+				'GROUPBY'	=> '',
+				'ORDERBY'	=> 'sorting',
+				'LIMIT'		=> (false !== $limit)?$limit:''
+			)
+		);
+		$res = mysql(TYPO3_db, $sql);
+
+		$content = '';
+		while ($row = mysql_fetch_assoc($sql)) {
+			$conf['tables'] = 'tt_content';
+			$conf['source'] = intval($row['uid']);
+			$conf['dontCheckPid'] = 1;
+			if (false !== $limit) {
+				$conf['max'] = intval($limit);
+			}
+
+			$content .= $this->cObj->RECORDS($conf);
+		}
+		return $content;
+	}
+
+	/**
 	 * Return the category name from parent page
 	 * The parent page is the category page
 	 *

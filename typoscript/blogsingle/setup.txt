@@ -113,11 +113,10 @@ plugin.tx_typo3blog_pi1 {
 			}
 
 			pagecontent = COA
-            pagecontent {
-               10 = CONTENT
-               10.table = tt_content
-               10.select.pidInList = this
-               10.select.max = 1
+			pagecontent {
+				10 = CONTENT
+				10.table = tt_content
+				10.select.pidInList = this
 			}
 
 			# gravatar setup for templatemarker '###BLOGSINGLE_GRAVATAR###'

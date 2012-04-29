@@ -8,7 +8,7 @@ plugin.tx_typo3blog_pi1 {
 		itemsToDisplay = 10
 
 		#Displaying elements from tt_content as preview
-		contentItemsToDisplay = 2
+		contentItemsToDisplay = 1
 
 		# Bloglist template file
 		templateFile = EXT:typo3_blog/res/bloglist/template.html

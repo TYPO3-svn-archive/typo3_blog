@@ -138,7 +138,7 @@ class tx_typo3blog_listview extends tslib_pibase
 
 			// add additional data to ts template
 			$row['category'] = $this->typo3BlogFunc->getPostCategoryName($row['pid'], 'title');
-			$row['pagecontent'] = $this->getContentElementsAsPreview($row['uid'], $this->conf['blogList.']['contentItemsToDisplay']);
+			$row['pagecontent'] = $this->typo3BlogFunc->getPageContent($row['uid'], $this->conf['blogList.']['contentItemsToDisplay']);
 
 			// add data to ts template
 			$this->cObj->data = $row;
@@ -222,45 +222,6 @@ class tx_typo3blog_listview extends tslib_pibase
 				$this->conf[$param] = $value;
 			}
 		}
-	}
-
-	/**
-	 * Get tt_content elements for post page with a limit as preview in the bloglist
-	 *
-	 * @param    int        $pid         The current Page Id from table pages
-	 * @param    int        $limit       The limit to display tt_content as preview
-	 * @return   string     $content     The HTMl output für result
-	 */
-	private function getContentElementsAsPreview($pid, $limit = 1)
-	{
-		if (!t3lib_div::testInt($limit)) {
-			$limit = 1;
-		}
-		$content = '';
-		$i = 0;
-
-		$sql = $GLOBALS['TYPO3_DB']->exec_SELECT_queryArray(array(
-				'SELECT'	=> '*',
-				'FROM'		=> 'tt_content',
-				'WHERE'		=> 'pid = ' . $pid,
-				'GROUPBY'	=> '',
-				'ORDERBY'	=> 'sorting',
-				'LIMIT'		=> intval($limit)
-			)
-		);
-		while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($sql)) {
-			if ($i == intval($limit)) {
-				$i = 0;
-				continue;
-			}
-			$conf['tables'] = 'tt_content';
-			$conf['source'] = intval($row['uid']);
-			$conf['dontCheckPid'] = 1;
-			$content .= $this->cObj->RECORDS($conf);
-			$i++;
-		}
-
-		return $content;
 	}
 
 	/**
