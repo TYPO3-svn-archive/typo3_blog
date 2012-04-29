@@ -121,16 +121,22 @@ class tx_typo3blog_singleview extends tslib_pibase
 		$content = '';
 		while ($row = mysql_fetch_assoc($res)) {
 			$row['category'] = $this->typo3BlogFunc->getPostCategoryName($row['pid'], 'title');
-			$row['pagecontent'] = $this->getPageContent();
+			$row['pagecontent'] = "";
+			$row['comments'] = "";
 			$this->cObj->data = $row;
 			foreach ($row as $column => $value) {
-				if ($this->conf['blogList.'][$column]) {
+				if ($this->conf['blogList.']['marker.'][$column]) {
 					$this->cObj->setCurrentVal($value);
-					$value = $this->cObj->cObjGetSingle($this->conf['blogSingle.'][$column], $this->conf['blogSingle.'][$column . '.']);
+					$value = $this->cObj->cObjGetSingle($this->conf['blogSingle.']['marker.'][$column], $this->conf['blogSingle.']['marker.'][$column . '.']);
 					$this->cObj->setCurrentVal(false);
 				}
 				else {
-					$value = $this->cObj->stdWrap($value, $this->conf['blogSingle.'][$column . '.']);
+					if ($column == 'pagecontent1') {
+						$value = $this->cObj->stdWrap($value, $this->conf['blogSingle.']['marker.'][$column . '.']);
+					} else {
+						$value = $this->cObj->cObjGetSingle($this->conf['blogSingle.']['marker.'][$column], $this->conf['blogSingle.']['marker.'][$column . '.']);
+					}
+
 				}
 				$markers['###BLOGSINGLE_' . strtoupper($column) . '###'] = $value;
 			}

@@ -140,7 +140,12 @@ class tx_typo3blog_listview extends tslib_pibase
 			foreach ($row as $column => $value) {
 				if ($this->conf['blogList.'][$column]) {
 					$this->cObj->setCurrentVal($value);
-					$value = $this->cObj->cObjGetSingle($this->conf['blogList.'][$column], $this->conf['blogList.'][$column . '.']);
+					if ($column == 'pagecontent') {
+						$value = $this->cObj->stdWrap($value, $this->conf['blogList.'][$column . '.']);
+					} else {
+						$value = $this->cObj->cObjGetSingle($this->conf['blogList.'][$column], $this->conf['blogList.'][$column . '.']);
+					}
+
 					$this->cObj->setCurrentVal(false);
 				}
 				else {

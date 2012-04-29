@@ -128,8 +128,8 @@ plugin.tx_typo3blog_pi1 {
         }
 
         # tt_content items setup for templatemarker '###BLOGLIST_PAGECONTENT###'
-        content = TEXT
-        content {
+        pagecontent = TEXT
+        pagecontent {
            wrap  = |
         }
 
