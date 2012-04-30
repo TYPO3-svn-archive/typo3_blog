@@ -127,7 +127,7 @@ class tx_typo3blog_listview extends tslib_pibase
 		$sql = $GLOBALS['TYPO3_DB']->exec_SELECT_queryArray(array(
 				'SELECT'	=> '*',
 				'FROM'		=> 'pages',
-				'WHERE'		=> 'pid IN (' . $this->getPostByRootLine() . ') AND hidden = 0 AND deleted = 0 AND doktype != ' . $this->blog_doktype_id . ' ' . $this->getFilterQuery(),
+				'WHERE'		=> 'pid IN (' . $this->getPostByRootLine() . ') AND hidden = 0 AND deleted = 0 AND doktype != ' . $this->blog_doktype_id . ' ' . $this->typo3BlogFunc->getTagCloudFilterQuery(),
 				'GROUPBY'	=> '',
 				'ORDERBY'	=> 'crdate DESC',
 				'LIMIT'		=> intval($this->getPageBrowseLimit()) . ',' . intval($this->conf['blogList.']['itemsToDisplay'])
@@ -146,7 +146,8 @@ class tx_typo3blog_listview extends tslib_pibase
 
 			// Set data in HTML template marker
 			foreach ($row as $column => $data) {
-				if ($this->conf['blogList.'][$column]) {
+
+				if ($this->conf['blogList.']['marker.'][$column]) {
 					$this->cObj->setCurrentVal($data);
 					if ($column == 'pagecontent') {
 						$data = $this->cObj->stdWrap($data, $this->conf['blogList.']['marker.'][$column . '.']);
@@ -157,6 +158,7 @@ class tx_typo3blog_listview extends tslib_pibase
 				}
 				else {
 					$data = $this->cObj->stdWrap($data, $this->conf['blogList.']['marker.'][$column . '.']);
+					$this->cObj->setCurrentVal(false);
 				}
 				$markerArray['###BLOGLIST_' . strtoupper($column) . '###'] = $data;
 			}
@@ -175,15 +177,11 @@ class tx_typo3blog_listview extends tslib_pibase
 		return $this->pi_wrapInBaseClass($content);
 	}
 
-	/**
-	 * Get the where clause for filter
-	 *
-	 * @access    private
-	 * @return    string
-	 */
-	private function getFilterQuery()
+
+
+	private function splitTags()
 	{
-		return "";
+
 	}
 
 	/**

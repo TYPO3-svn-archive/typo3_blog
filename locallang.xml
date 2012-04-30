@@ -8,6 +8,7 @@
 		<languageKey index="default" type="array">
 			<label index="pi1_title">Typo3 Blog</label>
 			<label index="pi1_plus_wiz_description">Widgets for Typo3 Blog</label>
+            <label index="tx_typo3blog_tagcloud">Tags</label>
 		</languageKey>
 	</data>
 </T3locallang>

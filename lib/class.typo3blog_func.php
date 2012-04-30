@@ -52,9 +52,9 @@ class typo3blog_func
 	/**
 	 * Set the tslib_cObj class
 	 *
-	 * @param	tslib_cObj		$cObj    tslib_cObj class
-	 * @return	void
-	 * @access public
+	 * @param    tslib_cObj     $cObj    tslib_cObj class
+	 * @return   void
+	 * @access   public
 	 */
 	public function setCobj(tslib_cObj $cObj)
 	{
@@ -66,11 +66,11 @@ class typo3blog_func
 	 * Replaces $this->cObj->substituteArrayMarkerCached() because substitued
 	 * function polutes cache_hash table a lot.
 	 *
-	 * @param	string		$template    Template
-	 * @param	array		$markers     Markers
-	 * @param	array		$subparts    Subparts
-	 * @return	string		$content     HTML
-	 * @access public
+	 * @access   public
+	 * @param    string    $template    Template
+	 * @param    array     $markers     Markers
+	 * @param    array     $subparts    Subparts
+	 * @return   string    $content     HTML
 	 */
 	public function substituteMarkersAndSubparts($template, array $markers, array $subparts)
 	{
@@ -87,16 +87,14 @@ class typo3blog_func
 	/**
 	 * Retrieve all records from tt_content by current page uid
 	 *
-	 * @param	[type]		$id: ...
-	 * @param	[type]		$limit: ...
-	 * @return	string
 	 * @access public
+	 * @param    int        $id:     Page uid from category page
+	 * @param    int        $limit:  Limit to display content elements on list view
+	 * @return   string
 	 */
 	public function getPageContent($id, $limit)
 	{
-		if (!t3lib_div::testInt($limit)) {
-			$limit = false;
-		}
+		$content = '';
 
 		$sql = $GLOBALS['TYPO3_DB']->exec_SELECT_queryArray(array(
 				'SELECT'	=> 'uid',
@@ -104,12 +102,10 @@ class typo3blog_func
 				'WHERE'		=> 'pid=' . intval($id) . ' ' . $this->cObj->enableFields('tt_content'),
 				'GROUPBY'	=> '',
 				'ORDERBY'	=> 'sorting',
-				'LIMIT'		=> (false !== $limit)?$limit:''
+				'LIMIT'		=> ''
 			)
 		);
-		$res = mysql(TYPO3_db, $sql);
 
-		$content = '';
 		while ($row = mysql_fetch_assoc($sql)) {
 			$conf['tables'] = 'tt_content';
 			$conf['source'] = intval($row['uid']);
@@ -127,10 +123,10 @@ class typo3blog_func
 	 * Return the category name from parent page
 	 * The parent page is the category page
 	 *
-	 * @param	int		$pid             Page ID
-	 * @param	string		$field           Column from table pages
-	 * @return	string		$page[$field]    Value from field in table pages
-	 * @access public
+	 * @access    public
+	 * @param     int        $pid:             Page ID
+	 * @param     string     $field:           Column from table pages
+	 * @return    string     $page[$field]:    Value from field in table pages
 	 */
 	public function getPostCategoryName($pid, $field = 'title')
 	{
@@ -146,6 +142,23 @@ class typo3blog_func
 		$page = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($sql);
 
 		return $page[$field];
+	}
+
+	/**
+	 * Get the where clause for filter
+	 *
+	 * @access    public
+	 * @return    string
+	 */
+	public function getTagCloudFilterQuery()
+	{
+		if (strlen(t3lib_div::_GET('tagsearch')) > 0) {
+			$tag = htmlspecialchars(trim(t3lib_div::_GET('tagsearch')));
+
+			return " AND tx_typo3blog_tagcloud LIKE '%".$tag."%'";
+		}
+
+		return "";
 	}
 }
 ?>

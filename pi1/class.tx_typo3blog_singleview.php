@@ -111,15 +111,20 @@ class tx_typo3blog_singleview extends tslib_pibase
 		$subparts = array();
 		$markers = array();
 
-		// Query to load all blog pages
-		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-			"*", "pages",
-			"uid = " . $this->page_uid . "
-			AND hidden = 0 AND deleted = 0 "
+		// Define return value
+		$content = '';
+
+		$sql = $GLOBALS['TYPO3_DB']->exec_SELECT_queryArray(array(
+				'SELECT'	=> '*',
+				'FROM'		=> 'pages',
+				'WHERE'		=> 'pid=' . intval($this->page_uid) . ' AND hidden = 0 AND deleted = 0 ' . $this->typo3BlogFunc->getTagCloudFilterQuery(),
+				'GROUPBY'	=> '',
+				'ORDERBY'	=> 'sorting',
+				'LIMIT'		=> ''
+			)
 		);
 
-		$content = '';
-		while ($row = mysql_fetch_assoc($res)) {
+		while ($row = mysql_fetch_assoc($sql)) {
 			$row['category'] = $this->typo3BlogFunc->getPostCategoryName($row['pid'], 'title');
 			$row['pagecontent'] = "";
 			$row['comments'] = "";
@@ -131,12 +136,7 @@ class tx_typo3blog_singleview extends tslib_pibase
 					$this->cObj->setCurrentVal(false);
 				}
 				else {
-					if ($column == 'pagecontent1') {
-						$value = $this->cObj->stdWrap($value, $this->conf['blogSingle.']['marker.'][$column . '.']);
-					} else {
-						$value = $this->cObj->cObjGetSingle($this->conf['blogSingle.']['marker.'][$column], $this->conf['blogSingle.']['marker.'][$column . '.']);
-					}
-
+					$value = $this->cObj->cObjGetSingle($this->conf['blogSingle.']['marker.'][$column], $this->conf['blogSingle.']['marker.'][$column . '.']);
 				}
 				$markers['###BLOGSINGLE_' . strtoupper($column) . '###'] = $value;
 			}

@@ -62,10 +62,47 @@ plugin.tx_typo3blog_pi1 {
 			}
 
 			# page field tx_typo3_tagcloud setup for templatemarker '###BLOGLIST_TX_TYPO3BLOG_TAGCLOUD###'
-			tx_typo3blog_tagcloud = TEXT
+			tx_typo3blog_tagcloud = COA
 			tx_typo3blog_tagcloud {
+				if.isTrue.field = tx_typo3blog_tagcloud
 				wrap = |
-				field = tx_typo3blog_tagcloud
+
+				10 = TEXT
+				10.data = LLL:EXT:typo3_blog/locallang.xml:tx_typo3blog_tagcloud
+				10.noTrimWrap = ||: |
+				20 = TEXT
+				20 {
+					field = tx_typo3blog_tagcloud
+					split {
+						cObjNum = 1
+						token = ,
+						1 {
+							1 = LOAD_REGISTER
+							1 {
+								linkparam.cObject = TEXT
+								linkparam.cObject {
+									current = 1
+									trim = 1
+									htmlSpecialChars = 1
+									rawUrlEncode = 1
+								}
+							}
+							10 = TEXT
+							10 {
+								trim = 1
+								current = 1
+								htmlSpecialChars = 1
+								typolink {
+									parameter.dataWrap = {field:pid}
+									additionalParams.dataWrap = &tagsearch={register:linkparam}
+									useCacheHash = 1
+								}
+								noTrimWrap = | ||
+							}
+						}
+						wrap = | |*| ,|
+					}
+				}
 			}
 
 			# tt_content items setup for templatemarker '###BLOGLIST_PAGECONTENT###'
