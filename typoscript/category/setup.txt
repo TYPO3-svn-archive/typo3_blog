@@ -3,7 +3,7 @@ plugin.tx_typo3blog_pi1 {
     CategoryList {
         entryLevel = 1
         special = directory
-        special.value = 104
+        special.value = {$plugin.tx_typo3blog_pi1.startPid}
         excludeDoktypes = 1
 
         stdWrap {

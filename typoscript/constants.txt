@@ -1,0 +1,5 @@
+plugin.tx_typo3blog_pi1 {
+
+	# cat=plugin.typo3blog: Basic; type=string; label=Start PID:The PID where for blog start page  (see manual!)
+	startPid =
+}
