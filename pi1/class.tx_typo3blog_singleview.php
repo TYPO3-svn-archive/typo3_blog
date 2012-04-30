@@ -117,7 +117,7 @@ class tx_typo3blog_singleview extends tslib_pibase
 		$sql = $GLOBALS['TYPO3_DB']->exec_SELECT_queryArray(array(
 				'SELECT'	=> '*',
 				'FROM'		=> 'pages',
-				'WHERE'		=> 'pid=' . intval($this->page_uid) . ' AND hidden = 0 AND deleted = 0 ' . $this->typo3BlogFunc->getTagCloudFilterQuery(),
+				'WHERE'		=> 'uid=' . intval($this->page_uid) . ' AND hidden = 0 AND deleted = 0 ' . $this->typo3BlogFunc->getTagCloudFilterQuery(),
 				'GROUPBY'	=> '',
 				'ORDERBY'	=> 'sorting',
 				'LIMIT'		=> ''
