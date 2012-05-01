@@ -123,7 +123,7 @@ class tx_typo3blog_listview extends tslib_pibase
 		$markerArray = array();
 		$markers = array();
 
-		// Query to load all blog pages
+		// Query to load current category page with all post pages in rootline
 		$sql = $GLOBALS['TYPO3_DB']->exec_SELECT_queryArray(array(
 				'SELECT'	=> '*',
 				'FROM'		=> 'pages',
@@ -134,7 +134,7 @@ class tx_typo3blog_listview extends tslib_pibase
 			)
 		);
 
-		// Set retrieved records in marker for bloglist
+		// Execute sql and set retrieved records in marker for bloglist
 		while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($sql)) {
 
 			// add additional data to ts template
@@ -144,7 +144,7 @@ class tx_typo3blog_listview extends tslib_pibase
 			// add data to ts template
 			$this->cObj->data = $row;
 
-			// Set data in HTML template marker
+			// Each all records and set data in HTML template marker
 			foreach ($row as $column => $data) {
 
 				if ($this->conf['blogList.']['marker.'][$column]) {
@@ -174,14 +174,8 @@ class tx_typo3blog_listview extends tslib_pibase
 		// Complete the template expansion by replacing the "content" marker in the template
 		$content = $this->typo3BlogFunc->substituteMarkersAndSubparts($template, $markers, $subparts);
 
+		// Return the content to display in frontend
 		return $this->pi_wrapInBaseClass($content);
-	}
-
-
-
-	private function splitTags()
-	{
-
 	}
 
 	/**
@@ -230,7 +224,7 @@ class tx_typo3blog_listview extends tslib_pibase
 	 * Return the start limit for pagebrowser
 	 *
 	 * @access    private
-	 * @return    int       $limit:    The limit to display tt_content as preview
+	 * @return    int       $limit:    The limit as start limit for bloglist
 	 */
 	private function getPageBrowseLimit()
 	{
@@ -276,6 +270,7 @@ class tx_typo3blog_listview extends tslib_pibase
 	 */
 	private function getNumberOfPostsInCategoryPage($page_id)
 	{
+		// Query to load all blog post pages in rootline from current category page
 		$sql = $GLOBALS['TYPO3_DB']->exec_SELECT_queryArray(array(
 			'SELECT'	=> '*',
 			'FROM'		=> 'pages',
@@ -285,8 +280,10 @@ class tx_typo3blog_listview extends tslib_pibase
 			'LIMIT'		=> ''
 			)
 		);
+		// Execute sql and count the result
 		$posts = $GLOBALS['TYPO3_DB']->sql_num_rows($sql);
 
+		// Return count of result
 		return $posts;
 	}
 
@@ -298,10 +295,11 @@ class tx_typo3blog_listview extends tslib_pibase
 	 */
 	private function getPostByRootLine()
 	{
-		// Read all posts from rootline
+		// Read all post uid's from rootline by current category page
 		$this->cObj->data['recursive'] = 4;
 		$pidList = $this->pi_getPidList(intval($this->page_uid), $this->cObj->data['recursive']);
 
+		// return the string with all uid's and clean up
 		return $GLOBALS['TYPO3_DB']->cleanIntList($pidList);
 	}
 }

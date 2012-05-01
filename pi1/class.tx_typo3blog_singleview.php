@@ -114,6 +114,7 @@ class tx_typo3blog_singleview extends tslib_pibase
 		// Define return value
 		$content = '';
 
+		// Select the current blog post page
 		$sql = $GLOBALS['TYPO3_DB']->exec_SELECT_queryArray(array(
 				'SELECT'	=> '*',
 				'FROM'		=> 'pages',
@@ -124,11 +125,18 @@ class tx_typo3blog_singleview extends tslib_pibase
 			)
 		);
 
+		// Execute the sql and each all selected fields
 		while ($row = mysql_fetch_assoc($sql)) {
+
+			// Define additional fields for ts and add initialize this or add the content
 			$row['category'] = $this->typo3BlogFunc->getPostCategoryName($row['pid'], 'title');
 			$row['pagecontent'] = "";
 			$row['comments'] = "";
+
+			// Add all fields in ts
 			$this->cObj->data = $row;
+
+			// Set all fields from ts in template marker
 			foreach ($row as $column => $value) {
 				if ($this->conf['blogList.']['marker.'][$column]) {
 					$this->cObj->setCurrentVal($value);
@@ -145,6 +153,7 @@ class tx_typo3blog_singleview extends tslib_pibase
 		// Complete the template expansion by replacing the "content" marker in the template
 		$content .= $this->typo3BlogFunc->substituteMarkersAndSubparts($template, $markers, $subparts);
 
+		// Return the content to display in frontend
 		return $this->pi_wrapInBaseClass($content);
 	}
 

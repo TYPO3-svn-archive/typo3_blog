@@ -88,34 +88,35 @@ class typo3blog_func
 	 * Retrieve all records from tt_content by current page uid
 	 *
 	 * @access public
-	 * @param    int        $id:     Page uid from category page
+	 * @param    int        $id:     Page uid from blog post page
 	 * @param    int        $limit:  Limit to display content elements on list view
 	 * @return   string
 	 */
 	public function getPageContent($id, $limit)
 	{
+		// Define return value
 		$content = '';
 
+		// Select the uid from tt_content
 		$sql = $GLOBALS['TYPO3_DB']->exec_SELECT_queryArray(array(
 				'SELECT'	=> 'uid',
 				'FROM'		=> 'tt_content',
 				'WHERE'		=> 'pid=' . intval($id) . ' ' . $this->cObj->enableFields('tt_content'),
 				'GROUPBY'	=> '',
 				'ORDERBY'	=> 'sorting',
-				'LIMIT'		=> ''
+				'LIMIT'		=> intval($limit)
 			)
 		);
 
+		// Execute sql and add tt_content entries in cObj RECORDS in return value $content
 		while ($row = mysql_fetch_assoc($sql)) {
 			$conf['tables'] = 'tt_content';
 			$conf['source'] = intval($row['uid']);
 			$conf['dontCheckPid'] = 1;
-			if (false !== $limit) {
-				$conf['max'] = intval($limit);
-			}
-
 			$content .= $this->cObj->RECORDS($conf);
 		}
+
+		// return the content
 		return $content;
 	}
 
@@ -124,12 +125,13 @@ class typo3blog_func
 	 * The parent page is the category page
 	 *
 	 * @access    public
-	 * @param     int        $pid:             Page ID
+	 * @param     int        $pid:             Page ID from category page
 	 * @param     string     $field:           Column from table pages
 	 * @return    string     $page[$field]:    Value from field in table pages
 	 */
 	public function getPostCategoryName($pid, $field = 'title')
 	{
+		// Select record from category page
 		$sql = $GLOBALS['TYPO3_DB']->exec_SELECT_queryArray(array(
 				'SELECT'	=> '*',
 				'FROM'		=> 'pages',
@@ -139,8 +141,10 @@ class typo3blog_func
 				'LIMIT'		=> ''
 			)
 		);
+		// Execute SQL
 		$page = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($sql);
 
+		// return $field from result
 		return $page[$field];
 	}
 
@@ -152,13 +156,20 @@ class typo3blog_func
 	 */
 	public function getTagCloudFilterQuery()
 	{
+		// Get GET param tagsearch from url
 		if (strlen(t3lib_div::_GET('tagsearch')) > 0) {
 			$tag = htmlspecialchars(trim(t3lib_div::_GET('tagsearch')));
 
+			// return the where query string
 			return " AND tx_typo3blog_tagcloud LIKE '%".$tag."%'";
 		}
 
+		// Return empty string if GET param tagsearch not exist
 		return "";
+	}
+
+	function getGravatarUrl($email,$size = 100,$default){
+		return  "http://www.gravatar.com/avatar/".md5($email).".jpg?s=".$size."&d=".urlencode($default);
 	}
 }
 ?>
