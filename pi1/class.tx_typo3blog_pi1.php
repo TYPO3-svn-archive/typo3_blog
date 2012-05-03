@@ -129,14 +129,20 @@ class tx_typo3blog_pi1 extends tslib_pibase
 
 		switch ($this->conf['what_to_display']) {
 			case "BLOGLIST":
-				require_once(t3lib_extMgm::extPath('typo3_blog') . 'pi1/class.tx_typo3blog_listview.php');
-				$view = t3lib_div::makeInstance('tx_typo3blog_listview');
+				require_once(t3lib_extMgm::extPath('typo3_blog') . 'pi1/class.tx_typo3blog_widget_listview.php');
+				$view = t3lib_div::makeInstance('tx_typo3blog_widget_listview');
 				return $view->main($content, $conf);
 				break;
 
 			case "BLOGSINGLE":
-				require_once(t3lib_extMgm::extPath('typo3_blog') . 'pi1/class.tx_typo3blog_singleview.php');
-				$view = t3lib_div::makeInstance('tx_typo3blog_singleview');
+				require_once(t3lib_extMgm::extPath('typo3_blog') . 'pi1/class.tx_typo3blog_widget_singleview.php');
+				$view = t3lib_div::makeInstance('tx_typo3blog_widget_singleview');
+				return $view->main($content, $conf);
+				break;
+
+			case "TAGCLOUD":
+				require_once(t3lib_extMgm::extPath('typo3_blog') . 'pi1/class.tx_typo3blog_widget_tagcloud.php');
+				$view = t3lib_div::makeInstance('tx_typo3blog_widget_tagcloud');
 				return $view->main($content, $conf);
 				break;
 

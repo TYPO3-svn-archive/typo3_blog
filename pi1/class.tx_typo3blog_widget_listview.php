@@ -26,18 +26,17 @@
  *
  *
  *
- *   57: class tx_typo3blog_listview extends tslib_pibase
- *   76:     private function init()
- *  109:     public function main($content, $conf)
- *  184:     private function getFilterQuery()
- *  196:     private function mergeConfiguration()
- *  215:     private function fetchConfigValue($param)
- *  237:     private function getPageBrowseLimit()
- *  255:     private function getListGetPageBrowser($numberOfPages)
- *  278:     private function getNumberOfPostsInCategoryPage($page_id)
- *  300:     private function getPostByRootLine()
+ *   56: class tx_typo3blog_widget_listview extends tslib_pibase
+ *   75:     private function init()
+ *  108:     public function main($content, $conf)
+ *  189:     private function mergeConfiguration()
+ *  208:     private function fetchConfigValue($param)
+ *  230:     private function getPageBrowseLimit()
+ *  247:     private function getListGetPageBrowser($numberOfPages)
+ *  270:     private function getNumberOfPostsInCategoryPage($page_id)
+ *  295:     private function getPostByRootLine()
  *
- * TOTAL FUNCTIONS: 9
+ * TOTAL FUNCTIONS: 8
  * (This index is automatically created/updated by the extension "extdeveval")
  *
  */
@@ -54,10 +53,10 @@ include_once(PATH_site . 'typo3/sysext/cms/tslib/class.tslib_content.php');
  * @package       TYPO3
  * @subpackage    tx_typo3blog
  */
-class tx_typo3blog_listview extends tslib_pibase
+class tx_typo3blog_widget_listview extends tslib_pibase
 {
-	public $prefixId = 'tx_typo3blog_pi1'; // Same as class name
-	public $scriptRelPath = 'pi1/class.tx_typo3blog_listview.php'; // Path to this script relative to the extension dir.
+	public $prefixId = 'tx_typo3blog_widget_listview'; // Same as class name
+	public $scriptRelPath = 'pi1/class.tx_typo3blog_widget_listview.php'; // Path to this script relative to the extension dir.
 	public $extKey = 'typo3_blog'; // The extension key.
 	public $pi_checkCHash = TRUE;
 
@@ -70,8 +69,8 @@ class tx_typo3blog_listview extends tslib_pibase
 	/**
 	 * initializes this class
 	 *
-	 * @access    private
-	 * @return    void
+	 * @return	void
+	 * @access private
 	 */
 	private function init()
 	{
@@ -101,10 +100,10 @@ class tx_typo3blog_listview extends tslib_pibase
 	/**
 	 * The main method of the PlugIn
 	 *
-	 * @access    public
-	 * @param     string    $content:    The PlugIn content
-	 * @param     array     $conf:       The PlugIn configuration
-	 * @return    string    $content:    The content that is displayed on the website
+	 * @param	string		$content:    The PlugIn content
+	 * @param	array		$conf:       The PlugIn configuration
+	 * @return	string		$content:    The content that is displayed on the website
+	 * @access public
 	 */
 	public function main($content, $conf)
 	{
@@ -112,6 +111,10 @@ class tx_typo3blog_listview extends tslib_pibase
 		$this->pi_setPiVarDefaults();
 		$this->pi_loadLL();
 		$this->init();
+
+		if (t3lib_div::_GET('tagsearch')) {
+			$this->page_uid = 104;
+		}
 
 		// Get subparts from HTML template BLOGLIST_TEMPLATE
 		$template = $this->cObj->getSubpart($this->template, '###BLOGLIST_TEMPLATE###');
@@ -136,7 +139,6 @@ class tx_typo3blog_listview extends tslib_pibase
 
 		// Execute sql and set retrieved records in marker for bloglist
 		while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($sql)) {
-
 			// add additional data to ts template
 			$row['category'] = $this->typo3BlogFunc->getPostCategoryName($row['pid'], 'title');
 			$row['pagecontent'] = $this->typo3BlogFunc->getPageContent($row['uid'], $this->conf['blogList.']['contentItemsToDisplay']);
@@ -166,10 +168,9 @@ class tx_typo3blog_listview extends tslib_pibase
 		}
 
 		// Set pagebrowser marker from HTML Template
-		$markers['###BLOGLIST_PAGEBROWSER###'] = $this->getListGetPageBrowser(
-			intval($this->getNumberOfPostsInCategoryPage(intval($GLOBALS['TSFE']->page['pid'])) / $this->conf['blogList.']['itemsToDisplay']) +
-			((intval($this->getNumberOfPostsInCategoryPage(intval($GLOBALS['TSFE']->page['pid']))) % $this->conf['blogList.']['itemsToDisplay']) == 0 ? 0 : 1)
-		);
+		$pagestodisplay = intval($this->getNumberOfPostsInCategoryPage(intval($this->page_uid)) / $this->conf['blogList.']['itemsToDisplay']) +
+			((intval($this->getNumberOfPostsInCategoryPage(intval($this->page_uid))) % $this->conf['blogList.']['itemsToDisplay']) == 0 ? 0 : 1);
+		$markers['###BLOGLIST_PAGEBROWSER###'] = $this->getListGetPageBrowser($pagestodisplay);
 
 		// Complete the template expansion by replacing the "content" marker in the template
 		$content = $this->typo3BlogFunc->substituteMarkersAndSubparts($template, $markers, $subparts);
@@ -182,8 +183,8 @@ class tx_typo3blog_listview extends tslib_pibase
 	 * THIS NICE PART IS FROM TYPO3 comments EXTENSION
 	 * Merges TS configuration with configuration from flexform (latter takes precedence).
 	 *
-	 * @access    private
-	 * @return    void
+	 * @return	void
+	 * @access private
 	 */
 	private function mergeConfiguration()
 	{
@@ -200,9 +201,9 @@ class tx_typo3blog_listview extends tslib_pibase
 	 * Fetches configuration value from flexform. If value exists, value in
 	 * <code>$this->conf</code> is replaced with this value.
 	 *
-	 * @access    private
-	 * @param     string    $param:    Parameter name. If <code>.</code> is found, the first part is section name, second is key (applies only to $this->conf)
-	 * @return    void
+	 * @param	string		$param:    Parameter name. If <code>.</code> is found, the first part is section name, second is key (applies only to $this->conf)
+	 * @return	void
+	 * @access private
 	 */
 	private function fetchConfigValue($param)
 	{
@@ -223,27 +224,25 @@ class tx_typo3blog_listview extends tslib_pibase
 	/**
 	 * Return the start limit for pagebrowser
 	 *
-	 * @access    private
-	 * @return    int       $limit:    The limit as start limit for bloglist
+	 * @return	int		$limit:    The limit as start limit for bloglist
+	 * @access private
 	 */
 	private function getPageBrowseLimit()
 	{
-		if (!$_GET['tx_typo3blog_pi1']['page']) {
+		if (!$_GET['tx_typo3blog_widget_listview']['page']) {
 			$limit = 0;
 		} else {
-			$limit = $_GET['tx_typo3blog_pi1']['page'] * $this->conf['blogList.']['itemsToDisplay'];
+			$limit = $_GET['tx_typo3blog_widget_listview']['page'] * $this->conf['blogList.']['itemsToDisplay'];
 		}
-
 		return $limit;
 	}
 
 	/**
 	 * Return pagebrowse
 	 *
-	 * @access    private
-	 * @param     int       $numberOfPages:    The number of display page
-	 * @return    string    $content:          The HTML output from pagebrowse plugin
-	 *
+	 * @param	int		$numberOfPages:    The number of display page
+	 * @return	string		$content:          The HTML output from pagebrowse plugin
+	 * @access private
 	 */
 	private function getListGetPageBrowser($numberOfPages)
 	{
@@ -264,9 +263,9 @@ class tx_typo3blog_listview extends tslib_pibase
 	/**
 	 * Return the number of posts in category page
 	 *
-	 * @access    private
-	 * @param     int       $page_id:    The category page id
-	 * @return    int       $posts:      Count of current posts in category page
+	 * @param	int		$page_id:    The category page id
+	 * @return	int		$posts:      Count of current posts in category page
+	 * @access private
 	 */
 	private function getNumberOfPostsInCategoryPage($page_id)
 	{
@@ -274,7 +273,7 @@ class tx_typo3blog_listview extends tslib_pibase
 		$sql = $GLOBALS['TYPO3_DB']->exec_SELECT_queryArray(array(
 			'SELECT'	=> '*',
 			'FROM'		=> 'pages',
-			'WHERE'		=> 'pid IN (' . $this->getPostByRootLine($page_id) . ') AND doktype != ' . $this->extConf["doktypeId"],
+			'WHERE'		=> 'pid IN (' . $this->getPostByRootLine($page_id) . ') AND doktype != ' . $this->extConf["doktypeId"] . ' ' . $this->typo3BlogFunc->getTagCloudFilterQuery(),
 			'GROUPBY'	=> '',
 			'ORDERBY'	=> 'crdate DESC',
 			'LIMIT'		=> ''
@@ -290,8 +289,8 @@ class tx_typo3blog_listview extends tslib_pibase
 	/**
 	 * Get all sub pages from current page_id as string "123,124,125"
 	 *
-	 * @access    private
-	 * @return    string
+	 * @return	string
+	 * @access private
 	 */
 	private function getPostByRootLine()
 	{
@@ -304,7 +303,7 @@ class tx_typo3blog_listview extends tslib_pibase
 	}
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/typo3_blog/pi1/class.tx_typo3blog_listview.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/typo3_blog/pi1/class.tx_typo3blog_listview.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/typo3_blog/pi1/class.tx_typo3blog_widget_listview.php']) {
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/typo3_blog/pi1/class.tx_typo3blog_widget_listview.php']);
 }
 ?>

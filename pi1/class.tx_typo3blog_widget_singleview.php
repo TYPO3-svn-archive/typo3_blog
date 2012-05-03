@@ -26,11 +26,11 @@
  *
  *
  *
- *   52: class tx_typo3blog_singleview extends tslib_pibase
+ *   52: class tx_typo3blog_widget_singleview extends tslib_pibase
  *   70:     private function init()
  *  100:     public function main($content, $conf)
- *  158:     private function mergeConfiguration()
- *  172:     private function fetchConfigValue($param)
+ *  167:     private function mergeConfiguration()
+ *  181:     private function fetchConfigValue($param)
  *
  * TOTAL FUNCTIONS: 4
  * (This index is automatically created/updated by the extension "extdeveval")
@@ -49,10 +49,10 @@ include_once(PATH_site . 'typo3/sysext/cms/tslib/class.tslib_content.php');
  * @package       TYPO3
  * @subpackage    tx_typo3blog
  */
-class tx_typo3blog_singleview extends tslib_pibase
+class tx_typo3blog_widget_singleview extends tslib_pibase
 {
-	public $prefixId = 'tx_typo3blog_pi1'; // Same as class name
-	public $scriptRelPath = 'pi1/class.tx_typo3blog_singleview.php'; // Path to this script relative to the extension dir.
+	public $prefixId = 'tx_typo3blog_widget_singleview'; // Same as class name
+	public $scriptRelPath = 'pi1/class.tx_typo3blog_widget_singleview.php'; // Path to this script relative to the extension dir.
 	public $extKey = 'typo3_blog'; // The extension key.
 	public $pi_checkCHash = TRUE;
 
@@ -64,8 +64,8 @@ class tx_typo3blog_singleview extends tslib_pibase
 	/**
 	 * Initializes this class
 	 *
-	 * @access    private
-	 * @return    void
+	 * @return	void
+	 * @access private
 	 */
 	private function init()
 	{
@@ -92,10 +92,10 @@ class tx_typo3blog_singleview extends tslib_pibase
 	/**
 	 * The main method of the PlugIn
 	 *
-	 * @access    public
-	 * @param     string    $content:      The PlugIn content
-	 * @param     array     $conf:         The PlugIn configuration
-	 * @return    string    $content:      That is displayed on the website
+	 * @param	string		$content:      The PlugIn content
+	 * @param	array		$conf:         The PlugIn configuration
+	 * @return	string		$content:      That is displayed on the website
+	 * @access public
 	 */
 	public function main($content, $conf)
 	{
@@ -161,8 +161,8 @@ class tx_typo3blog_singleview extends tslib_pibase
 	 * THIS NICE PART IS FROM TYPO3 comments EXTENSION
 	 * Merges TS configuration with configuration from flexform (latter takes precedence).
 	 *
-	 * @access    private
-	 * @return    void
+	 * @return	void
+	 * @access private
 	 */
 	private function mergeConfiguration()
 	{
@@ -174,9 +174,9 @@ class tx_typo3blog_singleview extends tslib_pibase
 	 * Fetches configuration value from flexform. If value exists, value in
 	 * <code>$this->conf</code> is replaced with this value.
 	 *
-	 * @access    private
-	 * @param     string     $param:    Parameter name. If <code>.</code> is found, the first part is section name, second is key (applies only to $this->conf)
-	 * @return    void
+	 * @param	string		$param:    Parameter name. If <code>.</code> is found, the first part is section name, second is key (applies only to $this->conf)
+	 * @return	void
+	 * @access private
 	 */
 	private function fetchConfigValue($param)
 	{
@@ -195,8 +195,8 @@ class tx_typo3blog_singleview extends tslib_pibase
 	}
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/typo3_blog/pi1/class.tx_typo3blog_listview.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/typo3_blog/pi1/class.tx_typo3blog_listview.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/typo3_blog/pi1/class.tx_typo3blog_widget_listview.php']) {
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/typo3_blog/pi1/class.tx_typo3blog_widget_listview.php']);
 }
 
 ?>

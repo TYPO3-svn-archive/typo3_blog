@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>tagcloud template</title>
+</head>
+
+<body>
+
+<h1>TAGCLOUD TEMPLATES</h1>
+
+<h2>EXAMPLE</h2>
+
+
+<br/>
+<br/>
+<br/>
+<strong>Global markers, as set up in TypoScript:</strong>
+These are substituted throughout the whole template.
+
+<em>Markers:</em>
+TAGCLOUD_UID - uid number of the blogsingle page
+
+
+
+<br/><br/><br/><br/>
+<hr/>
+<br/>
+
+<h3>TAGCLOUD_TEMPLATE</h3>
+<em>This is the template for the list of posts, typically displayed on a frontpage.</em>
+<br/>
+<br/>
+<br/>
+<br/>
+
+
+<!-- ###TAGCLOUD_TEMPLATE### begin-->
+
+###TAGCLOUD_TITLE###
+<ul>
+	<!--###ITEM### begin -->
+	<li>
+		<a class="tagcloudWeight###TAGCLOUD_WEIGHT###" href="###TAGCLOUD_LINK###" title="###TAGCLOUD_COUNT###">###TAGCLOUD_NAME###</a>
+
+	</li>
+	<!--###ITEM### begin -->
+</ul>
+
+<!-- ###TAGCLOUD_TEMPLATE### end -->
+
+</body>
+</html>

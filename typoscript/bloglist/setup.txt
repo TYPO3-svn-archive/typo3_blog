@@ -5,7 +5,7 @@ plugin.tx_typo3blog_pi1 {
 		#----------------------------------------------------
 
 		# Displaying posts in bloglist
-		itemsToDisplay = 10
+		itemsToDisplay = 5
 
 		#Displaying elements from tt_content as preview
 		contentItemsToDisplay = 1
@@ -93,7 +93,7 @@ plugin.tx_typo3blog_pi1 {
 								current = 1
 								htmlSpecialChars = 1
 								typolink {
-									parameter.dataWrap = {field:pid}
+									parameter.dataWrap = {$plugin.tx_typo3blog_pi1.startPid}
 									additionalParams.dataWrap = &tagsearch={register:linkparam}
 									useCacheHash = 1
 								}

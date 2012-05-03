@@ -1,0 +1,31 @@
+plugin.tx_typo3blog_pi1 {
+	tagcloud {
+
+		# Bloglist template file
+		templateFile = EXT:typo3_blog/res/tagcloud/template.html
+
+		# SECTION TEMPLATE MARKER FOR BLOGLIST TEMPLATE
+		#----------------------------------------------------
+		marker {
+			name = TEXT
+			name {
+				wrap = |
+			}
+
+			count = TEXT
+			count {
+				wrap = |
+			}
+
+			weight = TEXT
+			weight {
+				wrap = |
+			}
+
+			link = TEXT
+			link {
+				wrap = |
+			}
+		}
+	}
+}
