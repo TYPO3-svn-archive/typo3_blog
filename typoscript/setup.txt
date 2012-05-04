@@ -5,4 +5,5 @@
 
 plugin.tx_typo3blog_pi1 {
 	what_to_display =
+	startPid = {$plugin.tx_typo3blog_pi1.startPid}
 }

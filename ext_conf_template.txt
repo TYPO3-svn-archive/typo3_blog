@@ -1,5 +1,3 @@
 # cat=basic; type=integer; label=doktype Id: The doktype id for the new Blog page type
-doktypeId =r
+doktypeId =
 
-# cat=basic; type=integer; label=blog start PID: The page id for Blog start page
-startPId =

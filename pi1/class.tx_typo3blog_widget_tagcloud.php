@@ -29,12 +29,12 @@
  *   56: class tx_typo3blog_widget_tagcloud extends tslib_pibase
  *   80:     private function init()
  *  114:     public function main($content, $conf)
- *  208:     private function mergeConfiguration()
- *  222:     private function fetchConfigValue($param)
- *  244:     private function setTagcloudMax()
- *  257:     private function setTagcloudMin()
- *  271:     function calculateTagFontSize($count)
- *  289:     private function getPostByRootLine()
+ *  222:     private function mergeConfiguration()
+ *  236:     private function fetchConfigValue($param)
+ *  258:     private function setTagcloudMax()
+ *  271:     private function setTagcloudMin()
+ *  284:     function calculateTagFontSize($count)
+ *  302:     private function getPostByRootLine()
  *
  * TOTAL FUNCTIONS: 8
  * (This index is automatically created/updated by the extension "extdeveval")
@@ -49,13 +49,13 @@ include_once(PATH_site . 'typo3/sysext/cms/tslib/class.tslib_content.php');
 /**
  * Plugin 'Typo3 Blog ListView' for the 'typo3_blog' extension.
  *
- * @author        Roland Schmidt <rsch73@gmail.com>
- * @package       TYPO3
- * @subpackage    tx_typo3blog
+ * @author			Roland Schmidt <rsch73@gmail.com>
+ * @package			TYPO3
+ * @subpackage		tx_typo3blog
  */
 class tx_typo3blog_widget_tagcloud extends tslib_pibase
 {
-	public $prefixId = 'class.tx_typo3blog_widget_tagcloud'; // Same as class name
+	public $prefixId = 'tx_typo3blog_widget_tagcloud'; // Same as class name
 	public $scriptRelPath = 'pi1/class.tx_typo3blog_widget_tagcloud.php'; // Path to this script relative to the extension dir.
 	public $extKey = 'typo3_blog'; // The extension key.
 	public $pi_checkCHash = TRUE;
@@ -106,9 +106,9 @@ class tx_typo3blog_widget_tagcloud extends tslib_pibase
 	/**
 	 * The main method of the PlugIn
 	 *
-	 * @param	string		$content:    The PlugIn content
-	 * @param	array		$conf:       The PlugIn configuration
-	 * @return	string		$content:    The content that is displayed on the website
+	 * @param	string		$content:		The PlugIn content
+	 * @param	array		$conf:			The PlugIn configuration
+	 * @return	string		$content:		The content that is displayed on the website
 	 * @access public
 	 */
 	public function main($content, $conf)
@@ -117,6 +117,19 @@ class tx_typo3blog_widget_tagcloud extends tslib_pibase
 		$this->pi_setPiVarDefaults();
 		$this->pi_loadLL();
 		$this->init();
+
+		// Check the environment for typo3blog listview
+		if (NULL === $this->template) {
+			return $this->pi_wrapInBaseClass(
+				"Error :Template file " . $this->conf['blogList.']['templateFile'] . " not found.<br />Please check the typoscript configuration!"
+			);
+		}
+
+		if (!t3lib_div::testInt($this->blog_doktype_id)) {
+			return $this->pi_wrapInBaseClass(
+				"ERROR: doktype Id for page type blog not found.<br />Please set the doktype ID in extension conf!"
+			);
+		}
 
 		// Get subparts from HTML template BLOGLIST_TEMPLATE
 		$template = $this->cObj->getSubpart($this->template, '###TAGCLOUD_TEMPLATE###');
@@ -173,7 +186,7 @@ class tx_typo3blog_widget_tagcloud extends tslib_pibase
 			$tags[$i]['count']  = $count;
 			$tags[$i]['name']   = $name;
 			$tags[$i]['weight'] = $this->calculateTagFontSize($count);
-			$tags[$i]['link']   = $this->cObj->getTypoLink_URL(intval($this->extConf['startPId']),array('tagsearch' => $name));
+			$tags[$i]['link']   = $this->cObj->getTypoLink_URL(intval($this->conf['startPid']),array('tagsearch' => $name));
 			$i++;
 		}
 
@@ -182,6 +195,7 @@ class tx_typo3blog_widget_tagcloud extends tslib_pibase
 		{
 			foreach ($tag as $column => $data) {
 				if ($this->conf['tagcloud.']['marker.'][$column]) {
+
 					$this->cObj->setCurrentVal($data);
 					$data = $this->cObj->stdWrap($data, $this->conf['tagcloud.']['marker.'][$column . '.']);
 					$this->cObj->setCurrentVal(false);
@@ -215,7 +229,7 @@ class tx_typo3blog_widget_tagcloud extends tslib_pibase
 	 * Fetches configuration value from flexform. If value exists, value in
 	 * <code>$this->conf</code> is replaced with this value.
 	 *
-	 * @param	string		$param:    Parameter name. If <code>.</code> is found, the first part is section name, second is key (applies only to $this->conf)
+	 * @param	string		$param:		Parameter name. If <code>.</code> is found, the first part is section name, second is key (applies only to $this->conf)
 	 * @return	void
 	 * @access private
 	 */
@@ -263,10 +277,9 @@ class tx_typo3blog_widget_tagcloud extends tslib_pibase
 
 	/**
 	 * Calc the font size for tagcloud
-	 * possible value is 10,20,30,40,50,60,70,80,90,100
 	 *
-	 * @param	int		$count:   Count for tag in tagcloud
-	 * @return	int		$weight:  Weight tag in tagloud
+	 * @param	integer		$count:		Count for tag in tagcloud
+	 * @return	integer		$weight:	Weight tag in tagloud possible value is 10,20,30,40,50,60,70,80,90,100
 	 */
 	function calculateTagFontSize($count) {
 
@@ -300,4 +313,5 @@ class tx_typo3blog_widget_tagcloud extends tslib_pibase
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/typo3_blog/pi1/class.tx_typo3blog_widget_tagcloud.php']) {
 	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/typo3_blog/pi1/class.tx_typo3blog_widget_tagcloud.php']);
 }
+
 ?>

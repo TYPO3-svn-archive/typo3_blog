@@ -29,8 +29,8 @@
  *   52: class tx_typo3blog_widget_singleview extends tslib_pibase
  *   70:     private function init()
  *  100:     public function main($content, $conf)
- *  167:     private function mergeConfiguration()
- *  181:     private function fetchConfigValue($param)
+ *  174:     private function mergeConfiguration()
+ *  188:     private function fetchConfigValue($param)
  *
  * TOTAL FUNCTIONS: 4
  * (This index is automatically created/updated by the extension "extdeveval")
@@ -103,6 +103,13 @@ class tx_typo3blog_widget_singleview extends tslib_pibase
 		$this->pi_setPiVarDefaults();
 		$this->pi_loadLL();
 		$this->init();
+
+		// Check the environment for typo3blog listview
+		if (NULL === $this->template) {
+			return $this->pi_wrapInBaseClass(
+				"Error :Template file " . $this->conf['blogList.']['templateFile'] . " not found.<br />Please check the typoscript configuration!"
+			);
+		}
 
 		// Get subparts from HTML template BLOGLIST_TEMPLATE
 		$template = $this->cObj->getSubpart($this->template, '###BLOGSINGLE_TEMPLATE###');

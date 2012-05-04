@@ -1,0 +1,180 @@
+a:2:{s:4:"meta";a:3:{s:5:"title";s:22:"Typo3 Blog Extensiones";s:5:"descr";s:39:"Blog Extension for Typo3 based on pages";s:7:"options";a:2:{s:10:"usageCount";N;s:19:"includeCodeAbstract";N;}}s:5:"files";a:6:{s:14:"MD5_2db1a8cc54";a:4:{s:8:"filename";s:28:"lib/class.typo3blog_func.php";s:8:"filesize";i:5111;s:6:"header";a:5:{s:4:"text";s:58:"
+
+Plugin 'Typo3 Blog lib' for the 'typo3_blog' extension.
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:6:"[type]";i:1;s:3:"...";}s:5:"other";a:3:{i:0;s:48:"@author        Roland Schmidt <rsch73@gmail.com>";i:1;s:20:"@package       TYPO3";i:2;s:27:"@subpackage    tx_typo3blog";}s:11:"other_index";a:3:{s:7:"@author";a:1:{i:0;s:33:"Roland Schmidt <rsch73@gmail.com>";}s:8:"@package";a:1:{i:0;s:6:"TYPO3 ";}s:11:"@subpackage";a:1:{i:0;s:13:"tx_typo3blog ";}}}s:3:"DAT";a:6:{i:1;a:8:{s:6:"header";s:22:"class typo3blog_func
+{";s:5:"class";i:1;s:11:"parentClass";s:14:"typo3blog_func";s:4:"cDat";a:5:{s:4:"text";s:58:"
+
+Plugin 'Typo3 Blog lib' for the 'typo3_blog' extension.
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:6:"[type]";i:1;s:3:"...";}s:5:"other";a:3:{i:0;s:48:"@author        Roland Schmidt <rsch73@gmail.com>";i:1;s:20:"@package       TYPO3";i:2;s:27:"@subpackage    tx_typo3blog";}s:11:"other_index";a:3:{s:7:"@author";a:1:{i:0;s:33:"Roland Schmidt <rsch73@gmail.com>";}s:8:"@package";a:1:{i:0;s:6:"TYPO3 ";}s:11:"@subpackage";a:1:{i:0;s:13:"tx_typo3blog ";}}}s:7:"content";s:0:"";s:12:"content_size";i:25;s:13:"content_lines";i:2;s:6:"atLine";i:48;}i:3;a:7:{s:6:"header";s:44:"public function setCobj(tslib_cObj $cObj)
+	{";s:11:"parentClass";s:14:"typo3blog_func";s:4:"cDat";a:4:{s:4:"text";s:27:"
+
+Set the tslib_cObj class
+";s:5:"param";a:1:{i:0;a:2:{i:0;s:6:"object";i:1;s:23:"$cObj		tslib_cObj class";}}s:6:"return";a:2:{i:0;s:4:"void";i:1;s:0:"";}s:6:"access";s:6:"public";}s:7:"content";s:0:"";s:12:"content_size";i:28;s:13:"content_lines";i:3;s:6:"atLine";i:59;}i:5;a:7:{s:6:"header";s:91:"public function substituteMarkersAndSubparts($template, array $markers, array $subparts)
+	{";s:11:"parentClass";s:14:"typo3blog_func";s:4:"cDat";a:4:{s:4:"text";s:162:"
+
+THIS NICE PART IS FROM TYPO3 comments EXTENSION
+Replaces $this->cObj->substituteArrayMarkerCached() because substitued
+function polutes cache_hash table a lot.
+";s:5:"param";a:3:{i:0;a:2:{i:0;s:6:"string";i:1;s:20:"$template:		Template";}i:1;a:2:{i:0;s:5:"array";i:1;s:18:"$markers:		Markers";}i:2;a:2:{i:0;s:5:"array";i:1;s:20:"$subparts:		Subparts";}}s:6:"return";a:2:{i:0;s:6:"string";i:1;s:15:"$content:		HTML";}s:6:"access";s:6:"public";}s:7:"content";s:0:"";s:12:"content_size";i:254;s:13:"content_lines";i:10;s:6:"atLine";i:75;}i:7;a:7:{s:6:"header";s:46:"public function getPageContent($id, $limit)
+	{";s:11:"parentClass";s:14:"typo3blog_func";s:4:"cDat";a:4:{s:4:"text";s:59:"
+
+Retrieve all records from tt_content by current page uid
+";s:5:"param";a:2:{i:0;a:2:{i:0;s:7:"integer";i:1;s:34:"$id:		Page uid from blog post page";}i:1;a:2:{i:0;s:7:"integer";i:1;s:55:"$limit:		Limit to display content elements on list view";}}s:6:"return";a:2:{i:0;s:6:"string";i:1;s:0:"";}s:6:"access";s:6:"public";}s:7:"content";s:0:"";s:12:"content_size";i:701;s:13:"content_lines";i:26;s:6:"atLine";i:95;}i:9;a:4:{s:6:"header";s:62:"public function getPostCategoryName($pid, $field = 'title')
+	{";s:11:"parentClass";s:14:"typo3blog_func";s:4:"cDat";a:4:{s:4:"text";s:81:"
+
+Return the category name from parent page
+The parent page is the category page
+";s:5:"param";a:2:{i:0;a:2:{i:0;s:7:"integer";i:1;s:34:"$pid:			Page ID from category page";}i:1;a:2:{i:0;s:6:"string";i:1;s:33:"$field:			Column from table pages";}}s:6:"return";a:2:{i:0;s:6:"string";i:1;s:46:"$page[$field]:	Value from field in table pages";}s:6:"access";s:6:"public";}s:6:"atLine";i:132;}i:11;a:7:{s:6:"header";s:43:"public function getTagCloudFilterQuery()
+	{";s:11:"parentClass";s:14:"typo3blog_func";s:4:"cDat";a:4:{s:4:"text";s:34:"
+
+Get the where clause for filter
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:6:"string";i:1;s:0:"";}s:6:"access";s:6:"public";}s:7:"content";s:0:"";s:12:"content_size";i:560;s:13:"content_lines";i:17;s:6:"atLine";i:157;}}}s:14:"MD5_ec6855d5a7";a:4:{s:8:"filename";s:30:"pi1/class.tx_typo3blog_pi1.php";s:8:"filesize";i:5212;s:6:"header";a:5:{s:4:"text";s:54:"
+
+Plugin 'Typo3 Blog' for the 'typo3_blog' extension.
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:6:"[type]";i:1;s:3:"...";}s:5:"other";a:3:{i:0;s:44:"@author    Roland Schmidt <rsch73@gmail.com>";i:1;s:17:"@package    TYPO3";i:2;s:27:"@subpackage    tx_typo3blog";}s:11:"other_index";a:3:{s:7:"@author";a:1:{i:0;s:33:"Roland Schmidt <rsch73@gmail.com>";}s:8:"@package";a:1:{i:0;s:6:"TYPO3 ";}s:11:"@subpackage";a:1:{i:0;s:13:"tx_typo3blog ";}}}s:3:"DAT";a:5:{i:1;a:8:{s:6:"header";s:45:"class tx_typo3blog_pi1 extends tslib_pibase
+{";s:5:"class";i:1;s:11:"parentClass";s:16:"tx_typo3blog_pi1";s:4:"cDat";a:5:{s:4:"text";s:54:"
+
+Plugin 'Typo3 Blog' for the 'typo3_blog' extension.
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:6:"[type]";i:1;s:3:"...";}s:5:"other";a:3:{i:0;s:44:"@author    Roland Schmidt <rsch73@gmail.com>";i:1;s:17:"@package    TYPO3";i:2;s:27:"@subpackage    tx_typo3blog";}s:11:"other_index";a:3:{s:7:"@author";a:1:{i:0;s:33:"Roland Schmidt <rsch73@gmail.com>";}s:8:"@package";a:1:{i:0;s:6:"TYPO3 ";}s:11:"@subpackage";a:1:{i:0;s:13:"tx_typo3blog ";}}}s:7:"content";s:0:"";s:12:"content_size";i:298;s:13:"content_lines";i:7;s:6:"atLine";i:50;}i:3;a:7:{s:6:"header";s:26:"private function init()
+	{";s:11:"parentClass";s:16:"tx_typo3blog_pi1";s:4:"cDat";a:4:{s:4:"text";s:25:"
+
+initializes this class
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:4:"void";i:1;s:0:"";}s:6:"access";s:7:"private";}s:7:"content";s:0:"";s:12:"content_size";i:223;s:13:"content_lines";i:6;s:6:"atLine";i:65;}i:5;a:7:{s:6:"header";s:40:"private function mergeConfiguration()
+	{";s:11:"parentClass";s:16:"tx_typo3blog_pi1";s:4:"cDat";a:4:{s:4:"text";s:134:"
+
+THIS NICE PART IS FROM TYPO3 comments EXTENSION
+Merges TS configuration with configuration from flexform (latter takes precedence).
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:4:"void";i:1;s:0:"";}s:6:"access";s:7:"private";}s:7:"content";s:0:"";s:12:"content_size";i:83;s:13:"content_lines";i:6;s:6:"atLine";i:80;}i:7;a:4:{s:6:"header";s:43:"public function fetchConfigValue($param)
+	{";s:11:"parentClass";s:16:"tx_typo3blog_pi1";s:4:"cDat";a:4:{s:4:"text";s:177:"
+
+THIS NICE FUNCTION IS FROM TYPO3 comments EXTENSION
+Fetches configuration value from flexform. If value exists, value in
+<code>$this->conf</code> is replaced with this value.
+";s:5:"param";a:1:{i:0;a:2:{i:0;s:6:"string";i:1;s:129:"$param    Parameter name. If <code>.</code> is found, the first part is section name, second is key (applies only to $this->conf)";}}s:6:"return";a:2:{i:0;s:4:"void";i:1;s:0:"";}s:6:"access";s:6:"public";}s:6:"atLine";i:97;}i:9;a:7:{s:6:"header";s:40:"public function main($content, $conf)
+	{";s:11:"parentClass";s:16:"tx_typo3blog_pi1";s:4:"cDat";a:4:{s:4:"text";s:32:"
+
+The main method of the PlugIn
+";s:5:"param";a:2:{i:0;a:2:{i:0;s:6:"string";i:1;s:30:"$content:   The PlugIn content";}i:1;a:2:{i:0;s:5:"array";i:1;s:36:"$conf:      The PlugIn configuration";}}s:6:"return";a:2:{i:0;s:6:"string";i:1;s:44:"$content:   That is displayed on the website";}s:6:"access";s:6:"public";}s:7:"content";s:0:"";s:12:"content_size";i:1381;s:13:"content_lines";i:40;s:6:"atLine";i:121;}}}s:14:"MD5_043acb1f39";a:4:{s:8:"filename";s:38:"pi1/class.tx_typo3blog_pi1_wizicon.php";s:8:"filesize";i:2572;s:6:"header";a:5:{s:4:"text";s:35:"
+
+Class that adds the wizard icon.
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:6:"[type]";i:1;s:3:"...";}s:5:"other";a:3:{i:0;s:42:"@author		Roland Schmidt <rsch73@gmail.com>";i:1;s:15:"@package		TYPO3";i:2;s:24:"@subpackage	tx_typo3blog";}s:11:"other_index";a:3:{s:7:"@author";a:1:{i:0;s:33:"Roland Schmidt <rsch73@gmail.com>";}s:8:"@package";a:1:{i:0;s:6:"TYPO3 ";}s:11:"@subpackage";a:1:{i:0;s:13:"tx_typo3blog ";}}}s:3:"DAT";a:3:{i:1;a:8:{s:6:"header";s:32:"class tx_typo3blog_pi1_wizicon {";s:5:"class";i:1;s:11:"parentClass";s:24:"tx_typo3blog_pi1_wizicon";s:4:"cDat";a:5:{s:4:"text";s:35:"
+
+Class that adds the wizard icon.
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:6:"[type]";i:1;s:3:"...";}s:5:"other";a:3:{i:0;s:42:"@author		Roland Schmidt <rsch73@gmail.com>";i:1;s:15:"@package		TYPO3";i:2;s:24:"@subpackage	tx_typo3blog";}s:11:"other_index";a:3:{s:7:"@author";a:1:{i:0;s:33:"Roland Schmidt <rsch73@gmail.com>";}s:8:"@package";a:1:{i:0;s:6:"TYPO3 ";}s:11:"@subpackage";a:1:{i:0;s:13:"tx_typo3blog ";}}}s:7:"content";s:0:"";s:12:"content_size";i:2;s:13:"content_lines";i:1;s:6:"atLine";i:46;}i:3;a:4:{s:6:"header";s:30:"function proc($wizardItems)
+	{";s:11:"parentClass";s:24:"tx_typo3blog_pi1_wizicon";s:4:"cDat";a:3:{s:4:"text";s:36:"
+
+Processing the wizard items array
+";s:5:"param";a:1:{i:0;a:2:{i:0;s:5:"array";i:1;s:30:"$wizardItems: The wizard items";}}s:6:"return";a:2:{i:0;s:5:"array";i:1;s:23:"array with wizard items";}}s:6:"atLine";i:54;}i:5;a:7:{s:6:"header";s:30:"function includeLocalLang()
+	{";s:11:"parentClass";s:24:"tx_typo3blog_pi1_wizicon";s:4:"cDat";a:3:{s:4:"text";s:89:"
+
+Reads the [extDir]/locallang.xml and returns the $LOCAL_LANG array found in that file.
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:5:"array";i:1;s:20:"with language labels";}}s:7:"content";s:0:"";s:12:"content_size";i:414;s:13:"content_lines";i:11;s:6:"atLine";i:73;}}}s:14:"MD5_e25af009d1";a:4:{s:8:"filename";s:42:"pi1/class.tx_typo3blog_widget_listview.php";s:8:"filesize";i:10952;s:6:"header";a:5:{s:4:"text";s:63:"
+
+Plugin 'Typo3 Blog ListView' for the 'typo3_blog' extension.
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:6:"[type]";i:1;s:3:"...";}s:5:"other";a:3:{i:0;s:43:"@author			Roland Schmidt <rsch73@gmail.com>";i:1;s:16:"@package			TYPO3";i:2;s:25:"@subpackage		tx_typo3blog";}s:11:"other_index";a:3:{s:7:"@author";a:1:{i:0;s:33:"Roland Schmidt <rsch73@gmail.com>";}s:8:"@package";a:1:{i:0;s:6:"TYPO3 ";}s:11:"@subpackage";a:1:{i:0;s:13:"tx_typo3blog ";}}}s:3:"DAT";a:9:{i:1;a:8:{s:6:"header";s:57:"class tx_typo3blog_widget_listview extends tslib_pibase
+{";s:5:"class";i:1;s:11:"parentClass";s:28:"tx_typo3blog_widget_listview";s:4:"cDat";a:5:{s:4:"text";s:63:"
+
+Plugin 'Typo3 Blog ListView' for the 'typo3_blog' extension.
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:6:"[type]";i:1;s:3:"...";}s:5:"other";a:3:{i:0;s:43:"@author			Roland Schmidt <rsch73@gmail.com>";i:1;s:16:"@package			TYPO3";i:2;s:25:"@subpackage		tx_typo3blog";}s:11:"other_index";a:3:{s:7:"@author";a:1:{i:0;s:33:"Roland Schmidt <rsch73@gmail.com>";}s:8:"@package";a:1:{i:0;s:6:"TYPO3 ";}s:11:"@subpackage";a:1:{i:0;s:13:"tx_typo3blog ";}}}s:7:"content";s:0:"";s:12:"content_size";i:464;s:13:"content_lines";i:12;s:6:"atLine";i:54;}i:3;a:7:{s:6:"header";s:26:"private function init()
+	{";s:11:"parentClass";s:28:"tx_typo3blog_widget_listview";s:4:"cDat";a:4:{s:4:"text";s:25:"
+
+initializes this class
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:4:"void";i:1;s:0:"";}s:6:"access";s:7:"private";}s:7:"content";s:0:"";s:12:"content_size";i:757;s:13:"content_lines";i:23;s:6:"atLine";i:74;}i:5;a:7:{s:6:"header";s:40:"public function main($content, $conf)
+	{";s:11:"parentClass";s:28:"tx_typo3blog_widget_listview";s:4:"cDat";a:4:{s:4:"text";s:32:"
+
+The main method of the PlugIn
+";s:5:"param";a:2:{i:0;a:2:{i:0;s:6:"string";i:1;s:29:"$content:		The PlugIn content";}i:1;a:2:{i:0;s:5:"array";i:1;s:33:"$conf:			The PlugIn configuration";}}s:6:"return";a:2:{i:0;s:6:"string";i:1;s:55:"$content:		The content that is displayed on the website";}s:6:"access";s:6:"public";}s:7:"content";s:0:"";s:12:"content_size";i:3385;s:13:"content_lines";i:80;s:6:"atLine";i:107;}i:7;a:7:{s:6:"header";s:40:"private function mergeConfiguration()
+	{";s:11:"parentClass";s:28:"tx_typo3blog_widget_listview";s:4:"cDat";a:4:{s:4:"text";s:134:"
+
+THIS NICE PART IS FROM TYPO3 comments EXTENSION
+Merges TS configuration with configuration from flexform (latter takes precedence).
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:4:"void";i:1;s:0:"";}s:6:"access";s:7:"private";}s:7:"content";s:0:"";s:12:"content_size";i:247;s:13:"content_lines";i:8;s:6:"atLine";i:196;}i:9;a:7:{s:6:"header";s:44:"private function fetchConfigValue($param)
+	{";s:11:"parentClass";s:28:"tx_typo3blog_widget_listview";s:4:"cDat";a:4:{s:4:"text";s:177:"
+
+THIS NICE FUNCTION IS FROM TYPO3 comments EXTENSION
+Fetches configuration value from flexform. If value exists, value in
+<code>$this->conf</code> is replaced with this value.
+";s:5:"param";a:1:{i:0;a:2:{i:0;s:6:"string";i:1;s:128:"$param:		Parameter name. If <code>.</code> is found, the first part is section name, second is key (applies only to $this->conf)";}}s:6:"return";a:2:{i:0;s:4:"void";i:1;s:0:"";}s:6:"access";s:7:"private";}s:7:"content";s:0:"";s:12:"content_size";i:388;s:13:"content_lines";i:14;s:6:"atLine";i:215;}i:11;a:7:{s:6:"header";s:40:"private function getPageBrowseLimit()
+	{";s:11:"parentClass";s:28:"tx_typo3blog_widget_listview";s:4:"cDat";a:4:{s:4:"text";s:41:"
+
+Return the start limit for pagebrowser
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:7:"integer";i:1;s:46:"$limit:		The limit as start limit for bloglist";}s:6:"access";s:7:"private";}s:7:"content";s:0:"";s:12:"content_size";i:212;s:13:"content_lines";i:8;s:6:"atLine";i:237;}i:13;a:7:{s:6:"header";s:57:"private function getListGetPageBrowser($numberOfPages)
+	{";s:11:"parentClass";s:28:"tx_typo3blog_widget_listview";s:4:"cDat";a:4:{s:4:"text";s:20:"
+
+Return pagebrowse
+";s:5:"param";a:1:{i:0;a:2:{i:0;s:7:"integer";i:1;s:43:"$numberOfPages:		The number of display page";}}s:6:"return";a:2:{i:0;s:6:"string";i:1;s:50:"$content:			The HTML output from pagebrowse plugin";}s:6:"access";s:7:"private";}s:7:"content";s:0:"";s:12:"content_size";i:388;s:13:"content_lines";i:14;s:6:"atLine";i:254;}i:15;a:4:{s:6:"header";s:60:"private function getNumberOfPostsInCategoryPage($page_id)
+	{";s:11:"parentClass";s:28:"tx_typo3blog_widget_listview";s:4:"cDat";a:4:{s:4:"text";s:46:"
+
+Return the number of posts in category page
+";s:5:"param";a:1:{i:0;a:2:{i:0;s:7:"integer";i:1;s:31:"$page_id:		The category page id";}}s:6:"return";a:2:{i:0;s:7:"integer";i:1;s:49:"$posts:			Count of current posts in category page";}s:6:"access";s:7:"private";}s:6:"atLine";i:277;}i:17;a:7:{s:6:"header";s:39:"private function getPostByRootLine()
+	{";s:11:"parentClass";s:28:"tx_typo3blog_widget_listview";s:4:"cDat";a:4:{s:4:"text";s:65:"
+
+Get all sub pages from current page_id as string "123,124,125"
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:6:"string";i:1;s:0:"";}s:6:"access";s:7:"private";}s:7:"content";s:0:"";s:12:"content_size";i:559;s:13:"content_lines";i:12;s:6:"atLine";i:302;}}}s:14:"MD5_3e1fdaec38";a:4:{s:8:"filename";s:44:"pi1/class.tx_typo3blog_widget_singleview.php";s:8:"filesize";i:6898;s:6:"header";a:5:{s:4:"text";s:54:"
+
+Plugin 'Typo3 Blog' for the 'typo3_blog' extension.
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:6:"[type]";i:1;s:3:"...";}s:5:"other";a:3:{i:0;s:48:"@author        Roland Schmidt <rsch73@gmail.com>";i:1;s:20:"@package       TYPO3";i:2;s:27:"@subpackage    tx_typo3blog";}s:11:"other_index";a:3:{s:7:"@author";a:1:{i:0;s:33:"Roland Schmidt <rsch73@gmail.com>";}s:8:"@package";a:1:{i:0;s:6:"TYPO3 ";}s:11:"@subpackage";a:1:{i:0;s:13:"tx_typo3blog ";}}}s:3:"DAT";a:5:{i:1;a:8:{s:6:"header";s:59:"class tx_typo3blog_widget_singleview extends tslib_pibase
+{";s:5:"class";i:1;s:11:"parentClass";s:30:"tx_typo3blog_widget_singleview";s:4:"cDat";a:5:{s:4:"text";s:54:"
+
+Plugin 'Typo3 Blog' for the 'typo3_blog' extension.
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:6:"[type]";i:1;s:3:"...";}s:5:"other";a:3:{i:0;s:48:"@author        Roland Schmidt <rsch73@gmail.com>";i:1;s:20:"@package       TYPO3";i:2;s:27:"@subpackage    tx_typo3blog";}s:11:"other_index";a:3:{s:7:"@author";a:1:{i:0;s:33:"Roland Schmidt <rsch73@gmail.com>";}s:8:"@package";a:1:{i:0;s:6:"TYPO3 ";}s:11:"@subpackage";a:1:{i:0;s:13:"tx_typo3blog ";}}}s:7:"content";s:0:"";s:12:"content_size";i:403;s:13:"content_lines";i:10;s:6:"atLine";i:50;}i:3;a:7:{s:6:"header";s:26:"private function init()
+	{";s:11:"parentClass";s:30:"tx_typo3blog_widget_singleview";s:4:"cDat";a:4:{s:4:"text";s:25:"
+
+Initializes this class
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:4:"void";i:1;s:0:"";}s:6:"access";s:7:"private";}s:7:"content";s:0:"";s:12:"content_size";i:662;s:13:"content_lines";i:20;s:6:"atLine";i:68;}i:5;a:7:{s:6:"header";s:40:"public function main($content, $conf)
+	{";s:11:"parentClass";s:30:"tx_typo3blog_widget_singleview";s:4:"cDat";a:4:{s:4:"text";s:32:"
+
+The main method of the PlugIn
+";s:5:"param";a:2:{i:0;a:2:{i:0;s:6:"string";i:1;s:33:"$content:      The PlugIn content";}i:1;a:2:{i:0;s:5:"array";i:1;s:39:"$conf:         The PlugIn configuration";}}s:6:"return";a:2:{i:0;s:6:"string";i:1;s:47:"$content:      That is displayed on the website";}s:6:"access";s:6:"public";}s:7:"content";s:0:"";s:12:"content_size";i:2269;s:13:"content_lines";i:65;s:6:"atLine";i:98;}i:7;a:4:{s:6:"header";s:40:"private function mergeConfiguration()
+	{";s:11:"parentClass";s:30:"tx_typo3blog_widget_singleview";s:4:"cDat";a:4:{s:4:"text";s:134:"
+
+THIS NICE PART IS FROM TYPO3 comments EXTENSION
+Merges TS configuration with configuration from flexform (latter takes precedence).
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:4:"void";i:1;s:0:"";}s:6:"access";s:7:"private";}s:6:"atLine";i:172;}i:9;a:7:{s:6:"header";s:44:"private function fetchConfigValue($param)
+	{";s:11:"parentClass";s:30:"tx_typo3blog_widget_singleview";s:4:"cDat";a:4:{s:4:"text";s:177:"
+
+THIS NICE FUNCTION IS FROM TYPO3 comments EXTENSION
+Fetches configuration value from flexform. If value exists, value in
+<code>$this->conf</code> is replaced with this value.
+";s:5:"param";a:1:{i:0;a:2:{i:0;s:6:"string";i:1;s:130:"$param:    Parameter name. If <code>.</code> is found, the first part is section name, second is key (applies only to $this->conf)";}}s:6:"return";a:2:{i:0;s:4:"void";i:1;s:0:"";}s:6:"access";s:7:"private";}s:7:"content";s:0:"";s:12:"content_size";i:642;s:13:"content_lines";i:19;s:6:"atLine";i:186;}}}s:14:"MD5_af897735fa";a:4:{s:8:"filename";s:42:"pi1/class.tx_typo3blog_widget_tagcloud.php";s:8:"filesize";i:9893;s:6:"header";a:5:{s:4:"text";s:63:"
+
+Plugin 'Typo3 Blog ListView' for the 'typo3_blog' extension.
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:6:"[type]";i:1;s:3:"...";}s:5:"other";a:3:{i:0;s:43:"@author			Roland Schmidt <rsch73@gmail.com>";i:1;s:16:"@package			TYPO3";i:2;s:25:"@subpackage		tx_typo3blog";}s:11:"other_index";a:3:{s:7:"@author";a:1:{i:0;s:33:"Roland Schmidt <rsch73@gmail.com>";}s:8:"@package";a:1:{i:0;s:6:"TYPO3 ";}s:11:"@subpackage";a:1:{i:0;s:13:"tx_typo3blog ";}}}s:3:"DAT";a:9:{i:1;a:8:{s:6:"header";s:57:"class tx_typo3blog_widget_tagcloud extends tslib_pibase
+{";s:5:"class";i:1;s:11:"parentClass";s:28:"tx_typo3blog_widget_tagcloud";s:4:"cDat";a:5:{s:4:"text";s:63:"
+
+Plugin 'Typo3 Blog ListView' for the 'typo3_blog' extension.
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:6:"[type]";i:1;s:3:"...";}s:5:"other";a:3:{i:0;s:43:"@author			Roland Schmidt <rsch73@gmail.com>";i:1;s:16:"@package			TYPO3";i:2;s:25:"@subpackage		tx_typo3blog";}s:11:"other_index";a:3:{s:7:"@author";a:1:{i:0;s:33:"Roland Schmidt <rsch73@gmail.com>";}s:8:"@package";a:1:{i:0;s:6:"TYPO3 ";}s:11:"@subpackage";a:1:{i:0;s:13:"tx_typo3blog ";}}}s:7:"content";s:0:"";s:12:"content_size";i:533;s:13:"content_lines";i:16;s:6:"atLine";i:54;}i:3;a:7:{s:6:"header";s:26:"private function init()
+	{";s:11:"parentClass";s:28:"tx_typo3blog_widget_tagcloud";s:4:"cDat";a:4:{s:4:"text";s:25:"
+
+initializes this class
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:4:"void";i:1;s:0:"";}s:6:"access";s:7:"private";}s:7:"content";s:0:"";s:12:"content_size";i:709;s:13:"content_lines";i:24;s:6:"atLine";i:78;}i:5;a:7:{s:6:"header";s:40:"public function main($content, $conf)
+	{";s:11:"parentClass";s:28:"tx_typo3blog_widget_tagcloud";s:4:"cDat";a:4:{s:4:"text";s:32:"
+
+The main method of the PlugIn
+";s:5:"param";a:2:{i:0;a:2:{i:0;s:6:"string";i:1;s:29:"$content:		The PlugIn content";}i:1;a:2:{i:0;s:5:"array";i:1;s:33:"$conf:			The PlugIn configuration";}}s:6:"return";a:2:{i:0;s:6:"string";i:1;s:55:"$content:		The content that is displayed on the website";}s:6:"access";s:6:"public";}s:7:"content";s:0:"";s:12:"content_size";i:3376;s:13:"content_lines";i:99;s:6:"atLine";i:112;}i:7;a:7:{s:6:"header";s:40:"private function mergeConfiguration()
+	{";s:11:"parentClass";s:28:"tx_typo3blog_widget_tagcloud";s:4:"cDat";a:4:{s:4:"text";s:134:"
+
+THIS NICE PART IS FROM TYPO3 comments EXTENSION
+Merges TS configuration with configuration from flexform (latter takes precedence).
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:4:"void";i:1;s:0:"";}s:6:"access";s:7:"private";}s:7:"content";s:0:"";s:12:"content_size";i:35;s:13:"content_lines";i:3;s:6:"atLine";i:220;}i:9;a:7:{s:6:"header";s:44:"private function fetchConfigValue($param)
+	{";s:11:"parentClass";s:28:"tx_typo3blog_widget_tagcloud";s:4:"cDat";a:4:{s:4:"text";s:177:"
+
+THIS NICE FUNCTION IS FROM TYPO3 comments EXTENSION
+Fetches configuration value from flexform. If value exists, value in
+<code>$this->conf</code> is replaced with this value.
+";s:5:"param";a:1:{i:0;a:2:{i:0;s:6:"string";i:1;s:128:"$param:		Parameter name. If <code>.</code> is found, the first part is section name, second is key (applies only to $this->conf)";}}s:6:"return";a:2:{i:0;s:4:"void";i:1;s:0:"";}s:6:"access";s:7:"private";}s:7:"content";s:0:"";s:12:"content_size";i:388;s:13:"content_lines";i:14;s:6:"atLine";i:234;}i:11;a:7:{s:6:"header";s:36:"private function setTagcloudMax()
+	{";s:11:"parentClass";s:28:"tx_typo3blog_widget_tagcloud";s:4:"cDat";a:4:{s:4:"text";s:46:"
+
+Set the min count from all tagcloud entries
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:4:"void";i:1;s:0:"";}s:6:"access";s:7:"private";}s:7:"content";s:0:"";s:12:"content_size";i:113;s:13:"content_lines";i:5;s:6:"atLine";i:256;}i:13;a:7:{s:6:"header";s:36:"private function setTagcloudMin()
+	{";s:11:"parentClass";s:28:"tx_typo3blog_widget_tagcloud";s:4:"cDat";a:4:{s:4:"text";s:46:"
+
+Set the min count from all tagcloud entries
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:4:"void";i:1;s:0:"";}s:6:"access";s:7:"private";}s:7:"content";s:0:"";s:12:"content_size";i:114;s:13:"content_lines";i:5;s:6:"atLine";i:269;}i:15;a:4:{s:6:"header";s:39:"function calculateTagFontSize($count) {";s:11:"parentClass";s:28:"tx_typo3blog_widget_tagcloud";s:4:"cDat";a:3:{s:4:"text";s:34:"
+
+Calc the font size for tagcloud
+";s:5:"param";a:1:{i:0;a:2:{i:0;s:7:"integer";i:1;s:34:"$count:		Count for tag in tagcloud";}}s:6:"return";a:2:{i:0;s:7:"integer";i:1;s:79:"$weight:	Weight tag in tagloud possible value is 10,20,30,40,50,60,70,80,90,100";}}s:6:"atLine";i:282;}i:17;a:7:{s:6:"header";s:39:"private function getPostByRootLine()
+	{";s:11:"parentClass";s:28:"tx_typo3blog_widget_tagcloud";s:4:"cDat";a:4:{s:4:"text";s:65:"
+
+Get all sub pages from current page_id as string "123,124,125"
+";s:5:"param";a:0:{}s:6:"return";a:2:{i:0;s:6:"string";i:1;s:0:"";}s:6:"access";s:7:"private";}s:7:"content";s:0:"";s:12:"content_size";i:547;s:13:"content_lines";i:12;s:6:"atLine";i:300;}}}}}

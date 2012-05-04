@@ -27,15 +27,14 @@
  *
  *
  *
- *   50: class typo3blog_func
- *   61:     public function setCobj(tslib_cObj $cObj)
- *   77:     public function substituteMarkersAndSubparts($template, array $markers, array $subparts)
- *   97:     public function getPageContent($id, $limit)
- *  134:     public function getPostCategoryName($pid, $field = 'title')
- *  159:     public function getTagCloudFilterQuery()
- *  181:     function getGravatarUrl($email,$size = 100,$default)
+ *   49: class typo3blog_func
+ *   60:     public function setCobj(tslib_cObj $cObj)
+ *   76:     public function substituteMarkersAndSubparts($template, array $markers, array $subparts)
+ *   96:     public function getPageContent($id, $limit)
+ *  133:     public function getPostCategoryName($pid, $field = 'title')
+ *  158:     public function getTagCloudFilterQuery()
  *
- * TOTAL FUNCTIONS: 6
+ * TOTAL FUNCTIONS: 5
  * (This index is automatically created/updated by the extension "extdeveval")
  *
  */
@@ -54,7 +53,7 @@ class typo3blog_func
 	/**
 	 * Set the tslib_cObj class
 	 *
-	 * @param	tslib_cObj		$cObj    tslib_cObj class
+	 * @param	object		$cObj		tslib_cObj class
 	 * @return	void
 	 * @access public
 	 */
@@ -68,10 +67,10 @@ class typo3blog_func
 	 * Replaces $this->cObj->substituteArrayMarkerCached() because substitued
 	 * function polutes cache_hash table a lot.
 	 *
-	 * @param	string		$template    Template
-	 * @param	array		$markers     Markers
-	 * @param	array		$subparts    Subparts
-	 * @return	string		$content     HTML
+	 * @param	string		$template:		Template
+	 * @param	array		$markers:		Markers
+	 * @param	array		$subparts:		Subparts
+	 * @return	string		$content:		HTML
 	 * @access public
 	 */
 	public function substituteMarkersAndSubparts($template, array $markers, array $subparts)
@@ -89,8 +88,8 @@ class typo3blog_func
 	/**
 	 * Retrieve all records from tt_content by current page uid
 	 *
-	 * @param	int		$id:     Page uid from blog post page
-	 * @param	int		$limit:  Limit to display content elements on list view
+	 * @param	integer		$id:		Page uid from blog post page
+	 * @param	integer		$limit:		Limit to display content elements on list view
 	 * @return	string
 	 * @access public
 	 */
@@ -126,9 +125,9 @@ class typo3blog_func
 	 * Return the category name from parent page
 	 * The parent page is the category page
 	 *
-	 * @param	int		$pid:             Page ID from category page
-	 * @param	string		$field:           Column from table pages
-	 * @return	string		$page[$field]:    Value from field in table pages
+	 * @param	integer		$pid:			Page ID from category page
+	 * @param	string		$field:			Column from table pages
+	 * @return	string		$page[$field]:	Value from field in table pages
 	 * @access public
 	 */
 	public function getPostCategoryName($pid, $field = 'title')
@@ -169,17 +168,9 @@ class typo3blog_func
 		// Return empty string if GET param tagsearch not exist
 		return "";
 	}
+}
 
-	/**
-	 * [Describe function...]
-	 *
-	 * @param	[type]		$email: ...
-	 * @param	[type]		$size: ...
-	 * @param	[type]		$default: ...
-	 * @return	[type]		...
-	 */
-	function getGravatarUrl($email,$size = 100,$default){
-		return  "http://www.gravatar.com/avatar/".md5($email).".jpg?s=".$size."&d=".urlencode($default);
-	}
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/typo3_blog/lib/class.tx_typo3blog_func.php']) {
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/typo3_blog/lib/class.tx_typo3blog_func.php']);
 }
 ?>

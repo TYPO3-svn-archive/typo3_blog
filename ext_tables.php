@@ -18,9 +18,9 @@ if (TYPO3_MODE == 'BE') {
 	$TBE_MODULES_EXT['xMOD_db_new_content_el']['addElClasses']['tx_typo3blog_pi1_wizicon'] = t3lib_extMgm::extPath($_EXTKEY).'pi1/class.tx_typo3blog_pi1_wizicon.php';
 }
 
-$TCA['tt_content']['types']['list']['subtypes_addlist'][$_EXTKEY.'_pi1'] ='pi_flexform';
+//$TCA['tt_content']['types']['list']['subtypes_addlist'][$_EXTKEY.'_pi1'] ='pi_flexform';
 //t3lib_extMgm::addPiFlexFormValue($_EXTKEY.'_pi1', t3lib_extMgm::extRelPath($_EXTKEY) . 'pi1/flexform_ds.xml');
-t3lib_extMgm::addPiFlexFormValue($_EXTKEY .'_pi1', 'FILE:EXT:typo3_blog/pi1/flexform_ds.xml');
+//t3lib_extMgm::addPiFlexFormValue($_EXTKEY .'_pi1', 'FILE:EXT:typo3_blog/pi1/flexform_ds.xml');
 
 
 
@@ -61,7 +61,7 @@ t3lib_extMgm::addTCAcolumns('pages',$tempColumns,1);
 t3lib_extMgm::addToAllTCAtypes('pages', '--div--;Blog Settings, tx_typo3blog_is_root_page;;;;1-1-1, tx_typo3blog_is_category_page;;;;1-1-1, tx_typo3blog_allow_comments, tx_typo3blog_tagcloud');
 
 
-// Define Pagetype ID
+// Define Page type ID
 $doktype = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'][$_EXTKEY]['doktypeId'];
 
 $TCA['pages']['columns']['doktype']['config']['items'][] = Array ('Blog', $doktype, t3lib_extMgm::extRelPath($_EXTKEY). 'res/pageicon.png');

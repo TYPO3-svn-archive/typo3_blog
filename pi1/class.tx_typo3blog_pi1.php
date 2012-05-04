@@ -127,6 +127,12 @@ class tx_typo3blog_pi1 extends tslib_pibase
 		$this->pi_loadLL();
 		$this->init();
 
+		if (!isset($this->conf['blogList.'])) {
+			return $this->pi_wrapInBaseClass(
+				"Error :TS template not found.<br />Please include static <strong>Typo3Blog Setup (typo3_blog)</strong> configuration!"
+			);
+		}
+
 		switch ($this->conf['what_to_display']) {
 			case "BLOGLIST":
 				require_once(t3lib_extMgm::extPath('typo3_blog') . 'pi1/class.tx_typo3blog_widget_listview.php');
