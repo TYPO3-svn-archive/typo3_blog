@@ -1,7 +1,7 @@
 plugin.tx_typo3blog_pi1 {
     CategoryList = HMENU
     CategoryList {
-        entryLevel = 1
+        entryLevel = 0
         special = directory
         special.value = {$plugin.tx_typo3blog_pi1.startPid}
         excludeDoktypes = 1

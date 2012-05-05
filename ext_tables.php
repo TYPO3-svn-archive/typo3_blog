@@ -15,7 +15,7 @@ t3lib_extMgm::addPlugin(array(
 
 
 if (TYPO3_MODE == 'BE') {
-	$TBE_MODULES_EXT['xMOD_db_new_content_el']['addElClasses']['tx_typo3blog_pi1_wizicon'] = t3lib_extMgm::extPath($_EXTKEY).'pi1/class.tx_typo3blog_pi1_wizicon.php';
+	//$TBE_MODULES_EXT['xMOD_db_new_content_el']['addElClasses']['tx_typo3blog_pi1_wizicon'] = t3lib_extMgm::extPath($_EXTKEY).'pi1/class.tx_typo3blog_pi1_wizicon.php';
 }
 
 //$TCA['tt_content']['types']['list']['subtypes_addlist'][$_EXTKEY.'_pi1'] ='pi_flexform';
@@ -25,20 +25,6 @@ if (TYPO3_MODE == 'BE') {
 
 
 $tempColumns = array (
-    'tx_typo3blog_is_root_page' => array (
-		'exclude' => 0,
-		'label' => 'LLL:EXT:typo3_blog/locallang_db.xml:pages.tx_typo3blog_is_root_page',
-		'config' => array (
-			'type' => 'check',
-		)
-	),
-	'tx_typo3blog_is_category_page' => array (
-		'exclude' => 0,
-		'label' => 'LLL:EXT:typo3_blog/locallang_db.xml:pages.tx_typo3blog_is_category_page',
-		'config' => array (
-			'type' => 'check',
-		)
-	),
 	'tx_typo3blog_allow_comments' => array (
 		'exclude' => 0,
 		'label' => 'LLL:EXT:typo3_blog/locallang_db.xml:pages.tx_typo3blog_allow_comments',
@@ -58,7 +44,7 @@ $tempColumns = array (
 
 t3lib_div::loadTCA('pages');
 t3lib_extMgm::addTCAcolumns('pages',$tempColumns,1);
-t3lib_extMgm::addToAllTCAtypes('pages', '--div--;Blog Settings, tx_typo3blog_is_root_page;;;;1-1-1, tx_typo3blog_is_category_page;;;;1-1-1, tx_typo3blog_allow_comments, tx_typo3blog_tagcloud');
+t3lib_extMgm::addToAllTCAtypes('pages', '--div--;Blog Settings, tx_typo3blog_allow_comments, tx_typo3blog_tagcloud');
 
 
 // Define Page type ID
@@ -80,4 +66,5 @@ doktypesToShowInNewPageDragArea = 1,6,4,7,3,'.$doktype.',254,255,199
 
 
 t3lib_extMgm::addStaticFile($_EXTKEY,'typoscript/', 'Typo3Blog Setup');
+
 ?>
