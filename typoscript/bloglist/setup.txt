@@ -113,9 +113,13 @@ plugin.tx_typo3blog_pi1 {
 			}
 
 			# showMore setup for templatemarker '###BLOGLIST_SHOWMORE###'
-			showMore = TEXT
-			showMore {
+			showmore = TEXT
+			showmore {
+				field = showmore
 				wrap = |
+				typolink {
+					parameter.dataWrap = {field:uid}
+				}
 			}
 		}
 	}

@@ -126,10 +126,6 @@ class tx_typo3blog_widget_listview extends tslib_pibase
 			);
 		}
 
-		if (t3lib_div::_GET('tagsearch')) {
-			$this->page_uid = 104;
-		}
-
 		// Get subparts from HTML template BLOGLIST_TEMPLATE
 		$template = $this->cObj->getSubpart($this->template, '###BLOGLIST_TEMPLATE###');
 		$subpartItem = $this->cObj->getSubpart($template, '###ITEM###');
@@ -156,6 +152,7 @@ class tx_typo3blog_widget_listview extends tslib_pibase
 			// add additional data to ts template
 			$row['category'] = $this->typo3BlogFunc->getPostCategoryName($row['pid'], 'title');
 			$row['pagecontent'] = $this->typo3BlogFunc->getPageContent($row['uid'], $this->conf['blogList.']['contentItemsToDisplay']);
+			$row['showmore'] = "weiterlesen...";
 
 			// add data to ts template
 			$this->cObj->data = $row;

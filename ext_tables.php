@@ -66,5 +66,6 @@ doktypesToShowInNewPageDragArea = 1,6,4,7,3,'.$doktype.',254,255,199
 
 
 t3lib_extMgm::addStaticFile($_EXTKEY,'typoscript/', 'Typo3Blog Setup');
+t3lib_extMgm::addStaticFile($_EXTKEY,'typoscript/layout', 'Typo3Blog Setup Sample layout');
 
 ?>

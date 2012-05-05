@@ -9,7 +9,7 @@ plugin.tx_typo3blog_pi1 {
         stdWrap {
             required = 1
             noBlur = 1
-            wrap = <div class="ym-vlist"><ul> | </ul></div>
+            wrap = <div><ul> | </ul></div>
         }
 
         1 = TMENU
@@ -21,9 +21,7 @@ plugin.tx_typo3blog_pi1 {
 
         1.CUR = 1
         1.CUR {
-            wrapItemAndSub = <li> | </li>
-            allWrap = <strong>|</strong>
-            doNotLinkIt = 1
+            wrapItemAndSub = <li class="active"> | </li>
             stdWrap.htmlSpecialChars = 1
         }
 
@@ -43,8 +41,6 @@ plugin.tx_typo3blog_pi1 {
         2.CUR = 2
         2.CUR {
             wrapItemAndSub = <li class="active"> | </li>
-            allWrap = <strong>|</strong>
-            doNotLinkIt = 1
             stdWrap.htmlSpecialChars = 1
         }
 
@@ -64,8 +60,6 @@ plugin.tx_typo3blog_pi1 {
         3.CUR = 3
         3.CUR {
             wrapItemAndSub = <li class="active"> | </li>
-            allWrap = <strong>|</strong>
-            doNotLinkIt = 1
             stdWrap.htmlSpecialChars = 1
         }
 
@@ -86,8 +80,6 @@ plugin.tx_typo3blog_pi1 {
         4.CUR = 4
         4.CUR {
             wrapItemAndSub = <li class="active"> | </li>
-            allWrap = <strong>|</strong>
-            doNotLinkIt = 1
             stdWrap.htmlSpecialChars = 1
         }
 

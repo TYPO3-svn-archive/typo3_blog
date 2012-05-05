@@ -1,0 +1,8 @@
+.page-header {background: #006DCC; height:100px; padding-top:50px;}
+.page-footer {height:18px;margin-top: 18px;padding: 18px 0;background:#2C2C2C;color: #999999;}
+.header {height:110px; padding-top: 50px;}
+.tx-felogin-pi1 label {display:block;}
+.tx-vgetagcloud-pi1 {background:none;line-height:100%;}
+.tx-vgetagcloud-pi1 ul {float:left;list-style:none outside none;margin:0;padding:0;}
+.tx-vgetagcloud-pi1 li {display:inline;float:left;}
+.tx-vgetagcloud-pi1 li a {padding:4px;text-decoration:none;}

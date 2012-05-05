@@ -107,7 +107,7 @@ class tx_typo3blog_widget_singleview extends tslib_pibase
 		// Check the environment for typo3blog listview
 		if (NULL === $this->template) {
 			return $this->pi_wrapInBaseClass(
-				"Error :Template file " . $this->conf['blogList.']['templateFile'] . " not found.<br />Please check the typoscript configuration!"
+				"Error :Template file " . $this->conf['blogSingle.']['templateFile'] . " not found.<br />Please check the typoscript configuration!"
 			);
 		}
 
@@ -140,6 +140,7 @@ class tx_typo3blog_widget_singleview extends tslib_pibase
 			$row['pagecontent'] = "";
 			$row['comments'] = "";
 
+
 			// Add all fields in ts
 			$this->cObj->data = $row;
 
@@ -148,6 +149,7 @@ class tx_typo3blog_widget_singleview extends tslib_pibase
 				if ($this->conf['blogList.']['marker.'][$column]) {
 					$this->cObj->setCurrentVal($value);
 					$value = $this->cObj->cObjGetSingle($this->conf['blogSingle.']['marker.'][$column], $this->conf['blogSingle.']['marker.'][$column . '.']);
+
 					$this->cObj->setCurrentVal(false);
 				}
 				else {

@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Page browser template</title>
+	<!-- ###HEADER_ADDITIONS### begin -->
+	<!-- <link rel="stylesheet" type="text/css" href="###SITE_REL_PATH###res/styles_min.css" /> -->
+	<!-- ###HEADER_ADDITIONS### end -->
+</head>
+<body>
+
+<h1>Page browser</h1>
+<!-- ###PAGE_BROWSER### begin -->
+<!--TYPO3SEARCH_end-->
+<div class="pagination pagination-centered">
+	<ul>
+		<!-- ###ACTIVE_FIRST### begin -->
+		<li class="active"><a href="###FIRST_LINK###">###TEXT_FIRST###</a></li>
+		<!-- ###ACTIVE_FIRST### end -->
+
+		<!-- ###INACTIVE_FIRST### begin -->
+		<li class="disabled"><a href="#">###TEXT_FIRST###</a></li>
+		<!-- ###INACTIVE_FIRST### end -->
+
+		<!-- ###ACTIVE_PREV### begin -->
+		<li class="active"><a href="###PREV_LINK###">###TEXT_PREV###</a></li>
+		<!-- ###ACTIVE_PREV### end -->
+
+		<!-- ###INACTIVE_PREV### begin -->
+		<li class="disabled"><a href="#">###TEXT_PREV###</a></li>
+		<!-- ###INACTIVE_PREV### end -->
+
+		<!-- ###PAGES### begin -->
+
+		<!--  ###LESS_PAGES### begin -->
+		<li>...</li>
+		<!--  ###LESS_PAGES### end -->
+		<!-- ###PAGE### begin -->
+		<li class="active"><a href="###LINK###">###NUMBER_DISPLAY###</a></li>
+		<!-- ###PAGE### end -->
+		<!-- ###CURRENT### begin -->
+		<li class="disabled"><a href="#">###NUMBER_DISPLAY###</a></li>
+		<!-- ###CURRENT### end -->
+		<!--  ###MORE_PAGES### begin -->
+		<li>...</li>
+		<!--  ###MORE_PAGES### end -->
+
+		<!-- ###PAGES### end -->
+
+		<!-- ###ACTIVE_NEXT### begin -->
+		<li class="active"><a href="###NEXT_LINK###">###TEXT_NEXT###</a></li>
+		<!-- ###ACTIVE_NEXT### end -->
+
+		<!-- ###INACTIVE_NEXT### begin -->
+		<li class="disabled"><a href="#">###TEXT_NEXT###</a></li>
+		<!-- ###INACTIVE_NEXT### end -->
+
+		<!-- ###ACTIVE_LAST### begin -->
+		<li class="active"><a href="###LAST_LINK###">###TEXT_LAST###</a></li>
+		<!-- ###ACTIVE_LAST### end -->
+
+		<!-- ###INACTIVE_LAST### begin -->
+		<li class="disabled"><a href="#">###TEXT_LAST###</a></li>
+		<!-- ###INACTIVE_LAST### end -->
+
+	</ul>
+</div>
+<!--TYPO3SEARCH_begin-->
+<!-- ###PAGE_BROWSER### end -->
+
+</body>
+</html>

@@ -44,13 +44,16 @@ BLOGLIST_SHOWMORE        - show more link to blog page
 <!-- ###BLOGLIST_TEMPLATE### begin-->
 	<!--###ITEM### begin -->
 
-		###BLOGLIST_TITLE###
-		###BLOGLIST_CATEGORY###
-		###BLOGLIST_AUTHOR###
-		###BLOGLIST_AUTHOR_EMAIL###
-		###BLOGLIST_CRDATE###
-		###BLOGLIST_TX_TYPO3BLOG_TAGCLOUD###
+		<h2>###BLOGLIST_TITLE###</h2>
+		<ul class="breadcrumb">
+		<li>###BLOGLIST_CATEGORY###</li>
+		<li>###BLOGLIST_AUTHOR###</li>
+		<li>###BLOGLIST_AUTHOR_EMAIL###</li>
+		<li>###BLOGLIST_CRDATE###</li>
+		<li>###BLOGLIST_TX_TYPO3BLOG_TAGCLOUD###</li>
+		</ul>
 		###BLOGLIST_PAGECONTENT###
+		###BLOGLIST_SHOWMORE###
 		<hr />
 		<!--###ITEM### end -->
 

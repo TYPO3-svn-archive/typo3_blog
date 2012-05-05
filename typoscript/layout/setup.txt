@@ -1,0 +1,113 @@
+# Configuration typo3blog sample page
+##################################################
+
+### DEFINE HTML DOKTYPE
+page.config.doctype = html_5
+page.config.metaCharset = UTF-8
+
+# INSERT BOOTSTRAP CSS FILE
+page.headerData.10 = TEXT
+page.headerData.10.value = <link rel="stylesheet" type="text/css" href="typo3conf/ext/typo3_blog/res/layout/css/bootstrap.css" media="screen" />
+page.headerData.10.insertData = 1
+
+# INSERT STYLE CSS FILE
+page.headerData.20 = TEXT
+page.headerData.20.value = <link rel="stylesheet" type="text/css" href="typo3conf/ext/typo3_blog/res/layout/css/style.css" media="screen" />
+page.headerData.20.insertData = 1
+
+# INSERT JS FILE
+page.headerData.30 = TEXT
+page.headerData.30.value = <script type="text/javascript" src="typo3conf/ext/typo3_blog/res/layout/js/bootstrap.js"></script>
+page.headerData.30.insertData = 1
+
+
+# DEFINE DEFAULT CONTENT MARKER
+lib.content_main < styles.content.get
+lib.content_right < styles.content.getRight
+
+# Configuration Blog and additional plugins
+##################################################
+
+# typo3blog categoryList
+plugin.tx_typo3blog_pi1.CategoryList.stdWrap.wrap = <div class="well" style="padding: 8px 0;"><ul class="nav nav-list">|</ul></div>
+plugin.tx_typo3blog_pi1.CategoryList.2.wrap = <ul class="nav nav-list">|</ul>
+plugin.tx_typo3blog_pi1.CategoryList.3.wrap = <ul class="nav nav-list">|</ul>
+plugin.tx_typo3blog_pi1.CategoryList.4.wrap = <ul class="nav nav-list">|</ul>
+
+#typo3blog bloglist
+plugin.tx_typo3blog_pi1.blogList.marker {
+	showmore.typolink.ATagParams = class="btn btn-primary"
+}
+
+#pagebrowse configuration
+plugin.tx_pagebrowse_pi1 {
+	templateFile = EXT:typo3_blog/res/layout/pluginTemplates/pagebrowse/template.html
+}
+
+#comments configuration
+plugin.tx_comments_pi1 {
+	templateFile = EXT:typo3_blog/res/layout/pluginTemplates/comments/template.html
+	code = COMMENTS,FORM
+}
+
+#vgetagcloud configuration
+tagcloud < plugin.tx_vgetagcloud_pi1
+tagcloud {
+  referenceTable = pages
+  referenceFields = tx_typo3blog_tagcloud
+  targetPage = {$plugin.tx_typo3blog_pi1.startPid}
+
+  tagWrap {
+    typolink {
+      parameter = {$plugin.tx_typo3blog_pi1.startPid}
+      additionalParams.cObject = TEXT
+      additionalParams.cObject {
+        field = tag_keyword
+        rawUrlEncode = 1
+        dataWrap = &tagsearch={tag_keyword}
+      }
+
+      useCacheHash = 1
+    }
+  }
+  cloudWrap.wrap = <div class="well" style="padding: 8px;"><ul>|</ul></div>
+  _CSS_DEFAULT_STYLE >
+}
+
+
+
+
+#SWITCH CONTENT MARKER IF BLOG PAGE
+[globalVar = TSFE:page|doktype=73]
+	plugin.tx_typo3blog_pi1.what_to_display = BLOGLIST
+	lib.content_main < plugin.tx_typo3blog_pi1
+[else]
+	plugin.tx_typo3blog_pi1.what_to_display = BLOGSINGLE
+	lib.content_main < plugin.tx_typo3blog_pi1
+[global]
+
+typo3blog.sidebar = COA
+typo3blog.sidebar {
+	10 < plugin.tx_typo3blog_pi1.CategoryList
+	20 < tagcloud
+
+}
+
+lib.content_right < typo3blog.sidebar
+
+
+page = PAGE
+page.10 = TEMPLATE
+page.10 {
+	template = FILE
+	template.file = EXT:typo3_blog/res/layout/template.html
+
+	# Define template subparts
+	workOnSubpart = DOCUMENT_BODY
+
+	#Content Normal
+	subparts.CONTENT_NORMAL < lib.content_main
+
+	# Content RIGHT
+	subparts.CONTENT_RIGHT < lib.content_right
+}
