@@ -44,16 +44,19 @@ plugin.tx_pagebrowse_pi1 {
 	templateFile = EXT:typo3_blog/res/layout/pluginTemplates/pagebrowse/template.html
 }
 
-#comments configuration
+#comments configuration for bloglist
 plugin.tx_comments_pi1 {
 	templateFile = EXT:typo3_blog/res/layout/pluginTemplates/comments/template.html
 	code = FORM
 }
+plugin.tx_typo3blog_pi1.blogSingle.marker.comments < plugin.tx_comments_pi1
 
+#comments configuration for sidebar
 commentList < plugin.tx_comments_pi1
 commentList {
 	code = COMMENTS
 }
+
 
 #vgetagcloud configuration
 tagcloud < plugin.tx_vgetagcloud_pi1
@@ -87,6 +90,9 @@ tagcloud {
 	plugin.tx_typo3blog_pi1.what_to_display = BLOGSINGLE
 	lib.content_main < plugin.tx_typo3blog_pi1
 [global]
+
+
+
 
 typo3blog.sidebar = COA
 typo3blog.sidebar {
