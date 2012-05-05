@@ -47,7 +47,12 @@ plugin.tx_pagebrowse_pi1 {
 #comments configuration
 plugin.tx_comments_pi1 {
 	templateFile = EXT:typo3_blog/res/layout/pluginTemplates/comments/template.html
-	code = COMMENTS,FORM
+	code = FORM
+}
+
+commentList < plugin.tx_comments_pi1
+commentList {
+	code = COMMENTS
 }
 
 #vgetagcloud configuration
@@ -74,9 +79,6 @@ tagcloud {
   _CSS_DEFAULT_STYLE >
 }
 
-
-
-
 #SWITCH CONTENT MARKER IF BLOG PAGE
 [globalVar = TSFE:page|doktype=73]
 	plugin.tx_typo3blog_pi1.what_to_display = BLOGLIST
@@ -90,11 +92,10 @@ typo3blog.sidebar = COA
 typo3blog.sidebar {
 	10 < plugin.tx_typo3blog_pi1.CategoryList
 	20 < tagcloud
-
+	30 < commentList
 }
 
 lib.content_right < typo3blog.sidebar
-
 
 page = PAGE
 page.10 = TEMPLATE
