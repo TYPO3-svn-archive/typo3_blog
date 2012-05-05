@@ -39,32 +39,31 @@ plugin.tx_typo3blog_pi1.blogList.marker {
 	showmore.typolink.ATagParams = class="btn btn-primary"
 }
 
-#pagebrowse configuration
+#Plugin pagebrowse configuration set the templateFile
 plugin.tx_pagebrowse_pi1 {
 	templateFile = EXT:typo3_blog/res/layout/pluginTemplates/pagebrowse/template.html
 }
 
-#comments configuration for bloglist
+#Plugin comments configuration for blogSingle View add FORM only
 plugin.tx_comments_pi1 {
 	templateFile = EXT:typo3_blog/res/layout/pluginTemplates/comments/template.html
 	code = FORM
 }
 plugin.tx_typo3blog_pi1.blogSingle.marker.comments < plugin.tx_comments_pi1
 
-#comments configuration for sidebar
+
+#Plugin comments configuration for sidebar in add COMMENTS only
 commentList < plugin.tx_comments_pi1
 commentList {
 	code = COMMENTS
 }
 
-
-#vgetagcloud configuration
+#Plugin vge_tagcloud configuration for sidebar.
 tagcloud < plugin.tx_vgetagcloud_pi1
 tagcloud {
   referenceTable = pages
   referenceFields = tx_typo3blog_tagcloud
   targetPage = {$plugin.tx_typo3blog_pi1.startPid}
-
   tagWrap {
     typolink {
       parameter = {$plugin.tx_typo3blog_pi1.startPid}
@@ -91,18 +90,16 @@ tagcloud {
 	lib.content_main < plugin.tx_typo3blog_pi1
 [global]
 
-
-
-
+# Add plugins to Sidebar
 typo3blog.sidebar = COA
 typo3blog.sidebar {
 	10 < plugin.tx_typo3blog_pi1.CategoryList
 	20 < tagcloud
 	30 < commentList
 }
-
 lib.content_right < typo3blog.sidebar
 
+# Page setup for typo3_blog
 page = PAGE
 page.10 = TEMPLATE
 page.10 {
