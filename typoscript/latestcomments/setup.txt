@@ -1,6 +1,5 @@
 plugin.tx_typo3blog_pi1 {
 	LatestComments = CONTENT
-
 	LatestComments {
 		stdWrap {
         		outerWrap = <div class="well" style="padding: 8px 0;"><ul class="nav nav-list">|</ul></div>
@@ -8,7 +7,7 @@ plugin.tx_typo3blog_pi1 {
 		table = tx_comments_comments
 		select {
 			pidInList = 3
-			selectFields = firstname,lastname,email,homepage,content
+			selectFields = firstname,lastname,email,homepage,content,external_ref
 			where = approved = 1
 			orderBy = crdate desc
 			max = 5
@@ -35,7 +34,16 @@ plugin.tx_typo3blog_pi1 {
 			30 = TEXT
 			30 {
 				field = content
-				wrap = <li>|</li><li class="divider"></li>
+				wrap = <li>|</li>
+			}
+			40 = TEXT
+			40 {
+				field = external_ref
+				stdWrap.parseFunc.short {
+                    pages_ =
+                }
+                wrap = <li>|</li><li class="divider"></li>
+
 			}
 		}
 	}
