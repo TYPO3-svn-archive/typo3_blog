@@ -7,3 +7,10 @@
 .tx-vgetagcloud-pi1 ul {float:left;list-style:none outside none;margin:0;padding:0;}
 .tx-vgetagcloud-pi1 li {display:inline;float:left;}
 .tx-vgetagcloud-pi1 li a {padding:4px;text-decoration:none;}
+
+.typo3blog_date {
+	margin-right: .5em;
+}
+.typo3blog_latest {
+	
+}

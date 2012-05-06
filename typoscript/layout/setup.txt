@@ -14,6 +14,41 @@ plugin.tx_typo3blog_pi1.CategoryList.2.wrap = <ul class="nav nav-list">|</ul>
 plugin.tx_typo3blog_pi1.CategoryList.3.wrap = <ul class="nav nav-list">|</ul>
 plugin.tx_typo3blog_pi1.CategoryList.4.wrap = <ul class="nav nav-list">|</ul>
 
+#Setup typo3blog latestpost
+plugin.tx_typo3blog_pi1 {
+	LatestPosts < tt_content.menu.20.5
+	LatestPosts {
+		stdWrap {
+			outerWrap = <div class="well" style="padding: 8px 0;"><ul class="nav nav-list">|</ul></div>
+		}
+		special {
+			value >
+			value = {$plugin.tx_typo3blog_pi1.startPid}
+			mode = crdate
+			depth = 20
+			maxAge = 3600*24*365
+			limit = 5
+		}
+		excludeDoktypes = 73
+		//1.NO.stdWrap.dataWrap = |{field:crdate}
+		1.NO.stdWrap > 
+		1.NO.stdWrap.cObject = COA
+		1.NO.stdWrap.cObject {
+			10 = TEXT
+			10 {
+				data = field:crdate
+				strftime = %d. %b
+				wrap = <span class="typo3blog_date">|</span>
+			}
+			20 = TEXT
+			20 {
+				data = field:title
+				wrap = <span class="typo3blog_latest">|</span>
+			}
+		}
+	}
+}
+
 #Setup typo3blog bloglist
 plugin.tx_typo3blog_pi1.blogList.marker {
 	# wrap title
@@ -82,6 +117,7 @@ typo3blog.sidebar = COA
 typo3blog.sidebar {
 	10 < plugin.tx_typo3blog_pi1.CategoryList
 	20 < tagcloud
+	25 < plugin.tx_typo3blog_pi1.LatestPosts
 	30 < commentList
 }
 
