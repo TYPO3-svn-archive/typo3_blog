@@ -30,7 +30,7 @@ plugin.tx_typo3blog_pi1 {
 			limit = 5
 		}
 		excludeDoktypes = 73
-		//1.NO.stdWrap.dataWrap = |{field:crdate}
+		// TYPO3_CONF_VARS|EXT|extConf|typo3_blog
 		1.NO.stdWrap > 
 		1.NO.stdWrap.cObject = COA
 		1.NO.stdWrap.cObject {
@@ -118,6 +118,8 @@ typo3blog.sidebar {
 	10 < plugin.tx_typo3blog_pi1.CategoryList
 	20 < tagcloud
 	25 < plugin.tx_typo3blog_pi1.LatestPosts
+	27 < plugin.tx_typo3blog_pi1
+	27.what_to_display = CALENDAR
 	30 < commentList
 }
 
