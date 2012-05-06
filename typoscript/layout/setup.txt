@@ -1,26 +1,6 @@
 # Configuration typo3blog sample page
 ##################################################
 
-### DEFINE HTML DOKTYPE
-page.config.doctype = html_5
-page.config.metaCharset = UTF-8
-
-# INSERT BOOTSTRAP CSS FILE
-page.headerData.10 = TEXT
-page.headerData.10.value = <link rel="stylesheet" type="text/css" href="typo3conf/ext/typo3_blog/res/layout/css/bootstrap.css" media="screen" />
-page.headerData.10.insertData = 1
-
-# INSERT STYLE CSS FILE
-page.headerData.20 = TEXT
-page.headerData.20.value = <link rel="stylesheet" type="text/css" href="typo3conf/ext/typo3_blog/res/layout/css/style.css" media="screen" />
-page.headerData.20.insertData = 1
-
-# INSERT JS FILE
-page.headerData.30 = TEXT
-page.headerData.30.value = <script type="text/javascript" src="typo3conf/ext/typo3_blog/res/layout/js/bootstrap.js"></script>
-page.headerData.30.insertData = 1
-
-
 # DEFINE DEFAULT CONTENT MARKER
 lib.content_main < styles.content.get
 lib.content_right < styles.content.getRight
@@ -61,24 +41,24 @@ commentList {
 #Plugin vge_tagcloud configuration for sidebar.
 tagcloud < plugin.tx_vgetagcloud_pi1
 tagcloud {
-  referenceTable = pages
-  referenceFields = tx_typo3blog_tagcloud
-  targetPage = {$plugin.tx_typo3blog_pi1.startPid}
-  tagWrap {
-    typolink {
-      parameter = {$plugin.tx_typo3blog_pi1.startPid}
-      additionalParams.cObject = TEXT
-      additionalParams.cObject {
-        field = tag_keyword
-        rawUrlEncode = 1
-        dataWrap = &tagsearch={tag_keyword}
-      }
+	referenceTable = pages
+	referenceFields = tx_typo3blog_tagcloud
+	targetPage = {$plugin.tx_typo3blog_pi1.startPid}
+	tagWrap {
+		typolink {
+			parameter = {$plugin.tx_typo3blog_pi1.startPid}
+			additionalParams.cObject = TEXT
+			additionalParams.cObject {
+				field = tag_keyword
+				rawUrlEncode = 1
+				dataWrap = &tagsearch={tag_keyword}
+			}
 
-      useCacheHash = 1
-    }
-  }
-  cloudWrap.wrap = <div class="well" style="padding: 8px;"><ul>|</ul></div>
-  _CSS_DEFAULT_STYLE >
+			useCacheHash = 1
+		}
+	}
+	cloudWrap.wrap = <div class="well" style="padding: 8px;"><ul>|</ul></div>
+	_CSS_DEFAULT_STYLE >
 }
 
 #SWITCH CONTENT MARKER IF BLOG PAGE
@@ -101,17 +81,49 @@ lib.content_right < typo3blog.sidebar
 
 # Page setup for typo3_blog
 page = PAGE
-page.10 = TEMPLATE
-page.10 {
-	template = FILE
-	template.file = EXT:typo3_blog/res/layout/template.html
+page {
+	config {
+		# Doctype
+		doctype = html5
 
-	# Define template subparts
-	workOnSubpart = DOCUMENT_BODY
+		# Character sets
+		renderCharset = utf-8
+		metaCharset = utf-8
 
-	#Content Normal
-	subparts.CONTENT_NORMAL < lib.content_main
+		# Set Language
+		htmlTag_langKey = en
+		sys_language_uid = 0
+		language = en
+		locale_all = en_US
 
-	# Content RIGHT
-	subparts.CONTENT_RIGHT < lib.content_right
+		# Cache settings
+		cache_period = 43200
+		sendCacheHeaders = 1
+	}
+
+	# INSERT CSS FILES
+	includeCSS {
+		typo3_blog_bootstrap1 = EXT:typo3_blog/res/layout/css/bootstrap.min.css
+		typo3_blog_bootstrap2 = EXT:typo3_blog/res/layout/css/bootstrap-responsive.min.css
+		typo3_blog_css = EXT:typo3_blog/res/layout/css/style.css
+	}
+
+	# INSERT JS FILES
+	includeCSS {
+		typo3_blog_bootstrap = EXT:typo3_blog/res/layout/js/bootstrap.js
+	}
+	10 = TEMPLATE
+	10 {
+		template = FILE
+		template.file = EXT:typo3_blog/res/layout/template.html
+
+		# Define template subparts
+		workOnSubpart = DOCUMENT_BODY
+
+		#Content Normal
+		subparts.CONTENT_NORMAL < lib.content_main
+
+		# Content RIGHT
+		subparts.CONTENT_RIGHT < lib.content_right
+	}
 }
