@@ -14,10 +14,6 @@ plugin.tx_typo3blog_pi1.CategoryList.2.wrap = <ul class="nav nav-list">|</ul>
 plugin.tx_typo3blog_pi1.CategoryList.3.wrap = <ul class="nav nav-list">|</ul>
 plugin.tx_typo3blog_pi1.CategoryList.4.wrap = <ul class="nav nav-list">|</ul>
 
-
-
-
-
 #Setup typo3blog bloglist
 plugin.tx_typo3blog_pi1.blogList.marker {
 	# wrap title
