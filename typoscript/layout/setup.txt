@@ -49,6 +49,8 @@ plugin.tx_typo3blog_pi1 {
 	}
 }
 
+
+
 #Setup typo3blog bloglist
 plugin.tx_typo3blog_pi1.blogList.marker {
 	# wrap title
@@ -121,6 +123,8 @@ typo3blog.sidebar {
 	27 < plugin.tx_typo3blog_pi1
 	27.what_to_display = CALENDAR
 	30 < commentList
+	40 < plugin.tx_typo3blog_pi1
+	40.what_to_display = ARCHIVE
 }
 
 #SWITCH CONTENT MARKER IF BLOG PAGE

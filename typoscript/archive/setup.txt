@@ -1,0 +1,36 @@
+plugin.tx_typo3blog_pi1 {
+	archive {
+		# Bloglist template file
+		templateFile = EXT:typo3_blog/res/archive/template.html
+
+		marker {
+			year = TEXT
+			year {
+				field = year
+				wrap = |
+			}
+
+			month = TEXT
+				month {
+					field = month
+					wrap = |
+			}
+
+			quantity = TEXT
+			quantity {
+				field = quantity
+				wrap = |
+			}
+
+			title = TEXT
+			title {
+				wrap = |
+				field = title
+				typolink {
+					parameter.dataWrap = {field:uid}
+					useCacheHash = 1
+				}
+			}
+		}
+	}
+}
