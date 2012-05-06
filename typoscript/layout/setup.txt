@@ -83,6 +83,13 @@ lib.content_right < typo3blog.sidebar
 page = PAGE
 page {
 	config {
+		# Admin settings
+		admPanel = {$config.adminPanel}
+		debug = {$config.debug}
+
+		# set Base URL
+		baseURL = http://{$config.domain}/
+
 		# Doctype
 		doctype = html5
 
