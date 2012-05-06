@@ -88,6 +88,7 @@ typo3blog.sidebar {
 	30 < commentList
 	40 < plugin.tx_typo3blog_pi1
 	40.what_to_display = ARCHIVE
+	50 < plugin.tx_typo3blog_pi1.LatestComments
 }
 
 #SWITCH CONTENT MARKER IF BLOG PAGE

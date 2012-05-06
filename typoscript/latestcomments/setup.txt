@@ -1,0 +1,43 @@
+plugin.tx_typo3blog_pi1 {
+	LatestComments = CONTENT
+
+	LatestComments {
+		stdWrap {
+        		outerWrap = <div class="well" style="padding: 8px 0;"><ul class="nav nav-list">|</ul></div>
+        	}
+		table = tx_comments_comments
+		select {
+			pidInList = 3
+			selectFields = firstname,lastname,email,homepage,content
+			where = approved = 1
+			orderBy = crdate desc
+			max = 5
+		}
+
+		renderObj = COA
+		renderObj {
+
+			5 = TEXT
+			5 {
+				field = firstname
+				wrap = <li>|</li>
+			}
+			10 = TEXT
+			10 {
+				field = lastname
+				wrap = <li>|</li>
+			}
+			20 = TEXT
+			20 {
+				field = homepage
+				wrap = <li>|</li>
+			}
+			30 = TEXT
+			30 {
+				field = content
+				wrap = <li>|</li><li class="divider"></li>
+			}
+		}
+	}
+
+}
