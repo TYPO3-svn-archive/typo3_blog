@@ -16,7 +16,21 @@ plugin.tx_typo3blog_pi1.CategoryList.4.wrap = <ul class="nav nav-list">|</ul>
 
 #typo3blog bloglist
 plugin.tx_typo3blog_pi1.blogList.marker {
+	title.wrap = <h2>|</h2>
+
 	showmore.typolink.ATagParams = class="btn btn-primary"
+
+	category.if.isTrue.field = category
+	category.wrap = | <span class="divider"> /</span>
+
+	author.if.isTrue.field = author
+	author.wrap = | <span class="divider"> /</span>
+
+	author_email.if.isTrue.field = author
+	author_email.wrap = | <span class="divider"> /</span>
+
+	crdate.if.isTrue.field = crdate
+	crdate.wrap = | <span class="divider"> /</span>
 }
 
 #Plugin pagebrowse configuration set the templateFile
@@ -53,22 +67,12 @@ tagcloud {
 				rawUrlEncode = 1
 				dataWrap = &tagsearch={tag_keyword}
 			}
-
 			useCacheHash = 1
 		}
 	}
 	cloudWrap.wrap = <div class="well" style="padding: 8px;"><ul>|</ul></div>
 	_CSS_DEFAULT_STYLE >
 }
-
-#SWITCH CONTENT MARKER IF BLOG PAGE
-[globalVar = TSFE:page|doktype=73]
-	plugin.tx_typo3blog_pi1.what_to_display = BLOGLIST
-	lib.content_main < plugin.tx_typo3blog_pi1
-[else]
-	plugin.tx_typo3blog_pi1.what_to_display = BLOGSINGLE
-	lib.content_main < plugin.tx_typo3blog_pi1
-[global]
 
 # Add plugins to Sidebar
 typo3blog.sidebar = COA
@@ -77,6 +81,18 @@ typo3blog.sidebar {
 	20 < tagcloud
 	30 < commentList
 }
+
+#SWITCH CONTENT MARKER IF BLOG PAGE
+[globalVar = TSFE:page|doktype=73]
+	plugin.tx_typo3blog_pi1.what_to_display = BLOGLIST
+	lib.content_main < plugin.tx_typo3blog_pi1
+	typo3blog.sidebar.30 >
+[else]
+	plugin.tx_typo3blog_pi1.what_to_display = BLOGSINGLE
+	lib.content_main < plugin.tx_typo3blog_pi1
+[global]
+
+
 lib.content_right < typo3blog.sidebar
 
 # Page setup for typo3_blog
