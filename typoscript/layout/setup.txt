@@ -8,18 +8,21 @@ lib.content_right < styles.content.getRight
 # Configuration Blog and additional plugins
 ##################################################
 
-# typo3blog categoryList
+#Setup typo3blog categoryList
 plugin.tx_typo3blog_pi1.CategoryList.stdWrap.wrap = <div class="well" style="padding: 8px 0;"><ul class="nav nav-list">|</ul></div>
 plugin.tx_typo3blog_pi1.CategoryList.2.wrap = <ul class="nav nav-list">|</ul>
 plugin.tx_typo3blog_pi1.CategoryList.3.wrap = <ul class="nav nav-list">|</ul>
 plugin.tx_typo3blog_pi1.CategoryList.4.wrap = <ul class="nav nav-list">|</ul>
 
-#typo3blog bloglist
+#Setup typo3blog bloglist
 plugin.tx_typo3blog_pi1.blogList.marker {
+	# wrap title
 	title.wrap = <h2>|</h2>
 
+	# wrap showmore link
 	showmore.typolink.ATagParams = class="btn btn-primary"
 
+	# wrap with divider in breadcrumb
 	category.if.isTrue.field = category
 	category.wrap = | <span class="divider"> /</span>
 
@@ -33,12 +36,12 @@ plugin.tx_typo3blog_pi1.blogList.marker {
 	crdate.wrap = | <span class="divider"> /</span>
 }
 
-#Plugin pagebrowse configuration set the templateFile
+#Setup plugin pagebrowse configuration set the templateFile
 plugin.tx_pagebrowse_pi1 {
 	templateFile = EXT:typo3_blog/res/layout/pluginTemplates/pagebrowse/template.html
 }
 
-#Plugin comments configuration for blogSingle View add FORM only
+#Setup plugin comments configuration for blogSingle View add FORM only
 plugin.tx_comments_pi1 {
 	templateFile = EXT:typo3_blog/res/layout/pluginTemplates/comments/template.html
 	code = FORM
@@ -46,13 +49,13 @@ plugin.tx_comments_pi1 {
 plugin.tx_typo3blog_pi1.blogSingle.marker.comments < plugin.tx_comments_pi1
 
 
-#Plugin comments configuration for sidebar in add COMMENTS only
+#Setup plugin comments configuration for sidebar in add COMMENTS only
 commentList < plugin.tx_comments_pi1
 commentList {
 	code = COMMENTS
 }
 
-#Plugin vge_tagcloud configuration for sidebar.
+#Setup plugin vge_tagcloud configuration for sidebar.
 tagcloud < plugin.tx_vgetagcloud_pi1
 tagcloud {
 	referenceTable = pages
@@ -74,7 +77,7 @@ tagcloud {
 	_CSS_DEFAULT_STYLE >
 }
 
-# Add plugins to Sidebar
+#Setup sidebar add plugins to render in sidebar
 typo3blog.sidebar = COA
 typo3blog.sidebar {
 	10 < plugin.tx_typo3blog_pi1.CategoryList
@@ -92,7 +95,7 @@ typo3blog.sidebar {
 	lib.content_main < plugin.tx_typo3blog_pi1
 [global]
 
-
+# Add output to sidebar
 lib.content_right < typo3blog.sidebar
 
 # Page setup for typo3_blog
@@ -135,6 +138,8 @@ page {
 	includeCSS {
 		typo3_blog_bootstrap = EXT:typo3_blog/res/layout/js/bootstrap.js
 	}
+
+	# Setup site template
 	10 = TEMPLATE
 	10 {
 		template = FILE
