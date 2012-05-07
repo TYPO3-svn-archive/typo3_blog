@@ -40,6 +40,7 @@
 
 require_once(PATH_tslib . 'class.tslib_pibase.php');
 require_once(t3lib_extMgm::extPath('typo3_blog') . 'lib/class.typo3blog_func.php');
+require_once(t3lib_extMgm::extPath('typo3_blog').'lib/class.typo3blog_pagerenderer.php');
 include_once(PATH_site . 'typo3/sysext/cms/tslib/class.tslib_content.php');
 
 
@@ -52,17 +53,17 @@ include_once(PATH_site . 'typo3/sysext/cms/tslib/class.tslib_content.php');
  */
 class tx_typo3blog_widget_archive extends tslib_pibase
 {
-	public $prefixId = 'tx_typo3blog_widget_archive'; // Same as class name
-	public $scriptRelPath = 'pi1/class.tx_typo3blog_widget_archive.php'; // Path to this script relative to the extension dir.
-	public $extKey = 'typo3_blog'; // The extension key.
+	public $prefixId = 'tx_typo3blog_pi1';
+	public $scriptRelPath = 'pi1/class.tx_typo3blog_widget_archive.php';
+	public $extKey = 'typo3_blog';
 	public $pi_checkCHash = TRUE;
-	private $envErrors = array();
 
 	private $template = NULL;
 	private $extConf = NULL;
 	private $page_uid = NULL;
 	private $blog_doktype_id = NULL;
 	private $typo3BlogFunc = NULL;
+	private $parentConf = array();
 
 	/**
 	 * initializes this class
@@ -75,6 +76,13 @@ class tx_typo3blog_widget_archive extends tslib_pibase
 		// Make instance of tslib_cObj
 		$this->cObj = t3lib_div::makeInstance('tslib_cObj');
 
+		// get the startPid from PI1
+		$this->parentConf = $GLOBALS["TSFE"]->tmpl->setup['plugin.']['tx_typo3blog_pi1.'];
+
+		// define the pagerenderer
+		$this->pagerenderer = t3lib_div::makeInstance('typo3blog_pagerenderer');
+		$this->pagerenderer->setConf($this->conf);
+
 		// Make instance of tslib_cObj
 		$this->typo3BlogFunc = t3lib_div::makeInstance('typo3blog_func');
 		$this->typo3BlogFunc->setCobj($this->cObj);
@@ -86,13 +94,13 @@ class tx_typo3blog_widget_archive extends tslib_pibase
 		$this->extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['typo3_blog']);
 
 		// Set current page id
-		$this->page_uid = intval($this->conf['startPid']);
+		$this->page_uid = intval($this->parentConf['startPid']);
 
 		// Set doktype id from extension conf
 		$this->blog_doktype_id = $this->extConf['doktypeId'];
 
 		// Read template file
-		$this->template = $this->cObj->fileResource($this->conf['archive.']['templateFile']);
+		$this->template = $this->cObj->fileResource($this->conf['templateFile']);
 	}
 
 	/**
@@ -113,7 +121,7 @@ class tx_typo3blog_widget_archive extends tslib_pibase
 		// Check the environment for typo3blog archive view
 		if (NULL === $this->template) {
 			return $this->pi_wrapInBaseClass(
-				"Error :Template file " . $this->conf['archive.']['templateFile'] . " not found.<br />Please check the typoscript configuration!"
+				"Error :Template file " . $this->conf['templateFile'] . " not found.<br />Please check the typoscript configuration!"
 			);
 		}
 
@@ -124,7 +132,7 @@ class tx_typo3blog_widget_archive extends tslib_pibase
 		}
 
 		// Get subparts from HTML template BLOGLIST_TEMPLATE
-		$template = $this->cObj->getSubpart($this->template, '###ARCHIVE_TEMPLATE###');
+		$template   = $this->cObj->getSubpart($this->template, '###ARCHIVE_TEMPLATE###');
 		$subpartArchiveItems = $this->cObj->getSubpart($template, '###ARCHIVE_ITEMS###');
 
 
@@ -205,14 +213,14 @@ class tx_typo3blog_widget_archive extends tslib_pibase
 			if ($currentYear != $row['year']) {
 				$currentYear = $row['year'];
 				$subpartArchiveYear = $this->cObj->getSubpart($subpartArchiveItems, '###ARCHIVE_YEAR###');
-				$year = $this->cObj->cObjGetSingle($this->conf['archive.']['marker.']['year'], $this->conf['archive.']['marker.']['year' . '.']);
+				$year = $this->cObj->cObjGetSingle($this->conf['marker.']['year'], $this->conf['marker.']['year' . '.']);
 				$markerArray['###' . strtoupper('year') . '###'] = $year;
 				$subparts['###ARCHIVE_YEAR###'] = $this->cObj->substituteMarkerArrayCached($subpartArchiveYear, $markerArray);
 			}
 
 			$subpartArchiveMonth = $this->cObj->getSubpart($subpartArchiveYear, '###ARCHIVE_MONTH###');
-			$month = $this->cObj->cObjGetSingle($this->conf['archive.']['marker.']['month'], $this->conf['archive.']['marker.']['month' . '.']);
-			$quantity = $this->cObj->cObjGetSingle($this->conf['archive.']['marker.']['quantity'], $this->conf['archive.']['marker.']['quantity' . '.']);
+			$month = $this->cObj->cObjGetSingle($this->conf['marker.']['month'], $this->conf['marker.']['month' . '.']);
+			$quantity = $this->cObj->cObjGetSingle($this->conf['marker.']['quantity'], $this->conf['marker.']['quantity' . '.']);
 
 			// Add data in $markerArray for subpart ARCHIVE_YEAR
 
@@ -252,13 +260,13 @@ class tx_typo3blog_widget_archive extends tslib_pibase
 
 				// Each all records and set data in HTML template marker
 				foreach ($res as $column => $data) {
-					if ($this->conf['archive.']['marker.'][$column]) {
+					if ($this->conf['marker.'][$column]) {
 						$this->cObj->setCurrentVal($data);
-						$data = $this->cObj->cObjGetSingle($this->conf['archive.']['marker.'][$column], $this->conf['archive.']['marker.'][$column . '.']);
+						$data = $this->cObj->cObjGetSingle($this->conf['marker.'][$column], $this->conf['marker.'][$column . '.']);
 						$this->cObj->setCurrentVal(false);
 					} else {
 						$this->cObj->setCurrentVal($data);
-						$data = $this->cObj->stdWrap($data, $this->conf['archive.']['marker.'][$column . '.']);
+						$data = $this->cObj->stdWrap($data, $this->conf['marker.'][$column . '.']);
 						$this->cObj->setCurrentVal(false);
 					}
 					$markerArray['###' . strtoupper($column) . '###'] = $data;
@@ -269,6 +277,21 @@ class tx_typo3blog_widget_archive extends tslib_pibase
 			$subparts['###ARCHIVE_ITEMS###'] .=  $this->cObj->substituteSubpartArray($subpartArchiveItems, $subparts);
 			$subparts['###ARCHIVE_POST###'] = '';
 		}
+
+		// Add all CSS and JS files
+		if (T3JQUERY === true) {
+			tx_t3jquery::addJqJS();
+		} else {
+			$this->pagerenderer->addJsFile($this->parentConf['jQueryLibrary']);
+			$this->pagerenderer->addJsFile($this->parentConf['jQueryCookies']);
+		}
+		$this->pagerenderer->addJsFile($this->parentConf['jQueryTreeView']);
+		$this->pagerenderer->addCssFile($this->parentConf['jQueryTreeViewStyle']);
+
+		$templateJs = $this->cObj->getSubpart($this->template, '###ARCHIVE_TEMPLATE_JS###');
+		$this->pagerenderer->addJS($templateJs);
+
+		$this->pagerenderer->addResources();
 
 		// Complete the template expansion by replacing the "content" marker in the template
 		$content .= $this->typo3BlogFunc->substituteMarkersAndSubparts($template, $markers, $subparts);

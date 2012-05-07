@@ -123,8 +123,7 @@ typo3blog.sidebar {
 	10 < plugin.tx_typo3blog_pi1.CategoryList
 	20 < plugin.tx_typo3blog_pi1.calendar
 	30 < commentList
-	40 < plugin.tx_typo3blog_pi1
-	40.what_to_display = ARCHIVE
+	40 < plugin.tx_typo3blog_pi1.archive
 	50 < plugin.tx_sexybookmarks_pi1
 }
 

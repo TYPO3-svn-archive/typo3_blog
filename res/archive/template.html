@@ -37,31 +37,40 @@ ARCHIVE_UID - uid number of the blogsingle page
 
 <!-- ###ARCHIVE_TEMPLATE### begin-->
 <div class="well" style="padding: 8px 0;">
-###ARCHIVE_TITLE###
-<ul>
-	<!--###ARCHIVE_ITEMS### begin -->
-	<!--###ARCHIVE_YEAR### begin -->
-	<li>###YEAR###</li>
-	<!--###ARCHIVE_MONTH### begin -->
-	<li>
-		<ul>
-
-			<li>###MONTH### (###QUANTITY###)</li>
-			<li>
-				<ul>
-					<!--###ARCHIVE_POST### begin -->
-					<li>###TITLE###</li>
-					<!--###ARCHIVE_POST### end -->
-				</ul>
-			</li>
-		</ul>
-	</li>
-	<!--###ARCHIVE_MONTH### end -->
-	<!--###ARCHIVE_YEAR### end -->
-	<!--###ARCHIVE_ITEMS### end -->
-</ul>
+	<h3>###ARCHIVE_TITLE###</h3>
+	<ul class="tx_typo3blog_widget_archive">
+		<!--###ARCHIVE_ITEMS### begin -->
+		<!--###ARCHIVE_YEAR### begin -->
+		<li>
+			###YEAR###
+			<ul>
+				<!--###ARCHIVE_MONTH### begin -->
+				<li>
+					###MONTH### (###QUANTITY###)
+					<ul>
+						<!--###ARCHIVE_POST### begin -->
+						<li>###TITLE###</li>
+						<!--###ARCHIVE_POST### end -->
+					</ul>
+				</li>
+				<!--###ARCHIVE_MONTH### end -->
+			</ul>
+		</li>
+		<!--###ARCHIVE_YEAR### end -->
+		<!--###ARCHIVE_ITEMS### end -->
+	</ul>
 </div>
 <!-- ###ARCHIVE_TEMPLATE### end -->
+
+
+
+<!-- ###ARCHIVE_TEMPLATE_JS### begin-->
+jQuery(document).ready(function() {
+	jQuery(".tx_typo3blog_widget_archive").treeview({
+		persist: "cookie"
+	});
+});
+<!-- ###ARCHIVE_TEMPLATE_JS### end-->
 
 </body>
 </html>

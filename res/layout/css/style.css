@@ -28,3 +28,12 @@
 	margin: 8px 0 0;
 	clear: none !important;
 }
+.well h3 {
+	padding-left: 15px;
+}
+.tx_typo3blog_widget_archive {
+	padding: 3px 15px;
+}
+.tx_typo3blog_widget_archive ul {
+	background-color: transparent;
+}

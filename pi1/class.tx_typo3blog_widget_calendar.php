@@ -54,6 +54,7 @@ class tx_typo3blog_widget_calendar extends tslib_pibase
 	private $template = NULL;
 	private $extConf = NULL;
 	private $page_uid = NULL;
+	private $blog_doktype_id = NULL;
 	private $typo3BlogFunc = NULL;
 	private $parentConf = array();
 
@@ -86,7 +87,7 @@ class tx_typo3blog_widget_calendar extends tslib_pibase
 		$this->extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['typo3_blog']);
 
 		// Set current page id
-		$this->page_uid = intval($GLOBALS['TSFE']->page['uid']);
+		$this->page_uid = intval($this->parentConf['startPid']);
 
 		// Set doktype id from extension conf
 		$this->blog_doktype_id = $this->extConf['doktypeId'];
@@ -144,7 +145,7 @@ class tx_typo3blog_widget_calendar extends tslib_pibase
 
 		if (count($blogdates) > 0) {
 			foreach ($blogdates as $date) {
-				$link = $this->pi_getPageLink($this->parentConf['startPid'], '', array(
+				$link = $this->pi_getPageLink($this->page_uid, '', array(
 					$this->prefixId.'[datefrom]' => $date['day'],
 					$this->prefixId.'[dateto]'   => $date['day'],
 				));
@@ -189,7 +190,7 @@ class tx_typo3blog_widget_calendar extends tslib_pibase
 	 * @return array
 	 */
 	private function getBlogDates() {
-		$uids = $this->pi_getPidList($this->parentConf['startPid'], 100);
+		$uids = $this->pi_getPidList($this->page_uid, 100);
 		if ($uids) {
 			$rows = $GLOBALS['TYPO3_DB']->exec_SELECTgetRows(
 				'count(*) AS counter, DATE(FROM_UNIXTIME(crdate)) as day',
