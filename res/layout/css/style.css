@@ -2,6 +2,7 @@
 .header-logo {background: url("/typo3conf/ext/typo3_blog/res/layout/img/typo3_logo.png") no-repeat;width:125px;height: 125px;float:right;margin-top:-40px;margin-right: 140px;}
 .page-footer {height:18px;margin-top: 18px;padding: 18px 0;background:#2C2C2C;color: #999999;}
 .header {height:110px; padding-top: 70px;}
+.extended_main {background: #F5F5F5;border: 1px solid #DDDDDD;}
 .tx-felogin-pi1 label {display:block;}
 .tx-vgetagcloud-pi1 {background:none;line-height:100%;}
 .tx-vgetagcloud-pi1 ul {float:left;list-style:none outside none;margin:0;padding:0;}

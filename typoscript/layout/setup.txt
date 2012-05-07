@@ -92,7 +92,7 @@ tagcloud {
 			useCacheHash = 1
 		}
 	}
-	cloudWrap.wrap = <div class="well" style="padding: 8px;"><ul>|</ul></div>
+	cloudWrap.wrap = <h3>Tagcloud</h3><ul>|</ul>
 	_CSS_DEFAULT_STYLE >
 }
 

@@ -3,7 +3,7 @@ plugin.tx_typo3blog_pi1 {
 	LatestPosts < tt_content.menu.20.5
 	LatestPosts {
 		stdWrap {
-			outerWrap = <div class="well" style="padding: 8px 0;"><ul class="nav nav-list">|</ul></div>
+			outerWrap = <h3>Latest Posts</h3>
 		}
 		special {
 			value >
@@ -18,6 +18,7 @@ plugin.tx_typo3blog_pi1 {
 		1.NO.stdWrap >
 		1.NO.stdWrap.cObject = COA
 		1.NO.stdWrap.cObject {
+			wrap = <ul>|</ul>
 			10 = TEXT
 			10 {
 				data = field:crdate
