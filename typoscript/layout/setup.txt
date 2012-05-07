@@ -172,7 +172,7 @@ page {
 		workOnSubpart = DOCUMENT_BODY
 
 		#Sexybookmarks
-		marks.SEXYBOOKMARKS < plugin.tx_sexybookmarks_pi2
+		subparts.SEXYBOOKMARKS < plugin.tx_sexybookmarks_pi2
 
 		#Content Normal
 		subparts.CONTENT_NORMAL < lib.content_main
