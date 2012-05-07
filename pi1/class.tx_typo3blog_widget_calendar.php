@@ -55,6 +55,7 @@ class tx_typo3blog_widget_calendar extends tslib_pibase
 	private $extConf = NULL;
 	private $page_uid = NULL;
 	private $typo3BlogFunc = NULL;
+	private $startPid = NULL;
 
 	/**
 	 * initializes this class
@@ -66,6 +67,13 @@ class tx_typo3blog_widget_calendar extends tslib_pibase
 	{
 		// Make instance of tslib_cObj
 		$this->cObj = t3lib_div::makeInstance('tslib_cObj');
+
+		// get the startPid from PI1
+		$this->startPid = $GLOBALS["TSFE"]->tmpl->setup['plugin.']['tx_typo3blog_pi1.']['startPid'];
+
+		// define the pagerenderer
+		$this->pagerenderer = t3lib_div::makeInstance('typo3blog_pagerenderer');
+		$this->pagerenderer->setConf($this->conf);
 
 		// Make instance of tslib_cObj
 		$this->typo3BlogFunc = t3lib_div::makeInstance('typo3blog_func');
@@ -84,7 +92,7 @@ class tx_typo3blog_widget_calendar extends tslib_pibase
 		$this->blog_doktype_id = $this->extConf['doktypeId'];
 
 		// Read template file
-		$this->template = $this->cObj->fileResource($this->conf['blogList.']['templateFile']);
+		$this->template = $this->cObj->fileResource($this->conf['templateFile']);
 	}
 
 	/**
@@ -101,29 +109,10 @@ class tx_typo3blog_widget_calendar extends tslib_pibase
 		$this->pi_loadLL();
 		$this->init();
 
-		$this->pagerenderer = t3lib_div::makeInstance('typo3blog_pagerenderer');
-		$this->pagerenderer->setConf($this->conf);
-
-		// Make instance of tslib_cObj
-		$this->typo3BlogFunc = t3lib_div::makeInstance('typo3blog_func');
-		$this->typo3BlogFunc->setCobj($this->cObj);
-
-		// Merge current configuration from flexform and typoscript
-		$this->mergeConfiguration();
-
-		// unserialize extension conf
-		$this->extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['typo3_blog']);
-
-		// Set current page id
-		$this->page_uid = intval($GLOBALS['TSFE']->page['uid']);
-
-		// Read template file
-		$this->template = $this->cObj->fileResource($this->conf['calendar.']['templateFile']);
-
 		// Check the environment for typo3blog listview
 		if (NULL === $this->template) {
 			return $this->pi_wrapInBaseClass(
-				"Error :Template file " . $this->conf['calendar.']['templateFile'] . " not found.<br />Please check the typoscript configuration!"
+				"Error :Template file " . $this->conf['templateFile'] . " not found.<br />Please check the typoscript configuration!"
 			);
 		}
 
@@ -131,7 +120,7 @@ class tx_typo3blog_widget_calendar extends tslib_pibase
 		$templateCode = $this->cObj->getSubpart($this->template, '###TEMPLATE_CALENDAR_JS###');
 
 		// Generate the language string
-		$language = $this->cObj->cObjGetSingle($this->conf['calendar.']['language'], $this->conf['calendar.']['language.']);
+		$language = $this->cObj->cObjGetSingle($this->conf['language'], $this->conf['language.']);
 		// Language fallback, if not set, try to guess the language from config
 		if (! $language) {
 			$language = $GLOBALS['TSFE']->tmpl->setup['config.']['language'];
@@ -155,7 +144,7 @@ class tx_typo3blog_widget_calendar extends tslib_pibase
 
 		if (count($blogdates) > 0) {
 			foreach ($blogdates as $date) {
-				$link = $this->pi_getPageLink($this->conf['startPid'], '', array(
+				$link = $this->pi_getPageLink($this->startPid, '', array(
 					$this->prefixId.'[datefrom]' => $date['day'],
 					$this->prefixId.'[dateto]'   => $date['day'],
 				));
@@ -179,16 +168,16 @@ class tx_typo3blog_widget_calendar extends tslib_pibase
 		if (T3JQUERY === true) {
 			tx_t3jquery::addJqJS();
 		} else {
-			$this->pagerenderer->addJsFile($this->conf['calendar.']['jQueryLibrary']);
-			$this->pagerenderer->addJsFile($this->conf['calendar.']['jQueryUI']);
-			$this->pagerenderer->addJsFile(str_replace('###LANGUAGE###', $language, $this->conf['calendar.']['jQueryUIl18n']));
+			$this->pagerenderer->addJsFile($this->conf['jQueryLibrary']);
+			$this->pagerenderer->addJsFile($this->conf['jQueryUI']);
+			$this->pagerenderer->addJsFile(str_replace('###LANGUAGE###', $language, $this->conf['jQueryUIl18n']));
 		}
-		$this->pagerenderer->addCssFile($this->conf['calendar.']['jQueryUIstyle']);
+		$this->pagerenderer->addCssFile($this->conf['jQueryUIstyle']);
 		$this->pagerenderer->addJS($templateCode);
 
 		$this->pagerenderer->addResources();
 
-		$content = $this->cObj->cObjGetSingle($this->conf['calendar.']['datepicker'], $this->conf['calendar.']['datepicker.']);
+		$content = $this->cObj->cObjGetSingle($this->conf['datepicker'], $this->conf['datepicker.']);
 
 		// Return the content to display in frontend
 		return $this->pi_wrapInBaseClass($content);
@@ -200,7 +189,7 @@ class tx_typo3blog_widget_calendar extends tslib_pibase
 	 * @return array
 	 */
 	private function getBlogDates() {
-		$uids = $this->pi_getPidList($this->conf['startPid'], 100);
+		$uids = $this->pi_getPidList($this->startPid, 100);
 		if ($uids) {
 			$rows = $GLOBALS['TYPO3_DB']->exec_SELECTgetRows(
 				'count(*) AS counter, DATE(FROM_UNIXTIME(crdate)) as day',

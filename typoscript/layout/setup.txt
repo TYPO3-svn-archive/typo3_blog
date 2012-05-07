@@ -100,8 +100,7 @@ tagcloud {
 typo3blog.sidebar = COA
 typo3blog.sidebar {
 	10 < plugin.tx_typo3blog_pi1.CategoryList
-	20 < plugin.tx_typo3blog_pi1
-	20.what_to_display = CALENDAR
+	20 < plugin.tx_typo3blog_pi1.calendar
 	30 < commentList
 	40 < plugin.tx_typo3blog_pi1
 	40.what_to_display = ARCHIVE

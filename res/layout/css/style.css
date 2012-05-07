@@ -15,3 +15,10 @@
 .typo3blog_latest {
 	
 }
+
+#tx_typo3blog_widget_calendar {
+	margin-bottom: 20px;
+}
+#tx_typo3blog_widget_calendar .ui-datepicker {
+	width: auto !important;
+}
