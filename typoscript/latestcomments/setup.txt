@@ -2,8 +2,8 @@ plugin.tx_typo3blog_pi1 {
 	LatestComments = CONTENT
 	LatestComments {
 		stdWrap {
-        		outerWrap = <div class="well" style="padding: 8px 0;"><ul class="nav nav-list">|</ul></div>
-        	}
+			outerWrap = <div class="well" style="padding: 8px 0;"><ul class="nav nav-list">|</ul></div>
+		}
 		table = tx_comments_comments
 		select {
 			pidInList = 3
@@ -15,7 +15,6 @@ plugin.tx_typo3blog_pi1 {
 
 		renderObj = COA
 		renderObj {
-
 			5 = TEXT
 			5 {
 				field = firstname
@@ -35,15 +34,23 @@ plugin.tx_typo3blog_pi1 {
 			30 {
 				field = content
 				wrap = <li>|</li>
+				typolink {
+					parameter.cObject = TEXT
+					parameter.cObject {
+						field = external_ref
+						stdWrap.parseFunc.short {
+							pages_ =
+						}
+					}
+				}
 			}
 			40 = TEXT
 			40 {
 				field = external_ref
 				stdWrap.parseFunc.short {
-                    pages_ =
-                }
-                wrap = <li>|</li><li class="divider"></li>
-
+					pages_ =
+				}
+				wrap = <li>|</li><li class="divider"></li>
 			}
 		}
 	}

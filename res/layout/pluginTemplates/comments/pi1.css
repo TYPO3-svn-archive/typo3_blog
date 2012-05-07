@@ -1,0 +1,24 @@
+.tx-comments-comment-admin { margin: 10px 20px; background-color: #e0e0e0; padding: 5px 9px; text-align: center; }
+
+.tx-comments-comment-form LABEL { width: 100px; display: block; float: left; padding-top: 5px; }
+.tx-comments-comment-form INPUT, .tx-comments-comment-form TEXTAREA, .tx-comments-comment-form IMG { margin-top: 5px; }
+.tx-comments-comment-input, .tx-comments-comment-form TEXTAREA { width: 245px; }
+.tx-comments-comment-form BR { clear: left; }
+.tx-comments-comment-name { font-weight: bold; }
+.tx-comments-comment-date { font-weight: bold; }
+.tx-comments-comment-1, .tx-comments-comment-2 { border: 1px solid #e0e0e0; margin-bottom: 10px; padding: 3px 5px; }
+.tx-comments-comment-content { padding: 3px 0; text-align: justify; }
+.tx-comments-page-browser { text-align: center; margin: 15px 0; }
+.tx-comments-page-browser-current, .tx-comments-page-browser A { padding: 0 3px; }
+.tx-comments-required-mark { color: red; }
+.tx-comments-required-error { margin-left: 10px; color: red; background-color: #f5f500; padding: 3px 5px; }
+.tx-comments-captcha { padding-left: 100px; }
+.tx-comments-captcha IMG { border: 1px solid #d0d0d0; margin-left: 0px; }
+.tx-comments-form-top-message { border: 1px solid #d0d0d0; padding: 10px 20px; text-align: center; font-weight: bold; }
+
+.tx-comments-closed { border: 1px solid #d0d0d0; padding: 10px 10px; margin: 10px 0; }
+.tx-comments-closed IMG { vertical-align: baseline; margin-left: 4px; padding-right: 4px; }
+
+.tx-comments-comment-report { font-size: 80%; margin: 7px 0 5px 15px; }
+
+.tx-comments-rating { margin-left: 15px; }

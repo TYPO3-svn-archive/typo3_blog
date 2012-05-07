@@ -1,0 +1,21 @@
+New comment was posted to ###URL###. It requires your approval to appear on the web site. It got ###POINTS### spam points.
+
+First name: ###FIRSTNAME###
+Last name: ###LASTNAME###
+E-mail: ###EMAIL###
+Location: ###LOCATION###
+Web site: ###HOMEPAGE###
+Posted from IP: ###REMOTE_ADDR###
+Text:
+--------------------------------------------------------------------------
+###CONTENT###
+--------------------------------------------------------------------------
+
+To approve the comment, use this link:
+###APPROVE_LINK###
+
+To delete the comment, use this link:
+###DELETE_LINK###
+
+To delete the comment from the database permanently, use this link:
+###KILL_LINK###

@@ -20,20 +20,39 @@ plugin.tx_typo3blog_pi1.blogList.marker {
 	title.wrap = <h2>|</h2>
 
 	# wrap showmore link
-	showmore.typolink.ATagParams = class="btn btn-primary"
+	showmore.typolink.ATagParams = class="btn btn-inverse"
 
 	# wrap with divider in breadcrumb
-	category.if.isTrue.field = category
-	category.wrap = | <span class="divider"> /</span>
-
 	author.if.isTrue.field = author
-	author.wrap = | <span class="divider"> /</span>
+	author.wrap = <span class="divider"> /</span> |
 
 	author_email.if.isTrue.field = author
-	author_email.wrap = | <span class="divider"> /</span>
+	author_email.wrap = <span class="divider"> /</span> |
 
 	crdate.if.isTrue.field = crdate
-	crdate.wrap = | <span class="divider"> /</span>
+	crdate.wrap = <span class="divider"> /</span> |
+
+	tx_typo3blog_tagcloud.if.isTrue.field = crdate
+	tx_typo3blog_tagcloud.wrap = <span class="divider"> /</span> |
+}
+
+#Setup typo3blog blogSingle
+plugin.tx_typo3blog_pi1.blogSingle.marker {
+	# wrap title
+	title.wrap = <h2>|</h2>
+
+	# wrap with divider in breadcrumb
+	author.if.isTrue.field = author
+	author.wrap = <span class="divider"> /</span> |
+
+	author_email.if.isTrue.field = author
+	author_email.wrap = <span class="divider"> /</span> |
+
+	crdate.if.isTrue.field = crdate
+	crdate.wrap = <span class="divider"> /</span> |
+
+	tx_typo3blog_tagcloud.if.isTrue.field = crdate
+	tx_typo3blog_tagcloud.wrap = <span class="divider"> /</span> |
 }
 
 #Setup plugin pagebrowse configuration set the templateFile
@@ -81,14 +100,11 @@ tagcloud {
 typo3blog.sidebar = COA
 typo3blog.sidebar {
 	10 < plugin.tx_typo3blog_pi1.CategoryList
-	20 < tagcloud
-	25 < plugin.tx_typo3blog_pi1.LatestPosts
-	27 < plugin.tx_typo3blog_pi1
-	27.what_to_display = CALENDAR
+	20 < plugin.tx_typo3blog_pi1
+	20.what_to_display = CALENDAR
 	30 < commentList
 	40 < plugin.tx_typo3blog_pi1
 	40.what_to_display = ARCHIVE
-	50 < plugin.tx_typo3blog_pi1.LatestComments
 }
 
 #SWITCH CONTENT MARKER IF BLOG PAGE
@@ -99,6 +115,7 @@ typo3blog.sidebar {
 [else]
 	plugin.tx_typo3blog_pi1.what_to_display = BLOGSINGLE
 	lib.content_main < plugin.tx_typo3blog_pi1
+	typo3blog.sidebar.50 >
 [global]
 
 # Add output to sidebar
@@ -156,6 +173,15 @@ page {
 
 		#Content Normal
 		subparts.CONTENT_NORMAL < lib.content_main
+
+		#Content Normal
+		subparts.EXTENDED_NORMAL_1 < plugin.tx_typo3blog_pi1.LatestPosts
+
+		#Content Normal
+		subparts.EXTENDED_NORMAL_2 < plugin.tx_typo3blog_pi1.LatestComments
+
+		#Content Normal
+		subparts.EXTENDED_NORMAL_3 < tagcloud
 
 		# Content RIGHT
 		subparts.CONTENT_RIGHT < lib.content_right
