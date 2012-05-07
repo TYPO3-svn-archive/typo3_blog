@@ -2,7 +2,7 @@
 plugin.tx_typo3blog_pi1 {
 	LatestPosts < tt_content.menu.20.5
 	LatestPosts.wrap >
-	LatestPosts.wrap = <ul class="nav tx-typo3blog-link-list">|</ul>
+	LatestPosts.wrap = <ul>|</ul>
 	LatestPosts {
 		stdWrap {
 			outerWrap = <h3>Latest Posts</h3>
@@ -24,7 +24,7 @@ plugin.tx_typo3blog_pi1 {
 			10 = TEXT
 			10 {
 				data = field:author
-				wrap = <span class="typo3blog_date"><i class="icon-user"></i>|
+				wrap = <span>|
 			}
 			20 = TEXT
 			20 {
@@ -35,7 +35,7 @@ plugin.tx_typo3blog_pi1 {
 			30 = TEXT
 			30 {
 				data = field:title
-				wrap = <span class="typo3blog_latest"><i class="icon-file"></i><strong>|</strong></span>
+				wrap = <span>|</span>
 			}
 		}
 	}

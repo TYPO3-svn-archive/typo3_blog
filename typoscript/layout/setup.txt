@@ -96,6 +96,27 @@ tagcloud {
 	_CSS_DEFAULT_STYLE >
 }
 
+#Setuo plugin typo3blog latest posts
+plugin.tx_typo3blog_pi1.LatestPosts {
+	wrap >
+	wrap = <ul class="nav tx-typo3blog-link-list">|</ul>
+	1.NO.stdWrap.cObject {
+		stdWrap >
+		10.wrap = <span class="typo3blog_date"><i class="icon-user"></i>|
+		20.wrap = &nbsp;|&nbsp;</span><br />
+		30.wrap = <span class="typo3blog_latest"><i class="icon-file"></i><strong>|</strong></span>
+
+	}
+}
+
+plugin.tx_typo3blog_pi1.LatestComments {
+	stdWrap.outerWrap = <h3>Latest Comments</h3><ul class="nav tx-typo3blog-link-list">|</ul>
+	renderObj {
+		5.wrap = <span><i class="icon-user"></i>|
+		30.wrap = <span><i class="icon-comment"></i>|</span>
+	}
+}
+
 #Setup sidebar add plugins to render in sidebar
 typo3blog.sidebar = COA
 typo3blog.sidebar {
