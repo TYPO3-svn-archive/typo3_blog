@@ -124,7 +124,6 @@ typo3blog.sidebar {
 	20 < plugin.tx_typo3blog_pi1.calendar
 	30 < commentList
 	40 < plugin.tx_typo3blog_pi1.archive
-	50 < plugin.tx_sexybookmarks_pi1
 }
 
 #SWITCH CONTENT MARKER IF BLOG PAGE
@@ -192,7 +191,8 @@ page {
 		workOnSubpart = DOCUMENT_BODY
 
 		#Sexybookmarks
-		subparts.SEXYBOOKMARKS < plugin.tx_sexybookmarks_pi2
+		subparts.SEXYBOOKMARKS_PI1 < plugin.tx_sexybookmarks_pi1
+		subparts.SEXYBOOKMARKS_PI2 < plugin.tx_sexybookmarks_pi2
 
 		#Content Normal
 		subparts.CONTENT_NORMAL < lib.content_main
