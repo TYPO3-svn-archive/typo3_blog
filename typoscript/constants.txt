@@ -25,7 +25,18 @@ plugin.tx_typo3blog_pi1 {
 	file.jQueryTreeViewStyle = EXT:typo3_blog/res/jquery/css/treeview/jquery.treeview-1.5.css
 
 
-
-	# cat=plugin.typo3blog: Basic/basic/010; type=string; label=Start PID:The PID where for blog start page  (see manual!)
+	# cat=plugin.typo3blog: Basic/basic/0100; type=string; label=Start PID:The PID where for blog start page  (see manual!)
 	startPid =
+
+	# cat=plugin.typo3blog: Basic/basic/0110; type=string; label=Date format with strftime dd.mm.yyyy   (see manual!)
+	dateFromat = %d.%m.%Y
+
+	# cat=plugin.typo3blog: BlogList widget/basic/010; type=string; label=Items to display on bloglist  (see manual!)
+	blogList.itemsToDisplay = 5
+
+	# cat=plugin.typo3blog: BlogList widget/basic/020; type=string; label=Displaying elements from tt_content as preview on bloglist  (see manual!)
+	blogList.contentItemsToDisplay = 1
+
+	# cat=plugin.typo3blog: BlogList widget/basic/030; type=string; label=Template location for bloglist  (see manual!)
+	blogList.templateFile = EXT:typo3_blog/res/bloglist/template.html
 }

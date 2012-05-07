@@ -5,13 +5,13 @@ plugin.tx_typo3blog_pi1 {
 		#----------------------------------------------------
 
 		# Displaying posts in bloglist
-		itemsToDisplay = 5
+		itemsToDisplay = {$plugin.tx_typo3blog_pi1.blogList.itemsToDisplay}
 
 		#Displaying elements from tt_content as preview
-		contentItemsToDisplay = 1
+		contentItemsToDisplay = {$plugin.tx_typo3blog_pi1.blogList.contentItemsToDisplay}
 
 		# Bloglist template file
-		templateFile = EXT:typo3_blog/res/bloglist/template.html
+		templateFile = {$plugin.tx_typo3blog_pi1.blogList.templateFile}
 
 
 		# SECTION TEMPLATE MARKER FOR BLOGLIST TEMPLATE
@@ -33,7 +33,7 @@ plugin.tx_typo3blog_pi1 {
 			crdate {
 				wrap = |
 				field = crdate
-				strftime = %d.%m.%Y
+				strftime = {$plugin.tx_typo3blog_pi1.dateFromat}
 			}
 
 			# page field author setup for templatemarker '###BLOGLIST_AUTHOR###'
