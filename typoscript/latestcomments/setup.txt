@@ -2,12 +2,12 @@ plugin.tx_typo3blog_pi1 {
 	LatestComments = CONTENT
 	LatestComments {
 		stdWrap {
-			outerWrap = <h3>Latest Comments</h3>
+			outerWrap = <h3>Latest Comments</h3><ul class="nav tx-typo3blog-link-list">|</ul>
 		}
 		table = tx_comments_comments
 		select {
 			pidInList = 3
-			selectFields = firstname,lastname,email,homepage,content,external_ref
+			selectFields = crdate,firstname,lastname,email,homepage,content,external_ref
 			where = approved = 1
 			orderBy = crdate desc
 			max = 5
@@ -15,11 +15,12 @@ plugin.tx_typo3blog_pi1 {
 
 		renderObj = COA
 		renderObj {
-			wrap = <ul>|</ul>
+			wrap = <li class="odd">|</li> |*| <li class="even">|</li> |*| <li class="odd">|</li>
+
 			5 = TEXT
 			5 {
 				field = firstname
-				wrap = <li>|
+				wrap = <span><i class="icon-user"></i>|
 			}
 			10 = TEXT
 			10 {
@@ -28,13 +29,15 @@ plugin.tx_typo3blog_pi1 {
 			}
 			20 = TEXT
 			20 {
-				field = homepage
-				wrap = |</li>
+				field = crdate
+				strftime = %d.%b.%Y
+				wrap = |</span><br />
 			}
 			30 = TEXT
 			30 {
 				field = content
-				wrap = <li>|</li>
+				wrap = <span><i class="icon-comment"></i>|</span>
+				crop = 60
 				typolink {
 					parameter.cObject = TEXT
 					parameter.cObject {

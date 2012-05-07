@@ -1,6 +1,6 @@
 .page-header {background: #F5F5F5; height:150px;border: 1px solid #DDDDDD;}
 .header-logo {background: url("/typo3conf/ext/typo3_blog/res/layout/img/typo3_logo.png") no-repeat;width:125px;height: 125px;float:right;margin-top:-40px;margin-right: 140px;}
-.page-footer {height:18px;margin-top: 18px;padding: 18px 0;background:#2C2C2C;color: #999999;}
+.page-footer {height:18px;padding: 18px 0;background:#2C2C2C;color: #999999;}
 .header {height:110px; padding-top: 70px;}
 .extended_main {background: #F5F5F5;border: 1px solid #DDDDDD;}
 .tx-felogin-pi1 label {display:block;}
@@ -12,8 +12,9 @@
 .typo3blog_date {
 	margin-right: .5em;
 }
-.typo3blog_latest {
-	
+.tx-typo3blog-link-list li {
+	padding: 5px 0;
+    border-bottom: 1px solid #E5E5E5;
 }
 
 #tx_typo3blog_widget_calendar {
