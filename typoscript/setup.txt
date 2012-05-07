@@ -6,8 +6,18 @@
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/typoscript/archive/setup.txt">
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/typoscript/latestposts/setup.txt">
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/typoscript/latestcomments/setup.txt">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/typoscript/sexybookmarks/setup.txt">
 
 plugin.tx_typo3blog_pi1 {
+	jQueryLibrary = {$plugin.tx_typo3blog_pi1.file.jQueryLibrary}
+	jQueryCookies = {$plugin.tx_typo3blog_pi1.file.jQueryCookies}
+	jQueryEasing = {$plugin.tx_typo3blog_pi1.file.jQueryEasing}
+	jQueryUI = {$plugin.tx_typo3blog_pi1.file.jQueryUI}
+	jQueryUIl18n = {$plugin.tx_typo3blog_pi1.jQueryUIl18n}
+	jQueryUIstyle = {$plugin.tx_typo3blog_pi1.file.jQueryUIstyle}
+	jQueryTreeView = {$plugin.tx_typo3blog_pi1.file.jQueryTreeView}
+	jQueryTreeViewStyle = {$plugin.tx_typo3blog_pi1.file.jQueryTreeViewStyle}
+
 	what_to_display =
 	startPid = {$plugin.tx_typo3blog_pi1.startPid}
 }

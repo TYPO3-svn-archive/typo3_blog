@@ -14,7 +14,7 @@
 }
 .tx-typo3blog-link-list li {
 	padding: 5px 0;
-    border-bottom: 1px solid #E5E5E5;
+	border-bottom: 1px solid #E5E5E5;
 }
 
 #tx_typo3blog_widget_calendar {
@@ -22,4 +22,9 @@
 }
 #tx_typo3blog_widget_calendar .ui-datepicker {
 	width: auto !important;
+}
+
+.tx-sexybookmarks-pi2 div.sexybookmarks {
+	margin: 8px 0 0;
+	clear: none !important;
 }

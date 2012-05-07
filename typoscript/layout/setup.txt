@@ -104,6 +104,7 @@ typo3blog.sidebar {
 	30 < commentList
 	40 < plugin.tx_typo3blog_pi1
 	40.what_to_display = ARCHIVE
+	50 < plugin.tx_sexybookmarks_pi1
 }
 
 #SWITCH CONTENT MARKER IF BLOG PAGE
@@ -169,6 +170,9 @@ page {
 
 		# Define template subparts
 		workOnSubpart = DOCUMENT_BODY
+
+		#Sexybookmarks
+		marks.SEXYBOOKMARKS < plugin.tx_sexybookmarks_pi2
 
 		#Content Normal
 		subparts.CONTENT_NORMAL < lib.content_main
