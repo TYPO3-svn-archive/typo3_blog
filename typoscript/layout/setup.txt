@@ -96,8 +96,21 @@ tagcloud {
 	_CSS_DEFAULT_STYLE >
 }
 
-#Setuo plugin typo3blog latest posts
-plugin.tx_typo3blog_pi1.LatestPosts {
+#Setup plugin typo3blog latest posts
+plugin.tx_typo3blog_pi1.latestPosts {
+	wrap >
+	wrap = <ul class="nav tx-typo3blog-link-list">|</ul>
+	1.NO.stdWrap.cObject {
+		stdWrap >
+		10.wrap = <span class="typo3blog_date"><i class="icon-user"></i>|
+		20.wrap = &nbsp;|&nbsp;</span><br />
+		30.wrap = <span class="typo3blog_latest"><i class="icon-file"></i><strong>|</strong></span>
+
+	}
+}
+
+#Setup plugin typo3blog related posts
+plugin.tx_typo3blog_pi1.relatedPosts {
 	wrap >
 	wrap = <ul class="nav tx-typo3blog-link-list">|</ul>
 	1.NO.stdWrap.cObject {
@@ -124,6 +137,7 @@ typo3blog.sidebar {
 	20 < plugin.tx_typo3blog_pi1.calendar
 	30 < commentList
 	40 < plugin.tx_typo3blog_pi1.archive
+	50 < plugin.tx_typo3blog_pi1.relatedPosts
 }
 
 #SWITCH CONTENT MARKER IF BLOG PAGE
@@ -131,10 +145,10 @@ typo3blog.sidebar {
 	plugin.tx_typo3blog_pi1.what_to_display = BLOGLIST
 	lib.content_main < plugin.tx_typo3blog_pi1
 	typo3blog.sidebar.30 >
+	typo3blog.sidebar.50 >
 [else]
 	plugin.tx_typo3blog_pi1.what_to_display = BLOGSINGLE
 	lib.content_main < plugin.tx_typo3blog_pi1
-	typo3blog.sidebar.50 >
 [global]
 
 # Add output to sidebar
@@ -198,7 +212,7 @@ page {
 		subparts.CONTENT_NORMAL < lib.content_main
 
 		#Content Normal
-		subparts.EXTENDED_NORMAL_1 < plugin.tx_typo3blog_pi1.LatestPosts
+		subparts.EXTENDED_NORMAL_1 < plugin.tx_typo3blog_pi1.latestPosts
 
 		#Content Normal
 		subparts.EXTENDED_NORMAL_2 < plugin.tx_typo3blog_pi1.LatestComments

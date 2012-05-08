@@ -4,9 +4,10 @@
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/typoscript/tagcloud/setup.txt">
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/typoscript/calendar/setup.txt">
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/typoscript/archive/setup.txt">
-<INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/typoscript/latestposts/setup.txt">
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/typoscript/latestcomments/setup.txt">
-<INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/typoscript/sexybookmarks/setup.txt">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/widgets/latestposts/setup.txt">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/widgets/sexybookmarks/setup.txt">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/widgets/relatedposts/setup.txt">
 
 plugin.tx_typo3blog_pi1 {
 	jQueryLibrary = {$plugin.tx_typo3blog_pi1.file.jQueryLibrary}
@@ -20,4 +21,5 @@ plugin.tx_typo3blog_pi1 {
 
 	what_to_display =
 	startPid = {$plugin.tx_typo3blog_pi1.startPid}
+	entryLevel = {$plugin.tx_typo3blog_pi1.entryLevel}
 }

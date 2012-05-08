@@ -28,7 +28,10 @@ plugin.tx_typo3blog_pi1 {
 	# cat=plugin.typo3blog: Basic/basic/0100; type=string; label=Start PID:The PID where for blog start page  (see manual!)
 	startPid =
 
-	# cat=plugin.typo3blog: Basic/basic/0110; type=string; label=Date format with strftime dd.mm.yyyy   (see manual!)
+	# cat=plugin.typo3blog: Basic/basic/0110; type=string; label=Entry Level: The entrylevel to the root-template (distance to root)
+	entryLevel = 0
+
+	# cat=plugin.typo3blog: Basic/basic/0120; type=string; label=Date format with strftime dd.mm.yyyy   (see manual!)
 	dateFromat = %d.%m.%Y
 
 	# cat=plugin.typo3blog: BlogList widget/basic/010; type=string; label=Items to display on bloglist  (see manual!)

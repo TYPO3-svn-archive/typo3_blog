@@ -1,0 +1,43 @@
+#Setup typo3blog relatedposts
+plugin.tx_typo3blog_pi1 {
+	relatedPosts < tt_content.menu.20.6
+	relatedPosts {
+		wrap >
+		wrap = <ul> | </ul>
+		stdWrap {
+			outerWrap = <h3>Related Posts</h3>
+			required = 1
+		}
+		special {
+			entryLevel = {$plugin.tx_typo3blog_pi1.entryLevel}
+			mode = manual
+			keywordsField = tx_typo3blog_tagcloud
+			keywordsField.sourceField = tx_typo3blog_tagcloud
+			depth = 20
+			limit = 5
+			excludeNoSearchPages = 1
+		}
+		excludeDoktypes = 73
+		1.NO.stdWrap >
+		1.NO.stdWrap.cObject = COA
+		1.NO.stdWrap.cObject {
+			stdWrap >
+			10 = TEXT
+			10 {
+				data = field:author
+				wrap = <span>|
+			}
+			20 = TEXT
+			20 {
+				data = field:crdate
+				strftime = %d. %b %Y
+				wrap = &nbsp;|&nbsp;</span><br />
+			}
+			30 = TEXT
+			30 {
+				data = field:title
+				wrap = <span>|</span>
+			}
+		}
+	}
+}

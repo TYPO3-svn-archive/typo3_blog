@@ -1,9 +1,9 @@
 #Setup typo3blog latestpost
 plugin.tx_typo3blog_pi1 {
-	LatestPosts < tt_content.menu.20.5
-	LatestPosts.wrap >
-	LatestPosts.wrap = <ul>|</ul>
-	LatestPosts {
+	latestPosts < tt_content.menu.20.5
+	latestPosts {
+		wrap >
+		wrap = <ul>|</ul>
 		stdWrap {
 			outerWrap = <h3>Latest Posts</h3>
 		}
@@ -16,7 +16,6 @@ plugin.tx_typo3blog_pi1 {
 			limit = 5
 		}
 		excludeDoktypes = 73
-		// TYPO3_CONF_VARS|EXT|extConf|typo3_blog
 		1.NO.stdWrap >
 		1.NO.stdWrap.cObject = COA
 		1.NO.stdWrap.cObject {
@@ -29,7 +28,7 @@ plugin.tx_typo3blog_pi1 {
 			20 = TEXT
 			20 {
 				data = field:crdate
-				strftime = %d.%b.%Y
+				strftime = %d. %b %Y
 				wrap = &nbsp;|&nbsp;</span><br />
 			}
 			30 = TEXT
