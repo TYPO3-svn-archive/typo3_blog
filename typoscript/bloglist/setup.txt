@@ -68,7 +68,7 @@ plugin.tx_typo3blog_pi1 {
 				wrap = |
 
 				10 = TEXT
-				10.data = LLL:EXT:typo3_blog/locallang.xml:tx_typo3blog_tagcloud
+				10.data = LLL:EXT:typo3_blog/pi1/locallang.xml:tx_typo3blog_tagcloud
 				10.noTrimWrap = ||: |
 				20 = TEXT
 				20 {

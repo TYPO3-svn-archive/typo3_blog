@@ -16,27 +16,34 @@ plugin.tx_typo3blog_pi1 {
 		renderObj = COA
 		renderObj {
 			wrap = <li>|</li>
-			5 = TEXT
-			5 {
-				field = firstname
-				wrap = <span>|
-			}
 			10 = TEXT
 			10 {
-				field = lastname
-				wrap = &nbsp;|&nbsp;
-			}
-			20 = TEXT
-			20 {
-				field = crdate
-				strftime = %d.%b.%Y
-				wrap = |</span><br />
-			}
-			30 = TEXT
-			30 {
-				field = content
+				stdWrap.cObject = COA
+				stdWrap.cObject {
+					5 = TEXT
+					5 {
+						field = firstname
+						wrap = <span>|
+					}
+					10 = TEXT
+					10 {
+						field = lastname
+						wrap = &nbsp;|&nbsp;
+					}
+					20 = TEXT
+					20 {
+						field = crdate
+						strftime = %d.%b.%Y
+						wrap = |</span><br />
+					}
+					30 = TEXT
+					30 {
+						field = content
+						wrap = <span>|</span>
+						crop = 60
+					}
+				}
 				wrap = <span>|</span>
-				crop = 60
 				typolink {
 					parameter.cObject = TEXT
 					parameter.cObject {
