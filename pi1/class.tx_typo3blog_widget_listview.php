@@ -174,8 +174,11 @@ class tx_typo3blog_widget_listview extends tslib_pibase
 		}
 
 		// Set pagebrowser marker from HTML Template
-		$pagestodisplay = intval($this->getNumberOfPostsInCategoryPage(intval($this->page_uid)) / $this->conf['blogList.']['itemsToDisplay']) +
-			((intval($this->getNumberOfPostsInCategoryPage(intval($this->page_uid))) % $this->conf['blogList.']['itemsToDisplay']) == 0 ? 0 : 1);
+		$poststotal = intval($this->getNumberOfPostsInCategoryPage(intval($this->page_uid)));
+		$itemstodisplay = intval($this->conf['blogList.']['itemsToDisplay']);
+
+		// calc pages for pagebrowser
+		$pagestodisplay = ($poststotal - ($poststotal % $itemstodisplay)) / $itemstodisplay + (($poststotal % $itemstodisplay) == 0 ? 0 : 1);
 		$markers['###BLOGLIST_PAGEBROWSER###'] = $this->getListGetPageBrowser($pagestodisplay);
 
 		// Complete the template expansion by replacing the "content" marker in the template
@@ -252,13 +255,12 @@ class tx_typo3blog_widget_listview extends tslib_pibase
 	 */
 	private function getListGetPageBrowser($numberOfPages)
 	{
-		// Get default configuration
 		$conf = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_pagebrowse_pi1.'];
 		// Modify this configuration
-		$conf += array(
-			'pageParameterName' => $this->prefixId . '|page',
-			'numberOfPages' => $numberOfPages,
-		);
+		$conf['pageParameterName'] = $this->prefixId . '|page';
+		$conf['numberOfPages'] = $numberOfPages;
+
+		//echo "<pre>"; print_r($conf);exit;
 		// Get page browser
 		$this->cObj->start(array(), '');
 		$content = $this->cObj->cObjGetSingle('USER', $conf);
@@ -289,7 +291,7 @@ class tx_typo3blog_widget_listview extends tslib_pibase
 		$posts = $GLOBALS['TYPO3_DB']->sql_num_rows($sql);
 
 		// Return count of result
-		return $posts;
+		return $posts-1;
 	}
 
 	/**

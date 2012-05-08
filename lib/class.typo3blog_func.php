@@ -168,6 +168,20 @@ class typo3blog_func
 		// Return empty string if GET param tagsearch not exist
 		return "";
 	}
+
+	/**
+	 * Returns the version of an extension (in 4.4 its possible to this with t3lib_extMgm::getExtensionVersion)
+	 * @param string $key
+	 * @return string
+	 */
+	public function getExtensionVersion($key) {
+		if (! t3lib_extMgm::isLoaded($key)) {
+			return '';
+		}
+		$_EXTKEY = $key;
+		include(t3lib_extMgm::extPath($key) . 'ext_emconf.php');
+		return $EM_CONF[$key]['version'];
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/typo3_blog/lib/class.tx_typo3blog_func.php']) {
