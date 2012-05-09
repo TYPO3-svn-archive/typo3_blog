@@ -1,11 +1,14 @@
-#Setup typo3blog latestpost
+#
+# Setup typo3blog latestpost
+#
 plugin.tx_typo3blog_pi1 {
 	latestPosts < tt_content.menu.20.5
 	latestPosts {
 		wrap >
-		wrap = <ul>|</ul>
 		stdWrap {
-			outerWrap = <h3>Latest Posts</h3>
+			outerWrap = <div class="tx-typo3blog-pi1"><h3>Latest Posts</h3> | </div>
+			wrap = <ul> | </ul>
+			required = 1
 		}
 		special {
 			value >

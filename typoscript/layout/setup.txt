@@ -99,26 +99,26 @@ tagcloud {
 #Setup plugin typo3blog latest posts
 plugin.tx_typo3blog_pi1.latestPosts {
 	wrap >
-	wrap = <ul class="nav tx-typo3blog-link-list">|</ul>
+	stdWrap {
+		wrap = <ul class="nav tx-typo3blog-link-list"> | </ul>
+	}
 	1.NO.stdWrap.cObject {
-		stdWrap >
 		10.wrap = <span class="typo3blog_date"><i class="icon-user"></i>|
 		20.wrap = &nbsp;|&nbsp;</span><br />
 		30.wrap = <span class="typo3blog_latest"><i class="icon-file"></i><strong>|</strong></span>
-
 	}
 }
 
 #Setup plugin typo3blog related posts
 plugin.tx_typo3blog_pi1.relatedPosts {
 	wrap >
-	wrap = <ul class="nav tx-typo3blog-link-list">|</ul>
+	stdWrap {
+		wrap = <ul class="nav tx-typo3blog-link-list"> | </ul>
+	}
 	1.NO.stdWrap.cObject {
-		stdWrap >
-		10.wrap = <span class="typo3blog_date"><i class="icon-user"></i>|
-		20.wrap = &nbsp;|&nbsp;</span><br />
-		30.wrap = <span class="typo3blog_latest"><i class="icon-file"></i><strong>|</strong></span>
-
+		10.wrap = <span class="typo3blog_date"><i class="icon-user"></i> |
+		20.wrap = &nbsp; | &nbsp;</span><br />
+		30.wrap = <span class="typo3blog_latest"><i class="icon-file"></i><strong> | </strong></span>
 	}
 }
 

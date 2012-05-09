@@ -1,11 +1,13 @@
-#Setup typo3blog relatedposts
+#
+# Setup typo3blog relatedposts
+#
 plugin.tx_typo3blog_pi1 {
 	relatedPosts < tt_content.menu.20.6
 	relatedPosts {
 		wrap >
-		wrap = <ul> | </ul>
 		stdWrap {
-			outerWrap = <h3>Related Posts</h3>
+			outerWrap = <div class="tx-typo3blog-pi1"><h3>Related Posts</h3> | </div>
+			wrap = <ul> | </ul>
 			required = 1
 		}
 		special {
