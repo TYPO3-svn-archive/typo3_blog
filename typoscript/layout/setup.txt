@@ -156,6 +156,36 @@ typo3blog.sidebar {
 # Add output to sidebar
 lib.content_right < typo3blog.sidebar
 
+
+# Setup plugin form4_pages_rss
+# page rendering object for displaying a feed
+form4_pages_rss = PAGE
+form4_pages_rss {
+	typeNum = 100
+
+	config.disableAllHeaderCode = 1
+	config.additionalHeaders = Content-type:text/xml
+
+	10 = USER
+	10 {
+		userFunc = tx_form4_pages_rss_pi1->main
+		feedPid = {$form4_pages_rss.feedPid}
+		item {
+			title = {$form4_pages_rss.item.title}
+			description = {$form4_pages_rss.item.description}
+			author = {$form4_pages_rss.item.author}
+			pubDate = {$form4_pages_rss.item.pubDate}
+		}
+	}
+}
+
+# include rss feeds in html header
+page.headerData.100 = USER
+page.headerData.100 {
+	userFunc = tx_form4_pages_rss_pi1->includeHead
+	feedPid = {$form4_pages_rss.feedPid}
+}
+
 # Page setup for typo3_blog
 page = PAGE
 page {
