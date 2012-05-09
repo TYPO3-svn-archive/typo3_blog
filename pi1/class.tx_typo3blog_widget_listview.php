@@ -153,6 +153,7 @@ class tx_typo3blog_widget_listview extends tslib_pibase
 			$row['category'] = $this->typo3BlogFunc->getPostCategoryName($row['pid'], 'title');
 			$row['pagecontent'] = $this->typo3BlogFunc->getPageContent($row['uid'], $this->conf['blogList.']['contentItemsToDisplay']);
 			$row['showmore'] = "weiterlesen...";
+			$row['gravatar'] = md5($row['author_email']);
 
 			// add data to ts template
 			$this->cObj->data = $row;

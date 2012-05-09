@@ -43,11 +43,18 @@ plugin.tx_typo3blog_pi1 {
 			   field = author
 			}
 
-			# page field autor_email setup for templatemarker '###BLOGLIST_AUTHOR_EMAIL###'
-			authore_mail = TEXT
-			authore_mail {
+			# page field author_email setup for templatemarker '###BLOGLIST_AUTHOR_EMAIL###'
+			author_email = TEXT
+			author_email {
 				wrap = |
 				field = author_email
+			}
+
+			# page field author_email as gravatar setup for templatemarker '###BLOGLIST_GRAVATAR###'
+			gravatar = TEXT
+			gravatar {
+				wrap = <img src="http://www.gravatar.com/avatar/|.jpg?s=100" />
+				field = gravatar
 			}
 
 			# page field title (from parent page) setup for templatemarker '###BLOGLIST_CATEGORY###'
