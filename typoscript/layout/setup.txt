@@ -9,10 +9,12 @@ lib.content_right < styles.content.getRight
 ##################################################
 
 #Setup typo3blog categoryList
-plugin.tx_typo3blog_pi1.CategoryList.stdWrap.wrap = <div class="well" style="padding: 8px 0;"><ul class="nav nav-list">|</ul></div>
-plugin.tx_typo3blog_pi1.CategoryList.2.wrap = <ul class="nav nav-list">|</ul>
-plugin.tx_typo3blog_pi1.CategoryList.3.wrap = <ul class="nav nav-list">|</ul>
-plugin.tx_typo3blog_pi1.CategoryList.4.wrap = <ul class="nav nav-list">|</ul>
+plugin.tx_typo3blog_pi1.categoryList {
+	stdWrap.wrap = <div class="well" style="padding: 8px 0;"><ul class="nav nav-list">|</ul></div>
+	2.wrap = <ul class="nav nav-list">|</ul>
+	3.wrap = <ul class="nav nav-list">|</ul>
+	4.wrap = <ul class="nav nav-list">|</ul>
+}
 
 #Setup typo3blog bloglist
 plugin.tx_typo3blog_pi1.blogList.marker {
@@ -133,7 +135,7 @@ plugin.tx_typo3blog_pi1.LatestComments {
 #Setup sidebar add plugins to render in sidebar
 typo3blog.sidebar = COA
 typo3blog.sidebar {
-	10 < plugin.tx_typo3blog_pi1.CategoryList
+	10 < plugin.tx_typo3blog_pi1.categoryList
 	20 < plugin.tx_typo3blog_pi1.calendar
 	30 < commentList
 	40 < plugin.tx_typo3blog_pi1.archive

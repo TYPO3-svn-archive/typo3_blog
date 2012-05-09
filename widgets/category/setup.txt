@@ -1,0 +1,91 @@
+plugin.tx_typo3blog_pi1 {
+	categoryList = HMENU
+	categoryList {
+		entryLevel = 0
+		special = directory
+		special.value = {$plugin.tx_typo3blog_pi1.startPid}
+		excludeDoktypes = 1
+
+		stdWrap {
+			required = 1
+			noBlur = 1
+			wrap = <div><ul> | </ul></div>
+		}
+
+		1 = TMENU
+		1.noBlur = 1
+		1.NO {
+			wrapItemAndSub = <li> | </li>
+			stdWrap.htmlSpecialChars = 1
+		}
+
+		1.CUR = 1
+		1.CUR {
+			wrapItemAndSub = <li class="active"> | </li>
+			stdWrap.htmlSpecialChars = 1
+		}
+
+		1.ACT < .1.CUR
+		1.ACT {
+			wrapItemAndSub = <li> | </li>
+		}
+
+		2 = TMENU
+		2.noBlur = 1
+		2.wrap = <ul> | </ul>
+		2.NO {
+			wrapItemAndSub = <li> | </li>
+			stdWrap.htmlSpecialChars = 1
+		}
+
+		2.CUR = 2
+		2.CUR {
+			wrapItemAndSub = <li class="active"> | </li>
+			stdWrap.htmlSpecialChars = 1
+		}
+
+		2.ACT < .2.CUR
+		2.ACT {
+			wrapItemAndSub = <li> | </li>
+		}
+
+		3 = TMENU
+		3.noBlur = 1
+		3.wrap = <ul> | </ul>
+		3.NO {
+			wrapItemAndSub = <li> | </li>
+			stdWrap.htmlSpecialChars = 1
+		}
+
+		3.CUR = 3
+		3.CUR {
+			wrapItemAndSub = <li class="active"> | </li>
+			stdWrap.htmlSpecialChars = 1
+		}
+
+		3.ACT < .3.CUR
+		3.ACT {
+			wrapItemAndSub = <li> | </li>
+		}
+
+
+		4 = TMENU
+		4.noBlur = 1
+		4.wrap = <ul> | </ul>
+		4.NO {
+			wrapItemAndSub = <li> | </li>
+			stdWrap.htmlSpecialChars = 1
+		}
+
+		4.CUR = 4
+		4.CUR {
+			wrapItemAndSub = <li class="active"> | </li>
+			stdWrap.htmlSpecialChars = 1
+		}
+
+		4.ACT < .4.CUR
+		4.ACT {
+			wrapItemAndSub = <li> | </li>
+		}
+	}
+}

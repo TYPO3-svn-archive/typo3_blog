@@ -1,7 +1,7 @@
 plugin.tx_typo3blog_pi1 {
 	archive = USER
 	archive {
-		includeLibs = EXT:typo3_blog/pi1/class.tx_typo3blog_widget_archive.php
+		includeLibs = EXT:typo3_blog/widgets/class.tx_typo3blog_widget_archive.php
 		userFunc = tx_typo3blog_widget_archive->main
 
 		jQueryNoConflict = 0
@@ -10,7 +10,7 @@ plugin.tx_typo3blog_pi1 {
 		jsInline = 0
 		cssMinify = 0
 
-		templateFile = EXT:typo3_blog/res/archive/template.html
+		templateFile = EXT:typo3_blog/widgets/archive/template.html
 
 		marker {
 			year = TEXT

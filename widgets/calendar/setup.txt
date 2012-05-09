@@ -10,7 +10,7 @@ plugin.tx_typo3blog_pi1 {
 		jsInline = 0
 		cssMinify = 0
 
-		templateFile = EXT:typo3_blog/res/calendar/template.html
+		templateFile = EXT:typo3_blog/widgets/calendar/template.html
 
 		datepicker = COA
 		datepicker {
