@@ -191,7 +191,7 @@ page {
 	}
 
 	# INSERT JS FILES
-	includeCSS {
+	includeJS {
 		typo3_blog_bootstrap = EXT:typo3_blog/res/layout/js/bootstrap.js
 	}
 
