@@ -39,8 +39,8 @@ plugin.tx_typo3blog_pi1 {
 			# page field author setup for templatemarker '###BLOGLIST_AUTHOR###'
 			author = TEXT
 			author {
-			   wrap = |
-			   field = author
+				wrap = |
+				field = author
 			}
 
 			# page field author_email setup for templatemarker '###BLOGLIST_AUTHOR_EMAIL###'
@@ -116,7 +116,7 @@ plugin.tx_typo3blog_pi1 {
 			pagecontent = TEXT
 			pagecontent {
 				field = pagecontent
-			   	wrap  = |
+				wrap  = |
 			}
 
 			# showMore setup for templatemarker '###BLOGLIST_SHOWMORE###'

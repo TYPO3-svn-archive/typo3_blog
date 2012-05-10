@@ -94,7 +94,8 @@ tagcloud {
 			useCacheHash = 1
 		}
 	}
-	cloudWrap.wrap = <h3>Tagcloud</h3><ul>|</ul>
+	cloudWrap.wrap >
+	cloudWrap.dataWrap = <h3>{LLL:EXT:typo3_blog/pi1/locallang.xml:tx_typo3blog_widget_tagcloud.title}</h3><ul>|</ul>
 	_CSS_DEFAULT_STYLE >
 }
 
@@ -125,7 +126,7 @@ plugin.tx_typo3blog_pi1.relatedPosts {
 }
 
 plugin.tx_typo3blog_pi1.latestComments {
-	stdWrap.outerWrap = <h3>Latest Comments</h3><ul class="nav tx-typo3blog-link-list">|</ul>
+	stdWrap.wrap = <ul class="nav tx-typo3blog-link-list">|</ul>
 	renderObj {
 		5.wrap = <span><i class="icon-user"></i>|
 		30.wrap = <span><i class="icon-comment"></i>|</span>
@@ -146,7 +147,7 @@ plugin.tx_typo3blog_pi1.blogroll {
 		}
 	}
 	stdWrap {
-		outerWrap = <div class="well"><h3>Blogroll</h3> | </div>
+		outerWrap = <div class="well"> | </div>
 		wrap = <ul class="nav nav-list">|</ul>
 		required = 1
 	}

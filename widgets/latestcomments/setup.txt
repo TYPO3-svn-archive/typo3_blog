@@ -2,7 +2,8 @@ plugin.tx_typo3blog_pi1 {
 	latestComments = CONTENT
 	latestComments {
 		stdWrap {
-			outerWrap = <h3>Latest Comments</h3><ul>|</ul>
+			dataWrap = <div class="tx-typo3blog-pi1"><h3>{LLL:EXT:typo3_blog/pi1/locallang.xml:tx_typo3blog_widget_latestcomments.title}</h3> | </div>
+			wrap = <ul> | </ul>
 		}
 		table = tx_comments_comments
 		select {

@@ -13,6 +13,11 @@ plugin.tx_typo3blog_pi1 {
 		templateFile = {$plugin.tx_typo3blog_pi1.archive.templateFile}
 
 		marker {
+			widgetTitle =TEXT
+			widgetTitle {
+				data = LLL:EXT:typo3_blog/pi1/locallang.xml:tx_typo3blog_widget_archive.title
+			}
+
 			year = TEXT
 			year {
 				field = year

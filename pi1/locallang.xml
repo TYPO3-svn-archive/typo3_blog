@@ -6,12 +6,22 @@
 	</meta>
 	<data type="array">
 		<languageKey index="default" type="array">
-			<label index="list_mode_1">Mode 1</label>
-			<label index="list_mode_2">Mode 2</label>
-			<label index="list_mode_3">Mode 3</label>
-            <label index="tx_typo3blog_tags">Tags</label>
-			<label index="back">Back</label>
-			<label index="submit_button_label">Click here to submit value</label>
+			<label index="tx_typo3blog_tags">Tags</label>
+			<label index="tx_typo3blog_widget_archive.title">Archive</label>
+			<label index="tx_typo3blog_widget_latestcomments.title">Latest Comments</label>
+			<label index="tx_typo3blog_widget_latestposts.title">Latest Posts</label>
+			<label index="tx_typo3blog_widget_relatedposts.title">Related Posts</label>
+			<label index="tx_typo3blog_widget_tagcloud.title">Tagcloud</label>
+			<label index="tx_typo3blog_widget_blogroll.title">Blogroll</label>
+		</languageKey>
+		<languageKey index="de" type="array">
+			<label index="tx_typo3blog_tags">Tags</label>
+			<label index="tx_typo3blog_widget_archive.title">Archiv</label>
+			<label index="tx_typo3blog_widget_latestcomments.title">Neuste Kommentare</label>
+			<label index="tx_typo3blog_widget_latestposts.title">Neuste Posts</label>
+			<label index="tx_typo3blog_widget_relatedposts.title">Verwandte Posts</label>
+			<label index="tx_typo3blog_widget_tagcloud.title">Wortwolke</label>
+			<label index="tx_typo3blog_widget_blogroll.title">Blogrolle</label>
 		</languageKey>
 	</data>
 </T3locallang>
