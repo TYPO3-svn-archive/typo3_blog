@@ -41,5 +41,5 @@ plugin.tx_typo3blog_pi1 {
 	blogList.contentItemsToDisplay = 1
 
 	# cat=plugin.typo3blog: BlogList widget/basic/030; type=string; label=Template location for bloglist  (see manual!)
-	blogList.templateFile = EXT:typo3_blog/res/bloglist/template.html
+	blogList.templateFile = EXT:typo3_blog/widgets/bloglist/template.html
 }
