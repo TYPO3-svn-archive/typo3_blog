@@ -135,7 +135,6 @@ class tx_typo3blog_widget_archive extends tslib_pibase
 		$template   = $this->cObj->getSubpart($this->template, '###ARCHIVE_TEMPLATE###');
 		$subpartArchiveItems = $this->cObj->getSubpart($template, '###ARCHIVE_ITEMS###');
 
-
 		// Define array and vars for template
 		$subparts = array();
 		$subparts['###ARCHIVE_ITEMS###'] = '';
@@ -148,50 +147,6 @@ class tx_typo3blog_widget_archive extends tslib_pibase
 
 		$markers['###ARCHIVE_TITLE###'] = 'Archiv';
 
-
-/*
-		$rows = array(
-			array(
-				'year' => '2010',
-				'month' => 8,
-				'quantity' => 4
-			),
-			array(
-				'year' => '2010',
-				'month' => 9,
-				'quantity' => 2
-			),
-			array(
-				'year' => '2010',
-				'month' => 10,
-				'quantity' => 6
-			),
-			array(
-				'year' => '2010',
-				'month' => 11,
-				'quantity' => 3
-			),
-
-			array(
-				'year' => '2011',
-				'month' => 1,
-				'quantity' => 2
-			),
-			array(
-				'year' => '2011',
-				'month' => 2,
-				'quantity' => 3
-			),
-			array(
-				'year' => '2011',
-				'month' => 3,
-				'quantity' => 4
-			)
-		);
-*/
-		//$GLOBALS['TYPO3_DB']->debugOutput = true;
-		//$GLOBALS['TYPO3_DB']->store_lastBuiltQuery = true;
-
 		// Query to load current category page with all post pages in rootline
 		$sql = $GLOBALS['TYPO3_DB']->exec_SELECT_queryArray(array(
 				'SELECT'	=> 'MONTH(FROM_UNIXTIME(crdate)) as month, YEAR(FROM_UNIXTIME(crdate)) as year, count(*) as quantity',
@@ -203,9 +158,9 @@ class tx_typo3blog_widget_archive extends tslib_pibase
 			)
 		);
 		$currentYear = NULL;
+
 		// Execute sql and set retrieved records in marker for bloglist
 		while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($sql)) {
-		//foreach ($rows as $row) {
 			// add data to ts template
 			$this->cObj->data = $row;
 
@@ -223,13 +178,11 @@ class tx_typo3blog_widget_archive extends tslib_pibase
 			$quantity = $this->cObj->cObjGetSingle($this->conf['marker.']['quantity'], $this->conf['marker.']['quantity' . '.']);
 
 			// Add data in $markerArray for subpart ARCHIVE_YEAR
-
 			$markerArray['###' . strtoupper('month') . '###'] = $month;
 			$markerArray['###' . strtoupper('quantity') . '###'] = $quantity;
 
 			// Set Data in subpart Template
 			$subparts['###ARCHIVE_MONTH###'] = $this->cObj->substituteMarkerArrayCached($subpartArchiveMonth, $markerArray);
-
 
 			// Query to load pages for archive
 			$sqlquery = $GLOBALS['TYPO3_DB']->exec_SELECT_queryArray(array(
@@ -242,18 +195,8 @@ class tx_typo3blog_widget_archive extends tslib_pibase
 				)
 			);
 
-/*
-			unset($result);
-			$result = array(
-					array('title' => 'Post '.$row['year'].' '.$row['month'].' Post 1'),
-					array('title' => 'Post '.$row['year'].' '.$row['month'].' Post 2'),
-					array('title' => 'Post '.$row['year'].' '.$row['month'].' Post 3'),
-					array('title' => 'Post '.$row['year'].' '.$row['month'].' Post 4')
-			);
-*/
 			// Each all post from result $sqlquery
 			while ($res = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($sqlquery)) {
-//			foreach ($result as $res) {
 				// add data to ts template
 				$this->cObj->data = $res;
 				$subpartArchivePost = $this->cObj->getSubpart($subpartArchiveMonth, '###ARCHIVE_POST###');
@@ -336,7 +279,6 @@ class tx_typo3blog_widget_archive extends tslib_pibase
 			}
 		}
 	}
-
 
 	/**
 	 * Get all sub pages from current page_id as string "123,124,125"
