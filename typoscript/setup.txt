@@ -1,4 +1,5 @@
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/widgets/archive/setup.txt">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/widgets/blogroll/setup.txt">
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/widgets/bloglist/setup.txt">
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/widgets/blogsingle/setup.txt">
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/widgets/calendar/setup.txt">

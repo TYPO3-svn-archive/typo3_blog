@@ -40,17 +40,79 @@ $tempColumns = array (
 			'size' => '30',
 		)
 	),
+	'tx_typo3blog_blogrolls' => array (
+		'exclude' => 0,
+		'label' => 'LLL:EXT:typo3_blog/locallang_db.xml:pages.tx_typo3blog_blogrolls',
+		'config' => array (
+			'type' => 'select',
+			'foreign_table' => 'tx_typo3blog_blogroll',
+			'foreign_table_where' => 'ORDER BY tx_typo3blog_blogroll.uid',
+			'size' => 10,
+			'minitems' => 0,
+			'maxitems' => 100,
+			'wizards' => array(
+				'_PADDING'  => 2,
+				'_VERTICAL' => 1,
+				'add' => array(
+					'type'   => 'script',
+					'title'  => 'Create new record',
+					'icon'   => 'add.gif',
+					'params' => array(
+						'table'	=> 'tx_typo3blog_blogroll',
+						'pid'	  => '###CURRENT_PID###',
+						'setValue' => 'prepend'
+					),
+					'script' => 'wizard_add.php',
+				),
+				'edit' => array(
+					'type'					=> 'popup',
+					'title'					=> 'Edit',
+					'script'				=> 'wizard_edit.php',
+					'popup_onlyOpenIfSelected' => 1,
+					'icon'					=> 'edit2.gif',
+					'JSopenParams'			=> 'height=350,width=580,status=0,menubar=0,scrollbars=1',
+				),
+			),
+		)
+	),
 );
 
 t3lib_div::loadTCA('pages');
 t3lib_extMgm::addTCAcolumns('pages',$tempColumns,1);
-t3lib_extMgm::addToAllTCAtypes('pages', '--div--;Blog Settings, tx_typo3blog_allow_comments, tx_typo3blog_tags');
-
+t3lib_extMgm::addToAllTCAtypes('pages', '--div--;Blog Settings, tx_typo3blog_allow_comments, tx_typo3blog_tags, tx_typo3blog_blogrolls');
 
 // Define Page type ID
 $doktype = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'][$_EXTKEY]['doktypeId'];
 
 $TCA['pages']['columns']['doktype']['config']['items'][] = Array ('Blog', $doktype, t3lib_extMgm::extRelPath($_EXTKEY). 'res/pageicon.png');
+
+
+
+t3lib_extMgm::allowTableOnStandardPages('tx_typo3blog_blogroll');
+t3lib_extMgm::addToInsertRecords('tx_typo3blog_blogroll');
+$TCA['tx_typo3blog_blogroll'] = array (
+	'ctrl' => array (
+		'title'        => 'LLL:EXT:typo3_blog/locallang_db.xml:tx_typo3blog_blogroll',
+		'label'        => 'name',
+		'tstamp'       => 'tstamp',
+		'crdate'       => 'crdate',
+		'cruser_id'    => 'cruser_id',
+		'versioningWS' => TRUE, 
+		'origUid'      => 't3_origuid',
+		'default_sortby' => 'ORDER BY crdate',
+		'delete' => 'deleted',
+		'enablecolumns' => array (
+			'disabled'  => 'hidden',
+			'starttime' => 'starttime',
+			'endtime'   => 'endtime',
+			'fe_group'  => 'fe_group',
+		),
+		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY).'tca.php',
+		'iconfile'          => t3lib_extMgm::extRelPath($_EXTKEY).'icon_tx_typo3blog_blogroll.gif',
+	),
+);
+
+
 
 if (t3lib_div::int_from_ver(TYPO3_version) >= 4004000) {
 	t3lib_SpriteManager::addTcaTypeIcon('pages', $doktype, t3lib_extMgm::extRelPath($_EXTKEY) . 'res/pageicon.png');

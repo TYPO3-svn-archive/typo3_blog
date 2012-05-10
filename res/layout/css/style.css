@@ -9,6 +9,10 @@
 .tx-vgetagcloud-pi1 li {display:inline;float:left;}
 .tx-vgetagcloud-pi1 li a {padding:4px;text-decoration:none;}
 
+.well {
+	padding: 8px 0;
+}
+
 .typo3blog_date {
 	margin-right: .5em;
 }

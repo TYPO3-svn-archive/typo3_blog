@@ -10,7 +10,7 @@ lib.content_right < styles.content.getRight
 
 #Setup typo3blog categoryList
 plugin.tx_typo3blog_pi1.categoryList {
-	stdWrap.wrap = <div class="well" style="padding: 8px 0;"><ul class="nav nav-list">|</ul></div>
+	stdWrap.wrap = <div class="well"><ul class="nav nav-list">|</ul></div>
 	2.wrap = <ul class="nav nav-list">|</ul>
 	3.wrap = <ul class="nav nav-list">|</ul>
 	4.wrap = <ul class="nav nav-list">|</ul>
@@ -132,6 +132,26 @@ plugin.tx_typo3blog_pi1.latestComments {
 	}
 }
 
+plugin.tx_typo3blog_pi1.blogroll {
+	conf.tx_typo3blog_blogroll {
+		10.field >
+		10.stdWrap {
+			cObject = COA
+			cObject {
+				10 = TEXT
+				10.value = <i class="icon-share-alt"></i>
+				20 = TEXT
+				20.field = name
+			}
+		}
+	}
+	stdWrap {
+		outerWrap = <div class="well"><h3>Blogroll</h3> | </div>
+		wrap = <ul class="nav nav-list">|</ul>
+		required = 1
+	}
+}
+
 #Setup sidebar add plugins to render in sidebar
 typo3blog.sidebar = COA
 typo3blog.sidebar {
@@ -140,6 +160,7 @@ typo3blog.sidebar {
 	30 < commentList
 	40 < plugin.tx_typo3blog_pi1.archive
 	50 < plugin.tx_typo3blog_pi1.relatedPosts
+	60 < plugin.tx_typo3blog_pi1.blogroll
 }
 
 #SWITCH CONTENT MARKER IF BLOG PAGE

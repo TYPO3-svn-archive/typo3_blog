@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>tagcloud template</title>
+</head>
+
+<body>
+
+<h1>ARCHIVE TEMPLATES</h1>
+
+<h2>EXAMPLE</h2>
+
+
+<br/>
+<br/>
+<br/>
+<strong>Global markers, as set up in TypoScript:</strong>
+These are substituted throughout the whole template.
+
+<em>Markers:</em>
+ARCHIVE_UID - uid number of the blogsingle page
+
+
+
+<br/><br/><br/><br/>
+<hr/>
+<br/>
+
+<h3>ARCHIVE_TEMPLATE</h3>
+<em>This is the template for the list of posts, typically displayed on a frontpage.</em>
+<br/>
+<br/>
+<br/>
+<br/>
+
+
+<!-- ###ARCHIVE_TEMPLATE### begin-->
+<div class="well" style="padding: 8px 0;">
+	<h3>###ARCHIVE_TITLE###</h3>
+	<ul class="tx_typo3blog_widget_archive">
+		<!--###ARCHIVE_ITEMS### begin -->
+		<!--###ARCHIVE_YEAR### begin -->
+		<li>
+			###YEAR###
+			<ul>
+				<!--###ARCHIVE_MONTH### begin -->
+				<li>
+					###MONTH### (###QUANTITY###)
+					<ul>
+						<!--###ARCHIVE_POST### begin -->
+						<li>###TITLE###</li>
+						<!--###ARCHIVE_POST### end -->
+					</ul>
+				</li>
+				<!--###ARCHIVE_MONTH### end -->
+			</ul>
+		</li>
+		<!--###ARCHIVE_YEAR### end -->
+		<!--###ARCHIVE_ITEMS### end -->
+	</ul>
+</div>
+<!-- ###ARCHIVE_TEMPLATE### end -->
+
+
+
+<!-- ###ARCHIVE_TEMPLATE_JS### begin-->
+jQuery(document).ready(function() {
+	jQuery(".tx_typo3blog_widget_archive").treeview({
+		persist: "cookie"
+	});
+});
+<!-- ###ARCHIVE_TEMPLATE_JS### end-->
+
+</body>
+</html>
