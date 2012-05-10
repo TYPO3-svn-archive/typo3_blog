@@ -47,16 +47,16 @@ include_once(PATH_site . 'typo3/sysext/cms/tslib/class.tslib_content.php');
 
 
 /**
- * Plugin 'Typo3 Blog ListView' for the 'typo3_blog' extension.
+ * Plugin 'Typo3 Blog bloglist' for the 'typo3_blog' extension.
  *
  * @author			Roland Schmidt <rsch73@gmail.com>
  * @package			TYPO3
  * @subpackage		tx_typo3blog
  */
-class tx_typo3blog_widget_listview extends tslib_pibase
+class tx_typo3blog_widget_bloglist extends tslib_pibase
 {
 	public $prefixId = 'tx_typo3blog_pi1'; // Same as class name
-	public $scriptRelPath = 'pi1/class.tx_typo3blog_widget_listview.php'; // Path to this script relative to the extension dir.
+	public $scriptRelPath = 'pi1/class.tx_typo3blog_pi1'; // Path to this script relative to the extension dir.
 	public $extKey = 'typo3_blog'; // The extension key.
 	public $pi_checkCHash = TRUE;
 	private $envErrors = array();
@@ -239,10 +239,10 @@ class tx_typo3blog_widget_listview extends tslib_pibase
 	 */
 	private function getPageBrowseLimit()
 	{
-		if (!$_GET['tx_typo3blog_widget_listview']['page']) {
+		if (!$_GET['tx_typo3blog_widget_bloglist']['page']) {
 			$limit = 0;
 		} else {
-			$limit = $_GET['tx_typo3blog_widget_listview']['page'] * $this->conf['blogList.']['itemsToDisplay'];
+			$limit = $_GET['tx_typo3blog_widget_bloglist']['page'] * $this->conf['blogList.']['itemsToDisplay'];
 		}
 		return $limit;
 	}
@@ -343,8 +343,8 @@ class tx_typo3blog_widget_listview extends tslib_pibase
 	}
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/typo3_blog/pi1/class.tx_typo3blog_widget_listview.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/typo3_blog/pi1/class.tx_typo3blog_widget_listview.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/typo3_blog/widgets/bloglist/class.tx_typo3blog_widget_bloglist.php']) {
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/typo3_blog/widgets/bloglist/class.tx_typo3blog_widget_bloglist.php']);
 }
 
 ?>

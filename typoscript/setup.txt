@@ -1,8 +1,9 @@
-<INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/typoscript/bloglist/setup.txt">
+
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/typoscript/blogsingle/setup.txt">
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/typoscript/latestcomments/setup.txt">
 
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/widgets/archive/setup.txt">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/widgets/bloglist/setup.txt">
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/widgets/calendar/setup.txt">
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/widgets/category/setup.txt">
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/widgets/latestposts/setup.txt">
