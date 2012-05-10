@@ -13,10 +13,10 @@ plugin.tx_typo3blog_pi1 {
 		special {
 			entryLevel = {$plugin.tx_typo3blog_pi1.entryLevel}
 			mode = manual
-			keywordsField = tx_typo3blog_tags
-			keywordsField.sourceField = tx_typo3blog_tags
+			keywordsField = {$plugin.tx_typo3blog_pi1.relatedPosts.keywordsColumn}
+			keywordsField.sourceField = {$plugin.tx_typo3blog_pi1.relatedPosts.keywordsColumn}
 			depth = 20
-			limit = 5
+			limit = {$plugin.tx_typo3blog_pi1.relatedPosts.itemsToDisplay}
 			excludeNoSearchPages = 1
 		}
 		excludeDoktypes = 73
@@ -32,7 +32,7 @@ plugin.tx_typo3blog_pi1 {
 			20 = TEXT
 			20 {
 				data = field:crdate
-				strftime = %d. %b %Y
+				strftime = {$plugin.tx_typo3blog_pi1.dateFromat}
 				wrap = &nbsp;|&nbsp;</span><br />
 			}
 			30 = TEXT

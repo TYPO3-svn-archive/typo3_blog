@@ -16,7 +16,7 @@ plugin.tx_typo3blog_pi1 {
 			mode = crdate
 			depth = 20
 			maxAge = 3600*24*365
-			limit = 5
+			limit = {$plugin.tx_typo3blog_pi1.latestPosts.itemsToDisplay}
 		}
 		excludeDoktypes = 73
 		1.NO.stdWrap >
@@ -31,7 +31,7 @@ plugin.tx_typo3blog_pi1 {
 			20 = TEXT
 			20 {
 				data = field:crdate
-				strftime = %d. %b %Y
+				strftime = {$plugin.tx_typo3blog_pi1.dateFromat}
 				wrap = &nbsp;|&nbsp;</span><br />
 			}
 			30 = TEXT

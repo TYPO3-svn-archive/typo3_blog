@@ -21,22 +21,6 @@ plugin.tx_typo3blog_pi1 {
 				field = pid
 			}
 
-			# page field starttime setup for templatemarker '###BLOGSINGLE_STARTTIME###'
-			starttime = TEXT
-			starttime {
-				wrap = |
-				strftime = %H.%I.%S
-				field = starttime
-			}
-
-			# page field endtime setup for templatemarker '###BLOGSINGLE_ENDTIME###'
-			endtime = TEXT
-			endtime {
-				wrap = |
-				format = %d.%m.%Y
-				field = endtime
-			}
-
 			# page field subtitle setup for templatemarker '###BLOGSINGLE_SUBTITLE###'
 			subtitle = TEXT
 			subtitle {
@@ -56,7 +40,7 @@ plugin.tx_typo3blog_pi1 {
 			crdate {
 				wrap = |
 				field = crdate
-				strftime = %d.%m.%Y
+				strftime = {$plugin.tx_typo3blog_pi1.dateFromat}
 			}
 
 			# page field author setup for templatemarker '###BLOGSINGLE_AUTHOR###'
@@ -91,18 +75,10 @@ plugin.tx_typo3blog_pi1 {
 				}
 			}
 
-			# page field image setup for templatemarker '###BLOGSINGLE_TX_TYPO3BLOG_IMAGE###'
-			tx_typo3blog_image = IMAGE
-			tx_typo3blog_image {
-				wrap = |
-				field = tx_typo3blog_image
-
-			}
-
 			# page field tx_typo3_tagcloud setup for templatemarker '###BLOGLIST_TX_TYPO3BLOG_TAGS###'
 			tx_typo3blog_tags = COA
 			tx_typo3blog_tags {
-				if.isTrue.field = tx_typo3blog_tags
+				if.isTrue.field = {$plugin.tx_typo3blog_pi1.blogSingle.columnWithTags}
 				wrap = |
 
 				10 = TEXT
@@ -111,7 +87,7 @@ plugin.tx_typo3blog_pi1 {
 
 				20 = TEXT
 				20 {
-					field = tx_typo3blog_tags
+					field = {$plugin.tx_typo3blog_pi1.blogSingle.columnWithTags}
 					split {
 					cObjNum = 1
 						token = ,

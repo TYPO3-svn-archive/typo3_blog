@@ -1,16 +1,16 @@
 plugin.tx_typo3blog_pi1 {
-	LatestComments = CONTENT
-	LatestComments {
+	latestComments = CONTENT
+	latestComments {
 		stdWrap {
 			outerWrap = <h3>Latest Comments</h3><ul>|</ul>
 		}
 		table = tx_comments_comments
 		select {
-			pidInList = 3
+			pidInList = {$plugin.tx_comments_pi1.storagePid}
 			selectFields = crdate,firstname,lastname,email,homepage,content,external_ref
 			where = approved = 1
 			orderBy = crdate desc
-			max = 5
+			max = {$plugin.tx_typo3blog_pi1.latestComments.itemsToDisplay}
 		}
 
 		renderObj = COA
@@ -33,14 +33,14 @@ plugin.tx_typo3blog_pi1 {
 					20 = TEXT
 					20 {
 						field = crdate
-						strftime = %d.%b.%Y
+						strftime = {$plugin.tx_typo3blog_pi1.dateFromat}
 						wrap = |</span><br />
 					}
 					30 = TEXT
 					30 {
 						field = content
 						wrap = <span>|</span>
-						crop = 60
+						crop = {$plugin.tx_typo3blog_pi1.latestComments.cropContentAfter}
 					}
 				}
 				wrap = <span>|</span>

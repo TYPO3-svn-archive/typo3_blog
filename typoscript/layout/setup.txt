@@ -124,7 +124,7 @@ plugin.tx_typo3blog_pi1.relatedPosts {
 	}
 }
 
-plugin.tx_typo3blog_pi1.LatestComments {
+plugin.tx_typo3blog_pi1.latestComments {
 	stdWrap.outerWrap = <h3>Latest Comments</h3><ul class="nav tx-typo3blog-link-list">|</ul>
 	renderObj {
 		5.wrap = <span><i class="icon-user"></i>|
@@ -247,7 +247,7 @@ page {
 		subparts.EXTENDED_NORMAL_1 < plugin.tx_typo3blog_pi1.latestPosts
 
 		#Content Normal
-		subparts.EXTENDED_NORMAL_2 < plugin.tx_typo3blog_pi1.LatestComments
+		subparts.EXTENDED_NORMAL_2 < plugin.tx_typo3blog_pi1.latestComments
 
 		#Content Normal
 		subparts.EXTENDED_NORMAL_3 < tagcloud
