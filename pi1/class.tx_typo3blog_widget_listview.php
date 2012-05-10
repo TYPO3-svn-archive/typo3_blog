@@ -55,7 +55,7 @@ include_once(PATH_site . 'typo3/sysext/cms/tslib/class.tslib_content.php');
  */
 class tx_typo3blog_widget_listview extends tslib_pibase
 {
-	public $prefixId = 'tx_typo3blog_widget_listview'; // Same as class name
+	public $prefixId = 'tx_typo3blog_pi1'; // Same as class name
 	public $scriptRelPath = 'pi1/class.tx_typo3blog_widget_listview.php'; // Path to this script relative to the extension dir.
 	public $extKey = 'typo3_blog'; // The extension key.
 	public $pi_checkCHash = TRUE;
@@ -140,7 +140,7 @@ class tx_typo3blog_widget_listview extends tslib_pibase
 		$sql = $GLOBALS['TYPO3_DB']->exec_SELECT_queryArray(array(
 				'SELECT'	=> '*',
 				'FROM'		=> 'pages',
-				'WHERE'		=> 'pid IN (' . $this->getPostByRootLine() . ') AND hidden = 0 AND deleted = 0 AND doktype != ' . $this->blog_doktype_id . ' ' . $this->typo3BlogFunc->getTagCloudFilterQuery(),
+				'WHERE'		=> 'pid IN (' . $this->getPostByRootLine() . ') AND hidden = 0 AND deleted = 0 AND doktype != ' . $this->blog_doktype_id . ' ' . $this->getWhereFilterQuery(),
 				'GROUPBY'	=> '',
 				'ORDERBY'	=> 'crdate DESC',
 				'LIMIT'		=> intval($this->getPageBrowseLimit()) . ',' . intval($this->conf['blogList.']['itemsToDisplay'])
@@ -282,7 +282,7 @@ class tx_typo3blog_widget_listview extends tslib_pibase
 		$sql = $GLOBALS['TYPO3_DB']->exec_SELECT_queryArray(array(
 			'SELECT'	=> '*',
 			'FROM'		=> 'pages',
-			'WHERE'		=> 'pid IN (' . $this->getPostByRootLine($page_id) . ') AND doktype != ' . $this->extConf["doktypeId"] . ' ' . $this->typo3BlogFunc->getTagCloudFilterQuery(),
+			'WHERE'		=> 'pid IN (' . $this->getPostByRootLine($page_id) . ') AND doktype != ' . $this->extConf["doktypeId"] . ' ' . $this->getWhereFilterQuery(),
 			'GROUPBY'	=> '',
 			'ORDERBY'	=> 'crdate DESC',
 			'LIMIT'		=> ''
@@ -309,6 +309,37 @@ class tx_typo3blog_widget_listview extends tslib_pibase
 
 		// return the string with all uid's and clean up
 		return $GLOBALS['TYPO3_DB']->cleanIntList($pidList);
+	}
+
+	/**
+	 * Get the where clause to filter in bloglist
+	 *
+	 * @return	string
+	 * @access public
+	 */
+	public function getWhereFilterQuery()
+	{
+		$where = '';
+		// Get GET param tagsearch from url
+		if (strlen($this->piVars['tagsearch']) > 0) {
+			$tag = htmlspecialchars(trim($this->piVars['tagsearch']));
+
+			// return the where query string
+			$where .= " AND tx_typo3blog_tagcloud LIKE '%".$tag."%'";
+		}
+
+		// Get GET param datefrom and dateto from url
+		if (strlen($this->piVars['datefrom']) > 0 && strlen($this->piVars['dateto']) > 0) {
+			$datefrom = htmlspecialchars(trim($this->piVars['datefrom']));
+			$dateto   = htmlspecialchars(trim($this->piVars['dateto']));
+
+			if (($datefrom != false) AND ($dateto != false)) {
+				$where .= " AND DATE(FROM_UNIXTIME(crdate)) = '".$datefrom."' AND DATE(FROM_UNIXTIME(crdate)) = '".$dateto."'";
+			}
+		}
+
+		// Return empty string if GET param tagsearch not exist
+		return $where;
 	}
 }
 

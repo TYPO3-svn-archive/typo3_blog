@@ -149,25 +149,7 @@ class typo3blog_func
 		return $page[$field];
 	}
 
-	/**
-	 * Get the where clause for filter
-	 *
-	 * @return	string
-	 * @access public
-	 */
-	public function getTagCloudFilterQuery()
-	{
-		// Get GET param tagsearch from url
-		if (strlen(t3lib_div::_GET('tagsearch')) > 0) {
-			$tag = htmlspecialchars(trim(t3lib_div::_GET('tagsearch')));
 
-			// return the where query string
-			return " AND tx_typo3blog_tagcloud LIKE '%".$tag."%'";
-		}
-
-		// Return empty string if GET param tagsearch not exist
-		return "";
-	}
 
 	/**
 	 * Returns the version of an extension (in 4.4 its possible to this with t3lib_extMgm::getExtensionVersion)

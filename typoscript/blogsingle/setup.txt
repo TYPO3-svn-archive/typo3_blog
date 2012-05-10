@@ -133,7 +133,7 @@ plugin.tx_typo3blog_pi1 {
 								htmlSpecialChars = 1
 								typolink {
 									parameter.dataWrap = {$plugin.tx_typo3blog_pi1.startPid}
-									additionalParams.dataWrap = &tagsearch={register:linkparam}
+									additionalParams.dataWrap = &tx_typo3blog_pi1[tagsearch]={register:linkparam}
 									useCacheHash = 1
 								}
 								noTrimWrap = | ||

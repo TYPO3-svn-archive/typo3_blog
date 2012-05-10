@@ -89,7 +89,7 @@ tagcloud {
 			additionalParams.cObject {
 				field = tag_keyword
 				rawUrlEncode = 1
-				dataWrap = &tagsearch={tag_keyword}
+				dataWrap = &tx_typo3blog_pi1[tagsearch]=|
 			}
 			useCacheHash = 1
 		}
@@ -146,8 +146,8 @@ typo3blog.sidebar {
 [globalVar = TSFE:page|doktype=73]
 	plugin.tx_typo3blog_pi1.what_to_display = BLOGLIST
 	lib.content_main < plugin.tx_typo3blog_pi1
-	#typo3blog.sidebar.30 >
-	#ypo3blog.sidebar.50 >
+	typo3blog.sidebar.30 >
+	typo3blog.sidebar.50 >
 [else]
 	plugin.tx_typo3blog_pi1.what_to_display = BLOGSINGLE
 	lib.content_main < plugin.tx_typo3blog_pi1

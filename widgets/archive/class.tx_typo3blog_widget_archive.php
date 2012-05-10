@@ -54,7 +54,7 @@ include_once(PATH_site . 'typo3/sysext/cms/tslib/class.tslib_content.php');
 class tx_typo3blog_widget_archive extends tslib_pibase
 {
 	public $prefixId = 'tx_typo3blog_pi1';
-	public $scriptRelPath = 'pi1/class.tx_typo3blog_widget_archive.php';
+	public $scriptRelPath = 'widgets/archive/class.tx_typo3blog_widget_archive.php';
 	public $extKey = 'typo3_blog';
 	public $pi_checkCHash = TRUE;
 
@@ -297,8 +297,8 @@ class tx_typo3blog_widget_archive extends tslib_pibase
 	}
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/typo3_blog/pi1/class.tx_typo3blog_widget_archive.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/typo3_blog/pi1/class.tx_typo3blog_widget_archive.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/typo3_blog/widgets/archive/class.tx_typo3blog_widget_archive.php']) {
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/typo3_blog/widgets/archive/class.tx_typo3blog_widget_archive.php']);
 }
 
 ?>

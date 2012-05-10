@@ -1,7 +1,7 @@
 plugin.tx_typo3blog_pi1 {
 	archive = USER
 	archive {
-		includeLibs = EXT:typo3_blog/widgets/class.tx_typo3blog_widget_archive.php
+		includeLibs = EXT:typo3_blog/widgets/archive/class.tx_typo3blog_widget_archive.php
 		userFunc = tx_typo3blog_widget_archive->main
 
 		jQueryNoConflict = 0
