@@ -2,7 +2,7 @@ plugin.tx_typo3blog_pi1 {
 	blogSingle {
 
 		# Bloglist template file
-		templateFile = EXT:typo3_blog/res/blogsingle/template.html
+		templateFile = EXT:typo3_blog/widgets/blogsingle/template.html
 
 		# SECTION TEMPLATE MARKER FOR BLOGLIST TEMPLATE
 		#----------------------------------------------------
