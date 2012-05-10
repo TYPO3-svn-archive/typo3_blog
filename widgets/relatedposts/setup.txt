@@ -13,8 +13,8 @@ plugin.tx_typo3blog_pi1 {
 		special {
 			entryLevel = {$plugin.tx_typo3blog_pi1.entryLevel}
 			mode = manual
-			keywordsField = tx_typo3blog_tagcloud
-			keywordsField.sourceField = tx_typo3blog_tagcloud
+			keywordsField = tx_typo3blog_tags
+			keywordsField.sourceField = tx_typo3blog_tags
 			depth = 20
 			limit = 5
 			excludeNoSearchPages = 1

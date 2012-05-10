@@ -34,8 +34,8 @@ plugin.tx_typo3blog_pi1.blogList.marker {
 	crdate.if.isTrue.field = crdate
 	crdate.wrap = <span class="divider"> /</span> |
 
-	tx_typo3blog_tagcloud.if.isTrue.field = crdate
-	tx_typo3blog_tagcloud.wrap = <span class="divider"> /</span> |
+	tx_typo3blog_tags.if.isTrue.field = crdate
+	tx_typo3blog_tags.wrap = <span class="divider"> /</span> |
 }
 
 #Setup typo3blog blogSingle
@@ -53,8 +53,8 @@ plugin.tx_typo3blog_pi1.blogSingle.marker {
 	crdate.if.isTrue.field = crdate
 	crdate.wrap = <span class="divider"> /</span> |
 
-	tx_typo3blog_tagcloud.if.isTrue.field = crdate
-	tx_typo3blog_tagcloud.wrap = <span class="divider"> /</span> |
+	tx_typo3blog_tags.if.isTrue.field = crdate
+	tx_typo3blog_tags.wrap = <span class="divider"> /</span> |
 }
 
 #Setup plugin pagebrowse configuration set the templateFile
@@ -80,7 +80,7 @@ commentList {
 tagcloud < plugin.tx_vgetagcloud_pi1
 tagcloud {
 	referenceTable = pages
-	referenceFields = tx_typo3blog_tagcloud
+	referenceFields = tx_typo3blog_tags
 	targetPage = {$plugin.tx_typo3blog_pi1.startPid}
 	tagWrap {
 		typolink {

@@ -325,7 +325,7 @@ class tx_typo3blog_widget_listview extends tslib_pibase
 			$tag = htmlspecialchars(trim($this->piVars['tagsearch']));
 
 			// return the where query string
-			$where .= " AND tx_typo3blog_tagcloud LIKE '%".$tag."%'";
+			$where .= " AND tx_typo3blog_tags LIKE '%".$tag."%'";
 		}
 
 		// Get GET param datefrom and dateto from url

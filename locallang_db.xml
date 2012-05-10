@@ -7,10 +7,8 @@
 	<data type="array">
 		<languageKey index="default" type="array">
 			<label index="tt_content.list_type_pi1">typo3_blog_widget</label>
-            <label index="pages.tx_typo3blog_is_root_page">Set as blog root page</label>
-			<label index="pages.tx_typo3blog_is_category_page">Set as blog category page</label>
 			<label index="pages.tx_typo3blog_allow_comments">Allow comments on blog page</label>
-			<label index="pages.tx_typo3blog_tagcloud">Set tag cloud on blog page</label>
+			<label index="pages.tx_typo3blog_tags">Set tags on blog page</label>
 		</languageKey>
 	</data>
 </T3locallang>

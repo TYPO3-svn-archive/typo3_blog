@@ -32,9 +32,9 @@ $tempColumns = array (
 			'type' => 'check',
 		)
 	),
-	'tx_typo3blog_tagcloud' => array (
+	'tx_typo3blog_tags' => array (
 		'exclude' => 0,
-		'label' => 'LLL:EXT:typo3_blog/locallang_db.xml:pages.tx_typo3blog_tagcloud',
+		'label' => 'LLL:EXT:typo3_blog/locallang_db.xml:pages.tx_typo3blog_tags',
 		'config' => array (
 			'type' => 'input',
 			'size' => '30',
@@ -44,7 +44,7 @@ $tempColumns = array (
 
 t3lib_div::loadTCA('pages');
 t3lib_extMgm::addTCAcolumns('pages',$tempColumns,1);
-t3lib_extMgm::addToAllTCAtypes('pages', '--div--;Blog Settings, tx_typo3blog_allow_comments, tx_typo3blog_tagcloud');
+t3lib_extMgm::addToAllTCAtypes('pages', '--div--;Blog Settings, tx_typo3blog_allow_comments, tx_typo3blog_tags');
 
 
 // Define Page type ID

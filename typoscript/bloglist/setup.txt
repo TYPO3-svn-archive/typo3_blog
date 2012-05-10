@@ -68,18 +68,18 @@ plugin.tx_typo3blog_pi1 {
 				}
 			}
 
-			# page field tx_typo3_tagcloud setup for templatemarker '###BLOGLIST_TX_TYPO3BLOG_TAGCLOUD###'
-			tx_typo3blog_tagcloud = COA
-			tx_typo3blog_tagcloud {
-				if.isTrue.field = tx_typo3blog_tagcloud
+			# page field tx_typo3_tagcloud setup for templatemarker '###BLOGLIST_TX_TYPO3BLOG_TAGS###'
+			tx_typo3blog_tags = COA
+			tx_typo3blog_tags {
+				if.isTrue.field = tx_typo3blog_tags
 				wrap = |
 
 				10 = TEXT
-				10.data = LLL:EXT:typo3_blog/pi1/locallang.xml:tx_typo3blog_tagcloud
+				10.data = LLL:EXT:typo3_blog/pi1/locallang.xml:tx_typo3blog_tags
 				10.noTrimWrap = ||: |
 				20 = TEXT
 				20 {
-					field = tx_typo3blog_tagcloud
+					field = tx_typo3blog_tags
 					split {
 						cObjNum = 1
 						token = ,
