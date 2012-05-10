@@ -47,7 +47,7 @@ include_once(PATH_site . 'typo3/sysext/cms/tslib/class.tslib_content.php');
 class tx_typo3blog_widget_calendar extends tslib_pibase
 {
 	public $prefixId = 'tx_typo3blog_pi1';
-	public $scriptRelPath = 'pi1/class.tx_typo3blog_widget_calendar.php';
+	public $scriptRelPath = 'widgets/calendar/class.tx_typo3blog_widget_calendar.php';
 	public $extKey = 'typo3_blog';
 	public $pi_checkCHash = TRUE;
 
@@ -244,8 +244,8 @@ class tx_typo3blog_widget_calendar extends tslib_pibase
 	}
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/typo3_blog/pi1/class.tx_typo3blog_widget_calendar.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/typo3_blog/pi1/class.tx_typo3blog_widget_calendar.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/typo3_blog/widgets/calendar/class.tx_typo3blog_widget_calendar.php']) {
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/typo3_blog/widgets/calendar/class.tx_typo3blog_widget_calendar.php']);
 }
 
 ?>

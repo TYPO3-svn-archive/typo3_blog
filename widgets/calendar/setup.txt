@@ -1,7 +1,7 @@
 plugin.tx_typo3blog_pi1 {
 	calendar = USER
 	calendar {
-		includeLibs = EXT:typo3_blog/pi1/class.tx_typo3blog_widget_calendar.php
+		includeLibs = EXT:typo3_blog/widgets/calendar/class.tx_typo3blog_widget_calendar.php
 		userFunc = tx_typo3blog_widget_calendar->main
 
 		jQueryNoConflict = 0

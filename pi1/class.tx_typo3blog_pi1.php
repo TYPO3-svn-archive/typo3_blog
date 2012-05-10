@@ -153,7 +153,7 @@ class tx_typo3blog_pi1 extends tslib_pibase
 				break;
 
 			case "CALENDAR":
-				require_once(t3lib_extMgm::extPath('typo3_blog') . 'pi1/class.tx_typo3blog_widget_calendar.php');
+				require_once(t3lib_extMgm::extPath('typo3_blog') . 'widgets/calendar/class.tx_typo3blog_widget_calendar.php');
 				$view = t3lib_div::makeInstance('tx_typo3blog_widget_calendar');
 				return $view->main($content, $conf);
 				break;
