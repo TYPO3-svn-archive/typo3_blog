@@ -136,7 +136,7 @@ class typo3blog_func
 		$sql = $GLOBALS['TYPO3_DB']->exec_SELECT_queryArray(array(
 				'SELECT'	=> '*',
 				'FROM'		=> 'pages',
-				'WHERE'		=> 'uid=' . intval($pid),
+				'WHERE'		=> 'uid=' . intval($pid) . ' '.$this->cObj->enableFields('pages'),
 				'GROUPBY'	=> '',
 				'ORDERBY'	=> '',
 				'LIMIT'		=> ''

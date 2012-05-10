@@ -140,7 +140,7 @@ class tx_typo3blog_widget_bloglist extends tslib_pibase
 		$sql = $GLOBALS['TYPO3_DB']->exec_SELECT_queryArray(array(
 				'SELECT'	=> '*',
 				'FROM'		=> 'pages',
-				'WHERE'		=> 'pid IN (' . $this->getPostByRootLine() . ') AND hidden = 0 AND deleted = 0 AND doktype != ' . $this->blog_doktype_id . ' ' . $this->getWhereFilterQuery(),
+				'WHERE'		=> 'pid IN (' . $this->getPostByRootLine() . ') '.$this->cObj->enableFields('pages').' AND doktype != ' . $this->blog_doktype_id . ' ' . $this->getWhereFilterQuery(),
 				'GROUPBY'	=> '',
 				'ORDERBY'	=> 'crdate DESC',
 				'LIMIT'		=> intval($this->getPageBrowseLimit()) . ',' . intval($this->conf['blogList.']['itemsToDisplay'])
@@ -282,7 +282,7 @@ class tx_typo3blog_widget_bloglist extends tslib_pibase
 		$sql = $GLOBALS['TYPO3_DB']->exec_SELECT_queryArray(array(
 			'SELECT'	=> '*',
 			'FROM'		=> 'pages',
-			'WHERE'		=> 'pid IN (' . $this->getPostByRootLine($page_id) . ') AND doktype != ' . $this->extConf["doktypeId"] . ' ' . $this->getWhereFilterQuery(),
+			'WHERE'		=> 'pid IN (' . $this->getPostByRootLine($page_id) . ') '.$this->cObj->enableFields('pages').' AND doktype != ' . $this->extConf["doktypeId"] . ' ' . $this->getWhereFilterQuery(),
 			'GROUPBY'	=> '',
 			'ORDERBY'	=> 'crdate DESC',
 			'LIMIT'		=> ''

@@ -125,7 +125,7 @@ class tx_typo3blog_widget_blogsingle extends tslib_pibase
 		$sql = $GLOBALS['TYPO3_DB']->exec_SELECT_queryArray(array(
 				'SELECT'	=> '*',
 				'FROM'		=> 'pages',
-				'WHERE'		=> 'uid=' . intval($this->page_uid) . ' AND hidden = 0 AND deleted = 0 ',
+				'WHERE'		=> 'uid=' . intval($this->page_uid) . ' ' . $this->cObj->enableFields('pages'),
 				'GROUPBY'	=> '',
 				'ORDERBY'	=> 'sorting',
 				'LIMIT'		=> ''
