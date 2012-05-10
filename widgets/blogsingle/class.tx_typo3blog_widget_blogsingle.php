@@ -26,7 +26,7 @@
  *
  *
  *
- *   52: class tx_typo3blog_widget_singleview extends tslib_pibase
+ *   52: class tx_typo3blog_widget_blogsingle extends tslib_pibase
  *   70:     private function init()
  *  100:     public function main($content, $conf)
  *  174:     private function mergeConfiguration()
@@ -49,10 +49,10 @@ include_once(PATH_site . 'typo3/sysext/cms/tslib/class.tslib_content.php');
  * @package       TYPO3
  * @subpackage    tx_typo3blog
  */
-class tx_typo3blog_widget_singleview extends tslib_pibase
+class tx_typo3blog_widget_blogsingle extends tslib_pibase
 {
-	public $prefixId = 'tx_typo3blog_widget_singleview'; // Same as class name
-	public $scriptRelPath = 'pi1/class.tx_typo3blog_widget_singleview.php'; // Path to this script relative to the extension dir.
+	public $prefixId = 'tx_typo3blog_pi1'; // Same as class name
+	public $scriptRelPath = 'widgets/blogsingle/class.tx_typo3blog_widget_blogsingle.php'; // Path to this script relative to the extension dir.
 	public $extKey = 'typo3_blog'; // The extension key.
 	public $pi_checkCHash = TRUE;
 
@@ -204,8 +204,8 @@ class tx_typo3blog_widget_singleview extends tslib_pibase
 	}
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/typo3_blog/pi1/class.tx_typo3blog_widget_singleview.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/typo3_blog/pi1/class.tx_typo3blog_widget_singleview.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/typo3_blog/pi1/class.tx_typo3blog_widget_blogsingle.php']) {
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/typo3_blog/pi1/class.tx_typo3blog_widget_blogsingle.php']);
 }
 
 ?>

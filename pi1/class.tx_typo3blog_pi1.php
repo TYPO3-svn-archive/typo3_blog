@@ -141,8 +141,8 @@ class tx_typo3blog_pi1 extends tslib_pibase
 				break;
 
 			case "BLOGSINGLE":
-				require_once(t3lib_extMgm::extPath('typo3_blog') . 'pi1/class.tx_typo3blog_widget_singleview.php');
-				$view = t3lib_div::makeInstance('tx_typo3blog_widget_singleview');
+				require_once(t3lib_extMgm::extPath('typo3_blog') . 'widgets/blogsingle/class.tx_typo3blog_widget_blogsingle.php');
+				$view = t3lib_div::makeInstance('tx_typo3blog_widget_blogsingle');
 				return $view->main($content, $conf);
 				break;
 
