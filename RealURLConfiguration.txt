@@ -1,0 +1,32 @@
+Here's the realurl.conf array for the postVars.
+
+Copy the following part ('typo3blog') in to the postVarSets section/array of your existing RealURL configuration:
+
+			<<<< SNIP >>>>
+				// typo3blog
+				'blog-from' => array (
+					array(
+						'GETvar' => 'tx_typo3blog_pi1[datefrom]',
+					)
+				),
+				'blog-to' => array (
+					array(
+						'GETvar' => 'tx_typo3blog_pi1[dateto]',
+					)
+				),
+				'blog-tagsearch' => array (
+					array(
+						'GETvar' => 'tx_typo3blog_pi1[tagsearch]',
+					)
+				),
+			<<<< SNAP >>>>
+
+
+		'postVarSets' => array (
+			'_DEFAULT' => array (
+
+			<<<< INSERT HERE >>>>
+
+			)
+
+	)
