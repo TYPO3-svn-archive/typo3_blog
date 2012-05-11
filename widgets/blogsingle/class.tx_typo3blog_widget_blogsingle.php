@@ -134,12 +134,24 @@ class tx_typo3blog_widget_blogsingle extends tslib_pibase
 
 		// Execute the sql and each all selected fields
 		while ($row = mysql_fetch_assoc($sql)) {
+			$sql_user = $GLOBALS['TYPO3_DB']->exec_SELECT_queryArray(
+				array(
+					'SELECT'	=> '*',
+					'FROM'		=> 'be_users',
+					'WHERE'		=> "uid = ".$row['tx_typo3blog_author']." ".$this->cObj->enableFields('be_users'),
+				)
+			);
+			$row_user = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($sql_user);
+			$row['be_user_username']     = $row_user['username'];
+			$row['be_user_realName']     = $row_user['realName'];
+			$row['be_user_email']        = $row_user['email'];
+			$row['be_user_email_secure'] = md5($row_user['email']);
 
 			// Define additional fields for ts and add initialize this or add the content
 			$row['category'] = $this->typo3BlogFunc->getPostCategoryName($row['pid'], 'title');
 			$row['pagecontent'] = "";
 			$row['comments'] = "";
-
+			$row['gravatar'] = NULL;
 
 			// Add all fields in ts
 			$this->cObj->data = $row;

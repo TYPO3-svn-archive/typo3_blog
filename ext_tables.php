@@ -22,18 +22,40 @@ if (TYPO3_MODE == 'BE') {
 //t3lib_extMgm::addPiFlexFormValue($_EXTKEY.'_pi1', t3lib_extMgm::extRelPath($_EXTKEY) . 'pi1/flexform_ds.xml');
 //t3lib_extMgm::addPiFlexFormValue($_EXTKEY .'_pi1', 'FILE:EXT:typo3_blog/pi1/flexform_ds.xml');
 
-
+if(!is_object($GLOBALS['BE_USER']))  {
+	define('TYPO3_PROCEED_IF_NO_USER', true);
+	$GLOBALS['BE_USER'] = t3lib_div::makeInstance('t3lib_beUserAuth');
+	$GLOBALS['BE_USER']->start();
+	$GLOBALS['BE_USER']->backendCheckLogin();
+	define('TYPO3_PROCEED_IF_NO_USER', false);
+}
 
 $tempColumns = array (
+	'tx_typo3blog_author' => array (
+		'exclude' => 1,
+		'label' => 'LLL:EXT:typo3_blog/locallang_db.xml:pages.tx_typo3blog_author',
+		'config'  => array (
+			'type' => 'select',
+			'foreign_table' => 'be_users',
+			'foreign_table_where' => 'ORDER BY be_users.username',
+			'items' => array (
+				array('', ''),
+			),
+			'size' => 1,
+			'minitems' => 0,
+			'maxitems' => 1,
+			'default' => $GLOBALS['BE_USER']->user['uid']
+		)
+	),
 	'tx_typo3blog_allow_comments' => array (
-		'exclude' => 0,
+		'exclude' => 1,
 		'label' => 'LLL:EXT:typo3_blog/locallang_db.xml:pages.tx_typo3blog_allow_comments',
 		'config' => array (
 			'type' => 'check',
 		)
 	),
 	'tx_typo3blog_tags' => array (
-		'exclude' => 0,
+		'exclude' => 1,
 		'label' => 'LLL:EXT:typo3_blog/locallang_db.xml:pages.tx_typo3blog_tags',
 		'config' => array (
 			'type' => 'input',
@@ -41,7 +63,7 @@ $tempColumns = array (
 		)
 	),
 	'tx_typo3blog_blogrolls' => array (
-		'exclude' => 0,
+		'exclude' => 1,
 		'label' => 'LLL:EXT:typo3_blog/locallang_db.xml:pages.tx_typo3blog_blogrolls',
 		'config' => array (
 			'type' => 'select',
@@ -58,19 +80,19 @@ $tempColumns = array (
 					'title'  => 'Create new record',
 					'icon'   => 'add.gif',
 					'params' => array(
-						'table'	=> 'tx_typo3blog_blogroll',
-						'pid'	  => '###CURRENT_PID###',
+						'table'    => 'tx_typo3blog_blogroll',
+						'pid'      => '###CURRENT_PID###',
 						'setValue' => 'prepend'
 					),
 					'script' => 'wizard_add.php',
 				),
 				'edit' => array(
-					'type'					=> 'popup',
-					'title'					=> 'Edit',
-					'script'				=> 'wizard_edit.php',
+					'type'                     => 'popup',
+					'title'                    => 'Edit',
+					'script'                   => 'wizard_edit.php',
 					'popup_onlyOpenIfSelected' => 1,
-					'icon'					=> 'edit2.gif',
-					'JSopenParams'			=> 'height=350,width=580,status=0,menubar=0,scrollbars=1',
+					'icon'                     => 'edit2.gif',
+					'JSopenParams'             => 'height=350,width=580,status=0,menubar=0,scrollbars=1',
 				),
 			),
 		)
@@ -79,7 +101,7 @@ $tempColumns = array (
 
 t3lib_div::loadTCA('pages');
 t3lib_extMgm::addTCAcolumns('pages',$tempColumns,1);
-t3lib_extMgm::addToAllTCAtypes('pages', '--div--;Blog Settings, tx_typo3blog_allow_comments, tx_typo3blog_tags, tx_typo3blog_blogrolls');
+t3lib_extMgm::addToAllTCAtypes('pages', '--div--;LLL:EXT:typo3_blog/locallang_db.xml:pages.tx_typo3blog_tab, tx_typo3blog_author, tx_typo3blog_allow_comments, tx_typo3blog_tags, tx_typo3blog_blogrolls');
 
 // Define Page type ID
 $doktype = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'][$_EXTKEY]['doktypeId'];
@@ -108,7 +130,7 @@ $TCA['tx_typo3blog_blogroll'] = array (
 			'fe_group'  => 'fe_group',
 		),
 		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY).'tca.php',
-		'iconfile'          => t3lib_extMgm::extRelPath($_EXTKEY).'icon_tx_typo3blog_blogroll.gif',
+		'iconfile'          => t3lib_extMgm::extRelPath($_EXTKEY).'res/blogrollicon.gif',
 	),
 );
 

@@ -26,17 +26,25 @@ blogList.marker {
 	showmore.typolink.ATagParams = class="btn btn-inverse"
 
 	# wrap with divider in breadcrumb
-	author.if.isTrue.field = author
-	author.wrap = <span class="divider"> /</span> |
+	author {
+		wrap = <span class="divider"> /</span> |
+		required = 1
+	}
 
-	author_email.if.isTrue.field = author
-	author_email.wrap = <span class="divider"> /</span> |
+	author_email {
+		wrap = <span class="divider"> /</span> |
+		required = 1
+	}
 
-	crdate.if.isTrue.field = crdate
-	crdate.wrap = <span class="divider"> /</span> |
+	crdate {
+		wrap = <span class="divider"> /</span> |
+		required = 1
+	}
 
-	tx_typo3blog_tags.if.isTrue.field = crdate
-	tx_typo3blog_tags.wrap = <span class="divider"> /</span> |
+	tx_typo3blog_tags {
+		wrap = <span class="divider"> /</span> |
+		required = 1
+	}
 }
 
 #Setup typo3blog blogSingle
@@ -46,17 +54,25 @@ blogSingle.marker {
 	title.wrap = <h2>|</h2>
 
 	# wrap with divider in breadcrumb
-	author.if.isTrue.field = author
-	author.wrap = <span class="divider"> /</span> |
+	author {
+		wrap = <span class="divider"> /</span> |
+		required = 1
+	}
 
-	author_email.if.isTrue.field = author
-	author_email.wrap = <span class="divider"> /</span> |
+	author_email {
+		wrap = <span class="divider"> /</span> |
+		required = 1
+	}
 
-	crdate.if.isTrue.field = crdate
-	crdate.wrap = <span class="divider"> /</span> |
+	crdate {
+		wrap = <span class="divider"> /</span> |
+		required = 1
+	}
 
-	tx_typo3blog_tags.if.isTrue.field = crdate
-	tx_typo3blog_tags.wrap = <span class="divider"> /</span> |
+	tx_typo3blog_tags {
+		wrap = <span class="divider"> /</span> |
+		required = 1
+	}
 }
 
 #Setup plugin pagebrowse configuration set the templateFile

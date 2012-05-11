@@ -49,15 +49,15 @@ plugin.tx_typo3blog_pi1 {
 			# page field author setup for templatemarker '###BLOGSINGLE_AUTHOR###'
 			author = TEXT
 			author {
-			   wrap = |
-			   field = author
+				field = be_user_realName
+				wrap = |
 			}
 
 			# page field autor_email setup for templatemarker '###BLOGSINGLE_AUTHOR_EMAIL###'
 			author_email = TEXT
 			author_email {
+				field = be_user_email
 				wrap = |
-				field = author_email
 			}
 
 			# page field nav_title setup for templatemarker '###BLOGSINGLE_NAV_TITLE###'
@@ -131,9 +131,10 @@ plugin.tx_typo3blog_pi1 {
 			}
 
 			# gravatar setup for templatemarker '###BLOGSINGLE_GRAVATAR###'
-			gravatar = IMAGE
+			gravatar = TEXT
 			gravatar {
-				wrap = |
+				field = be_user_email_secure
+				wrap = <img src="http://www.gravatar.com/avatar/|.jpg?s=100" />
 			}
 
 			# link to post setup for templatemarker '###BLOGSINGLE_LINKTOPOST###'
