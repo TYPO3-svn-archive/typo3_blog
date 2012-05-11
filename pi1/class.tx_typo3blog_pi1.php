@@ -134,29 +134,6 @@ class tx_typo3blog_pi1 extends tslib_pibase
 		}
 
 		switch ($this->conf['what_to_display']) {
-			case "BLOGSINGLE":
-				require_once(t3lib_extMgm::extPath('typo3_blog') . 'widgets/blogsingle/class.tx_typo3blog_widget_blogsingle.php');
-				$view = t3lib_div::makeInstance('tx_typo3blog_widget_blogsingle');
-				return $view->main($content, $conf);
-				break;
-
-			case "TAGCLOUD":
-				require_once(t3lib_extMgm::extPath('typo3_blog') . 'pi1/class.tx_typo3blog_widget_tagcloud.php');
-				$view = t3lib_div::makeInstance('tx_typo3blog_widget_tagcloud');
-				return $view->main($content, $conf);
-				break;
-
-			case "CALENDAR":
-				require_once(t3lib_extMgm::extPath('typo3_blog') . 'widgets/calendar/class.tx_typo3blog_widget_calendar.php');
-				$view = t3lib_div::makeInstance('tx_typo3blog_widget_calendar');
-				return $view->main($content, $conf);
-				break;
-
-			case "ARCHIVE":
-				require_once(t3lib_extMgm::extPath('typo3_blog') . 'pi1/class.tx_typo3blog_widget_archive.php');
-				$view = t3lib_div::makeInstance('tx_typo3blog_widget_archive');
-				return $view->main($content, $conf);
-				break;
 
 		}
 		$content = "No View defined";

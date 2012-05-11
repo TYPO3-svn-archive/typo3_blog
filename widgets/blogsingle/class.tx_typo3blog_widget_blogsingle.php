@@ -86,7 +86,7 @@ class tx_typo3blog_widget_blogsingle extends tslib_pibase
 		$this->page_uid = intval($GLOBALS['TSFE']->page['uid']);
 
 		// Read template file
-		$this->template = $this->cObj->fileResource($this->conf['blogSingle.']['templateFile']);
+		$this->template = $this->cObj->fileResource($this->conf['templateFile']);
 	}
 
 	/**
@@ -107,7 +107,7 @@ class tx_typo3blog_widget_blogsingle extends tslib_pibase
 		// Check the environment for typo3blog listview
 		if (NULL === $this->template) {
 			return $this->pi_wrapInBaseClass(
-				"Error :Template file " . $this->conf['blogSingle.']['templateFile'] . " not found.<br />Please check the typoscript configuration!"
+				"Error :Template file " . $this->conf['templateFile'] . " not found.<br />Please check the typoscript configuration!"
 			);
 		}
 
@@ -148,12 +148,12 @@ class tx_typo3blog_widget_blogsingle extends tslib_pibase
 			foreach ($row as $column => $value) {
 				if ($this->conf['blogList.']['marker.'][$column]) {
 					$this->cObj->setCurrentVal($value);
-					$value = $this->cObj->cObjGetSingle($this->conf['blogSingle.']['marker.'][$column], $this->conf['blogSingle.']['marker.'][$column . '.']);
+					$value = $this->cObj->cObjGetSingle($this->conf['marker.'][$column], $this->conf['marker.'][$column . '.']);
 
 					$this->cObj->setCurrentVal(false);
 				}
 				else {
-					$value = $this->cObj->cObjGetSingle($this->conf['blogSingle.']['marker.'][$column], $this->conf['blogSingle.']['marker.'][$column . '.']);
+					$value = $this->cObj->cObjGetSingle($this->conf['marker.'][$column], $this->conf['marker.'][$column . '.']);
 				}
 				$markers['###BLOGSINGLE_' . strtoupper($column) . '###'] = $value;
 			}

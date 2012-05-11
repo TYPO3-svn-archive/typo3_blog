@@ -1,5 +1,8 @@
 plugin.tx_typo3blog_pi1 {
+	blogSingle = USER
 	blogSingle {
+		includeLibs = EXT:typo3_blog/widgets/blogsingle/class.tx_typo3blog_widget_blogsingle.php
+		userFunc = tx_typo3blog_widget_blogsingle->main
 
 		# Bloglist template file
 		templateFile = EXT:typo3_blog/widgets/blogsingle/template.html

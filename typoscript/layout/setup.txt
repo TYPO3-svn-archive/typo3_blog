@@ -40,7 +40,8 @@ blogList.marker {
 }
 
 #Setup typo3blog blogSingle
-plugin.tx_typo3blog_pi1.blogSingle.marker {
+blogSingle < plugin.tx_typo3blog_pi1.blogSingle
+blogSingle.marker {
 	# wrap title
 	title.wrap = <h2>|</h2>
 
@@ -167,13 +168,11 @@ typo3blog.sidebar {
 
 #SWITCH CONTENT MARKER IF BLOG PAGE
 [globalVar = TSFE:page|doktype=73]
-	#plugin.tx_typo3blog_pi1.what_to_display = BLOGLIST
 	lib.content_main < blogList
 	typo3blog.sidebar.30 >
 	typo3blog.sidebar.50 >
 [else]
-	plugin.tx_typo3blog_pi1.what_to_display = BLOGSINGLE
-	lib.content_main < plugin.tx_typo3blog_pi1
+	lib.content_main < blogSingle
 [global]
 
 # Add output to sidebar
