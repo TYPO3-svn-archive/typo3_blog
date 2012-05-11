@@ -20,7 +20,7 @@ plugin.tx_typo3blog_pi1 {
 			limit = {$plugin.tx_typo3blog_pi1.relatedPosts.itemsToDisplay}
 			excludeNoSearchPages = 1
 		}
-		excludeDoktypes = 73
+		excludeDoktypes = {$plugin.tx_typo3blog_pi1.excludeDoktypes}
 		1.NO.stdWrap >
 		1.NO.stdWrap.cObject = COA
 		1.NO.stdWrap.cObject {

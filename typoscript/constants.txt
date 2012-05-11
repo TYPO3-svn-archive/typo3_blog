@@ -25,14 +25,19 @@ plugin.tx_typo3blog_pi1 {
 	file.jQueryTreeViewStyle = EXT:typo3_blog/res/jquery/css/treeview/jquery.treeview-1.5.css
 
 
-	# cat=plugin.typo3blog: Basic/basic/0100; type=string; label=Start PID:The PID where for blog start page  (see manual!)
+	# cat=plugin.typo3blog: Basic/basic/010; type=string; label=Start PID:The PID where for blog start page (see manual!)
 	startPid =
 
-	# cat=plugin.typo3blog: Basic/basic/0110; type=string; label=Entry Level: The entrylevel to the root-template (distance to root)
+	# cat=plugin.typo3blog: Basic/basic/020; type=string; label=Entry Level: The entrylevel to the root-template (distance to root)
 	entryLevel = 0
 
-	# cat=plugin.typo3blog: Basic/basic/0120; type=string; label=Date format with strftime dd.mm.yyyy   (see manual!)
+	# cat=plugin.typo3blog: Basic/basic/030; type=string; label=Date format with strftime dd.mm.yyyy (see manual!)
 	dateFromat = %d.%m.%Y
+
+	# cat=plugin.typo3blog: Basic/basic/040; type=string; label=Exclude doctype: Exclude doctype for latest and related posts (see manual!)
+	excludeDoktypes = 5,6,73
+
+
 
 	# cat=plugin.typo3blog: widget BlogList/basic/010; type=string; label=Items to display on bloglist  (see manual!)
 	blogList.itemsToDisplay = 5
@@ -46,11 +51,17 @@ plugin.tx_typo3blog_pi1 {
 	# cat=plugin.typo3blog: widget BlogSingle/basic/010; type=string; label=Column from table pages with tags   (see manual!)
 	blogSingle.columnWithTags = tx_typo3blog_tags
 
+
+
 	# cat=plugin.typo3blog: widget Archive/basic/010; type=string; label=Template location for archive  (see manual!)
 	archive.templateFile = EXT:typo3_blog/widgets/archive/template.html
 
+
+
 	# cat=plugin.typo3blog: widget Calendar/basic/010; type=string; label=Template location for calendar  (see manual!)
 	calendar.templateFile = EXT:typo3_blog/widgets/calendar/template.html
+
+
 
 	# cat=plugin.typo3blog: widget latestComments/basic/010; type=string; label=Items to display for latestComments   (see manual!)
 	latestComments.itemsToDisplay = 5
@@ -58,8 +69,12 @@ plugin.tx_typo3blog_pi1 {
 	# cat=plugin.typo3blog: widget latestComments/basic/020; type=string; label=Crop content in latestComments   (see manual!)
 	latestComments.cropContentAfter = 60
 
+
+
 	# cat=plugin.typo3blog: widget latestPosts/basic/010; type=string; label=Items to display for latestPosts   (see manual!)
 	latestPosts.itemsToDisplay = 5
+
+
 
 	# cat=plugin.typo3blog: widget relatedPosts/basic/010; type=string; label=Column from table pages to use   (see manual!)
 	relatedPosts.keywordsColumn = tx_typo3blog_tags

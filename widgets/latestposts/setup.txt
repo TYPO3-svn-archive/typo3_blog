@@ -19,7 +19,7 @@ plugin.tx_typo3blog_pi1 {
 			maxAge = 3600*24*365
 			limit = {$plugin.tx_typo3blog_pi1.latestPosts.itemsToDisplay}
 		}
-		excludeDoktypes = 73
+		excludeDoktypes = {$plugin.tx_typo3blog_pi1.excludeDoktypes}
 		1.NO.stdWrap >
 		1.NO.stdWrap.cObject = COA
 		1.NO.stdWrap.cObject {

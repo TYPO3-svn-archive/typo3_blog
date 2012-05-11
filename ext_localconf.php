@@ -14,4 +14,7 @@ $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'][$_EXTKEY]['doktypeId'] = intval($_EXTCONF
 
 $GLOBALS["TYPO3_CONF_VARS"]["FE"]["addRootLineFields"] .= ',tx_typo3blog_blogrolls';
 
+$extensionPath = t3lib_extMgm::extPath('typo3_blog');
+require_once($extensionPath . 'lib/user_typo3blog.php');
+
 ?>
