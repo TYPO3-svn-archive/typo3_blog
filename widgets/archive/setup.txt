@@ -20,14 +20,59 @@ plugin.tx_typo3blog_pi1 {
 
 			year = TEXT
 			year {
-				field = year
 				wrap = |
+				field = year
+				typolink {
+					parameter = {$plugin.tx_typo3blog_pi1.startPid}
+					additionalParams.cObject = COA
+					additionalParams.cObject {
+						10 = TEXT
+						10 {
+							value = {field:year}-01-01
+							insertData = 1
+							wrap = &tx_typo3blog_pi1[datefrom]=|
+						}
+						20 = TEXT
+						20 {
+							value = {field:year}-12-31
+							insertData = 1
+							wrap = &tx_typo3blog_pi1[dateto]=|
+						}
+					}
+					useCacheHash = 1
+				}
 			}
 
 			month = TEXT
 			month {
-				field = month
 				wrap = |
+				stdWrap.cObject = COA
+				stdWrap.cObject {
+					10 = TEXT
+					10.field = month
+					20 = TEXT
+					20.field = quantity
+					20.noTrimWrap = | (|)|
+				}
+				typolink {
+					parameter = {$plugin.tx_typo3blog_pi1.startPid}
+					additionalParams.cObject = COA
+					additionalParams.cObject {
+						10 = TEXT
+						10 {
+							field = datefrom
+							strftime = %Y-%m-%d
+							wrap = &tx_typo3blog_pi1[datefrom]=|
+						}
+						20 = TEXT
+						20 {
+							field = dateto
+							strftime = %Y-%m-%d
+							wrap = &tx_typo3blog_pi1[dateto]=|
+						}
+					}
+					useCacheHash = 1
+				}
 			}
 
 			quantity = TEXT

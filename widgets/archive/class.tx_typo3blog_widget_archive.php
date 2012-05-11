@@ -163,18 +163,20 @@ class tx_typo3blog_widget_archive extends tslib_pibase
 		while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($sql)) {
 			// add data to ts template
 			$this->cObj->data = $row;
+			$this->cObj->data['datefrom'] = date(mktime(0, 0, 0, $row['month'],   1, $row['year']));
+			$this->cObj->data['dateto']   = date(mktime(0, 0, 0, $row['month']+1, 0, $row['year']));
 
 			// Get data year, month and count
 			if ($currentYear != $row['year']) {
 				$currentYear = $row['year'];
 				$subpartArchiveYear = $this->cObj->getSubpart($subpartArchiveItems, '###ARCHIVE_YEAR###');
-				$year = $this->cObj->cObjGetSingle($this->conf['marker.']['year'], $this->conf['marker.']['year' . '.']);
+				$year = $this->cObj->cObjGetSingle($this->conf['marker.']['year'], $this->conf['marker.']['year.']);
 				$markerArray['###' . strtoupper('year') . '###'] = $year;
 				$subparts['###ARCHIVE_YEAR###'] = $this->cObj->substituteMarkerArrayCached($subpartArchiveYear, $markerArray);
 			}
 
 			$subpartArchiveMonth = $this->cObj->getSubpart($subpartArchiveYear, '###ARCHIVE_MONTH###');
-			$month = $this->cObj->cObjGetSingle($this->conf['marker.']['month'], $this->conf['marker.']['month' . '.']);
+			$month = $this->cObj->cObjGetSingle($this->conf['marker.']['month'], $this->conf['marker.']['month.']);
 			$quantity = $this->cObj->cObjGetSingle($this->conf['marker.']['quantity'], $this->conf['marker.']['quantity' . '.']);
 
 			// Add data in $markerArray for subpart ARCHIVE_YEAR

@@ -334,7 +334,7 @@ class tx_typo3blog_widget_bloglist extends tslib_pibase
 			$dateto   = htmlspecialchars(trim($this->piVars['dateto']));
 
 			if (($datefrom != false) AND ($dateto != false)) {
-				$where .= " AND DATE(FROM_UNIXTIME(crdate)) = '".$datefrom."' AND DATE(FROM_UNIXTIME(crdate)) = '".$dateto."'";
+				$where .= " AND DATE(FROM_UNIXTIME(crdate)) >= '".$datefrom."' AND DATE(FROM_UNIXTIME(crdate)) <= '".$dateto."'";
 			}
 		}
 
