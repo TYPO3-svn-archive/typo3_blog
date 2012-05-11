@@ -95,7 +95,7 @@ class tx_typo3blog_widget_bloglist extends tslib_pibase
 		$this->blog_doktype_id = $this->extConf['doktypeId'];
 
 		// Read template file
-		$this->template = $this->cObj->fileResource($this->conf['blogList.']['templateFile']);
+		$this->template = $this->cObj->fileResource($this->conf['templateFile']);
 	}
 
 	/**
@@ -116,7 +116,7 @@ class tx_typo3blog_widget_bloglist extends tslib_pibase
 		// Check the environment for typo3blog listview
 		if (NULL === $this->template) {
 			return $this->pi_wrapInBaseClass(
-				"Error :Template file " . $this->conf['blogList.']['templateFile'] . " not found.<br />Please check the typoscript configuration!"
+				"Error :Template file " . $this->conf['templateFile'] . " not found.<br />Please check the typoscript configuration!"
 			);
 		}
 
@@ -143,7 +143,7 @@ class tx_typo3blog_widget_bloglist extends tslib_pibase
 				'WHERE'		=> 'pid IN (' . $this->getPostByRootLine() . ') '.$this->cObj->enableFields('pages').' AND doktype != ' . $this->blog_doktype_id . ' ' . $this->getWhereFilterQuery(),
 				'GROUPBY'	=> '',
 				'ORDERBY'	=> 'crdate DESC',
-				'LIMIT'		=> intval($this->getPageBrowseLimit()) . ',' . intval($this->conf['blogList.']['itemsToDisplay'])
+				'LIMIT'		=> intval($this->getPageBrowseLimit()) . ',' . intval($this->conf['itemsToDisplay'])
 			)
 		);
 
@@ -151,7 +151,7 @@ class tx_typo3blog_widget_bloglist extends tslib_pibase
 		while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($sql)) {
 			// add additional data to ts template
 			$row['category'] = $this->typo3BlogFunc->getPostCategoryName($row['pid'], 'title');
-			$row['pagecontent'] = $this->typo3BlogFunc->getPageContent($row['uid'], $this->conf['blogList.']['contentItemsToDisplay']);
+			$row['pagecontent'] = $this->typo3BlogFunc->getPageContent($row['uid'], $this->conf['contentItemsToDisplay']);
 			$row['showmore'] = "weiterlesen...";
 			$row['gravatar'] = md5($row['author_email']);
 
@@ -160,13 +160,13 @@ class tx_typo3blog_widget_bloglist extends tslib_pibase
 
 			// Each all records and set data in HTML template marker
 			foreach ($row as $column => $data) {
-				if ($this->conf['blogList.']['marker.'][$column]) {
+				if ($this->conf['marker.'][$column]) {
 					$this->cObj->setCurrentVal($data);
-					$data = $this->cObj->cObjGetSingle($this->conf['blogList.']['marker.'][$column], $this->conf['blogList.']['marker.'][$column . '.']);
+					$data = $this->cObj->cObjGetSingle($this->conf['marker.'][$column], $this->conf['marker.'][$column . '.']);
 					$this->cObj->setCurrentVal(false);
 				}
 				else {
-					$data = $this->cObj->stdWrap($data, $this->conf['blogList.']['marker.'][$column . '.']);
+					$data = $this->cObj->stdWrap($data, $this->conf['marker.'][$column . '.']);
 					$this->cObj->setCurrentVal(false);
 				}
 				$markerArray['###BLOGLIST_' . strtoupper($column) . '###'] = $data;
@@ -176,7 +176,7 @@ class tx_typo3blog_widget_bloglist extends tslib_pibase
 
 		// Set pagebrowser marker from HTML Template
 		$poststotal = intval($this->getNumberOfPostsInCategoryPage(intval($this->page_uid)));
-		$itemstodisplay = intval($this->conf['blogList.']['itemsToDisplay']);
+		$itemstodisplay = intval($this->conf['itemsToDisplay']);
 
 		// calc pages for pagebrowser
 		$pagestodisplay = ($poststotal - ($poststotal % $itemstodisplay)) / $itemstodisplay + (($poststotal % $itemstodisplay) == 0 ? 0 : 1);
@@ -242,7 +242,7 @@ class tx_typo3blog_widget_bloglist extends tslib_pibase
 		if (!$_GET['tx_typo3blog_widget_bloglist']['page']) {
 			$limit = 0;
 		} else {
-			$limit = $_GET['tx_typo3blog_widget_bloglist']['page'] * $this->conf['blogList.']['itemsToDisplay'];
+			$limit = $_GET['tx_typo3blog_widget_bloglist']['page'] * $this->conf['itemsToDisplay'];
 		}
 		return $limit;
 	}

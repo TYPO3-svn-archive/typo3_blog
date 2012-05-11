@@ -134,12 +134,6 @@ class tx_typo3blog_pi1 extends tslib_pibase
 		}
 
 		switch ($this->conf['what_to_display']) {
-			case "BLOGLIST":
-				require_once(t3lib_extMgm::extPath('typo3_blog') . 'widgets/bloglist/class.tx_typo3blog_widget_bloglist.php');
-				$view = t3lib_div::makeInstance('tx_typo3blog_widget_bloglist');
-				return $view->main($content, $conf);
-				break;
-
 			case "BLOGSINGLE":
 				require_once(t3lib_extMgm::extPath('typo3_blog') . 'widgets/blogsingle/class.tx_typo3blog_widget_blogsingle.php');
 				$view = t3lib_div::makeInstance('tx_typo3blog_widget_blogsingle');

@@ -17,7 +17,8 @@ plugin.tx_typo3blog_pi1.categoryList {
 }
 
 #Setup typo3blog bloglist
-plugin.tx_typo3blog_pi1.blogList.marker {
+blogList < plugin.tx_typo3blog_pi1.blogList
+blogList.marker {
 	# wrap title
 	title.wrap = <h2>|</h2>
 
@@ -165,16 +166,15 @@ typo3blog.sidebar {
 }
 
 #SWITCH CONTENT MARKER IF BLOG PAGE
-[userFunc = user_typo3blog_pageTypeIsCategory()]
-	plugin.tx_typo3blog_pi1.what_to_display = BLOGLIST
-	lib.content_main < plugin.tx_typo3blog_pi1
+[globalVar = TSFE:page|doktype=73]
+	#plugin.tx_typo3blog_pi1.what_to_display = BLOGLIST
+	lib.content_main < blogList
 	typo3blog.sidebar.30 >
 	typo3blog.sidebar.50 >
 [else]
 	plugin.tx_typo3blog_pi1.what_to_display = BLOGSINGLE
 	lib.content_main < plugin.tx_typo3blog_pi1
 [global]
-
 
 # Add output to sidebar
 lib.content_right < typo3blog.sidebar
