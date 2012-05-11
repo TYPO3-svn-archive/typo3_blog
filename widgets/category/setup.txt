@@ -9,7 +9,7 @@ plugin.tx_typo3blog_pi1 {
 		stdWrap {
 			required = 1
 			noBlur = 1
-			wrap = <div><ul> | </ul></div>
+			wrap = <div class="tx-typo3blog-pi1-widget-relatedPosts"><ul> | </ul></div>
 		}
 
 		1 = TMENU

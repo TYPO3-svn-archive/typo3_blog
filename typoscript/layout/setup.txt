@@ -10,7 +10,7 @@ lib.content_right < styles.content.getRight
 
 #Setup typo3blog categoryList
 plugin.tx_typo3blog_pi1.categoryList {
-	stdWrap.wrap = <div class="well"><ul class="nav nav-list">|</ul></div>
+	stdWrap.wrap = <div class="tx-typo3blog-pi1-widget-relatedPosts well"><ul class="nav nav-list">|</ul></div>
 	2.wrap = <ul class="nav nav-list">|</ul>
 	3.wrap = <ul class="nav nav-list">|</ul>
 	4.wrap = <ul class="nav nav-list">|</ul>
@@ -149,7 +149,7 @@ plugin.tx_typo3blog_pi1.blogroll {
 		}
 	}
 	stdWrap {
-		outerWrap = <div class="well"> | </div>
+		outerWrap = <div class="tx-typo3blog-pi1-widget-blogroll well"> | </div>
 		wrap = <ul class="nav nav-list">|</ul>
 		required = 1
 	}
