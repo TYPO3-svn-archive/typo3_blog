@@ -164,6 +164,37 @@ class typo3blog_func
 		include(t3lib_extMgm::extPath($key) . 'ext_emconf.php');
 		return $EM_CONF[$key]['version'];
 	}
+
+	/**
+	 * Wraps the input string in a <div> tag with the class attribute set to the prefixId.
+	 * All content returned from your plugins should be returned through this function so all content from your plugin is encapsulated in a <div>-tag nicely identifying the content of your plugin.
+	 *
+	 * @param	string		HTML content to wrap in the div-tags with the "main class" of the plugin
+	 * @return	string		HTML content wrapped, ready to return to the parent object.
+	 */
+	function pi_wrapInBaseClass($str, $widgetId)	{
+		$content = '<div class="'.str_replace('_','-',$widgetId).'">
+		'.$str.'
+	</div>
+	';
+
+		if(!$GLOBALS['TSFE']->config['config']['disablePrefixComment'])	{
+			$content = '
+
+
+	<!--
+
+		BEGIN: Content of extension "'.$this->extKey.'", plugin "'.$widgetId.'"
+
+	-->
+	'.$content.'
+	<!-- END: Content of extension "'.$this->extKey.'", plugin "'.$widgetId.'" -->
+
+	';
+		}
+
+		return $content;
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/typo3_blog/lib/class.tx_typo3blog_func.php']) {

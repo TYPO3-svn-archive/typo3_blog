@@ -181,7 +181,7 @@ class tx_typo3blog_widget_calendar extends tslib_pibase
 		$content = $this->cObj->cObjGetSingle($this->conf['datepicker'], $this->conf['datepicker.']);
 
 		// Return the content to display in frontend
-		return $this->pi_wrapInBaseClass($content);
+		return $this->typo3BlogFunc->pi_wrapInBaseClass($content,$this->prefixId.'-widget_calendar');
 	}
 
 	/**

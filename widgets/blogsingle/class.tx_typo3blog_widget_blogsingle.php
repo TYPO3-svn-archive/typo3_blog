@@ -163,7 +163,7 @@ class tx_typo3blog_widget_blogsingle extends tslib_pibase
 		$content .= $this->typo3BlogFunc->substituteMarkersAndSubparts($template, $markers, $subparts);
 
 		// Return the content to display in frontend
-		return $this->pi_wrapInBaseClass($content);
+		return $this->typo3BlogFunc->pi_wrapInBaseClass($content,$this->prefixId.'-widget_single');
 	}
 
 	/**

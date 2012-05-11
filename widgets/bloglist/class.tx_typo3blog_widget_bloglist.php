@@ -56,7 +56,7 @@ include_once(PATH_site . 'typo3/sysext/cms/tslib/class.tslib_content.php');
 class tx_typo3blog_widget_bloglist extends tslib_pibase
 {
 	public $prefixId = 'tx_typo3blog_pi1'; // Same as class name
-	public $scriptRelPath = 'pi1/class.tx_typo3blog_pi1'; // Path to this script relative to the extension dir.
+	public $scriptRelPath = 'widgets/bloglist/class.tx_typo3blog_widget_bloglist.php'; // Path to this script relative to the extension dir.
 	public $extKey = 'typo3_blog'; // The extension key.
 	public $pi_checkCHash = TRUE;
 	private $envErrors = array();
@@ -186,7 +186,7 @@ class tx_typo3blog_widget_bloglist extends tslib_pibase
 		$content = $this->typo3BlogFunc->substituteMarkersAndSubparts($template, $markers, $subparts);
 
 		// Return the content to display in frontend
-		return $this->pi_wrapInBaseClass($content);
+		return $this->typo3BlogFunc->pi_wrapInBaseClass($content,$this->prefixId.'-widget_bloglist');
 	}
 
 	/**

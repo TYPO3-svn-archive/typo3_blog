@@ -132,10 +132,6 @@ class tx_typo3blog_pi1 extends tslib_pibase
 				"Error :TS template not found.<br />Please include static <strong>Typo3Blog Setup (typo3_blog)</strong> configuration!"
 			);
 		}
-
-		switch ($this->conf['what_to_display']) {
-
-		}
 		$content = "No View defined";
 		return $content;
 	}
