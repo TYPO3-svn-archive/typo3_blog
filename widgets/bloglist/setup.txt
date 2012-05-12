@@ -63,7 +63,7 @@ plugin.tx_typo3blog_pi1 {
 			gravatar = TEXT
 			gravatar {
 				field = be_user_email_secure
-				wrap = <img src="http://www.gravatar.com/avatar/|.jpg?s=50" />
+				dataWrap = <img src="http://www.gravatar.com/avatar/|.jpg?s=50" alt="{field:be_user_realName}" />
 				required = 1
 			}
 
