@@ -304,7 +304,7 @@ class tx_typo3blog_widget_bloglist extends tslib_pibase
 		$posts = $GLOBALS['TYPO3_DB']->sql_num_rows($sql);
 
 		// Return count of result
-		return $posts-1;
+		return $posts;
 	}
 
 	/**
