@@ -6,5 +6,8 @@ config {
 	debug = 0
 
 	# cat=plugin.typo3blog: Layout//30; type=string; label=Domain name for Base URL: (excluding slashes and protocol like http://)
-	domain = 
+	domain =
+
+	# cat=plugin.typo3blog: Layout//40; type=boolean; label=Enable index search
+	indexsearch = 0
 }

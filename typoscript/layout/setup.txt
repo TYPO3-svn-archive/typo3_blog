@@ -26,10 +26,6 @@ lib.typo3blog_commentsForm < plugin.tx_comments_pi1
 lib.typo3blog_commentsForm {
 	templateFile = EXT:typo3_blog/res/layout/pluginTemplates/comments/template.html
 	code = FORM
-
-	requiredFields_errorWrap {
-		dataWrap = <span class="help-inline tx-comments-pi1-error">{LLL:EXT:comments/pi1/locallang.xml:error}:&#32;|</span>
-	}
 }
 
 #
@@ -37,7 +33,6 @@ lib.typo3blog_commentsForm {
 #
 lib.typo3blog_comments < plugin.tx_comments_pi1
 lib.typo3blog_comments {
-	templateFile = EXT:typo3_blog/res/layout/pluginTemplates/comments/template.html
 	code = COMMENTS
 }
 
@@ -316,14 +311,15 @@ lib.content_right {
 #
 # SWITCH CONTENT MARKER IF BLOG PAGE
 #
-[globalVar = TSFE:page|doktype=73]
+lib.content_main < plugin.tx_typo3blog_pi1.blogSingle
+
+[userFunc = user_typo3blog_pageTypeIsCategory()]
 	lib.content_main < plugin.tx_typo3blog_pi1.blogList
 	lib.content_right.30 >
 	lib.content_right.50 >
-[else]
-	lib.content_main < plugin.tx_typo3blog_pi1.blogSingle
-[global]
-
+[userFunc = user_typo3blog_ignoreToRenderAsBlogPage({$plugin.tx_typo3blog_pi1.excludePages})]
+	lib.content_main < styles.content.get
+[end]
 
 
 # Configuration page
@@ -341,6 +337,9 @@ page {
 
 		# set Base URL
 		baseURL = http://{$config.domain}/
+
+		# index search
+		index_enable = {$config.indexsearch}
 
 		# Doctype
 		doctype = html5

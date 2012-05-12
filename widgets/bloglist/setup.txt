@@ -13,6 +13,8 @@ plugin.tx_typo3blog_pi1 {
 		#Displaying elements from tt_content as preview
 		contentItemsToDisplay = {$plugin.tx_typo3blog_pi1.blogList.contentItemsToDisplay}
 
+		excludePages = {$plugin.tx_typo3blog_pi1.excludePages}
+
 		# Bloglist template file
 		templateFile = {$plugin.tx_typo3blog_pi1.blogList.templateFile}
 

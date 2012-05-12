@@ -32,3 +32,16 @@ function user_typo3blog_pageTypeIsCategory() {
 	$doktypeId = $extConf['doktypeId'] ? $extConf['doktypeId'] : 73;
 	return $GLOBALS['TSFE']->page['doktype'] == $doktypeId ? TRUE : FALSE;
 }
+
+/**
+* @author		Roland Schmidt <rsch73@gmail.com>
+* @package		TYPO3
+* @subpackage	tx_typo3blog
+*/
+function user_typo3blog_ignoreToRenderAsBlogPage($excludePages) {
+	if (t3lib_div::inList( $GLOBALS['TSFE']->page['uid'],$excludePages)) {
+		return TRUE;
+	} else {
+		return FALSE;
+	}
+}
