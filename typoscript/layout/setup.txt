@@ -1,24 +1,26 @@
 # Configuration typo3blog sample page
 ##################################################
 
+#
 # DEFINE DEFAULT CONTENT MARKER
+#
 lib.content_main < styles.content.get
 lib.content_right < styles.content.getRight
 
-# Configuration Blog and additional plugins
+
+
+# Configuration additional plugins
 ##################################################
 
 #
-# Setup plugin pagebrowse configuration set the templateFile
+# Setup plugin pagebrowse configuration
 #
 plugin.tx_pagebrowse_pi1 {
 	templateFile = EXT:typo3_blog/res/layout/pluginTemplates/pagebrowse/template.html
 }
 
-
-
 #
-# Setup plugin comments configuration for blogSingle View add FORM only
+# Setup plugin comments configuration FORM only
 #
 lib.typo3blog_commentsForm < plugin.tx_comments_pi1
 lib.typo3blog_commentsForm {
@@ -26,20 +28,16 @@ lib.typo3blog_commentsForm {
 	code = FORM
 }
 
-
-
 #
-# Setup plugin comments configuration for sidebar in add COMMENTS only
+# Setup plugin comments configuration COMMENTS only
 #
 lib.typo3blog_comments < plugin.tx_comments_pi1
 lib.typo3blog_comments {
 	code = COMMENTS
 }
 
-
-
 #
-# Setup plugin vge_tagcloud configuration for sidebar.
+# Setup plugin vge_tagcloud configuration
 #
 plugin.tx_vgetagcloud_pi1 {
 	referenceTable = pages
@@ -62,7 +60,34 @@ plugin.tx_vgetagcloud_pi1 {
 	_CSS_DEFAULT_STYLE >
 }
 
+#
+# Setup plugin form4_pages_rss
+# page rendering object for displaying a feed
+#
+form4_pages_rss = PAGE
+form4_pages_rss {
+	typeNum = 100
 
+	config.disableAllHeaderCode = 1
+	config.additionalHeaders = Content-type:text/xml
+
+	10 = USER
+	10 {
+		userFunc = tx_form4_pages_rss_pi1->main
+		feedPid = {$form4_pages_rss.feedPid}
+		item {
+			title = {$form4_pages_rss.item.title}
+			description = {$form4_pages_rss.item.description}
+			author = {$form4_pages_rss.item.author}
+			pubDate = {$form4_pages_rss.item.pubDate}
+		}
+	}
+}
+
+
+
+# Configuration typo3blog widgets
+##################################################
 
 #
 # Setup typo3blog categoryList
@@ -76,8 +101,6 @@ plugin.tx_typo3blog_pi1.categoryList {
 	3.wrap = <ul class="nav nav-list">|</ul>
 	4.wrap = <ul class="nav nav-list">|</ul>
 }
-
-
 
 #
 # Setup typo3blog bloglist
@@ -113,8 +136,6 @@ plugin.tx_typo3blog_pi1.blogList {
 	}
 }
 
-
-
 #
 # Setup typo3blog blogSingle
 #
@@ -144,11 +165,9 @@ plugin.tx_typo3blog_pi1.blogSingle {
 			required = 1
 		}
 
-		comments < lib.typo3blog_commentsForm
+		additionalfooter.10 < lib.typo3blog_commentsForm
 	}
 }
-
-
 
 #
 # Setup plugin typo3blog latest posts
@@ -165,8 +184,6 @@ plugin.tx_typo3blog_pi1.latestPosts {
 	}
 }
 
-
-
 #
 # Setup plugin typo3blog related posts
 #
@@ -182,8 +199,6 @@ plugin.tx_typo3blog_pi1.relatedPosts {
 	}
 }
 
-
-
 #
 # Setup plugin typo3blog latest comments
 #
@@ -194,8 +209,6 @@ plugin.tx_typo3blog_pi1.latestComments {
 		30.wrap = <span><i class="icon-comment"></i> | </span>
 	}
 }
-
-
 
 #
 # Setup plugin typo3blog blogroll
@@ -220,8 +233,6 @@ plugin.tx_typo3blog_pi1.blogroll {
 	}
 }
 
-
-
 #
 # Setup plugin typo3blog archive
 #
@@ -232,6 +243,9 @@ plugin.tx_typo3blog_pi1.archive {
 }
 
 
+
+# Configuration layout marker
+##################################################
 
 #
 # Setup sidebar add plugins to render in sidebar
@@ -246,8 +260,6 @@ lib.content_right {
 	60 < plugin.tx_typo3blog_pi1.blogroll
 }
 
-
-
 #
 # SWITCH CONTENT MARKER IF BLOG PAGE
 #
@@ -261,31 +273,8 @@ lib.content_right {
 
 
 
-#
-# Setup plugin form4_pages_rss
-# page rendering object for displaying a feed
-#
-form4_pages_rss = PAGE
-form4_pages_rss {
-	typeNum = 100
-
-	config.disableAllHeaderCode = 1
-	config.additionalHeaders = Content-type:text/xml
-
-	10 = USER
-	10 {
-		userFunc = tx_form4_pages_rss_pi1->main
-		feedPid = {$form4_pages_rss.feedPid}
-		item {
-			title = {$form4_pages_rss.item.title}
-			description = {$form4_pages_rss.item.description}
-			author = {$form4_pages_rss.item.author}
-			pubDate = {$form4_pages_rss.item.pubDate}
-		}
-	}
-}
-
-
+# Configuration page
+##################################################
 
 #
 # Page setup for typo3_blog

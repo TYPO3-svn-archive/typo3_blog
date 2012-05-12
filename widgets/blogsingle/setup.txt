@@ -147,8 +147,17 @@ plugin.tx_typo3blog_pi1 {
 				wrap = |
 			}
 
-			# comments setup for templatemarker '###BLOGSINGLE_COMMENTS###'
-			#comments < plugin.tx_comments_pi1
+			# additionalheader setup for templatemarker '###BLOGSINGLE_ADDITIONALHEADER###'
+			additionalheader = COA
+			additionalheader {
+
+			}
+
+			# additionalfooter setup for templatemarker '###BLOGSINGLE_ADDITIONALFOOTER###'
+			additionalfooter = COA
+			additionalfooter {
+
+			}
 		}
 	}
 }

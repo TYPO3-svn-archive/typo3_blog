@@ -151,6 +151,8 @@ class tx_typo3blog_widget_blogsingle extends tslib_pibase
 			$row['pagecontent']          = "";
 			$row['comments']             = "";
 			$row['gravatar']             = NULL;
+			$row['additionalheader']     = '';
+			$row['additionalfooter']     = '';
 
 			// Add all fields in ts
 			$this->cObj->data = $row;

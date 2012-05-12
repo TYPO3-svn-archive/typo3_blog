@@ -167,6 +167,8 @@ class tx_typo3blog_widget_bloglist extends tslib_pibase
 			$row['pagecontent']          = $this->typo3BlogFunc->getPageContent($row['uid'], $this->conf['contentItemsToDisplay']);
 			$row['showmore']             = $GLOBALS['LANG']->sL('LLL:EXT:typo3_blog/pi1/locallang.xml:tx_typo3blog_widget_bloglist.showmore');
 			$row['gravatar']             = NULL;
+			$row['additionalheader']     = '';
+			$row['additionalfooter']     = '';
 
 			// add data to ts template
 			$this->cObj->data = $row;
@@ -174,7 +176,7 @@ class tx_typo3blog_widget_bloglist extends tslib_pibase
 			// Each all records and set data in HTML template marker
 			foreach ($row as $column => $data) {
 				$this->cObj->setCurrentVal($data);
-				$data = $this->cObj->stdWrap($data, $this->conf['marker.'][$column . '.']);
+				$data = $this->cObj->cObjGetSingle($this->conf['marker.'][$column], $this->conf['marker.'][$column . '.']);
 				$this->cObj->setCurrentVal(false);
 				$markerArray['###BLOGLIST_' . strtoupper($column) . '###'] = $data;
 			}

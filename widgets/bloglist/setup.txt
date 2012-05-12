@@ -134,6 +134,18 @@ plugin.tx_typo3blog_pi1 {
 					parameter.dataWrap = {field:uid}
 				}
 			}
+
+			# additionalheader setup for templatemarker '###BLOGLIST_ADDITIONALHEADER###'
+			additionalheader = COA
+			additionalheader {
+
+			}
+
+			# additionalfooter setup for templatemarker '###BLOGLIST_ADDITIONALFOOTER###'
+			additionalfooter = COA
+			additionalfooter {
+
+			}
 		}
 	}
 }
