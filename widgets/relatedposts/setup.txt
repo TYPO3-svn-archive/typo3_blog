@@ -7,7 +7,7 @@ plugin.tx_typo3blog_pi1 {
 		wrap >
 		stdWrap {
 			outerWrap >
-			dataWrap = <div class="tx-typo3blog-pi1-widget-relatedPosts"><h3>{LLL:EXT:typo3_blog/pi1/locallang.xml:tx_typo3blog_widget_relatedposts.title}</h3> | </div>
+			dataWrap = <div class="tx-typo3blog-pi1-widget-relatedposts"><h3>{LLL:EXT:typo3_blog/pi1/locallang.xml:tx_typo3blog_widget_relatedposts.title}</h3> | </div>
 			wrap = <ul> | </ul>
 			required = 1
 		}

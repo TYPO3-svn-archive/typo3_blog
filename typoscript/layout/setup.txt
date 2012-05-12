@@ -8,95 +8,40 @@ lib.content_right < styles.content.getRight
 # Configuration Blog and additional plugins
 ##################################################
 
-#Setup typo3blog categoryList
-plugin.tx_typo3blog_pi1.categoryList {
-	stdWrap.wrap = <div class="tx-typo3blog-pi1-widget-relatedPosts well"><ul class="nav nav-list">|</ul></div>
-	2.wrap = <ul class="nav nav-list">|</ul>
-	3.wrap = <ul class="nav nav-list">|</ul>
-	4.wrap = <ul class="nav nav-list">|</ul>
-}
-
-#Setup typo3blog bloglist
-blogList < plugin.tx_typo3blog_pi1.blogList
-blogList.marker {
-	# wrap title
-	title.wrap = <h2>|</h2>
-
-	# wrap showmore link
-	showmore.typolink.ATagParams = class="btn btn-inverse"
-
-	# wrap with divider in breadcrumb
-	author {
-		wrap = <span class="divider"> /</span> |
-		required = 1
-	}
-
-	author_email {
-		wrap = <span class="divider"> /</span> |
-		required = 1
-	}
-
-	crdate {
-		wrap = <span class="divider"> /</span> |
-		required = 1
-	}
-
-	tx_typo3blog_tags {
-		wrap = <span class="divider"> /</span> |
-		required = 1
-	}
-}
-
-#Setup typo3blog blogSingle
-blogSingle < plugin.tx_typo3blog_pi1.blogSingle
-blogSingle.marker {
-	# wrap title
-	title.wrap = <h2>|</h2>
-
-	# wrap with divider in breadcrumb
-	author {
-		wrap = <span class="divider"> /</span> |
-		required = 1
-	}
-
-	author_email {
-		wrap = <span class="divider"> /</span> |
-		required = 1
-	}
-
-	crdate {
-		wrap = <span class="divider"> /</span> |
-		required = 1
-	}
-
-	tx_typo3blog_tags {
-		wrap = <span class="divider"> /</span> |
-		required = 1
-	}
-}
-
-#Setup plugin pagebrowse configuration set the templateFile
+#
+# Setup plugin pagebrowse configuration set the templateFile
+#
 plugin.tx_pagebrowse_pi1 {
 	templateFile = EXT:typo3_blog/res/layout/pluginTemplates/pagebrowse/template.html
 }
 
-#Setup plugin comments configuration for blogSingle View add FORM only
-plugin.tx_comments_pi1 {
+
+
+#
+# Setup plugin comments configuration for blogSingle View add FORM only
+#
+lib.typo3blog_commentsForm < plugin.tx_comments_pi1
+lib.typo3blog_commentsForm {
 	templateFile = EXT:typo3_blog/res/layout/pluginTemplates/comments/template.html
 	code = FORM
 }
-plugin.tx_typo3blog_pi1.blogSingle.marker.comments < plugin.tx_comments_pi1
 
 
-#Setup plugin comments configuration for sidebar in add COMMENTS only
-commentList < plugin.tx_comments_pi1
-commentList {
+
+#
+# Setup plugin comments configuration for sidebar in add COMMENTS only
+#
+lib.typo3blog_comments < plugin.tx_comments_pi1
+lib.typo3blog_comments {
 	code = COMMENTS
 }
 
-#Setup plugin vge_tagcloud configuration for sidebar.
-tagcloud < plugin.tx_vgetagcloud_pi1
-tagcloud {
+
+
+#
+# Setup plugin vge_tagcloud configuration for sidebar.
+#
+plugin.tx_vgetagcloud_pi1 {
 	referenceTable = pages
 	referenceFields = tx_typo3blog_tags
 	targetPage = {$plugin.tx_typo3blog_pi1.startPid}
@@ -117,20 +62,114 @@ tagcloud {
 	_CSS_DEFAULT_STYLE >
 }
 
-#Setup plugin typo3blog latest posts
+
+
+#
+# Setup typo3blog categoryList
+#
+plugin.tx_typo3blog_pi1.categoryList {
+	stdWrap {
+		outerWrap = <div class="tx-typo3blog-pi1-widget-categorylist well"> | </div>
+		wrap = <ul class="nav nav-list">|</ul>
+	}
+	2.wrap = <ul class="nav nav-list">|</ul>
+	3.wrap = <ul class="nav nav-list">|</ul>
+	4.wrap = <ul class="nav nav-list">|</ul>
+}
+
+
+
+#
+# Setup typo3blog bloglist
+#
+plugin.tx_typo3blog_pi1.blogList {
+	marker {
+		# wrap title
+		title.wrap = <h2> | </h2>
+
+		# wrap showmore link
+		showmore.typolink.ATagParams = class="btn btn-inverse"
+
+		# wrap with divider in breadcrumb
+		author {
+			wrap = <span class="divider"> /</span> |
+			required = 1
+		}
+
+		author_email {
+			wrap = <span class="divider"> /</span> |
+			required = 1
+		}
+
+		crdate {
+			wrap = <span class="divider"> /</span> |
+			required = 1
+		}
+
+		tx_typo3blog_tags {
+			wrap = <span class="divider"> /</span> |
+			required = 1
+		}
+	}
+}
+
+
+
+#
+# Setup typo3blog blogSingle
+#
+plugin.tx_typo3blog_pi1.blogSingle {
+	marker {
+		# wrap title
+		title.wrap = <h2> | </h2>
+
+		# wrap with divider in breadcrumb
+		author {
+			wrap = <span class="divider"> /</span> |
+			required = 1
+		}
+
+		author_email {
+			wrap = <span class="divider"> /</span> |
+			required = 1
+		}
+
+		crdate {
+			wrap = <span class="divider"> /</span> |
+			required = 1
+		}
+
+		tx_typo3blog_tags {
+			wrap = <span class="divider"> /</span> |
+			required = 1
+		}
+
+		comments < lib.typo3blog_commentsForm
+	}
+}
+
+
+
+#
+# Setup plugin typo3blog latest posts
+#
 plugin.tx_typo3blog_pi1.latestPosts {
 	wrap >
 	stdWrap {
 		wrap = <ul class="nav tx-typo3blog-link-list"> | </ul>
 	}
 	1.NO.stdWrap.cObject {
-		10.wrap = <span class="typo3blog_date"><i class="icon-user"></i>|
-		20.wrap = &nbsp;|&nbsp;</span><br />
-		30.wrap = <span class="typo3blog_latest"><i class="icon-file"></i><strong>|</strong></span>
+		10.wrap = <span class="typo3blog_date"><i class="icon-user"></i> |
+		20.wrap = &nbsp; | &nbsp;</span><br />
+		30.wrap = <span class="typo3blog_latest"><i class="icon-file"></i><strong> | </strong></span>
 	}
 }
 
-#Setup plugin typo3blog related posts
+
+
+#
+# Setup plugin typo3blog related posts
+#
 plugin.tx_typo3blog_pi1.relatedPosts {
 	wrap >
 	stdWrap {
@@ -143,14 +182,24 @@ plugin.tx_typo3blog_pi1.relatedPosts {
 	}
 }
 
+
+
+#
+# Setup plugin typo3blog latest comments
+#
 plugin.tx_typo3blog_pi1.latestComments {
-	stdWrap.wrap = <ul class="nav tx-typo3blog-link-list">|</ul>
+	stdWrap.wrap = <ul class="nav tx-typo3blog-link-list"> | </ul>
 	renderObj {
-		5.wrap = <span><i class="icon-user"></i>|
-		30.wrap = <span><i class="icon-comment"></i>|</span>
+		5.wrap = <span><i class="icon-user"></i> |
+		30.wrap = <span><i class="icon-comment"></i> | </span>
 	}
 }
 
+
+
+#
+# Setup plugin typo3blog blogroll
+#
 plugin.tx_typo3blog_pi1.blogroll {
 	conf.tx_typo3blog_blogroll {
 		10.field >
@@ -166,37 +215,56 @@ plugin.tx_typo3blog_pi1.blogroll {
 	}
 	stdWrap {
 		outerWrap = <div class="tx-typo3blog-pi1-widget-blogroll well"> | </div>
-		wrap = <ul class="nav nav-list">|</ul>
+		wrap = <ul class="nav nav-list"> | </ul>
 		required = 1
 	}
 }
 
-#Setup sidebar add plugins to render in sidebar
-typo3blog.sidebar = COA
-typo3blog.sidebar {
+
+
+#
+# Setup plugin typo3blog archive
+#
+plugin.tx_typo3blog_pi1.archive {
+	stdWrap {
+		outerWrap = <div class="tx-typo3blog-pi1-widget-archive well"> | </div>
+	}
+}
+
+
+
+#
+# Setup sidebar add plugins to render in sidebar
+#
+lib.content_right = COA
+lib.content_right {
 	10 < plugin.tx_typo3blog_pi1.categoryList
 	20 < plugin.tx_typo3blog_pi1.calendar
-	30 < commentList
+	30 < lib.typo3blog_comments
 	40 < plugin.tx_typo3blog_pi1.archive
 	50 < plugin.tx_typo3blog_pi1.relatedPosts
 	60 < plugin.tx_typo3blog_pi1.blogroll
 }
 
-#SWITCH CONTENT MARKER IF BLOG PAGE
+
+
+#
+# SWITCH CONTENT MARKER IF BLOG PAGE
+#
 [globalVar = TSFE:page|doktype=73]
-	lib.content_main < blogList
-	typo3blog.sidebar.30 >
-	typo3blog.sidebar.50 >
+	lib.content_main < plugin.tx_typo3blog_pi1.blogList
+	lib.content_right.30 >
+	lib.content_right.50 >
 [else]
-	lib.content_main < blogSingle
+	lib.content_main < plugin.tx_typo3blog_pi1.blogSingle
 [global]
 
-# Add output to sidebar
-lib.content_right < typo3blog.sidebar
 
 
+#
 # Setup plugin form4_pages_rss
 # page rendering object for displaying a feed
+#
 form4_pages_rss = PAGE
 form4_pages_rss {
 	typeNum = 100
@@ -217,14 +285,11 @@ form4_pages_rss {
 	}
 }
 
-# include rss feeds in html header
-page.headerData.100 = USER
-page.headerData.100 {
-	userFunc = tx_form4_pages_rss_pi1->includeHead
-	feedPid = {$form4_pages_rss.feedPid}
-}
 
+
+#
 # Page setup for typo3_blog
+#
 page = PAGE
 page {
 	config {
@@ -265,6 +330,13 @@ page {
 		typo3_blog_bootstrap = EXT:typo3_blog/res/layout/js/bootstrap.js
 	}
 
+	# include rss feeds in html header
+	headerData.100 = USER
+	headerData.100 {
+		userFunc = tx_form4_pages_rss_pi1->includeHead
+		feedPid = {$form4_pages_rss.feedPid}
+	}
+
 	# Setup site template
 	10 = TEMPLATE
 	10 {
@@ -288,7 +360,7 @@ page {
 		subparts.EXTENDED_NORMAL_2 < plugin.tx_typo3blog_pi1.latestComments
 
 		#Content Normal
-		subparts.EXTENDED_NORMAL_3 < tagcloud
+		subparts.EXTENDED_NORMAL_3 < plugin.tx_vgetagcloud_pi1
 
 		# Content RIGHT
 		subparts.CONTENT_RIGHT < lib.content_right

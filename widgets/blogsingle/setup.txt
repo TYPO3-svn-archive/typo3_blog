@@ -7,6 +7,10 @@ plugin.tx_typo3blog_pi1 {
 		# Bloglist template file
 		templateFile = EXT:typo3_blog/widgets/blogsingle/template.html
 
+		stdWrap {
+			outerWrap = <div class="tx-typo3blog-pi1-widget-blogsingle"> | </div>
+		}
+
 		# SECTION TEMPLATE MARKER FOR BLOGLIST TEMPLATE
 		#----------------------------------------------------
 		marker {

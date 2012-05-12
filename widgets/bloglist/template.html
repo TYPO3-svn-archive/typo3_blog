@@ -46,9 +46,11 @@ BE_USER_EMAIL_SECURE - MD5 from BE_USER_EMAIL (used for gravatar)
 <br />
 <br />
 
+
+
 <!-- ###BLOGLIST_TEMPLATE### begin-->
 	<!--###ITEM### begin -->
-
+	<div id="blog###BLOGLIST_UID###">
 		###BLOGLIST_GRAVATAR###
 		###BLOGLIST_TITLE###
 		<ul class="breadcrumb">
@@ -61,11 +63,12 @@ BE_USER_EMAIL_SECURE - MD5 from BE_USER_EMAIL (used for gravatar)
 		###BLOGLIST_PAGECONTENT###
 		###BLOGLIST_SHOWMORE###
 		<hr />
-		<!--###ITEM### end -->
+	</div>
+	<!--###ITEM### end -->
+	###BLOGLIST_PAGEBROWSER###
+<!-- ###BLOGLIST_TEMPLATE### end -->
 
-		###BLOGLIST_PAGEBROWSER###
-	<!-- ###BLOGLIST_TEMPLATE### end -->
 
 
-	</body>
-	</html>
+</body>
+</html>
