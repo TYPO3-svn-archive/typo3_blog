@@ -157,32 +157,25 @@ class tx_typo3blog_widget_bloglist extends tslib_pibase
 					'WHERE'  => "uid = '" . intval($row['tx_typo3blog_author']) . "' " . $this->cObj->enableFields('be_users'),
 				)
 			);
+			// add additional data to ts template
 			$row_user = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($sql_user);
 			$row['be_user_username']     = $row_user['username'];
 			$row['be_user_realName']     = $row_user['realName'];
 			$row['be_user_email']        = $row_user['email'];
 			$row['be_user_email_secure'] = md5($row_user['email']);
-
-			// add additional data to ts template
-			$row['category'] = $this->typo3BlogFunc->getPostCategoryName($row['pid'], 'title');
-			$row['pagecontent'] = $this->typo3BlogFunc->getPageContent($row['uid'], $this->conf['contentItemsToDisplay']);
-			$row['showmore'] = $GLOBALS['LANG']->sL('LLL:EXT:typo3_blog/pi1/locallang.xml:tx_typo3blog_widget_bloglist.showmore');
-			$row['gravatar'] = NULL;
+			$row['category']             = $this->typo3BlogFunc->getPostCategoryName($row['pid'], 'title');
+			$row['pagecontent']          = $this->typo3BlogFunc->getPageContent($row['uid'], $this->conf['contentItemsToDisplay']);
+			$row['showmore']             = $GLOBALS['LANG']->sL('LLL:EXT:typo3_blog/pi1/locallang.xml:tx_typo3blog_widget_bloglist.showmore');
+			$row['gravatar']             = NULL;
 
 			// add data to ts template
 			$this->cObj->data = $row;
 
 			// Each all records and set data in HTML template marker
 			foreach ($row as $column => $data) {
-				if ($this->conf['marker.'][$column]) {
-					$this->cObj->setCurrentVal($data);
-					$data = $this->cObj->cObjGetSingle($this->conf['marker.'][$column], $this->conf['marker.'][$column . '.']);
-					$this->cObj->setCurrentVal(false);
-				}
-				else {
-					$data = $this->cObj->stdWrap($data, $this->conf['marker.'][$column . '.']);
-					$this->cObj->setCurrentVal(false);
-				}
+				$this->cObj->setCurrentVal($data);
+				$data = $this->cObj->stdWrap($data, $this->conf['marker.'][$column . '.']);
+				$this->cObj->setCurrentVal(false);
 				$markerArray['###BLOGLIST_' . strtoupper($column) . '###'] = $data;
 			}
 			$subparts['###ITEM###'] .= $this->cObj->substituteMarkerArrayCached($subpartItem, $markerArray);
