@@ -67,7 +67,7 @@ plugin.tx_typo3blog_pi1 {
 	latestComments.itemsToDisplay = 5
 
 	# cat=plugin.typo3blog: widget latestComments/basic/020; type=string; label=Crop content in latestComments   (see manual!)
-	latestComments.cropContentAfter = 60
+	latestComments.cropContentAfter = 50
 
 
 

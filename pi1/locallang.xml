@@ -13,6 +13,7 @@
 			<label index="tx_typo3blog_widget_relatedposts.title">Related Posts</label>
 			<label index="tx_typo3blog_widget_tagcloud.title">Tagcloud</label>
 			<label index="tx_typo3blog_widget_blogroll.title">Blogroll</label>
+            <label index="tx_typo3blog_widget_categorylist.title">Category</label>
 			<label index="tx_typo3blog_widget_bloglist.showmore">read more...</label>
 		</languageKey>
 		<languageKey index="de" type="array">
@@ -23,6 +24,7 @@
 			<label index="tx_typo3blog_widget_relatedposts.title">Verwandte Posts</label>
 			<label index="tx_typo3blog_widget_tagcloud.title">Wortwolke</label>
 			<label index="tx_typo3blog_widget_blogroll.title">Blogrolle</label>
+            <label index="tx_typo3blog_widget_categorylist.title">Kategorie</label>
 			<label index="tx_typo3blog_widget_bloglist.showmore">weiterlesen...</label>
 		</languageKey>
 	</data>

@@ -44,7 +44,6 @@ plugin.tx_typo3blog_pi1 {
 						crop = {$plugin.tx_typo3blog_pi1.latestComments.cropContentAfter}
 					}
 				}
-				wrap = <span>|</span>
 				typolink {
 					parameter.cObject = TEXT
 					parameter.cObject {

@@ -181,7 +181,7 @@ plugin.tx_typo3blog_pi1.blogSingle {
 plugin.tx_typo3blog_pi1.latestPosts {
 	wrap >
 	stdWrap {
-		wrap = <ul class="nav tx-typo3blog-link-list"> | </ul>
+		wrap = <ul class="nav nav-list tx-typo3blog-link-list"> | </ul>
 	}
 	1.NO.stdWrap.cObject {
 		10.wrap = <span class="typo3blog_date"><i class="icon-user"></i> |
@@ -194,9 +194,9 @@ plugin.tx_typo3blog_pi1.latestPosts {
 # Setup plugin typo3blog related posts
 #
 plugin.tx_typo3blog_pi1.relatedPosts {
-	wrap >
 	stdWrap {
-		wrap = <ul class="nav tx-typo3blog-link-list"> | </ul>
+		dataWrap = <div class="tx-typo3blog-pi1-widget-relatedposts well"><h3>{LLL:EXT:typo3_blog/pi1/locallang.xml:tx_typo3blog_widget_relatedposts.title}</h3> | </div>
+		wrap = <ul class="nav nav-list tx-typo3blog-link-list"> | </ul>
 	}
 	1.NO.stdWrap.cObject {
 		10.wrap = <span class="typo3blog_date"><i class="icon-user"></i> |
@@ -209,10 +209,10 @@ plugin.tx_typo3blog_pi1.relatedPosts {
 # Setup plugin typo3blog latest comments
 #
 plugin.tx_typo3blog_pi1.latestComments {
-	stdWrap.wrap = <ul class="nav tx-typo3blog-link-list"> | </ul>
+	stdWrap.wrap = <ul class="nav nav-list tx-typo3blog-link-list"> | </ul>
 	renderObj {
-		5.wrap = <span><i class="icon-user"></i> |
-		30.wrap = <span><i class="icon-comment"></i> | </span>
+		10.stdWrap.cObject.5.wrap = <span><i class="icon-user"></i> |
+		10.stdWrap.cObject.30.wrap = <span><i class="icon-comment"></i> | </span>
 	}
 }
 
