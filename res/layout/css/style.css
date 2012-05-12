@@ -48,7 +48,9 @@ div.well {
 	padding-left: 3px;
 }
 
-.tx-comments-comment-1, .tx-comments-comment-2 {
+.tx-comments-no-comments,
+.tx-comments-comment-1,
+.tx-comments-comment-2 {
 	border: none !important;
 	padding: 5px 15px !important;
 }
