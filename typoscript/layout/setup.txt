@@ -108,7 +108,28 @@ plugin.tx_typo3blog_pi1.categoryList {
 plugin.tx_typo3blog_pi1.blogList {
 	marker {
 		# wrap title
-		title.wrap = <h2> | </h2>
+		title >
+		title = COA
+		title {
+			wrap = <div class="tx-typo3blog-pi1-post-title row"> | </div>
+			10 = TEXT
+			10 {
+				wrap = <h2 class="pull-left"> | </h2>
+				field = title
+				typolink {
+					parameter.dataWrap = {field:uid}
+					useCacheHash = 1
+				}
+			}
+			20 = TEXT
+			20 {
+				outerWrap = <div class="pull-right"> | </div>
+				field = be_user_email_secure
+				dataWrap = <img src="http://www.gravatar.com/avatar/|.jpg?s=50" alt="{field:be_user_realName}" />
+				required = 1
+			}
+		}
+		gravatar >
 
 		# wrap showmore link
 		showmore.typolink.ATagParams = class="btn btn-inverse"
@@ -142,7 +163,28 @@ plugin.tx_typo3blog_pi1.blogList {
 plugin.tx_typo3blog_pi1.blogSingle {
 	marker {
 		# wrap title
-		title.wrap = <h2> | </h2>
+		title >
+		title = COA
+		title {
+			wrap = <div class="tx-typo3blog-pi1-post-title row"> | </div>
+			10 = TEXT
+			10 {
+				wrap = <h2 class="pull-left"> | </h2>
+				field = title
+				typolink {
+					parameter.dataWrap = {field:uid}
+					useCacheHash = 1
+				}
+			}
+			20 = TEXT
+			20 {
+				outerWrap = <div class="pull-right"> | </div>
+				field = be_user_email_secure
+				dataWrap = <img src="http://www.gravatar.com/avatar/|.jpg?s=50" alt="{field:be_user_realName}" />
+				required = 1
+			}
+		}
+		gravatar >
 
 		# wrap with divider in breadcrumb
 		author {

@@ -71,5 +71,12 @@
 
 .tx-vgetagcloud-pi1 ul {
 	padding-left: 15px;
-    padding-right: 15px;
+	padding-right: 15px;
+}
+
+.row.tx-typo3blog-pi1-post-title {
+	margin-left: 0;
+}
+.row.tx-typo3blog-pi1-post-title h2 {
+	margin-top: .5em;
 }
