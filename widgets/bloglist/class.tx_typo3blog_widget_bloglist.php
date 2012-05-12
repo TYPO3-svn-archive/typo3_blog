@@ -165,7 +165,7 @@ class tx_typo3blog_widget_bloglist extends tslib_pibase
 			$row['be_user_email_secure'] = md5($row_user['email']);
 			$row['category']             = $this->typo3BlogFunc->getPostCategoryName($row['pid'], 'title');
 			$row['pagecontent']          = $this->typo3BlogFunc->getPageContent($row['uid'], $this->conf['contentItemsToDisplay']);
-			$row['showmore']             = $GLOBALS['LANG']->sL('LLL:EXT:typo3_blog/pi1/locallang.xml:tx_typo3blog_widget_bloglist.showmore');
+			$row['showmore']             = NULL;
 			$row['gravatar']             = NULL;
 			$row['additionalheader']     = '';
 			$row['additionalfooter']     = '';

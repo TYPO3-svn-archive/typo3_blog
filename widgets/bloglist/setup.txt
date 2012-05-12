@@ -135,7 +135,7 @@ plugin.tx_typo3blog_pi1 {
 			# showMore setup for templatemarker '###BLOGLIST_SHOWMORE###'
 			showmore = TEXT
 			showmore {
-				field = showmore
+				data = LLL:EXT:typo3_blog/pi1/locallang.xml:tx_typo3blog_widget_bloglist.showmore
 				wrap = |
 				required = 1
 				typolink {
