@@ -251,10 +251,10 @@ class tx_typo3blog_widget_bloglist extends tslib_pibase
 	 */
 	private function getPageBrowseLimit()
 	{
-		if (!$_GET['tx_typo3blog_widget_bloglist']['page']) {
+		if (!$this->piVars['page']) {
 			$limit = 0;
 		} else {
-			$limit = $_GET['tx_typo3blog_widget_bloglist']['page'] * $this->conf['itemsToDisplay'];
+			$limit = $this->piVars['page'] * $this->conf['itemsToDisplay'];
 		}
 		return $limit;
 	}
