@@ -16,10 +16,10 @@
 <!-- ###COMMENT_LIST### begin
 	This subpart formats comments
 -->
-<a id="tx-comments-comments-###UID###"></a>
-<div class="tx-comments-comments">
+<div class="tx-comments-comments well">
 
 	<!-- ###CONTENT### begin -->
+	<h3>Kommentare</h3>
 	<!-- ###SINGLE_COMMENT### begin
 		   A single comment in the list. Possible markers:
 			   ALTERNATE		- "-1" for odd and "-2" for even entries, allows to have alternating styles
@@ -31,9 +31,12 @@
 			   COMMENT_DATE	- date when posted
 			   COMMENT_CONTENT	- content of the comment (nl2br + htmlspecialchars)
 	   -->
+
 	<div class="tx-comments-comment###ALTERNATE###">
+		<a id="tx-comments-comments-###UID###"></a>
+
 		<span class="tx-comments-comment-name"><a href="###EMAIL###">###FIRSTNAME###</a></span>, <span class="tx-comments-comment-date">###COMMENT_DATE###</span>:
-		<hr size="1" />
+
 		<div class="tx-comments-comment-content">
 			###COMMENT_CONTENT###
 		</div>

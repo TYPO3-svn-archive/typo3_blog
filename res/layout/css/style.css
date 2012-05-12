@@ -47,3 +47,14 @@
 .tx-typo3blog-pi1-widget-archive .treeview a {
 	padding-left: 3px;
 }
+
+.tx-comments-comment-1, .tx-comments-comment-2 {
+	border: none !important;
+	padding: 5px 15px !important;
+}
+
+.tx-comments-comment-content {
+	border-top: 1px solid #E5E5E5;
+	padding: 5px 0 !important;
+	margin-top: 5px;
+}
