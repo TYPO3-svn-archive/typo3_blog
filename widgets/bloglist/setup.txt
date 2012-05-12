@@ -37,23 +37,26 @@ plugin.tx_typo3blog_pi1 {
 			# page field crdate (format as date '%d.%m.%Y' via strftime) setup for templatemarker '###BLOGLIST_CRDATE###'
 			crdate = TEXT
 			crdate {
-				wrap = |
 				field = crdate
 				strftime = {$plugin.tx_typo3blog_pi1.dateFromat}
+				wrap = <li> | </li>
+				required = 1
 			}
 
 			# page field author setup for templatemarker '###BLOGLIST_AUTHOR###'
 			author = TEXT
 			author {
 				field = be_user_realName
-				wrap = |
+				wrap = <li> | </li>
+				required = 1
 			}
 
 			# page field author_email setup for templatemarker '###BLOGLIST_AUTHOR_EMAIL###'
 			author_email = TEXT
 			author_email {
 				field = be_user_email
-				wrap = |
+				wrap = <li> | </li>
+				required = 1
 			}
 
 			# page field author_email as gravatar setup for templatemarker '###BLOGLIST_GRAVATAR###'
@@ -61,13 +64,15 @@ plugin.tx_typo3blog_pi1 {
 			gravatar {
 				field = be_user_email_secure
 				wrap = <img src="http://www.gravatar.com/avatar/|.jpg?s=50" />
+				required = 1
 			}
 
 			# page field title (from parent page) setup for templatemarker '###BLOGLIST_CATEGORY###'
 			category = TEXT
 			category {
-				wrap = |
 				field = category
+				wrap = <li> | </li>
+				required = 1
 				typolink {
 					parameter.dataWrap = {field:pid}
 					useCacheHash = 1
@@ -79,6 +84,7 @@ plugin.tx_typo3blog_pi1 {
 			tx_typo3blog_tags {
 				if.isTrue.field = tx_typo3blog_tags
 				wrap = |
+				required = 1
 
 				10 = TEXT
 				10.data = LLL:EXT:typo3_blog/pi1/locallang.xml:tx_typo3blog_tags
@@ -122,7 +128,8 @@ plugin.tx_typo3blog_pi1 {
 			pagecontent = TEXT
 			pagecontent {
 				field = pagecontent
-				wrap  = |
+				wrap = |
+				required = 1
 			}
 
 			# showMore setup for templatemarker '###BLOGLIST_SHOWMORE###'
@@ -130,6 +137,7 @@ plugin.tx_typo3blog_pi1 {
 			showmore {
 				field = showmore
 				wrap = |
+				required = 1
 				typolink {
 					parameter.dataWrap = {field:uid}
 				}

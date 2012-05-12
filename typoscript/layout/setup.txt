@@ -115,22 +115,22 @@ plugin.tx_typo3blog_pi1.blogList {
 
 		# wrap with divider in breadcrumb
 		author {
-			wrap = <span class="divider"> /</span> |
+			wrap = <li><span class="divider">/</span> | </li>
 			required = 1
+			typolink {
+				parameter.field = be_user_email
+			}
 		}
 
-		author_email {
-			wrap = <span class="divider"> /</span> |
-			required = 1
-		}
+		author_email >
 
 		crdate {
-			wrap = <span class="divider"> /</span> |
+			wrap = <li><span class="divider">/</span> | </li>
 			required = 1
 		}
 
 		tx_typo3blog_tags {
-			wrap = <span class="divider"> /</span> |
+			wrap = <li><span class="divider">/</span> | </li>
 			required = 1
 		}
 	}
@@ -146,22 +146,22 @@ plugin.tx_typo3blog_pi1.blogSingle {
 
 		# wrap with divider in breadcrumb
 		author {
-			wrap = <span class="divider"> /</span> |
+			wrap = <li><span class="divider">/</span> | </li>
 			required = 1
+			typolink {
+				parameter.field = be_user_email
+			}
 		}
 
-		author_email {
-			wrap = <span class="divider"> /</span> |
-			required = 1
-		}
+		author_email >
 
 		crdate {
-			wrap = <span class="divider"> /</span> |
+			wrap = <li><span class="divider">/</span> | </li>
 			required = 1
 		}
 
 		tx_typo3blog_tags {
-			wrap = <span class="divider"> /</span> |
+			wrap = <li><span class="divider">/</span> | </li>
 			required = 1
 		}
 
@@ -311,6 +311,10 @@ page {
 		# Cache settings
 		cache_period = 43200
 		sendCacheHeaders = 1
+
+		// Protect mail addresses from spamming
+		spamProtectEmailAddresses = -3
+		spamProtectEmailAddresses_atSubst = @<span style="display:none;">remove-this.</span>
 	}
 
 	# INSERT CSS FILES

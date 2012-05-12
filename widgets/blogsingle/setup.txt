@@ -45,37 +45,42 @@ plugin.tx_typo3blog_pi1 {
 			# page field crdate (format as date '%d.%m.%Y' via strftime) setup for templatemarker '###BLOGSINGLE_CRDATE###'
 			crdate = TEXT
 			crdate {
-				wrap = |
 				field = crdate
 				strftime = {$plugin.tx_typo3blog_pi1.dateFromat}
+				wrap = <li> | </li>
+				required = 1
 			}
 
 			# page field author setup for templatemarker '###BLOGSINGLE_AUTHOR###'
 			author = TEXT
 			author {
 				field = be_user_realName
-				wrap = |
+				wrap = <li> | </li>
+				required = 1
 			}
 
 			# page field autor_email setup for templatemarker '###BLOGSINGLE_AUTHOR_EMAIL###'
 			author_email = TEXT
 			author_email {
 				field = be_user_email
-				wrap = |
+				wrap = <li> | </li>
+				required = 1
 			}
 
 			# page field nav_title setup for templatemarker '###BLOGSINGLE_NAV_TITLE###'
 			nav_title = TEXT
 			nav_title {
-				wrap = |
 				field = nav_title
+				wrap = <li> | </li>
+				required = 1
 			}
 
 			# page field title (from parent page) setup for templatemarker '###BLOGSINGLE_CATEGORY###'
 			category = TEXT
 			category {
-				wrap = |
 				field = category
+				wrap = <li> | </li>
+				required = 1
 				typolink {
 					parameter.dataWrap = {field:pid}
 					useCacheHash = 1
@@ -86,7 +91,8 @@ plugin.tx_typo3blog_pi1 {
 			tx_typo3blog_tags = COA
 			tx_typo3blog_tags {
 				if.isTrue.field = {$plugin.tx_typo3blog_pi1.blogSingle.columnWithTags}
-				wrap = |
+				wrap = <li> | </li>
+				required = 1
 
 				10 = TEXT
 				10.data = LLL:EXT:typo3_blog/pi1/locallang.xml:tx_typo3blog_tags
