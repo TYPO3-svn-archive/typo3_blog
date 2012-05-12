@@ -137,13 +137,14 @@ class tx_typo3blog_widget_bloglist extends tslib_pibase
 		$markers = array();
 
 		// Query to load current category page with all post pages in rootline
-		$sql = $GLOBALS['TYPO3_DB']->exec_SELECT_queryArray(array(
-				'SELECT'	=> '*',
-				'FROM'		=> 'pages',
-				'WHERE'		=> 'pid IN (' . $this->getPostByRootLine() . ') '.$this->cObj->enableFields('pages').' AND doktype != ' . $this->blog_doktype_id . ' ' . $this->getWhereFilterQuery(),
-				'GROUPBY'	=> '',
-				'ORDERBY'	=> 'crdate DESC',
-				'LIMIT'		=> intval($this->getPageBrowseLimit()) . ',' . intval($this->conf['itemsToDisplay'])
+		$sql = $GLOBALS['TYPO3_DB']->exec_SELECT_queryArray(
+			array(
+				'SELECT'  => '*',
+				'FROM'    => 'pages',
+				'WHERE'   => 'pid IN (' . $this->getPostByRootLine() . ') '.$this->cObj->enableFields('pages').' AND doktype != ' . $this->blog_doktype_id . ' ' . $this->getWhereFilterQuery(),
+				'GROUPBY' => '',
+				'ORDERBY' => 'crdate DESC',
+				'LIMIT'   => intval($this->getPageBrowseLimit()) . ',' . intval($this->conf['itemsToDisplay'])
 			)
 		);
 
@@ -151,9 +152,9 @@ class tx_typo3blog_widget_bloglist extends tslib_pibase
 		while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($sql)) {
 			$sql_user = $GLOBALS['TYPO3_DB']->exec_SELECT_queryArray(
 				array(
-					'SELECT'	=> '*',
-					'FROM'		=> 'be_users',
-					'WHERE'		=> "uid = '" . intval($row['tx_typo3blog_author']) . "' " . $this->cObj->enableFields('be_users'),
+					'SELECT' => '*',
+					'FROM'   => 'be_users',
+					'WHERE'  => "uid = '" . intval($row['tx_typo3blog_author']) . "' " . $this->cObj->enableFields('be_users'),
 				)
 			);
 			$row_user = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($sql_user);
@@ -165,7 +166,7 @@ class tx_typo3blog_widget_bloglist extends tslib_pibase
 			// add additional data to ts template
 			$row['category'] = $this->typo3BlogFunc->getPostCategoryName($row['pid'], 'title');
 			$row['pagecontent'] = $this->typo3BlogFunc->getPageContent($row['uid'], $this->conf['contentItemsToDisplay']);
-			$row['showmore'] = "weiterlesen...";
+			$row['showmore'] = $GLOBALS['LANG']->sL('LLL:EXT:typo3_blog/pi1/locallang.xml:tx_typo3blog_widget_bloglist.showmore');
 			$row['gravatar'] = NULL;
 
 			// add data to ts template
