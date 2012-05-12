@@ -58,3 +58,18 @@
 	padding: 5px 0 !important;
 	margin-top: 5px;
 }
+
+.extended_main {
+	padding: 8px 0;
+}
+
+.tx-typo3blog-pi1-widget-latestposts h3,
+.tx-typo3blog-pi1-widget-latestcomments h3,
+.tx-vgetagcloud-pi1 h3 {
+	padding-left: 15px;
+}
+
+.tx-vgetagcloud-pi1 ul {
+	padding-left: 15px;
+    padding-right: 15px;
+}
