@@ -165,7 +165,13 @@ plugin.tx_typo3blog_pi1.blogSingle {
 			required = 1
 		}
 
-		additionalfooter.10 < lib.typo3blog_commentsForm
+		# if tx_typo3blog_allow_comments true show comments form
+		additionalfooter.10 = TEXT
+		additionalfooter.10 {
+			if.isTrue.field = tx_typo3blog_allow_comments
+			stdWrap.cObject = CONTENT
+			stdWrap.cObject < lib.typo3blog_commentsForm
+		}
 	}
 }
 
