@@ -1,2 +1,5 @@
 # cat=basic; type=integer; label=doktype Id: The doktype id for the new Blog page type (default 73)
 doktypeId = 73
+
+# cat=basic; type=integer; label=allow Comments: Enable (1) or disable (0) comments as default (default 1)
+allowComments = 1

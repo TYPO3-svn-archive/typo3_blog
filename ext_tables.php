@@ -30,6 +30,9 @@ if(!is_object($GLOBALS['BE_USER']))  {
 	define('TYPO3_PROCEED_IF_NO_USER', false);
 }
 
+// Get extConf
+$extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$_EXTKEY]);
+
 $tempColumns = array (
 	'tx_typo3blog_author' => array (
 		'exclude' => 1,
@@ -52,6 +55,7 @@ $tempColumns = array (
 		'label' => 'LLL:EXT:typo3_blog/locallang_db.xml:pages.tx_typo3blog_allow_comments',
 		'config' => array (
 			'type' => 'check',
+			'default' => $extConf['allowComments'],
 		)
 	),
 	'tx_typo3blog_tags' => array (
