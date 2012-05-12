@@ -41,3 +41,9 @@
 .tx_typo3blog_widget_archive ul {
 	background-color: transparent;
 }
+.tx-typo3blog-pi1-widget-archive .treeview li {
+	padding: 0 0 2px 16px;
+}
+.tx-typo3blog-pi1-widget-archive .treeview a {
+	padding-left: 3px;
+}
