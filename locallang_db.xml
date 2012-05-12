@@ -12,7 +12,7 @@
 			<label index="pages.tx_typo3blog_allow_comments">Allow comments on blog page</label>
 			<label index="pages.tx_typo3blog_tags">Set tags on blog page</label>
 
-			<label index="tx_typo3blog_blogroll">Blogroll</label>
+			<label index="tx_typo3blog_blogrolls">Blogroll</label>
 			<label index="tx_typo3blog_blogroll.name">Name</label>
 			<label index="tx_typo3blog_blogroll.link">Link</label>
 		</languageKey>
