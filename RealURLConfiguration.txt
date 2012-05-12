@@ -19,6 +19,11 @@ Copy the following part ('typo3blog') in to the postVarSets section/array of you
 						'GETvar' => 'tx_typo3blog_pi1[tagsearch]',
 					)
 				),
+				'blog-page' => array (
+					array(
+						'GETvar' => 'tx_typo3blog_pi1[page]',
+					)
+				),
 			<<<< SNAP >>>>
 
 
