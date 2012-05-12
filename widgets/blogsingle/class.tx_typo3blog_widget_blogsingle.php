@@ -160,7 +160,9 @@ class tx_typo3blog_widget_blogsingle extends tslib_pibase
 			// Set all fields from ts in template marker
 			foreach ($row as $column => $value) {
 				$this->cObj->setCurrentVal($value);
-				$value = $this->cObj->cObjGetSingle($this->conf['marker.'][$column], $this->conf['marker.'][$column . '.']);
+				if ($this->conf['marker.'][$column]) {
+					$value = $this->cObj->cObjGetSingle($this->conf['marker.'][$column], $this->conf['marker.'][$column . '.']);
+				}
 				$this->cObj->setCurrentVal(false);
 				$markers['###BLOGSINGLE_' . strtoupper($column) . '###'] = $value;
 			}

@@ -176,7 +176,9 @@ class tx_typo3blog_widget_bloglist extends tslib_pibase
 			// Each all records and set data in HTML template marker
 			foreach ($row as $column => $data) {
 				$this->cObj->setCurrentVal($data);
-				$data = $this->cObj->cObjGetSingle($this->conf['marker.'][$column], $this->conf['marker.'][$column . '.']);
+				if ($this->conf['marker.'][$column]) {
+					$data = $this->cObj->cObjGetSingle($this->conf['marker.'][$column], $this->conf['marker.'][$column . '.']);
+				}
 				$this->cObj->setCurrentVal(false);
 				$markerArray['###BLOGLIST_' . strtoupper($column) . '###'] = $data;
 			}
