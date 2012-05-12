@@ -34,3 +34,7 @@ function tx_comments_pi1_setUserData() {
 	tx_comments_pi1_setUserDataField('email');
 	tx_comments_pi1_setUserDataField('homepage');
 }
+
+jQuery(document).ready(function(){
+	jQuery('.tx-comments-pi1-error').parents('.control-group').addClass('error');
+});

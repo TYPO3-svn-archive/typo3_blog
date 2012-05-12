@@ -74,30 +74,72 @@
 -->
 <div class="tx-comments-comment-form">
 	###TOP_MESSAGE###
-	<form action="###ACTION_URL###" method="post">
-		<fieldset class="control-group">
+	<form action="###ACTION_URL###" method="post" class="form-horizontal">
+		<fieldset>
 			<legend>###TEXT_ADD_COMMENT###</legend>
-			<input type="hidden" name="tx_comments_pi1[itemurl]" value="###CURRENT_URL###" />
-			<input type="hidden" name="tx_comments_pi1[itemurlchk]" value="###CURRENT_URL_CHK###" />
-			<p>
-				<span class="tx-comments-required-mark">*</span> ###TEXT_REQUIRED_HINT###
+			<p style="display:none;">
+				<input type="hidden" name="tx_comments_pi1[itemurl]" value="###CURRENT_URL###" />
+				<input type="hidden" name="tx_comments_pi1[itemurlchk]" value="###CURRENT_URL_CHK###" />
 			</p>
-			<label for="tx_comments_pi1_firstname">###TEXT_FIRST_NAME###</label>
-			<input class="tx-comments-comment-input span5" type="text" name="tx_comments_pi1[firstname]" id="tx_comments_pi1_firstname" value="###FIRSTNAME###" /> ###REQUIRED_FIRSTNAME### ###ERROR_FIRSTNAME###<br />
-			<label for="tx_comments_pi1_lastname">###TEXT_LAST_NAME###</label>
-			<input class="tx-comments-comment-input span5" type="text" name="tx_comments_pi1[lastname]" id="tx_comments_pi1_lastname" value="###LASTNAME###" /> ###REQUIRED_LASTNAME### ###ERROR_LASTNAME###<br />
-			<label for="tx_comments_pi1_email">###TEXT_EMAIL###</label>
-			<input class="tx-comments-comment-input span5" type="text" name="tx_comments_pi1[email]" id="tx_comments_pi1_email" value="###EMAIL###" /> ###REQUIRED_EMAIL### ###ERROR_EMAIL###<br />
-			<label for="tx_comments_pi1_homepage">###TEXT_WEB_SITE###</label>
-			<input class="tx-comments-comment-input span5" type="text" name="tx_comments_pi1[homepage]" id="tx_comments_pi1_homepage" value="###HOMEPAGE###" /> ###REQUIRED_HOMEPAGE### ###ERROR_HOMEPAGE###<br />
-			<label for="tx_comments_pi1_location">###TEXT_LOCATION###</label>
-			<input class="tx-comments-comment-input span5" type="text" name="tx_comments_pi1[location]" id="tx_comments_pi1_location" value="###LOCATION###" /> ###REQUIRED_LOCATION### ###ERROR_LOCATION###<br />
+			<div class="pull-right">
+				<span class="tx-comments-required-mark">*</span> ###TEXT_REQUIRED_HINT###
+			</div>
+
+			<div class="control-group">
+				<label class="control-label" for="tx_comments_pi1_firstname">###REQUIRED_FIRSTNAME### ###TEXT_FIRST_NAME###</label>
+				<div class="controls">
+					<input class="input-xlarge" type="text" name="tx_comments_pi1[firstname]" id="tx_comments_pi1_firstname" value="###FIRSTNAME###" />
+					###ERROR_FIRSTNAME###
+				</div>
+			</div>
+
+			<div class="control-group">
+				<label class="control-label" for="tx_comments_pi1_lastname">###REQUIRED_LASTNAME### ###TEXT_LAST_NAME###</label>
+				<div class="controls">
+					<input class="input-xlarge" type="text" name="tx_comments_pi1[lastname]" id="tx_comments_pi1_lastname" value="###LASTNAME###" />
+					###ERROR_LASTNAME###
+				</div>
+			</div>
+
+			<div class="control-group">
+				<label class="control-label" for="tx_comments_pi1_email">###REQUIRED_EMAIL### ###TEXT_EMAIL###</label>
+				<div class="controls">
+					<input class="input-xlarge" type="text" name="tx_comments_pi1[email]" id="tx_comments_pi1_email" value="###EMAIL###" />
+					###ERROR_EMAIL###
+				</div>
+			</div>
+
+			<div class="control-group">
+				<label class="control-label" for="tx_comments_pi1_homepage">###REQUIRED_HOMEPAGE### ###TEXT_WEB_SITE###</label>
+				<div class="controls">
+					<input class="input-xlarge" type="text" name="tx_comments_pi1[homepage]" id="tx_comments_pi1_homepage" value="###HOMEPAGE###" />
+					###ERROR_HOMEPAGE###
+				</div>
+			</div>
+
+			<div class="control-group">
+				<label class="control-label" for="tx_comments_pi1_location">###REQUIRED_LOCATION### ###TEXT_LOCATION###</label>
+				<div class="controls">
+					<input class="input-xlarge" type="text" name="tx_comments_pi1[location]" id="tx_comments_pi1_location" value="###LOCATION###" />
+					###ERROR_LOCATION###
+				</div>
+			</div>
+
+			<div class="control-group">
+				<label class="control-label" for="tx_comments_pi1_content">###REQUIRED_CONTENT### ###TEXT_CONTENT###</label>
+				<div class="controls">
+					<textarea class="input-xlarge" name="tx_comments_pi1[content]" id="tx_comments_pi1_content">###CONTENT###</textarea>
+					###ERROR_CONTENT###
+				</div>
+			</div>
+
 			###CAPTCHA###
-			<label for="tx_comments_pi1_content">###TEXT_CONTENT###</label>
-			<textarea class="span5" name="tx_comments_pi1[content]" id="tx_comments_pi1_content">###CONTENT###</textarea> ###REQUIRED_CONTENT### ###ERROR_CONTENT###<br />
-			<label for="tx_comments_pi1_submit">&nbsp;</label>
-			<input type="submit" class="btn btn-inverse" name="tx_comments_pi1[submit]" id="tx_comments_pi1_submit" value="###TEXT_SUBMIT###" />
-			<input type="reset" class="btn btn-inverse" value="###TEXT_RESET###" />
+
+			<div class="form-actions">
+				<input type="submit" class="btn btn-inverse" name="tx_comments_pi1[submit]" id="tx_comments_pi1_submit" value="###TEXT_SUBMIT###" />&nbsp;
+				<input type="reset" class="btn btn-inverse" value="###TEXT_RESET###" />
+			</div>
+
 			###JS_USER_DATA###
 		</fieldset>
 	</form>
@@ -137,11 +179,16 @@
 <!-- ###CAPTCHA_SUB### begin
 	This subpart formats captcha
 -->
-<label for="tx_comments_pi1-captcha">###TEXT_ENTER_CODE###</label>
-<div class="tx-comments-captcha">
-	###SR_FREECAP_IMAGE###<br />###SR_FREECAP_CANT_READ###<br />
-	<input class="tx-comments-comment-input" type="text" size="35" id="tx_comments_pi1-captcha" name="tx_comments_pi1[captcha]" value="" /> ###REQUIRED_CAPTCHA### ###ERROR_CAPTCHA###<br />
-</div>
+			<div class="control-group">
+				<label class="control-label" for="tx_comments_pi1-captcha">###REQUIRED_CAPTCHA######TEXT_ENTER_CODE###</label>
+				<div class="controls">
+					###SR_FREECAP_IMAGE###<br />
+					###SR_FREECAP_CANT_READ###<br />
+					<input class="input-xlarge" type="text" size="35" id="tx_comments_pi1-captcha" name="tx_comments_pi1[captcha]" value="" />
+					###ERROR_CAPTCHA###
+					###ERROR_CONTENT###
+				</div>
+			</div>
 <!-- ###CAPTCHA_SUB### end -->
 
 <!-- ###TTNEWS_COMMENT_COUNT_SUB### begin -->
