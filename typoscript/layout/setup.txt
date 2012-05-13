@@ -391,6 +391,8 @@ page {
 		# Define template subparts
 		workOnSubpart = DOCUMENT_BODY
 
+		subparts.INDEXSEARCHBOX < plugin.tx_typo3blog_pi1.searchbox
+
 		#Sexybookmarks
 		subparts.SEXYBOOKMARKS_PI1 < plugin.tx_sexybookmarks_pi1
 		subparts.SEXYBOOKMARKS_PI2 < plugin.tx_sexybookmarks_pi2
