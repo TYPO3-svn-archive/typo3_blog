@@ -190,7 +190,7 @@ class tx_typo3blog_widget_archive extends tslib_pibase
 			$sqlquery = $GLOBALS['TYPO3_DB']->exec_SELECT_queryArray(array(
 					'SELECT'	=> '*',
 					'FROM'		=> 'pages',
-					'WHERE'		=> 'pid IN (' . $this->getPostByRootLine() . ') AND hidden = 0 AND deleted = 0 AND doktype != ' . $this->blog_doktype_id . ' AND MONTH(FROM_UNIXTIME(crdate)) = '.intval($row['month']) . ' AND YEAR(FROM_UNIXTIME(crdate)) = ' . intval($row['year']) .$this->cObj->enableFields('pages'),
+					'WHERE'		=> 'pid IN (' . $this->getPostByRootLine() . ') AND doktype != ' . $this->blog_doktype_id . ' AND MONTH(FROM_UNIXTIME(crdate)) = '.intval($row['month']) . ' AND YEAR(FROM_UNIXTIME(crdate)) = ' . intval($row['year']) .$this->cObj->enableFields('pages') . ' '.$this->getWhereFilterQuery(),
 					'GROUPBY'	=> '',
 					'ORDERBY'	=> 'crdate DESC',
 					'LIMIT'		=> ''
@@ -299,6 +299,23 @@ class tx_typo3blog_widget_archive extends tslib_pibase
 
 		// return the string with all uid's and clean up
 		return $GLOBALS['TYPO3_DB']->cleanIntList($pidList);
+	}
+
+	/**
+	 * Get the where clause
+	 *
+	 * @return	string
+	 * @access public
+	 */
+	public function getWhereFilterQuery()
+	{
+		$where = '';
+		// ignore excluded pages from ts
+		if (strlen($this->conf['excludePages']) > 0) {
+			$where .= ' AND UID NOT IN ('.$this->conf['excludePages'].')';
+		}
+
+		return $where;
 	}
 }
 
