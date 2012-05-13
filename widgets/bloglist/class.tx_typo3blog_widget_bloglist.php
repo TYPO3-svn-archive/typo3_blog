@@ -78,6 +78,13 @@ class tx_typo3blog_widget_bloglist extends tslib_pibase
 		// Make instance of tslib_cObj
 		$this->cObj = t3lib_div::makeInstance('tslib_cObj');
 
+		// get the startPid from PI1
+		$this->parentConf = $GLOBALS["TSFE"]->tmpl->setup['plugin.']['tx_typo3blog_pi1.'];
+
+		// define the pagerenderer
+		$this->pagerenderer = t3lib_div::makeInstance('typo3blog_pagerenderer');
+		$this->pagerenderer->setConf($this->conf);
+
 		// Make instance of tslib_cObj
 		$this->typo3BlogFunc = t3lib_div::makeInstance('typo3blog_func');
 		$this->typo3BlogFunc->setCobj($this->cObj);
@@ -192,6 +199,15 @@ class tx_typo3blog_widget_bloglist extends tslib_pibase
 		// calc pages for pagebrowser
 		$pagestodisplay = ($poststotal - ($poststotal % $itemstodisplay)) / $itemstodisplay + (($poststotal % $itemstodisplay) == 0 ? 0 : 1);
 		$markers['###BLOGLIST_PAGEBROWSER###'] = $this->getListGetPageBrowser($pagestodisplay);
+
+		// Add all CSS and JS files
+		if (T3JQUERY === true) {
+			tx_t3jquery::addJqJS();
+		} else {
+			$this->pagerenderer->addJsFile($this->parentConf['jQueryLibrary']);
+			$this->pagerenderer->addJsFile($this->parentConf['jQueryCookies']);
+		}
+		$this->pagerenderer->addResources();
 
 		// Complete the template expansion by replacing the "content" marker in the template
 		$content = $this->typo3BlogFunc->substituteMarkersAndSubparts($template, $markers, $subparts);

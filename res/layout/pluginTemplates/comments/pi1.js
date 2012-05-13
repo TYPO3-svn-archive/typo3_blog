@@ -1,40 +1,21 @@
-function tx_comments_pi1_readCookie(name) {
-	var nameEQ = name + "=";
-	var ca = document.cookie.split(';');
-	for (var i = 0; i < ca.length; i++) {
-		var c = ca[i];
-		while (c.charAt(0) == ' ') {
-			c = c.substring(1, c.length);
-		}
-		if (c.indexOf(nameEQ) == 0) {
-			return unescape(c.substring(nameEQ.length,c.length)).replace(/\+/, ' ');
-		}
-	}
-	return false;
-}
 
-function tx_comments_pi1_setUserDataField(name) {
-	var	field = document.getElementById('tx_comments_pi1_' + name);
-	try {
-		if (field && field.value == '') {
-			var	value = tx_comments_pi1_readCookie('tx_comments_pi1_' + name);
-			if (typeof value == 'string') {
-				field.value = value;
-			}
-		}
-	}
-	catch (e) {
-	}
-}
+jQuery(document).ready(function() {
 
-function tx_comments_pi1_setUserData() {
-	tx_comments_pi1_setUserDataField('firstname');
-	tx_comments_pi1_setUserDataField('lastname');
-	tx_comments_pi1_setUserDataField('location');
-	tx_comments_pi1_setUserDataField('email');
-	tx_comments_pi1_setUserDataField('homepage');
-}
-
-jQuery(document).ready(function(){
+	// Set error classes on load
 	jQuery('.tx-comments-pi1-error').parents('.control-group').addClass('error');
+
+	// Load cookie values on load
+	jQuery('input[data-cookie="true"]').each(function() {
+		if ($(this).val() == '') {
+			$(this).val(jQuery.cookie(this.id));
+		}
+	});
+
+	// Save cookies on submit
+	jQuery('.tx-comments-pi1 form').bind("submit", function() {
+		jQuery('input[data-cookie="true"]').each(function() {
+			jQuery.cookie(this.id, $(this).val());
+		});
+	});
+
 });
