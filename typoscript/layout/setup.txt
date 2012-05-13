@@ -33,6 +33,7 @@ lib.typo3blog_commentsForm {
 #
 lib.typo3blog_comments < plugin.tx_comments_pi1
 lib.typo3blog_comments {
+	templateFile = EXT:typo3_blog/res/layout/pluginTemplates/comments/template.html
 	code = COMMENTS
 }
 
