@@ -158,6 +158,9 @@ plugin.tx_typo3blog_pi1.blogList {
 			wrap = <li><span class="divider">/</span> | </li>
 			required = 1
 		}
+
+		additionalfooter.10 = TEXT
+		additionalfooter.10 < plugin.tx_sexybookmarks_pi1
 	}
 }
 
@@ -211,9 +214,12 @@ plugin.tx_typo3blog_pi1.blogSingle {
 			required = 1
 		}
 
-		# if tx_typo3blog_allow_comments true show comments form
 		additionalfooter.10 = TEXT
-		additionalfooter.10 {
+ 		additionalfooter.10 < plugin.tx_sexybookmarks_pi1
+
+ 		# if tx_typo3blog_allow_comments true show comments form
+		additionalfooter.20 = TEXT
+		additionalfooter.20 {
 			if.isTrue.field = tx_typo3blog_allow_comments
 			stdWrap.cObject = CONTENT
 			stdWrap.cObject < lib.typo3blog_commentsForm
@@ -401,7 +407,6 @@ page {
 		subparts.INDEXSEARCHBOX < tt_content.search.30
 
 		#Sexybookmarks
-		subparts.SEXYBOOKMARKS_PI1 < plugin.tx_sexybookmarks_pi1
 		subparts.SEXYBOOKMARKS_PI2 < plugin.tx_sexybookmarks_pi2
 
 		#Content Normal
