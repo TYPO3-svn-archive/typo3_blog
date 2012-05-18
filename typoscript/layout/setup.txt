@@ -325,6 +325,9 @@ lib.content_main < plugin.tx_typo3blog_pi1.blogSingle
 	lib.content_main < styles.content.get
 [end]
 
+[globalVar = TSFE:id = {$plugin.tx_typo3blog_pi1.searchPid}]
+	lib.content_main < tt_content.search.20
+[end]
 
 # Configuration page
 ##################################################
@@ -395,7 +398,7 @@ page {
 		# Define template subparts
 		workOnSubpart = DOCUMENT_BODY
 
-		subparts.INDEXSEARCHBOX < plugin.tx_typo3blog_pi1.searchbox
+		subparts.INDEXSEARCHBOX < tt_content.search.30
 
 		#Sexybookmarks
 		subparts.SEXYBOOKMARKS_PI1 < plugin.tx_sexybookmarks_pi1
