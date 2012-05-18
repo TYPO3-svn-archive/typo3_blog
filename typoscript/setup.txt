@@ -4,11 +4,12 @@
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/widgets/blogsingle/setup.txt">
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/widgets/calendar/setup.txt">
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/widgets/category/setup.txt">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/widgets/indexsearch/setup.txt">
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/widgets/latestcomments/setup.txt">
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/widgets/latestposts/setup.txt">
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/widgets/relatedposts/setup.txt">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/widgets/search/setup.txt">
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/widgets/sexybookmarks/setup.txt">
-<INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/widgets/indexsearch/setup.txt">
 
 plugin.tx_typo3blog_pi1 {
 	jQueryLibrary = {$plugin.tx_typo3blog_pi1.file.jQueryLibrary}
@@ -22,5 +23,6 @@ plugin.tx_typo3blog_pi1 {
 
 	what_to_display =
 	startPid = {$plugin.tx_typo3blog_pi1.startPid}
+	searchPid = {$plugin.tx_typo3blog_pi1.searchPid}
 	entryLevel = {$plugin.tx_typo3blog_pi1.entryLevel}
 }

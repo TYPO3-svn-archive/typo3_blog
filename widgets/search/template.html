@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>tagcloud template</title>
+</head>
+
+<body>
+
+<h1>SEARCH TEMPLATES</h1>
+
+<h2>EXAMPLE</h2>
+
+
+<br/>
+<br/>
+<br/>
+<strong>Global markers, as set up in TypoScript:</strong>
+These are substituted throughout the whole template.
+
+<em>Markers:</em>
+
+
+
+<br/><br/><br/><br/>
+<hr/>
+<br/>
+
+<h3>SEARCH_TEMPLATE</h3>
+<em>This is the template for the list of posts, typically displayed on a frontpage.</em>
+<br/>
+<br/>
+<br/>
+<br/>
+
+
+
+<!-- ###SEARCH_TEMPLATE### begin-->
+	<form action="###FORM_ACTION###" id="mailform" class="form-horizontal" name="mailform" enctype="multipart/form-data" method="post" onsubmit="return validateForm('mailform','','','','')">
+		<fieldset>
+			<legend>###FORM_LEGEND###</legend>
+			<div style="display:none;">
+				<input type="hidden" name="stype" id="mailformstype" value="L0" />
+				<input type="hidden" name="locationData" value="###LOCATION_DATA###" />
+				<!--<input type="hidden" name="locationData" value="157:tt_content:459" />-->
+			</div>
+			<div class="form-horizontal">
+				<div class="control-group">
+					<label class="control-label" for="mailformsword">###SEARCHWORD_LABEL###</label>
+					<div class="controls">
+						<input type="text" name="sword" id="mailformsword" size="20" value="" />
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="mailformscols">###SEARCHIN_LABEL###</label>
+					<div class="controls">
+						<select name="scols" id="mailformscols" size="1">
+							<option value="pages.title-subtitle-keywords-description-tx_typo3blog_tags:tt_content.header-bodytext-imagecaption">###SEARCHIN_OPTION1###</option>
+							<option value="pages.title-subtitle-keywords-description-tx_typo3blog_tags:tt_content.header">###SEARCHIN_OPTION2###</option>
+							<option value="tt_content.header-bodytext-imagecaption">###SEARCHIN_OPTION3###</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-actions">
+					<input type="submit" name="submit" id="mailformsubmit" value="###SEARCH_BUTTON###" class="btn btn-inverse" />
+				</div>
+			</div>
+		</fieldset>
+	</form>
+<!-- ###SEARCH_TEMPLATE### end -->
+
+
+
+
+
+
+</body>
+</html>

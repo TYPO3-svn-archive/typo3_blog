@@ -13,8 +13,15 @@
 			<label index="tx_typo3blog_widget_relatedposts.title">Related Posts</label>
 			<label index="tx_typo3blog_widget_tagcloud.title">Tagcloud</label>
 			<label index="tx_typo3blog_widget_blogroll.title">Blogroll</label>
-            <label index="tx_typo3blog_widget_categorylist.title">Category</label>
+			<label index="tx_typo3blog_widget_categorylist.title">Category</label>
 			<label index="tx_typo3blog_widget_bloglist.showmore">read more...</label>
+			<label index="tx_typo3blog_widget_search.title">Search</label>
+			<label index="tx_typo3blog_widget_search.label.searchword">Searchword:</label>
+			<label index="tx_typo3blog_widget_search.label.searchin">Search in:</label>
+			<label index="tx_typo3blog_widget_search.option.all">Everything</label>
+			<label index="tx_typo3blog_widget_search.option.header">Headers and keywords</label>
+			<label index="tx_typo3blog_widget_search.option.content">Page content</label>
+			<label index="tx_typo3blog_widget_search.button">Search now!</label>
 		</languageKey>
 		<languageKey index="de" type="array">
 			<label index="tx_typo3blog_tags">Tags</label>
@@ -24,8 +31,15 @@
 			<label index="tx_typo3blog_widget_relatedposts.title">Verwandte Posts</label>
 			<label index="tx_typo3blog_widget_tagcloud.title">Wortwolke</label>
 			<label index="tx_typo3blog_widget_blogroll.title">Blogrolle</label>
-            <label index="tx_typo3blog_widget_categorylist.title">Kategorie</label>
+			<label index="tx_typo3blog_widget_categorylist.title">Kategorie</label>
 			<label index="tx_typo3blog_widget_bloglist.showmore">weiterlesen...</label>
+			<label index="tx_typo3blog_widget_search.title">Suche</label>
+			<label index="tx_typo3blog_widget_search.label.searchword">Suchwort:</label>
+			<label index="tx_typo3blog_widget_search.label.searchin">Suche in:</label>
+			<label index="tx_typo3blog_widget_search.option.all">Alles</label>
+			<label index="tx_typo3blog_widget_search.option.header">Titel und Schlagwörter</label>
+			<label index="tx_typo3blog_widget_search.option.content">Seiteninhalt</label>
+			<label index="tx_typo3blog_widget_search.button">Suchen</label>
 		</languageKey>
 	</data>
 </T3locallang>

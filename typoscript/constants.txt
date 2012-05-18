@@ -28,16 +28,19 @@ plugin.tx_typo3blog_pi1 {
 	# cat=plugin.typo3blog: Basic/basic/010; type=string; label=Start PID:The PID where for blog start page (see manual!)
 	startPid =
 
-	# cat=plugin.typo3blog: Basic/basic/020; type=string; label=Entry Level: The entrylevel to the root-template (distance to root)
+	# cat=plugin.typo3blog: Basic/basic/020; type=string; label=Search page UID: Page UID where the search form is defined
+	searchPid =
+
+	# cat=plugin.typo3blog: Basic/basic/030; type=string; label=Entry Level: The entrylevel to the root-template (distance to root)
 	entryLevel = 0
 
-	# cat=plugin.typo3blog: Basic/basic/030; type=string; label=Date format with strftime dd.mm.yyyy (see manual!)
+	# cat=plugin.typo3blog: Basic/basic/040; type=string; label=Date format with strftime dd.mm.yyyy (see manual!)
 	dateFromat = %d.%m.%Y
 
-	# cat=plugin.typo3blog: Basic/basic/040; type=string; label=Exclude doctype: Exclude doctype for latest and related posts (see manual!)
+	# cat=plugin.typo3blog: Basic/basic/050; type=string; label=Exclude doctype: Exclude doctype for latest and related posts (see manual!)
 	excludeDoktypes = 5,6,73
 
-	# cat=plugin.typo3blog: Basic/basic/050; type=string; label=ignore page ids: Exclude pages for render as blog page use , as seperator
+	# cat=plugin.typo3blog: Basic/basic/060; type=string; label=Ignore page ids: Exclude pages for render as blog page use , as seperator
 	excludePages =
 
 

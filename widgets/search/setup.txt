@@ -1,0 +1,48 @@
+tt_content.search.10 >
+tt_content.search.30 >
+tt_content.search.20 {
+	allowedCols = pages.title-subtitle-keywords-description-tx_typo3blog_tags : tt_content.header-bodytext-imagecaption : tt_address.name-title-address-email-company-city-country : tt_links.title-note-note2-url : tt_board.subject-message-author-email : tt_calender.title-note : tt_products.title-note-itemnumber
+}
+
+tt_content.search.10 = TEMPLATE
+tt_content.search.10 {
+	template = FILE
+	template.file = EXT:typo3_blog/widgets/search/template.html
+	workOnSubpart = SEARCH_TEMPLATE
+
+	marks {
+		FORM_ACTION = TEXT
+		FORM_ACTION {
+			typolink {
+				parameter.data = page:uid
+				no_cache = 1
+				returnLast = url
+			}
+		}
+
+		LOCATION_DATA = TEXT
+		LOCATION_DATA.value = {$plugin.tx_typo3blog_pi1.searchPid}:tt_content:{field:uid}
+		LOCATION_DATA.insertData = 1
+
+		FORM_LEGEND = TEXT
+		FORM_LEGEND.data = LLL:EXT:typo3_blog/pi1/locallang.xml:tx_typo3blog_widget_search.title
+
+		SEARCHWORD_LABEL = TEXT
+		SEARCHWORD_LABEL.data = LLL:EXT:typo3_blog/pi1/locallang.xml:tx_typo3blog_widget_search.label.searchword
+
+		SEARCHIN_LABEL = TEXT
+		SEARCHIN_LABEL.data = LLL:EXT:typo3_blog/pi1/locallang.xml:tx_typo3blog_widget_search.label.searchin
+
+		SEARCHIN_OPTION1 = TEXT
+		SEARCHIN_OPTION1.data = LLL:EXT:typo3_blog/pi1/locallang.xml:tx_typo3blog_widget_search.option.all
+
+		SEARCHIN_OPTION2 = TEXT
+		SEARCHIN_OPTION2.data = LLL:EXT:typo3_blog/pi1/locallang.xml:tx_typo3blog_widget_search.option.header
+
+		SEARCHIN_OPTION3 = TEXT
+		SEARCHIN_OPTION3.data = LLL:EXT:typo3_blog/pi1/locallang.xml:tx_typo3blog_widget_search.option.content
+
+		SEARCH_BUTTON = TEXT
+		SEARCH_BUTTON.data = LLL:EXT:typo3_blog/pi1/locallang.xml:tx_typo3blog_widget_search.button
+	}
+}
