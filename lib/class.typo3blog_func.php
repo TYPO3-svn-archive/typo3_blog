@@ -27,14 +27,15 @@
  *
  *
  *
- *   49: class typo3blog_func
- *   60:     public function setCobj(tslib_cObj $cObj)
- *   76:     public function substituteMarkersAndSubparts($template, array $markers, array $subparts)
- *   96:     public function getPageContent($id, $limit)
- *  133:     public function getPostCategoryName($pid, $field = 'title')
- *  158:     public function getTagCloudFilterQuery()
+ *   50: class typo3blog_func
+ *   61:     public function setCobj(tslib_cObj $cObj)
+ *   77:     public function substituteMarkersAndSubparts($template, array $markers, array $subparts)
+ *   97:     public function getPageContent($id, $limit)
+ *  134:     public function getPostCategoryName($pid, $field = 'title')
+ *  161:     public function getExtensionVersion($key)
+ *  178:     function pi_wrapInBaseClass($str, $widgetId)
  *
- * TOTAL FUNCTIONS: 5
+ * TOTAL FUNCTIONS: 6
  * (This index is automatically created/updated by the extension "extdeveval")
  *
  */
@@ -153,8 +154,9 @@ class typo3blog_func
 
 	/**
 	 * Returns the version of an extension (in 4.4 its possible to this with t3lib_extMgm::getExtensionVersion)
-	 * @param string $key
-	 * @return string
+	 *
+	 * @param	string		$key
+	 * @return	string
 	 */
 	public function getExtensionVersion($key) {
 		if (! t3lib_extMgm::isLoaded($key)) {
@@ -170,6 +172,7 @@ class typo3blog_func
 	 * All content returned from your plugins should be returned through this function so all content from your plugin is encapsulated in a <div>-tag nicely identifying the content of your plugin.
 	 *
 	 * @param	string		HTML content to wrap in the div-tags with the "main class" of the plugin
+	 * @param	[type]		$widgetId: ...
 	 * @return	string		HTML content wrapped, ready to return to the parent object.
 	 */
 	function pi_wrapInBaseClass($str, $widgetId)	{

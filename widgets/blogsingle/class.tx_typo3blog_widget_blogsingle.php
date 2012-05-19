@@ -26,13 +26,11 @@
  *
  *
  *
- *   52: class tx_typo3blog_widget_blogsingle extends tslib_pibase
- *   70:     private function init()
- *  100:     public function main($content, $conf)
- *  174:     private function mergeConfiguration()
- *  188:     private function fetchConfigValue($param)
+ *   50: class tx_typo3blog_widget_blogsingle extends tslib_pibase
+ *   68:     private function init()
+ *  102:     public function main($content, $conf)
  *
- * TOTAL FUNCTIONS: 4
+ * TOTAL FUNCTIONS: 2
  * (This index is automatically created/updated by the extension "extdeveval")
  *
  */

@@ -28,12 +28,11 @@
  *
  *   53: class tx_typo3blog_widget_archive extends tslib_pibase
  *   73:     private function init()
- *  106:     public function main($content, $conf)
- *  287:     private function mergeConfiguration()
- *  301:     private function fetchConfigValue($param)
- *  324:     private function getPostByRootLine()
+ *  110:     public function main($content, $conf)
+ *  253:     private function getPostByRootLine()
+ *  269:     public function getWhereFilterQuery()
  *
- * TOTAL FUNCTIONS: 5
+ * TOTAL FUNCTIONS: 4
  * (This index is automatically created/updated by the extension "extdeveval")
  *
  */

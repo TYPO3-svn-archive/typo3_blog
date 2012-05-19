@@ -26,8 +26,12 @@
  *
  *
  *
+ *   51: class tx_typo3blog_widget_calendar extends tslib_pibase
+ *   71:     private function init()
+ *  108:     public function main($content, $conf)
+ *  193:     private function getBlogDates()
  *
- * TOTAL FUNCTIONS: 4
+ * TOTAL FUNCTIONS: 3
  * (This index is automatically created/updated by the extension "extdeveval")
  *
  */
@@ -183,8 +187,8 @@ class tx_typo3blog_widget_calendar extends tslib_pibase
 
 	/**
 	 * Get all Dates with count of blogs
-	 * 
-	 * @return array
+	 *
+	 * @return	array
 	 */
 	private function getBlogDates() {
 		$uids = $this->pi_getPidList($this->page_uid, 100);

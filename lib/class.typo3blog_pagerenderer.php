@@ -48,17 +48,19 @@ class typo3blog_pagerenderer
 
 	/**
 	 * Set the configuration for the pagerenderer
-	 * @param array $conf
+	 *
+	 * @param	array		$conf
+	 * @return	[type]		...
 	 */
 	public function setConf($conf) {
 		$this->conf = $conf;
 	}
 
 	/**
-	* Include all defined resources (JS / CSS)
-	*
-	* @return void
-	*/
+	 * Include all defined resources (JS / CSS)
+	 *
+	 * @return	void
+	 */
 	public function addResources() {
 		if (class_exists(t3lib_utility_VersionNumber) && t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) >= 4003000) {
 			$pagerender = $GLOBALS['TSFE']->getPageRenderer();
@@ -184,8 +186,10 @@ class typo3blog_pagerenderer
 	/**
 	 * Return the webbased path
 	 *
-	 * @param string $path
 	 * return string
+	 *
+	 * @param	string		$path
+	 * @return	[type]		...
 	 */
 	public function getPath($path="") {
 		return $GLOBALS['TSFE']->tmpl->getFileName($path);
@@ -194,9 +198,9 @@ class typo3blog_pagerenderer
 	/**
 	 * Add additional JS file
 	 *
-	 * @param string $script
-	 * @param boolean $first
-	 * @return void
+	 * @param	string		$script
+	 * @param	boolean		$first
+	 * @return	void
 	 */
 	public function addJsFile($script="", $first=FALSE) {
 		if ($this->getPath($script) && ! in_array($script, $this->jsFiles)) {
@@ -211,8 +215,8 @@ class typo3blog_pagerenderer
 	/**
 	 * Add JS to header
 	 *
-	 * @param string $script
-	 * @return void
+	 * @param	string		$script
+	 * @return	void
 	 */
 	public function addJS($script="") {
 		if (! in_array($script, $this->js)) {
@@ -223,8 +227,8 @@ class typo3blog_pagerenderer
 	/**
 	 * Add additional CSS file
 	 *
-	 * @param string $script
-	 * @return void
+	 * @param	string		$script
+	 * @return	void
 	 */
 	public function addCssFile($script="") {
 		if ($this->getPath($script) && ! in_array($script, $this->cssFiles)) {
@@ -235,9 +239,9 @@ class typo3blog_pagerenderer
 	/**
 	 * Add additional CSS file to include into IE only
 	 *
-	 * @param string $script
-	 * @param string $include for example use "lte IE 7"
-	 * @return void
+	 * @param	string		$script
+	 * @param	string		$include for example use "lte IE 7"
+	 * @return	void
 	 */
 	public function addCssFileInc($script="", $include='IE') {
 		if ($this->getPath($script) && ! in_array($script, $this->cssFiles) && $include) {
@@ -251,8 +255,8 @@ class typo3blog_pagerenderer
 	/**
 	 * Add CSS to header
 	 *
-	 * @param string $script
-	 * @return void
+	 * @param	string		$script
+	 * @return	void
 	 */
 	public function addCSS($script="") {
 		if (! in_array($script, $this->css)) {
@@ -262,8 +266,9 @@ class typo3blog_pagerenderer
 
 	/**
 	 * Returns the version of an extension (in 4.4 its possible to this with t3lib_extMgm::getExtensionVersion)
-	 * @param string $key
-	 * @return string
+	 *
+	 * @param	string		$key
+	 * @return	string
 	 */
 	public function getExtensionVersion($key) {
 		if (! t3lib_extMgm::isLoaded($key)) {

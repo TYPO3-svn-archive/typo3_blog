@@ -23,6 +23,7 @@
 ***************************************************************/
 
 /**
+ * @return	[type]		...
  * @author	Juergen Furrer <juergen.furrer@gmail.com>
  * @package	TYPO3
  * @subpackage	tx_typo3blog
@@ -34,10 +35,12 @@ function user_typo3blog_pageTypeIsCategory() {
 }
 
 /**
-* @author		Roland Schmidt <rsch73@gmail.com>
-* @package		TYPO3
-* @subpackage	tx_typo3blog
-*/
+ * @param	[type]		$excludePages: ...
+ * @return	[type]		...
+ * @author		Roland Schmidt <rsch73@gmail.com>
+ * @package		TYPO3
+ * @subpackage	tx_typo3blog
+ */
 function user_typo3blog_ignoreToRenderAsBlogPage($excludePages) {
 	if (t3lib_div::inList( $GLOBALS['TSFE']->page['uid'],$excludePages)) {
 		return TRUE;

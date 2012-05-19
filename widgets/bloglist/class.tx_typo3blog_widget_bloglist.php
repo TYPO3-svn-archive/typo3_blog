@@ -26,17 +26,16 @@
  *
  *
  *
- *   56: class tx_typo3blog_widget_listview extends tslib_pibase
- *   76:     private function init()
- *  109:     public function main($content, $conf)
- *  198:     private function mergeConfiguration()
- *  217:     private function fetchConfigValue($param)
- *  239:     private function getPageBrowseLimit()
- *  256:     private function getListGetPageBrowser($numberOfPages)
- *  279:     private function getNumberOfPostsInCategoryPage($page_id)
- *  304:     private function getPostByRootLine()
+ *   55: class tx_typo3blog_widget_bloglist extends tslib_pibase
+ *   75:     private function init()
+ *  112:     public function main($content, $conf)
+ *  224:     private function getPageBrowseLimit()
+ *  241:     private function getListGetPageBrowser($numberOfPages)
+ *  263:     private function getNumberOfPostsInCategoryPage($page_id)
+ *  288:     private function getPostByRootLine()
+ *  304:     public function getWhereFilterQuery()
  *
- * TOTAL FUNCTIONS: 8
+ * TOTAL FUNCTIONS: 7
  * (This index is automatically created/updated by the extension "extdeveval")
  *
  */
