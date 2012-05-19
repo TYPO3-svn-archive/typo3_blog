@@ -80,9 +80,6 @@ class tx_typo3blog_widget_calendar extends tslib_pibase
 		$this->typo3BlogFunc = t3lib_div::makeInstance('typo3blog_func');
 		$this->typo3BlogFunc->setCobj($this->cObj);
 
-		// Merge current configuration from flexform and typoscript
-		$this->mergeConfiguration();
-
 		// unserialize extension conf
 		$this->extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['typo3_blog']);
 
@@ -204,43 +201,6 @@ class tx_typo3blog_widget_calendar extends tslib_pibase
 			return $rows;
 		}
 		return array();
-	}
-
-	/**
-	 * THIS NICE PART IS FROM TYPO3 comments EXTENSION
-	 * Merges TS configuration with configuration from flexform (latter takes precedence).
-	 *
-	 * @return	void
-	 * @access private
-	 */
-	private function mergeConfiguration()
-	{
-		$this->pi_initPIflexForm();
-	}
-
-	/**
-	 * THIS NICE FUNCTION IS FROM TYPO3 comments EXTENSION
-	 * Fetches configuration value from flexform. If value exists, value in
-	 * <code>$this->conf</code> is replaced with this value.
-	 *
-	 * @param	string		$param:    Parameter name. If <code>.</code> is found, the first part is section name, second is key (applies only to $this->conf)
-	 * @return	void
-	 * @access private
-	 */
-	private function fetchConfigValue($param)
-	{
-		if (strchr($param, '.')) {
-			list($section, $param) = explode('.', $param, 2);
-		}
-		$value = trim($this->pi_getFFvalue($this->cObj->data['pi_flexform'], $param, ($section ? 's' . ucfirst($section) : 'sDEF')));
-		if (!is_null($value) && $value != '') {
-			if ($section) {
-				$this->conf[$section . '.'][$param] = $value;
-			}
-			else {
-				$this->conf[$param] = $value;
-			}
-		}
 	}
 }
 
