@@ -3,7 +3,7 @@ plugin.tx_typo3blog_pi1 {
 	searchbox {
 		stdWrap.prefixComment = 2 | plugin.tx_typo3blog_pi1.searchbox
 		10 = TEXT
-		10.typolink.parameter.data = {$plugin.tx_typo3blog_pi1.searchPid}
+		10.typolink.parameter = {$plugin.tx_typo3blog_pi1.searchPid}
 		10.typolink.returnLast = url
 		10.wrap = <form class="navbar-search pull-left" action="|" method="post" id="indexedsearch">
 		20 = COA
