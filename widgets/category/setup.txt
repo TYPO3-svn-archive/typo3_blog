@@ -29,7 +29,7 @@ plugin.tx_typo3blog_pi1 {
 
 		1.ACT < .1.CUR
 		1.ACT {
-			wrapItemAndSub = <li> | </li>
+			wrapItemAndSub = <li class="active"> | </li>
 		}
 
 		2 < .1
