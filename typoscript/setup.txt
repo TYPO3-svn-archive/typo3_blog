@@ -24,6 +24,5 @@ plugin.tx_typo3blog_pi1 {
 	what_to_display =
 	startPid = {$plugin.tx_typo3blog_pi1.startPid}
 	searchPid = {$plugin.tx_typo3blog_pi1.searchPid}
-	searchCid = {$plugin.tx_typo3blog_pi1.searchCid}
 	entryLevel = {$plugin.tx_typo3blog_pi1.entryLevel}
 }
