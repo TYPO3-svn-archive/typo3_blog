@@ -147,7 +147,7 @@ class tx_typo3blog_widget_archive extends tslib_pibase
 		$sql = $GLOBALS['TYPO3_DB']->exec_SELECT_queryArray(array(
 				'SELECT'	=> 'MONTH(FROM_UNIXTIME(crdate)) as month, YEAR(FROM_UNIXTIME(crdate)) as year, count(*) as quantity',
 				'FROM'		=> 'pages',
-				'WHERE'		=> 'pid IN (' . $this->getPostByRootLine() . ') AND hidden = 0 AND deleted = 0 AND doktype != ' . $this->blog_doktype_id . $this->cObj->enableFields('pages'),
+				'WHERE'		=> 'pid IN (' . $this->getPostByRootLine() . ') AND doktype != ' . $this->blog_doktype_id . $this->cObj->enableFields('pages') . $this->getWhereFilterQuery(),
 				'GROUPBY'	=> 'year, month',
 				'ORDERBY'	=> 'crdate DESC',
 				'LIMIT'		=> ''
@@ -269,10 +269,8 @@ class tx_typo3blog_widget_archive extends tslib_pibase
 	public function getWhereFilterQuery()
 	{
 		$where = '';
-		// ignore excluded pages from ts
-		if (strlen($this->conf['excludePages']) > 0) {
-			$where .= ' AND UID NOT IN ('.$this->conf['excludePages'].')';
-		}
+		// ignore excluded page
+		$where .= ' AND tx_typo3blog_exclude_page = 0';
 
 		return $where;
 	}

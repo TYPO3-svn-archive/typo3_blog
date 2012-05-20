@@ -12,8 +12,6 @@ plugin.tx_typo3blog_pi1 {
 
 		templateFile = {$plugin.tx_typo3blog_pi1.archive.templateFile}
 
-		excludePages = {$plugin.tx_typo3blog_pi1.excludePages}
-
 		stdWrap {
 			outerWrap = <div class="tx-typo3blog-pi1-widget-archive"> | </div>
 		}

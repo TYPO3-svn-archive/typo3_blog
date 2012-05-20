@@ -327,8 +327,6 @@ lib.content_main < plugin.tx_typo3blog_pi1.blogSingle
 	lib.content_main < plugin.tx_typo3blog_pi1.blogList
 	lib.content_right.30 >
 	lib.content_right.50 >
-[userFunc = user_typo3blog_ignoreToRenderAsBlogPage({$plugin.tx_typo3blog_pi1.excludePages})]
-	lib.content_main < styles.content.get
 [end]
 
 [globalVar = TSFE:id = {$plugin.tx_typo3blog_pi1.searchPid}]

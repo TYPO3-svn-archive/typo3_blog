@@ -5,6 +5,7 @@ CREATE TABLE pages (
 	tx_typo3blog_author tinytext NOT NULL,
 	tx_typo3blog_allow_comments tinyint(3) DEFAULT '0' NOT NULL,
 	tx_typo3blog_tags tinytext,
+	tx_typo3blog_exclude_page tinyint(3) DEFAULT '0' NOT NULL,
 	tx_typo3blog_blogrolls text
 );
 

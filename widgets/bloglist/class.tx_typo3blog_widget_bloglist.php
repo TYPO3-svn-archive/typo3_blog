@@ -304,10 +304,8 @@ class tx_typo3blog_widget_bloglist extends tslib_pibase
 	public function getWhereFilterQuery()
 	{
 		$where = '';
-		// ignore excluded pages from ts
-		if (strlen($this->conf['excludePages']) > 0) {
-			$where .= ' AND UID NOT IN ('.$this->conf['excludePages'].')';
-		}
+		// ignore excluded page
+		$where .= ' AND tx_typo3blog_exclude_page = 0';
 
 		// Get GET param tagsearch from url
 		if (strlen($this->piVars['tagsearch']) > 0) {

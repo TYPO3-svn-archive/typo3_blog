@@ -40,9 +40,6 @@ plugin.tx_typo3blog_pi1 {
 	# cat=plugin.typo3blog: Basic/basic/050; type=string; label=Exclude doctype: Exclude doctype for latest and related posts (see manual!)
 	excludeDoktypes = 5,6,73
 
-	# cat=plugin.typo3blog: Basic/basic/060; type=string; label=Ignore page ids: Exclude pages for render as blog page use , as seperator
-	excludePages =
-
 
 
 	# cat=plugin.typo3blog: widget BlogList/basic/010; type=string; label=Items to display on bloglist  (see manual!)

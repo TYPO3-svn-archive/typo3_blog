@@ -66,6 +66,14 @@ $tempColumns = array (
 			'size' => '30',
 		)
 	),
+	'tx_typo3blog_exclude_page' => array (
+		'exclude' => 1,
+		'label' => 'LLL:EXT:typo3_blog/locallang_db.xml:pages.tx_typo3blog_exclude_page',
+		'config' => array (
+			'type' => 'check',
+			'default' => '0',
+		)
+	),
 	'tx_typo3blog_blogrolls' => array (
 		'exclude' => 1,
 		'label' => 'LLL:EXT:typo3_blog/locallang_db.xml:pages.tx_typo3blog_blogrolls',
@@ -105,7 +113,7 @@ $tempColumns = array (
 
 t3lib_div::loadTCA('pages');
 t3lib_extMgm::addTCAcolumns('pages',$tempColumns,1);
-t3lib_extMgm::addToAllTCAtypes('pages', '--div--;LLL:EXT:typo3_blog/locallang_db.xml:pages.tx_typo3blog_tab, tx_typo3blog_author, tx_typo3blog_allow_comments, tx_typo3blog_tags, tx_typo3blog_blogrolls');
+t3lib_extMgm::addToAllTCAtypes('pages', '--div--;LLL:EXT:typo3_blog/locallang_db.xml:pages.tx_typo3blog_tab, tx_typo3blog_author, tx_typo3blog_allow_comments, tx_typo3blog_tags, tx_typo3blog_exclude_page, tx_typo3blog_blogrolls');
 
 // Define Page type ID
 $doktype = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'][$_EXTKEY]['doktypeId'];
