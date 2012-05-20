@@ -215,9 +215,9 @@ plugin.tx_typo3blog_pi1.blogSingle {
 		}
 
 		additionalfooter.10 = TEXT
- 		additionalfooter.10 < plugin.tx_sexybookmarks_pi1
+		additionalfooter.10 < plugin.tx_sexybookmarks_pi1
 
- 		# if tx_typo3blog_allow_comments true show comments form
+		# if tx_typo3blog_allow_comments true show comments form
 		additionalfooter.20 = TEXT
 		additionalfooter.20 {
 			if.isTrue.field = tx_typo3blog_allow_comments
@@ -236,9 +236,9 @@ plugin.tx_typo3blog_pi1.latestPosts {
 		wrap = <ul class="nav nav-list tx-typo3blog-link-list"> | </ul>
 	}
 	renderObj {
-    		10.stdWrap.cObject.10.wrap = <span><i class="icon-user"></i> |
-    		10.stdWrap.cObject.30.wrap = <span><i class="icon-comment"></i> | </span>
-    	}
+		10.stdWrap.cObject.10.wrap = <span><i class="icon-user"></i> |
+		10.stdWrap.cObject.30.wrap = <span><i class="icon-comment"></i> | </span>
+	}
 }
 
 #
@@ -401,7 +401,8 @@ page {
 		# Define template subparts
 		workOnSubpart = DOCUMENT_BODY
 
-		subparts.INDEXSEARCHBOX < tt_content.search.30
+		// subparts.INDEXSEARCHBOX < plugin.tx_typo3blog_pi1.searchbox
+		subparts.SEARCHFORM < plugin.tx_typo3blog_pi1.searchform
 
 		#Sexybookmarks
 		subparts.SEXYBOOKMARKS_PI2 < plugin.tx_sexybookmarks_pi2

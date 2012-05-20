@@ -1,32 +1,84 @@
-tt_content.search.30 {
-	accessibility=1
-	formName= searchform
-	labelWrap.wrap=|
-	stdWrap.wrap = |
-	layout = ###FIELD###
-	method = post" class="navbar-form pull-left
+tt_content.search.10 >
+tt_content.search.30 >
+tt_content.search.20 {
+	allowedCols = pages.title-subtitle-keywords-description-tx_typo3blog_tags : tt_content.header-bodytext-imagecaption : tt_address.name-title-address-email-company-city-country : tt_links.title-note-note2-url : tt_board.subject-message-author-email : tt_calender.title-note : tt_products.title-note-itemnumber
+}
 
-	target >
-	redirect = {$plugin.tx_typo3blog_pi1.searchPid}
+tt_content.search.10 = TEMPLATE
+tt_content.search.10 {
+	template = FILE
+	template.file = EXT:typo3_blog/widgets/search/template.html
+	workOnSubpart = SEARCH_TEMPLATE
 
-	dataArray {
-		# input field
-		10 >
-		10.type = sword=input,10
-		10.label >
-		#hidden fields
-		20 >
-		20.type = scols=hidden
-		20.value = pages.title-subtitle-keywords-description : tt_content.header-bodytext
-		30.type = stype=hidden
-		30.value = L0
-		#submit button
-		40 >
-		#40.type = submit=submit
-		#40.value = Search
-	}
-	params {
-		submit >
-		input= class=search-query
+	marks {
+		FORM_ACTION = TEXT
+		FORM_ACTION {
+			typolink {
+				parameter.data = page:uid
+				no_cache = 1
+				returnLast = url
+			}
+		}
+
+		LOCATION_DATA = TEXT
+		LOCATION_DATA.value = {$plugin.tx_typo3blog_pi1.searchPid}:tt_content:{$plugin.tx_typo3blog_pi1.searchCid}
+		LOCATION_DATA.insertData = 1
+
+		FORM_LEGEND = TEXT
+		FORM_LEGEND.data = LLL:EXT:typo3_blog/pi1/locallang.xml:tx_typo3blog_widget_search.title
+
+		SEARCHWORD_LABEL = TEXT
+		SEARCHWORD_LABEL.data = LLL:EXT:typo3_blog/pi1/locallang.xml:tx_typo3blog_widget_search.label.searchword
+
+		SEARCHIN_LABEL = TEXT
+		SEARCHIN_LABEL.data = LLL:EXT:typo3_blog/pi1/locallang.xml:tx_typo3blog_widget_search.label.searchin
+
+		SEARCHIN_OPTION1 = TEXT
+		SEARCHIN_OPTION1.data = LLL:EXT:typo3_blog/pi1/locallang.xml:tx_typo3blog_widget_search.option.all
+
+		SEARCHIN_OPTION2 = TEXT
+		SEARCHIN_OPTION2.data = LLL:EXT:typo3_blog/pi1/locallang.xml:tx_typo3blog_widget_search.option.header
+
+		SEARCHIN_OPTION3 = TEXT
+		SEARCHIN_OPTION3.data = LLL:EXT:typo3_blog/pi1/locallang.xml:tx_typo3blog_widget_search.option.content
+
+		SEARCH_BUTTON = TEXT
+		SEARCH_BUTTON.data = LLL:EXT:typo3_blog/pi1/locallang.xml:tx_typo3blog_widget_search.button
 	}
 }
+
+plugin.tx_typo3blog_pi1 {
+	searchform = COA
+	searchform {
+		10 = TEXT
+		10 {
+			typolink.parameter = {$plugin.tx_typo3blog_pi1.searchPid}
+			typolink.returnLast = url
+			wrap = <form class="navbar-search pull-left" action="|" method="post" id="searchform">
+		}
+		20 = COA
+		20 {
+			wrap = | </form>
+			10 = TEXT
+			10.data = GPvar : tx_indexedsearch |sword
+			10.htmlSpecialChars = 1
+			10.dataWrap = <input type="text" class="search-query" name="sword" value="|" placeholder="{LLL:EXT:typo3_blog/pi1/locallang.xml:tx_typo3blog_widget_search.title}">
+			20 = COA
+			20 {
+				wrap = <div style="display:none;"> | </div>
+				10 = TEXT
+				10.value = <input type="hidden" name="scols" value="pages.title-subtitle-keywords-description-tx_typo3blog_tags:tt_content.header-bodytext-imagecaption" />
+				20 = TEXT
+				20.value = <input type="hidden" value="L0" name="stype">
+				30 = TEXT
+				30.value = <input type="hidden" value="{$plugin.tx_typo3blog_pi1.searchPid}:tt_content:{$plugin.tx_typo3blog_pi1.searchCid}" name="locationData">
+				40 = TEXT
+				40 {
+					value = <input name="submit" value="{LLL:EXT:typo3_blog/pi1/locallang.xml:tx_typo3blog_widget_search.title}" type="hidden" />
+					insertData = 1
+				}
+			}
+		}
+	}
+}
+
