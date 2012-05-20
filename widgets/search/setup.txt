@@ -1,3 +1,7 @@
+tt_content.search.20 {
+	allowedCols = pages.title-subtitle-keywords-description-tx_typo3blog_tags : tt_content.header-bodytext-imagecaption : tt_address.name-title-address-email-company-city-country : tt_links.title-note-note2-url : tt_board.subject-message-author-email : tt_calender.title-note : tt_products.title-note-itemnumber
+}
+
 tt_content.search.30 {
 	accessibility=1
 	formName= searchform
@@ -17,7 +21,7 @@ tt_content.search.30 {
 		#hidden fields
 		20 >
 		20.type = scols=hidden
-		20.value = pages.title-subtitle-keywords-description : tt_content.header-bodytext
+		20.value = pages.title-subtitle-keywords-description-tx_typo3blog_tags : tt_content.header-bodytext
 		30.type = stype=hidden
 		30.value = L0
 		#submit button
