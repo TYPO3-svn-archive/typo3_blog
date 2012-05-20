@@ -146,7 +146,7 @@ class tx_typo3blog_widget_bloglist extends tslib_pibase
 				'FROM'    => 'pages',
 				'WHERE'   => 'pid IN (' . $this->getPostByRootLine() . ') '.$this->cObj->enableFields('pages').' AND doktype != ' . $this->blog_doktype_id . ' ' . $this->getWhereFilterQuery(),
 				'GROUPBY' => '',
-				'ORDERBY' => 'crdate DESC',
+				'ORDERBY' => 'tx_typo3blog_create_datetime DESC',
 				'LIMIT'   => intval($this->getPageBrowseLimit()) . ',' . intval($this->conf['itemsToDisplay'])
 			)
 		);
@@ -268,7 +268,7 @@ class tx_typo3blog_widget_bloglist extends tslib_pibase
 			'FROM'		=> 'pages',
 			'WHERE'		=> 'pid IN (' . $this->getPostByRootLine($page_id) . ') '.$this->cObj->enableFields('pages').' AND doktype != ' . $this->extConf["doktypeId"] . ' ' . $this->getWhereFilterQuery(),
 			'GROUPBY'	=> '',
-			'ORDERBY'	=> 'crdate DESC',
+			'ORDERBY'	=> 'tx_typo3blog_create_datetime DESC',
 			'LIMIT'		=> ''
 			)
 		);
@@ -321,7 +321,7 @@ class tx_typo3blog_widget_bloglist extends tslib_pibase
 			$dateto   = htmlspecialchars(trim($this->piVars['dateto']));
 
 			if (($datefrom != false) AND ($dateto != false)) {
-				$where .= " AND DATE(FROM_UNIXTIME(crdate)) >= '".$datefrom."' AND DATE(FROM_UNIXTIME(crdate)) <= '".$dateto."'";
+				$where .= " AND DATE(FROM_UNIXTIME(tx_typo3blog_create_datetime)) >= '".$datefrom."' AND DATE(FROM_UNIXTIME(tx_typo3blog_create_datetime)) <= '".$dateto."'";
 			}
 		}
 

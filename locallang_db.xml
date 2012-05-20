@@ -10,7 +10,8 @@
 			<label index="pages.tx_typo3blog_tab">Blog Settings</label>
 			<label index="pages.tx_typo3blog_author">Author</label>
 			<label index="pages.tx_typo3blog_allow_comments">Allow comments on blog page</label>
-            <label index="pages.tx_typo3blog_exclude_page">Exclude page</label>
+			<label index="pages.tx_typo3blog_create_datetime">Create datetime</label>
+			<label index="pages.tx_typo3blog_exclude_page">Exclude page</label>
 			<label index="pages.tx_typo3blog_tags">Set tags on blog page</label>
 
 			<label index="tx_typo3blog_blogrolls">Blogroll</label>

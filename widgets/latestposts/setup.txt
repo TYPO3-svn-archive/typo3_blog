@@ -2,43 +2,54 @@
 # Setup typo3blog latestpost
 #
 plugin.tx_typo3blog_pi1 {
-	latestPosts < tt_content.menu.20.5
+	latestPosts = CONTENT
 	latestPosts {
-		wrap >
 		stdWrap {
-			outerWrap >
 			dataWrap = <div class="tx-typo3blog-pi1-widget-latestposts"><h3>{LLL:EXT:typo3_blog/pi1/locallang.xml:tx_typo3blog_widget_latestposts.title}</h3> | </div>
 			wrap = <ul> | </ul>
-			required = 1
 		}
-		special {
-			value >
-			value = {$plugin.tx_typo3blog_pi1.startPid}
-			mode = crdate
-			depth = 20
-			maxAge = 3600*24*365
-			limit = {$plugin.tx_typo3blog_pi1.latestPosts.itemsToDisplay}
+		table = pages
+		select {
+			pidInList = {$plugin.tx_typo3blog_pi1.startPid}
+			recursive = 10
+			selectFields = pages.uid,pages.tx_typo3blog_create_datetime,be_users.realname,pages.title
+			where = doktype != 73 AND pages.hidden = 0 AND pages.deleted = 0
+			leftjoin = be_users ON (pages.tx_typo3blog_author = be_users.uid)
+			orderBy = tx_typo3blog_create_datetime desc
+			max = 5
 		}
-		excludeDoktypes = {$plugin.tx_typo3blog_pi1.excludeDoktypes}
-		1.NO.stdWrap >
-		1.NO.stdWrap.cObject = COA
-		1.NO.stdWrap.cObject {
-			stdWrap >
+
+		renderObj = COA
+		renderObj {
+			wrap = <li>|</li>
 			10 = TEXT
 			10 {
-				data = field:author
-				wrap = <span>|
-			}
-			20 = TEXT
-			20 {
-				data = field:crdate
-				strftime = {$plugin.tx_typo3blog_pi1.dateFromat}
-				wrap = &nbsp;|&nbsp;</span><br />
-			}
-			30 = TEXT
-			30 {
-				data = field:title
-				wrap = <span>|</span>
+				stdWrap.cObject = COA
+				stdWrap.cObject {
+					stdWrap >
+					10 = TEXT
+					10 {
+						data = field:realname
+						wrap = <span>|
+					}
+					20 = TEXT
+					20 {
+						data = field:tx_typo3blog_create_datetime
+						strftime = {$plugin.tx_typo3blog_pi1.dateFromat}
+						wrap = &nbsp;|&nbsp;</span><br />
+					}
+					30 = TEXT
+					30 {
+						data = field:title
+						wrap = <span>|</span>
+					}
+				}
+				typolink {
+					parameter.cObject = TEXT
+					parameter.cObject {
+						field = uid
+					}
+				}
 			}
 		}
 	}

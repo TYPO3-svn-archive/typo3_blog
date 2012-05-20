@@ -34,10 +34,10 @@ plugin.tx_typo3blog_pi1 {
 				}
 			}
 
-			# page field crdate (format as date '%d.%m.%Y' via strftime) setup for templatemarker '###BLOGLIST_CRDATE###'
-			crdate = TEXT
-			crdate {
-				field = crdate
+			# page field crdate (format as date '%d.%m.%Y' via strftime) setup for templatemarker '###BLOGLIST_TX_TYPO3BLOG_CREATE_DATETIME###'
+			tx_typo3blog_create_datetime = TEXT
+			tx_typo3blog_create_datetime {
+				field = tx_typo3blog_create_datetime
 				strftime = {$plugin.tx_typo3blog_pi1.dateFromat}
 				wrap = <li> | </li>
 				required = 1

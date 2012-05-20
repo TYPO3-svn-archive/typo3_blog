@@ -32,7 +32,7 @@ plugin.tx_typo3blog_pi1 {
 			}
 			20 = TEXT
 			20 {
-				data = field:crdate
+				data = field:tx_typo3blog_create_datetime
 				strftime = {$plugin.tx_typo3blog_pi1.dateFromat}
 				wrap = &nbsp;|&nbsp;</span><br />
 			}

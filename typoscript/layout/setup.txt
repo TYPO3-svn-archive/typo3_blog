@@ -149,7 +149,7 @@ plugin.tx_typo3blog_pi1.blogList {
 
 		author_email >
 
-		crdate {
+		tx_typo3blog_create_datetime {
 			wrap = <li><span class="divider">/</span> | </li>
 			required = 1
 		}
@@ -204,7 +204,7 @@ plugin.tx_typo3blog_pi1.blogSingle {
 
 		author_email >
 
-		crdate {
+		tx_typo3blog_create_datetime {
 			wrap = <li><span class="divider">/</span> | </li>
 			required = 1
 		}
@@ -235,11 +235,10 @@ plugin.tx_typo3blog_pi1.latestPosts {
 	stdWrap {
 		wrap = <ul class="nav nav-list tx-typo3blog-link-list"> | </ul>
 	}
-	1.NO.stdWrap.cObject {
-		10.wrap = <span class="typo3blog_date"><i class="icon-user"></i> |
-		20.wrap = &nbsp; | &nbsp;</span><br />
-		30.wrap = <span class="typo3blog_latest"><i class="icon-file"></i><strong> | </strong></span>
-	}
+	renderObj {
+    		10.stdWrap.cObject.10.wrap = <span><i class="icon-user"></i> |
+    		10.stdWrap.cObject.30.wrap = <span><i class="icon-comment"></i> | </span>
+    	}
 }
 
 #

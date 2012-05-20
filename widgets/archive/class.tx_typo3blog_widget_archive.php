@@ -131,10 +131,12 @@ class tx_typo3blog_widget_archive extends tslib_pibase
 		$template   = $this->cObj->getSubpart($this->template, '###ARCHIVE_TEMPLATE###');
 		$subpartArchiveItems = $this->cObj->getSubpart($template, '###ARCHIVE_ITEMS###');
 
+
 		// Define array and vars for template
 		$subparts = array();
 		$subparts['###ARCHIVE_ITEMS###'] = '';
 		$subparts['###ARCHIVE_YEAR###'] = '';
+		$subparts['###ARCHIVE_MONTH_ITEMS###'] = '';
 		$subparts['###ARCHIVE_MONTH###'] = '';
 		$subparts['###ARCHIVE_POST###'] = '';
 
@@ -145,14 +147,16 @@ class tx_typo3blog_widget_archive extends tslib_pibase
 
 		// Query to load current category page with all post pages in rootline
 		$sql = $GLOBALS['TYPO3_DB']->exec_SELECT_queryArray(array(
-				'SELECT'	=> 'MONTH(FROM_UNIXTIME(crdate)) as month, YEAR(FROM_UNIXTIME(crdate)) as year, count(*) as quantity',
+				'SELECT'	=> 'MONTH(FROM_UNIXTIME(tx_typo3blog_create_datetime)) as month, YEAR(FROM_UNIXTIME(tx_typo3blog_create_datetime)) as year, count(*) as quantity, tx_typo3blog_create_datetime',
 				'FROM'		=> 'pages',
 				'WHERE'		=> 'pid IN (' . $this->getPostByRootLine() . ') AND doktype != ' . $this->blog_doktype_id . $this->cObj->enableFields('pages') . $this->getWhereFilterQuery(),
 				'GROUPBY'	=> 'year, month',
-				'ORDERBY'	=> 'crdate DESC',
+				'ORDERBY'	=> 'tx_typo3blog_create_datetime DESC',
 				'LIMIT'		=> ''
 			)
 		);
+
+		$subpartArchiveYear = $this->cObj->getSubpart($subpartArchiveItems, '###ARCHIVE_YEAR###');
 		$currentYear = NULL;
 
 		// Execute sql and set retrieved records in marker for bloglist
@@ -164,12 +168,22 @@ class tx_typo3blog_widget_archive extends tslib_pibase
 
 			// Get data year, month and count
 			if ($currentYear != $row['year']) {
+				if ($currentYear != NULL) {
+					$subparts['###ARCHIVE_ITEMS###'] .=  $this->cObj->substituteSubpartArray($subpartArchiveItems, $subparts);
+				}
+				// Set Year in template
 				$currentYear = $row['year'];
-				$subpartArchiveYear = $this->cObj->getSubpart($subpartArchiveItems, '###ARCHIVE_YEAR###');
 				$year = $this->cObj->cObjGetSingle($this->conf['marker.']['year'], $this->conf['marker.']['year.']);
 				$markerArray['###' . strtoupper('year') . '###'] = $year;
 				$subparts['###ARCHIVE_YEAR###'] = $this->cObj->substituteMarkerArrayCached($subpartArchiveYear, $markerArray);
+
+				// Get subpart month items
+				$subpartArchiveMonthItems = $this->cObj->getSubpart($subpartArchiveYear, '###ARCHIVE_MONTH_ITEMS###');
+
+				// clear data ARCHIVE_MONTH_ITEMS for the next year run
+				$subparts['###ARCHIVE_MONTH_ITEMS###'] = "";
 			}
+
 
 			$subpartArchiveMonth = $this->cObj->getSubpart($subpartArchiveYear, '###ARCHIVE_MONTH###');
 			$month = $this->cObj->cObjGetSingle($this->conf['marker.']['month'], $this->conf['marker.']['month.']);
@@ -186,9 +200,9 @@ class tx_typo3blog_widget_archive extends tslib_pibase
 			$sqlquery = $GLOBALS['TYPO3_DB']->exec_SELECT_queryArray(array(
 					'SELECT'	=> '*',
 					'FROM'		=> 'pages',
-					'WHERE'		=> 'pid IN (' . $this->getPostByRootLine() . ') AND doktype != ' . $this->blog_doktype_id . ' AND MONTH(FROM_UNIXTIME(crdate)) = '.intval($row['month']) . ' AND YEAR(FROM_UNIXTIME(crdate)) = ' . intval($row['year']) .$this->cObj->enableFields('pages') . ' '.$this->getWhereFilterQuery(),
+					'WHERE'		=> 'pid IN (' . $this->getPostByRootLine() . ') AND doktype != ' . $this->blog_doktype_id . ' AND MONTH(FROM_UNIXTIME(tx_typo3blog_create_datetime)) = '.intval($row['month']) . ' AND YEAR(FROM_UNIXTIME(tx_typo3blog_create_datetime)) = ' . intval($row['year']) .$this->cObj->enableFields('pages') . ' '.$this->getWhereFilterQuery(),
 					'GROUPBY'	=> '',
-					'ORDERBY'	=> 'crdate DESC',
+					'ORDERBY'	=> 'tx_typo3blog_create_datetime DESC',
 					'LIMIT'		=> ''
 				)
 			);
@@ -215,10 +229,10 @@ class tx_typo3blog_widget_archive extends tslib_pibase
 				$subparts['###ARCHIVE_POST###'] .= $this->cObj->substituteMarkerArrayCached($subpartArchivePost, $markerArray);
 			}
 
-			$subparts['###ARCHIVE_ITEMS###'] .=  $this->cObj->substituteSubpartArray($subpartArchiveItems, $subparts);
+			$subparts['###ARCHIVE_MONTH_ITEMS###'] .=  $this->cObj->substituteSubpartArray($subpartArchiveMonthItems, $subparts);
 			$subparts['###ARCHIVE_POST###'] = '';
 		}
-
+		$subparts['###ARCHIVE_ITEMS###'] .=  $this->cObj->substituteSubpartArray($subpartArchiveItems, $subparts);
 		// Add all CSS and JS files
 		if (T3JQUERY === true) {
 			tx_t3jquery::addJqJS();

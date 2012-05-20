@@ -194,7 +194,7 @@ class tx_typo3blog_widget_calendar extends tslib_pibase
 		$uids = $this->pi_getPidList($this->page_uid, 100);
 		if ($uids) {
 			$rows = $GLOBALS['TYPO3_DB']->exec_SELECTgetRows(
-				'count(*) AS counter, DATE(FROM_UNIXTIME(crdate)) as day',
+				'count(*) AS counter, DATE(FROM_UNIXTIME(tx_typo3blog_create_datetime)) as day',
 				'pages',
 				"uid IN (".$uids.") AND doktype != '".($this->extConf['doktypeId'] ? $this->extConf['doktypeId'] : 73)."'" . $this->cObj->enableFields('pages'),
 				'day',

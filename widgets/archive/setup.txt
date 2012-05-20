@@ -53,7 +53,8 @@ plugin.tx_typo3blog_pi1 {
 				stdWrap.cObject = COA
 				stdWrap.cObject {
 					10 = TEXT
-					10.field = month
+					10.field = tx_typo3blog_create_datetime
+					10.strftime = %B
 					20 = TEXT
 					20.field = quantity
 					20.noTrimWrap = | (|)|
