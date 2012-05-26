@@ -20,8 +20,14 @@ plugin.tx_pagebrowse_pi1 {
 }
 
 #
+# Setup plugin comments pageBrowser configuration
+#
+plugin.tx_comments_pi1.pageBrowser.templateFile = EXT:typo3_blog/res/layout/pluginTemplates/pagebrowse/template.html
+
+#
 # Setup plugin comments configuration FORM only
 #
+plugin.tx_comments_pi1 = USER_INT
 lib.typo3blog_commentsForm < plugin.tx_comments_pi1
 lib.typo3blog_commentsForm {
 	templateFile = EXT:typo3_blog/res/layout/pluginTemplates/comments/template.html
@@ -38,6 +44,7 @@ lib.typo3blog_comments < plugin.tx_comments_pi1
 lib.typo3blog_comments {
 	templateFile = EXT:typo3_blog/res/layout/pluginTemplates/comments/template.html
 	code = COMMENTS
+
 }
 
 #
@@ -45,7 +52,7 @@ lib.typo3blog_comments {
 #
 plugin.tx_vgetagcloud_pi1 {
 	referenceTable = pages
-	referenceFields = tx_typo3blog_tags
+	referenceFields = {$plugin.tx_typo3blog_pi1.columnWithTags}
 	targetPage = {$plugin.tx_typo3blog_pi1.startPid}
 	tagWrap {
 		typolink {
@@ -159,8 +166,8 @@ plugin.tx_typo3blog_pi1.blogList {
 			required = 1
 		}
 
-		additionalfooter.10 = TEXT
-		additionalfooter.10 < plugin.tx_sexybookmarks_pi1
+		#additionalfooter.10 = TEXT
+		#additionalfooter.10 < plugin.tx_sexybookmarks_pi1
 	}
 }
 
@@ -305,7 +312,7 @@ plugin.tx_typo3blog_pi1.archive {
 ##################################################
 
 #
-# Setup sidebar add plugins to render in sidebar
+# Setup plugins to render in sidebar
 #
 lib.content_right = COA
 lib.content_right {
@@ -320,7 +327,10 @@ lib.content_right {
 #
 # SWITCH CONTENT MARKER IF BLOG PAGE
 #
-lib.content_main < plugin.tx_typo3blog_pi1.blogSingle
+
+[PIDinRootline = {$plugin.tx_typo3blog_pi1.startPid}]
+	lib.content_main < plugin.tx_typo3blog_pi1.blogSingle
+[end]
 
 [userFunc = user_typo3blog_pageTypeIsCategory()]
 	lib.content_main < plugin.tx_typo3blog_pi1.blogList
@@ -331,7 +341,7 @@ lib.content_main < plugin.tx_typo3blog_pi1.blogSingle
 [globalVar = TSFE:id = {$plugin.tx_typo3blog_pi1.searchPid}]
 	lib.content_main < tt_content.search.20
 [end]
-
+[end]
 # Configuration page
 ##################################################
 

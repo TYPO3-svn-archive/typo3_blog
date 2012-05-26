@@ -82,7 +82,7 @@ plugin.tx_typo3blog_pi1 {
 			# page field tx_typo3_tagcloud setup for templatemarker '###BLOGLIST_TX_TYPO3BLOG_TAGS###'
 			tx_typo3blog_tags = COA
 			tx_typo3blog_tags {
-				if.isTrue.field = tx_typo3blog_tags
+				if.isTrue.field = {$plugin.tx_typo3blog_pi1.columnWithTags}
 				wrap = |
 				required = 1
 
@@ -91,7 +91,7 @@ plugin.tx_typo3blog_pi1 {
 				10.noTrimWrap = ||: |
 				20 = TEXT
 				20 {
-					field = tx_typo3blog_tags
+					field = {$plugin.tx_typo3blog_pi1.columnWithTags}
 					split {
 						cObjNum = 1
 						token = ,

@@ -5,7 +5,7 @@ plugin.tx_typo3blog_pi1 {
 		userFunc = tx_typo3blog_widget_blogsingle->main
 
 		# Bloglist template file
-		templateFile = EXT:typo3_blog/widgets/blogsingle/template.html
+		templateFile = {$plugin.tx_typo3blog_pi1.blogSingle.templateFile}
 
 		stdWrap {
 			outerWrap = <div class="tx-typo3blog-pi1-widget-blogsingle"> | </div>
@@ -90,19 +90,18 @@ plugin.tx_typo3blog_pi1 {
 			# page field tx_typo3_tagcloud setup for templatemarker '###BLOGLIST_TX_TYPO3BLOG_TAGS###'
 			tx_typo3blog_tags = COA
 			tx_typo3blog_tags {
-				if.isTrue.field = {$plugin.tx_typo3blog_pi1.blogSingle.columnWithTags}
-				wrap = <li> | </li>
+				if.isTrue.field = {$plugin.tx_typo3blog_pi1.columnWithTags}
+				wrap = |
 				required = 1
 
 				10 = TEXT
 				10.data = LLL:EXT:typo3_blog/pi1/locallang.xml:tx_typo3blog_tags
 				10.noTrimWrap = ||: |
-
 				20 = TEXT
 				20 {
-					field = {$plugin.tx_typo3blog_pi1.blogSingle.columnWithTags}
+					field = {$plugin.tx_typo3blog_pi1.columnWithTags}
 					split {
-					cObjNum = 1
+						cObjNum = 1
 						token = ,
 						1 {
 							1 = LOAD_REGISTER
