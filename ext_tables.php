@@ -22,6 +22,7 @@ if (TYPO3_MODE == 'BE') {
 //t3lib_extMgm::addPiFlexFormValue($_EXTKEY.'_pi1', t3lib_extMgm::extRelPath($_EXTKEY) . 'pi1/flexform_ds.xml');
 //t3lib_extMgm::addPiFlexFormValue($_EXTKEY .'_pi1', 'FILE:EXT:typo3_blog/pi1/flexform_ds.xml');
 
+/*
 if(!is_object($GLOBALS['BE_USER']))  {
 	define('TYPO3_PROCEED_IF_NO_USER', true);
 	$GLOBALS['BE_USER'] = t3lib_div::makeInstance('t3lib_beUserAuth');
@@ -29,7 +30,7 @@ if(!is_object($GLOBALS['BE_USER']))  {
 	$GLOBALS['BE_USER']->backendCheckLogin();
 	define('TYPO3_PROCEED_IF_NO_USER', false);
 }
-
+*/
 // Get extConf
 $extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$_EXTKEY]);
 
