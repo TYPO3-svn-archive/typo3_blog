@@ -67,7 +67,7 @@ $tempColumns = array (
 			'type' => 'input',
 			'size' => '10',
 			'max' => '20',
-			'eval' => 'datetime',
+			'eval' => 'tstamp',
 			'default' => mktime(date("H"),date("i"),0,date("m"),date("d"),date("Y"))
 		)
 	),
