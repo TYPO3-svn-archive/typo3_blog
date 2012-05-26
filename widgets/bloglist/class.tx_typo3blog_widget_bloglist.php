@@ -309,16 +309,17 @@ class tx_typo3blog_widget_bloglist extends tslib_pibase
 
 		// Get GET param tagsearch from url
 		if (strlen($this->piVars['tagsearch']) > 0) {
-			$tag = htmlspecialchars(trim($this->piVars['tagsearch']));
+			$tag = $GLOBALS['TYPO3_DB']->quoteStr(strtolower($this->piVars['tagsearch']), 'pages');
 
-			// return the where query string
-			$where .= " AND tx_typo3blog_tags LIKE '%".$tag."%'";
+			// Trim tx_typo3blog_tags and replace " ," and ", " with "," for clean list without spaces
+			$where .= " AND  FIND_IN_SET('".$tag."',TRIM(REPLACE(REPLACE(LOWER(tx_typo3blog_tags), ', ', ','), ' ,', ','))) > 0";
 		}
 
 		// Get GET param datefrom and dateto from url
 		if (strlen($this->piVars['datefrom']) > 0 && strlen($this->piVars['dateto']) > 0) {
-			$datefrom = htmlspecialchars(trim($this->piVars['datefrom']));
-			$dateto   = htmlspecialchars(trim($this->piVars['dateto']));
+			$datefrom = $GLOBALS['TYPO3_DB']->quoteStr(trim($this->piVars['datefrom'], 'pages'));
+			$dateto   = $GLOBALS['TYPO3_DB']->quoteStr(trim($this->piVars['dateto'], 'pages'));
+
 
 			if (($datefrom != false) AND ($dateto != false)) {
 				$where .= " AND DATE(FROM_UNIXTIME(tx_typo3blog_create_datetime)) >= '".$datefrom."' AND DATE(FROM_UNIXTIME(tx_typo3blog_create_datetime)) <= '".$dateto."'";
