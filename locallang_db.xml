@@ -13,6 +13,7 @@
 			<label index="pages.tx_typo3blog_create_datetime">Create datetime</label>
 			<label index="pages.tx_typo3blog_exclude_page">Exclude page</label>
 			<label index="pages.tx_typo3blog_tags">Set tags on blog page</label>
+            <label index="pages.tx_typo3blog_blogrolls">Select Blogroll to display</label>
 
 			<label index="tx_typo3blog_blogrolls">Blogroll</label>
 			<label index="tx_typo3blog_blogroll.name">Name</label>
