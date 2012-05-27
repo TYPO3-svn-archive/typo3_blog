@@ -1,13 +1,25 @@
-config {
-	# cat=plugin.typo3blog: Layout//10; type=boolean; label=Admin Panel: Turn on admin panel (mainly for testing purposes only)
+plugin.tx_typo3blog_pi1.layout {
+	# cat=plugin.typo3blog: Layout/Page/10; type=boolean; label=Admin Panel: Turn on admin panel (mainly for testing purposes only)
 	adminPanel = 0
 
-	# cat=plugin.typo3blog: Layout//20; type=boolean; label=Debugging: Turn on debugging (testing purposes only)
+	# cat=plugin.typo3blog: Layout/Page/20; type=boolean; label=Debugging: Turn on debugging (testing purposes only)
 	debug = 0
 
-	# cat=plugin.typo3blog: Layout//30; type=string; label=Domain name for Base URL: (excluding slashes and protocol like http://)
+	# cat=plugin.typo3blog: Layout/Page/30; type=string; label=Domain name for Base URL: (excluding slashes and protocol like http://)
 	domain =
 
-	# cat=plugin.typo3blog: Layout//40; type=boolean; label=Enable index search
+	# cat=plugin.typo3blog: Layout/Page/40; type=boolean; label=Enable index search
 	indexsearch = 0
+
+	# cat=plugin.typo3blog: Layout/Template/bloglist/010; type=file; label=Template location for bloglist widget
+	bloglist.templateFile = EXT:typo3_blog/res/layout/pluginTemplates/bloglist/template.html
+
+	# cat=plugin.typo3blog: Layout/Template/blogsingle/020; type=file; label=Template location for blogsingle widget
+	blogsingle.templateFile = EXT:typo3_blog/res/layout/pluginTemplates/blogsingle/template.html
+
+	# cat=plugin.typo3blog: Layout/Template/pagebrowse/030; type=file; label=Template location for pagebrowse extensions
+	pagebrowse.templateFile = EXT:typo3_blog/res/layout/pluginTemplates/pagebrowse/template.html
+
+	# cat=plugin.typo3blog: Layout/Template/comments/040; type=file; label=Template location for comments extension
+	comments.templateFile = EXT:typo3_blog/res/layout/pluginTemplates/comments/template.html
 }

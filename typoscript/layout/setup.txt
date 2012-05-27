@@ -8,7 +8,6 @@ lib.content_main < styles.content.get
 lib.content_right < styles.content.getRight
 
 
-
 # Configuration additional plugins
 ##################################################
 
@@ -16,13 +15,13 @@ lib.content_right < styles.content.getRight
 # Setup plugin pagebrowse configuration
 #
 plugin.tx_pagebrowse_pi1 {
-	templateFile = EXT:typo3_blog/res/layout/pluginTemplates/pagebrowse/template.html
+	templateFile = {$plugin.tx_typo3blog_pi1.layout.pagebrowse.templateFile}
 }
 
 #
 # Setup plugin comments pageBrowser configuration
 #
-plugin.tx_comments_pi1.pageBrowser.templateFile = EXT:typo3_blog/res/layout/pluginTemplates/pagebrowse/template.html
+plugin.tx_comments_pi1.pageBrowser.templateFile = {$plugin.tx_typo3blog_pi1.layout.pagebrowse.templateFile}
 
 #
 # Setup plugin comments configuration FORM only
@@ -30,7 +29,7 @@ plugin.tx_comments_pi1.pageBrowser.templateFile = EXT:typo3_blog/res/layout/plug
 plugin.tx_comments_pi1 = USER_INT
 lib.typo3blog_commentsForm < plugin.tx_comments_pi1
 lib.typo3blog_commentsForm {
-	templateFile = EXT:typo3_blog/res/layout/pluginTemplates/comments/template.html
+	templateFile = {$plugin.tx_typo3blog_pi1.layout.comments.templateFile}
 	code = FORM
 	requiredFields_errorWrap {
 		dataWrap = <span class="help-inline tx-comments-pi1-error">{LLL:EXT:comments/pi1/locallang.xml:error}:&#32;|</span>
@@ -42,7 +41,7 @@ lib.typo3blog_commentsForm {
 #
 lib.typo3blog_comments < plugin.tx_comments_pi1
 lib.typo3blog_comments {
-	templateFile = EXT:typo3_blog/res/layout/pluginTemplates/comments/template.html
+	templateFile = {$plugin.tx_typo3blog_pi1.layout.comments.templateFile}
 	code = COMMENTS
 
 }
@@ -99,6 +98,10 @@ form4_pages_rss {
 
 # Configuration typo3blog widgets
 ##################################################
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/typoscript/layout/search/setup.txt">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/typoscript/layout/sexybookmarks/setup.txt">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/typoscript/layout/indexsearch/setup.txt">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/typoscript/layout/latestcomments/setup.txt">
 
 #
 # Setup typo3blog categoryList
@@ -117,6 +120,7 @@ plugin.tx_typo3blog_pi1.categoryList {
 # Setup typo3blog bloglist
 #
 plugin.tx_typo3blog_pi1.blogList {
+	templateFile = {$plugin.tx_typo3blog_pi1.layout.bloglist.templateFile}
 	marker {
 		# wrap title
 		title >
@@ -156,23 +160,28 @@ plugin.tx_typo3blog_pi1.blogList {
 
 		author_email >
 
+		# wrap tx_typo3blog_create_datetime
 		tx_typo3blog_create_datetime {
 			wrap = <li><span class="divider">/</span> | </li>
 			required = 1
 		}
 
+		# wrap tx_typo3blog_tags
 		tx_typo3blog_tags {
 			wrap = <li><span class="divider">/</span> | </li>
 			required = 1
 		}
 
-		tx_pagehits_hits.10 {
-			dataWrap = <li><span class="divider">/</span>{LLL:EXT:typo3_blog/pi1/locallang.xml:tx_typo3blog_views}: | </li>
-			required = 1
+		# Add tx_pagehits_hits
+		tx_pagehits_hits = COA_INT
+		tx_pagehits_hits {
+			10 = TEXT
+			10 {
+				field = tx_pagehits_hits
+				dataWrap = <li><span class="divider">/</span>{LLL:EXT:typo3_blog/pi1/locallang.xml:tx_typo3blog_views}: | </li>
+				required = 1
+			}
 		}
-
-		#additionalfooter.10 = TEXT
-		#additionalfooter.10 < plugin.tx_sexybookmarks_pi1
 	}
 }
 
@@ -180,6 +189,7 @@ plugin.tx_typo3blog_pi1.blogList {
 # Setup typo3blog blogSingle
 #
 plugin.tx_typo3blog_pi1.blogSingle {
+	templateFile = {$plugin.tx_typo3blog_pi1.layout.blogsingle.templateFile}
 	marker {
 		# wrap title
 		title >
@@ -226,9 +236,14 @@ plugin.tx_typo3blog_pi1.blogSingle {
 			required = 1
 		}
 
-		tx_pagehits_hits.10 {
-			dataWrap = <li><span class="divider">/</span>{LLL:EXT:typo3_blog/pi1/locallang.xml:tx_typo3blog_views}: | </li>
-			required = 1
+		tx_pagehits_hits = COA_INT
+		tx_pagehits_hits {
+			10 = TEXT
+			10 {
+				field = tx_pagehits_hits
+				dataWrap = <li><span class="divider">/</span>{LLL:EXT:typo3_blog/pi1/locallang.xml:tx_typo3blog_views}: | </li>
+				required = 1
+			}
 		}
 
 		additionalfooter.10 = TEXT
@@ -362,14 +377,14 @@ page = PAGE
 page {
 	config {
 		# Admin settings
-		admPanel = {$config.adminPanel}
-		debug = {$config.debug}
+		admPanel = {$plugin.tx_typo3blog_pi1.layout.adminPanel}
+		debug = {$plugin.tx_typo3blog_pi1.layout.debug}
 
 		# set Base URL
-		baseURL = http://{$config.domain}/
+		baseURL = http://{$plugin.tx_typo3blog_pi1.layout.domain}/
 
 		# index search
-		index_enable = {$config.indexsearch}
+		index_enable = {$plugin.tx_typo3blog_pi1.layout.indexsearch}
 
 		# Doctype
 		doctype = html5

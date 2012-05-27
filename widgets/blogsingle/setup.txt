@@ -132,6 +132,7 @@ plugin.tx_typo3blog_pi1 {
 				}
 			}
 
+			# pagecontent setup for templatemarker '###BLOGSINGLE_PAGECONTENT###'
 			pagecontent = COA
 			pagecontent {
 				10 = CONTENT
@@ -151,16 +152,6 @@ plugin.tx_typo3blog_pi1 {
 			linktopost = TEXT
 			linktopost {
 				wrap = |
-			}
-
-			tx_pagehits_hits = COA_INT
-			tx_pagehits_hits {
-				10 = TEXT
-				10 {
-					field = tx_pagehits_hits
-					dataWrap = <li>{LLL:EXT:typo3_blog/pi1/locallang.xml:tx_typo3blog_views}: | </li>
-					required = 1
-				}
 			}
 
 			# additionalheader setup for templatemarker '###BLOGSINGLE_ADDITIONALHEADER###'

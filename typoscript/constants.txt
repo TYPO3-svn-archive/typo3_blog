@@ -12,7 +12,7 @@ plugin.tx_typo3blog_pi1 {
 	# cat=plugin.typo3blog: Basic/file/040; type=file[js]; label=jQuery UI: Location of the jQuery UI
 	file.jQueryUI = EXT:typo3_blog/res/jquery/js/jquery-ui-1.8.20.custom.min.js
 
-	# cat=plugin.tx_jft3blogwidget/file/050; type=string; label=Languagefile pattern: Pattern for the languagefile (jquerycalendar)
+	# cat=plugin.typo3blog: basic/file/050; type=string; label=Languagefile pattern: Pattern for the languagefile (jquerycalendar)
 	jQueryUIl18n = EXT:typo3_blog/res/jquery/js/i18n/jquery.ui.datepicker-###LANGUAGE###.js
 
 	# cat=plugin.typo3blog: Basic/file/060; type=file[css]; label=jQuery UI style: Location of the jQuery UI CSS
@@ -32,7 +32,7 @@ plugin.tx_typo3blog_pi1 {
 	searchPid =
 
 	# cat=plugin.typo3blog: Basic/basic/030; type=string; label=Column from table pages with tags   (see manual!)
-    columnWithTags = tx_typo3blog_tags
+	columnWithTags = tx_typo3blog_tags
 
 	# cat=plugin.typo3blog: Basic/basic/040; type=string; label=Entry Level: The entrylevel to the root-template (distance to root)
 	entryLevel = 0
@@ -51,23 +51,23 @@ plugin.tx_typo3blog_pi1 {
 	# cat=plugin.typo3blog: widget BlogList/basic/020; type=string; label=Displaying elements from tt_content as preview on bloglist  (see manual!)
 	blogList.contentItemsToDisplay = 1
 
-	# cat=plugin.typo3blog: widget BlogList/basic/030; type=string; label=Template location for bloglist  (see manual!)
+	# cat=plugin.typo3blog: widget BlogList/basic/030; type=string; label=Template location for bloglist widget  (see manual!)
 	blogList.templateFile = EXT:typo3_blog/widgets/bloglist/template.html
 
 
 
-	# cat=plugin.typo3blog: widget BlogSingle/basic/010; type=string; label=Template location for bloglist  (see manual!)
+	# cat=plugin.typo3blog: widget BlogSingle/basic/010; type=string; label=Template location for blogsingle widget  (see manual!)
 	blogSingle.templateFile = EXT:typo3_blog/widgets/blogsingle/template.html
 
 
 
 
-	# cat=plugin.typo3blog: widget Archive/basic/010; type=string; label=Template location for archive  (see manual!)
+	# cat=plugin.typo3blog: widget Archive/basic/010; type=string; label=Template location for archive widget  (see manual!)
 	archive.templateFile = EXT:typo3_blog/widgets/archive/template.html
 
 
 
-	# cat=plugin.typo3blog: widget Calendar/basic/010; type=string; label=Template location for calendar  (see manual!)
+	# cat=plugin.typo3blog: widget Calendar/basic/010; type=string; label=Template location for calendar widget  (see manual!)
 	calendar.templateFile = EXT:typo3_blog/widgets/calendar/template.html
 
 
