@@ -166,6 +166,11 @@ plugin.tx_typo3blog_pi1.blogList {
 			required = 1
 		}
 
+		tx_pagehits_hits.10 {
+			dataWrap = <li><span class="divider">/</span>{LLL:EXT:typo3_blog/pi1/locallang.xml:tx_typo3blog_views}: | </li>
+			required = 1
+		}
+
 		#additionalfooter.10 = TEXT
 		#additionalfooter.10 < plugin.tx_sexybookmarks_pi1
 	}
@@ -221,6 +226,11 @@ plugin.tx_typo3blog_pi1.blogSingle {
 			required = 1
 		}
 
+		tx_pagehits_hits.10 {
+			dataWrap = <li><span class="divider">/</span>{LLL:EXT:typo3_blog/pi1/locallang.xml:tx_typo3blog_views}: | </li>
+			required = 1
+		}
+
 		additionalfooter.10 = TEXT
  		additionalfooter.10 < plugin.tx_sexybookmarks_pi1
 
@@ -243,9 +253,9 @@ plugin.tx_typo3blog_pi1.latestPosts {
 		wrap = <ul class="nav nav-list tx-typo3blog-link-list"> | </ul>
 	}
 	renderObj {
-    		10.stdWrap.cObject.10.wrap = <span><i class="icon-user"></i> |
-    		10.stdWrap.cObject.30.wrap = <span><i class="icon-comment"></i> | </span>
-    	}
+		10.stdWrap.cObject.10.wrap = <span><i class="icon-user"></i> |
+		10.stdWrap.cObject.30.wrap = <span><i class="icon-comment"></i> | </span>
+	}
 }
 
 #
@@ -401,6 +411,9 @@ page {
 		userFunc = tx_form4_pages_rss_pi1->includeHead
 		feedPid = {$form4_pages_rss.feedPid}
 	}
+
+	# Activate the counter (Plugin pagehits required)
+	5 < lib.pagehits
 
 	# Setup site template
 	10 = TEMPLATE
