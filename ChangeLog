@@ -1,3 +1,12 @@
+2012-05-27 Roland Schmidt  <rsch73@gmail.com>
+
+	* [Task #37527]    Remove dependency in core widgets to other extension
+	* [Feature #37524] Add "pageviews" to layout use the extension pagehits
+	* [Task #37523]    Add label for blogroll in Blog Setting tab
+	* [Bug #37477]     Tagsearch should match exactly
+	* Released version 0.0.3
+
+
 2012-05-26 Roland Schmidt  <rsch73@gmail.com>
 
 	* Bugfix BE Login problem after install this extension
