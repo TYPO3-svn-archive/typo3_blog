@@ -36,6 +36,7 @@ CREATE TABLE tx_typo3blog_blogroll (
 	endtime int(11) DEFAULT '0' NOT NULL,
 	fe_group int(11) DEFAULT '0' NOT NULL,
 	name tinytext,
+	title tinytext,
 	link varchar(255) DEFAULT '' NOT NULL,
 
 	PRIMARY KEY (uid),

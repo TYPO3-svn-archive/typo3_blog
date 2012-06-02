@@ -20,6 +20,7 @@ plugin.tx_typo3blog_pi1 {
 				field = name
 				typolink {
 					parameter.field = link
+					title.field = title
 				}
 				wrap = <li> | </li>
 			}

@@ -78,6 +78,15 @@ $TCA['tx_typo3blog_blogroll'] = array (
 				'eval' => 'required,trim',
 			)
 		),
+		'title' => array (
+			'exclude' => 1,
+			'label'   => 'LLL:EXT:typo3_blog/locallang_db.xml:tx_typo3blog_blogroll.title',
+			'config'  => array (
+				'type' => 'input',
+				'size' => '30',
+				'max'  => '255'
+			)
+		),
 		'link' => array (
 			'exclude' => 0,
 			'label'   => 'LLL:EXT:typo3_blog/locallang_db.xml:tx_typo3blog_blogroll.link',
@@ -101,7 +110,7 @@ $TCA['tx_typo3blog_blogroll'] = array (
 		),
 	),
 	'types' => array (
-		'0' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, name, link')
+		'0' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, name, title, link')
 	),
 	'palettes' => array (
 		'1' => array('showitem' => 'starttime, endtime, fe_group')
