@@ -190,6 +190,16 @@ plugin.tx_typo3blog_pi1.blogList {
 #
 plugin.tx_typo3blog_pi1.blogSingle {
 	templateFile = {$plugin.tx_typo3blog_pi1.layout.blogsingle.templateFile}
+
+	# wrap singleNav
+	singleNav {
+		1.wrap = <ul class="pager row">|</ul>
+		1.NO {
+			linkWrap = <li class="span4">|</li>
+			stdWrap.htmlSpecialChars = 1
+		}
+	}
+
 	marker {
 		# wrap title
 		title >
@@ -256,6 +266,15 @@ plugin.tx_typo3blog_pi1.blogSingle {
 			stdWrap.cObject = CONTENT
 			stdWrap.cObject < lib.typo3blog_commentsForm
 		}
+	}
+}
+
+#
+# Setup plugin typo3blog blogSingle singleNav
+#
+plugin.tx_typo3blog_pi1.blogSingle {
+	marker {
+		additionalheader.10 < plugin.tx_typo3blog_pi1.blogSingle.singleNav
 	}
 }
 
