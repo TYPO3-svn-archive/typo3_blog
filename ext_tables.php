@@ -97,6 +97,7 @@ $tempColumns = array (
 			'size' => 10,
 			'minitems' => 0,
 			'maxitems' => 100,
+			/*
 			'wizards' => array(
 				'_PADDING'  => 2,
 				'_VERTICAL' => 1,
@@ -119,7 +120,7 @@ $tempColumns = array (
 					'icon'                     => 'edit2.gif',
 					'JSopenParams'             => 'height=350,width=580,status=0,menubar=0,scrollbars=1',
 				),
-			),
+			),*/
 		)
 	),
 );
