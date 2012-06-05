@@ -170,8 +170,6 @@ class tx_typo3blog_widget_bloglist extends tslib_pibase
 			$row['pagecontent']          = $this->typo3BlogFunc->getPageContent($row['uid'], $this->conf['contentItemsToDisplay']);
 			$row['showmore']             = NULL;
 			$row['gravatar']             = NULL;
-			$row['additionalheader']     = '';
-			$row['additionalfooter']     = '';
 
 			// add data to ts template
 			$this->cObj->data = $row;
@@ -188,9 +186,13 @@ class tx_typo3blog_widget_bloglist extends tslib_pibase
 			$subparts['###ITEM###'] .= $this->cObj->substituteMarkerArrayCached($subpartItem, $markerArray);
 		}
 
-		// Set pagebrowser marker from HTML Template
+		// Set pagebrowser marker in HTML Template marker
 		$poststotal = intval($this->getNumberOfPostsInCategoryPage(intval($this->page_uid)));
 		$itemstodisplay = intval($this->conf['itemsToDisplay']);
+
+		//additional header and footer in HTML Template marker
+		$markers['###BLOGLIST_ADDITIONALHEADER###'] = $this->cObj->cObjGetSingle($this->conf['marker.']['additionalheader'], $this->conf['marker.']['additionalheader' . '.']);
+		$markers['###BLOGLIST_ADDITIONALFOOTER###'] = $this->cObj->cObjGetSingle($this->conf['marker.']['additionalfooter'], $this->conf['marker.']['additionalfooter' . '.']);
 
 		// calc pages for pagebrowser
 		$pagestodisplay = ($poststotal - ($poststotal % $itemstodisplay)) / $itemstodisplay + (($poststotal % $itemstodisplay) == 0 ? 0 : 1);

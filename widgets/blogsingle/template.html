@@ -19,23 +19,15 @@
 These are substituted throughout the whole template.
 
 <em>Markers:</em>
-BLOGSINGLE_UID                          - uid number of the blogsingle page
-BLOGSINGLE_PID                          - pid number of the blogsingle page
-BLOGSINGLE_STARTTIME                    - starttime of the blogsingle page
-BLOGSINGLE_ENDTIME                      - endtime of the blogsingle page
-BLOGSINGLE_SUBTITLE                     - subtitle of the blogsingle page
 BLOGSINGLE_TITLE                        - title of the blogsingle page
 BLOGSINGLE_TX_TYPO3BLOG_CREATE_DATETIME - crdate of the blogsingle page
 BLOGSINGLE_AUTHOR                       - author of the blogsingle page
 BLOGSINGLE_AUTHOR_EMAIL                 - author_email of the blogsingle page
-BLOGSINGLE_NAVTITLE                     - navtitle of the blogsingle page
 BLOGSINGLE_CATEGORY                     - category name of the blogsingle page
-BLOGSINGLE_CATEGORYIMAGE                - tx_typo3blog_image of the blogsingle page
 BLOGSINGLE_TAGS                         - tx_typo3blog_tags of the blogsingle page
 BLOGSINGLE_VIEWCOUNT                    - tx_typo3blog_viewcount of the blogsingle page
-BLOGSINGLE_CONTENT                      - tt_content of the blogsingle page
+BLOGSINGLE_PAGECONTENT                  - tt_content of the blogsingle page
 BLOGSINGLE_GRAVATAR                     - gravatar image from gravatar.com by author_email
-BLOGSINGLE_LINKTOPOST                   - url to blogpage
 BLOGSINGLE_TX_PAGEHITS_HITS             - Pagehit count from plugin pagehits
 
 BLOGSINGLE_ADDITIONALHEADER - marker for additional header content
@@ -61,9 +53,9 @@ BE_USER_EMAIL_SECURE - MD5 from BE_USER_EMAIL (used for gravatar)
 
 
 <!-- ###BLOGSINGLE_TEMPLATE### begin-->
-	<!--###ITEM### begin -->
+
 	<article>
-		<div>###BLOGSINGLE_ADDITIONALHEADER###</div>
+		###BLOGSINGLE_ADDITIONALHEADER###
 		###BLOGSINGLE_TITLE###
 		<ul class="breadcrumb">
 			###BLOGSINGLE_CATEGORY###
@@ -78,7 +70,7 @@ BE_USER_EMAIL_SECURE - MD5 from BE_USER_EMAIL (used for gravatar)
 		<!--TYPO3SEARCH_end-->
 		###BLOGSINGLE_ADDITIONALFOOTER###
 	</article>
-	<!--###ITEM### end -->
+
 <!-- ###BLOGSINGLE_TEMPLATE### end -->
 
 
