@@ -132,7 +132,7 @@ t3lib_extMgm::addToAllTCAtypes('pages', '--div--;LLL:EXT:typo3_blog/locallang_db
 // Define Page type ID
 $doktype = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'][$_EXTKEY]['doktypeId'];
 
-$TCA['pages']['columns']['doktype']['config']['items'][] = Array ('Blog', $doktype, t3lib_extMgm::extRelPath($_EXTKEY). 'res/pageicon.png');
+$TCA['pages']['columns']['doktype']['config']['items'][] = Array ('Blog Category', $doktype, t3lib_extMgm::extRelPath($_EXTKEY). 'res/pageicon.png');
 
 
 
