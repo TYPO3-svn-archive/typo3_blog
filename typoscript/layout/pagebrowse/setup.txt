@@ -1,0 +1,6 @@
+#
+# Setup plugin pagebrowse configuration
+#
+plugin.tx_pagebrowse_pi1 {
+	templateFile = {$plugin.tx_typo3blog_pi1.layout.pagebrowse.templateFile}
+}

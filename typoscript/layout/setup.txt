@@ -8,100 +8,22 @@ lib.content_main < styles.content.get
 lib.content_right < styles.content.getRight
 
 
-# Configuration additional plugins
-##################################################
-
-#
-# Setup plugin pagebrowse configuration
-#
-plugin.tx_pagebrowse_pi1 {
-	templateFile = {$plugin.tx_typo3blog_pi1.layout.pagebrowse.templateFile}
-}
-
-#
-# Setup plugin comments pageBrowser configuration
-#
-plugin.tx_comments_pi1.pageBrowser.templateFile = {$plugin.tx_typo3blog_pi1.layout.pagebrowse.templateFile}
-
-#
-# Setup plugin comments configuration FORM only
-#
-plugin.tx_comments_pi1 = USER_INT
-lib.typo3blog_commentsForm < plugin.tx_comments_pi1
-lib.typo3blog_commentsForm {
-	templateFile = {$plugin.tx_typo3blog_pi1.layout.comments.templateFile}
-	code = FORM
-	requiredFields_errorWrap {
-		dataWrap = <span class="help-inline tx-comments-pi1-error">{LLL:EXT:comments/pi1/locallang.xml:error}:&#32;|</span>
-	}
-}
-
-#
-# Setup plugin comments configuration COMMENTS only
-#
-lib.typo3blog_comments < plugin.tx_comments_pi1
-lib.typo3blog_comments {
-	templateFile = {$plugin.tx_typo3blog_pi1.layout.comments.templateFile}
-	code = COMMENTS
-
-}
-
-#
-# Setup plugin vge_tagcloud configuration
-#
-plugin.tx_vgetagcloud_pi1 {
-	referenceTable = pages
-	referenceFields = {$plugin.tx_typo3blog_pi1.columnWithTags}
-	targetPage = {$plugin.tx_typo3blog_pi1.startPid}
-	tagWrap {
-		typolink {
-			parameter = {$plugin.tx_typo3blog_pi1.startPid}
-			additionalParams.cObject = TEXT
-			additionalParams.cObject {
-				field = tag_keyword
-				rawUrlEncode = 1
-				dataWrap = &tx_typo3blog_pi1[tagsearch]=|
-			}
-			useCacheHash = 1
-		}
-	}
-	cloudWrap.wrap >
-	cloudWrap.dataWrap = <h3>{LLL:EXT:typo3_blog/pi1/locallang.xml:tx_typo3blog_widget_tagcloud.title}</h3><ul>|</ul>
-	_CSS_DEFAULT_STYLE >
-}
-
-#
-# Setup plugin form4_pages_rss
-# page rendering object for displaying a feed
-#
-form4_pages_rss = PAGE
-form4_pages_rss {
-	typeNum = 100
-
-	config.disableAllHeaderCode = 1
-	config.additionalHeaders = Content-type:text/xml
-
-	10 = USER
-	10 {
-		userFunc = tx_form4_pages_rss_pi1->main
-		feedPid = {$form4_pages_rss.feedPid}
-		item {
-			title = {$form4_pages_rss.item.title}
-			description = {$form4_pages_rss.item.description}
-			author = {$form4_pages_rss.item.author}
-			pubDate = {$form4_pages_rss.item.pubDate}
-		}
-	}
-}
-
-
-
-# Configuration typo3blog widgets
-##################################################
-<INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/typoscript/layout/search/setup.txt">
-<INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/typoscript/layout/sexybookmarks/setup.txt">
+# Typoscript Configuration additional plugins for typo3_blog
+# Include the typoscript configuration from TER extensions which are used in typo3_blog
+########################################################################################
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/typoscript/layout/comments/setup.txt">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/typoscript/layout/form4_pages_rss/setup.txt">
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/typoscript/layout/indexsearch/setup.txt">
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/typoscript/layout/latestcomments/setup.txt">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/typoscript/layout/pagebrowse/setup.txt">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/typoscript/layout/search/setup.txt">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/typoscript/layout/sexybookmarks/setup.txt">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/typoscript/layout/vge_tagcloud/setup.txt">
+
+
+
+# Typoscript Configuration for typo3_blog widgets
+##################################################
 
 #
 # Setup typo3blog categoryList
@@ -223,7 +145,6 @@ plugin.tx_typo3blog_pi1.blogSingle {
 				required = 1
 			}
 		}
-		gravatar >
 
 		# wrap with divider in breadcrumb
 		author {
@@ -372,20 +293,28 @@ lib.content_right {
 # SWITCH CONTENT MARKER IF BLOG PAGE
 #
 
+# Check if requested page in rootline from typo3_blog startPID
+# then set the blogSingle widget for content main (overwrite styled_content_get)
 [PIDinRootline = {$plugin.tx_typo3blog_pi1.startPid}]
 	lib.content_main < plugin.tx_typo3blog_pi1.blogSingle
 [end]
 
+# Check if requested page has the doktype what defined in extension config
+# then set the blogList widget for content_main (overwrite blogSingle widget)
 [userFunc = user_typo3blog_pageTypeIsCategory()]
 	lib.content_main < plugin.tx_typo3blog_pi1.blogList
 	lib.content_right.30 >
 	lib.content_right.50 >
 [end]
 
+# Check if requested page a search page
+# then set the tt_content.search.20 for content main (override blogSingle widget)
 [globalVar = TSFE:id = {$plugin.tx_typo3blog_pi1.searchPid}]
 	lib.content_main < tt_content.search.20
 [end]
-[end]
+
+
+
 # Configuration page
 ##################################################
 

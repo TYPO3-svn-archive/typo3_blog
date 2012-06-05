@@ -1,0 +1,23 @@
+#
+# Setup plugin vge_tagcloud configuration
+#
+plugin.tx_vgetagcloud_pi1 {
+	referenceTable = pages
+	referenceFields = {$plugin.tx_typo3blog_pi1.columnWithTags}
+	targetPage = {$plugin.tx_typo3blog_pi1.startPid}
+	tagWrap {
+		typolink {
+			parameter = {$plugin.tx_typo3blog_pi1.startPid}
+			additionalParams.cObject = TEXT
+			additionalParams.cObject {
+				field = tag_keyword
+				rawUrlEncode = 1
+				dataWrap = &tx_typo3blog_pi1[tagsearch]=|
+			}
+			useCacheHash = 1
+		}
+	}
+	cloudWrap.wrap >
+	cloudWrap.dataWrap = <h3>{LLL:EXT:typo3_blog/pi1/locallang.xml:tx_typo3blog_widget_tagcloud.title}</h3><ul>|</ul>
+	_CSS_DEFAULT_STYLE >
+}
