@@ -8,6 +8,7 @@ form4_pages_rss {
 
 	config.disableAllHeaderCode = 1
 	config.additionalHeaders = Content-type:text/xml
+	config.xhtml_cleanup = 0
 
 	10 = USER
 	10 {
