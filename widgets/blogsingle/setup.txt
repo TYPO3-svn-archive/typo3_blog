@@ -34,25 +34,11 @@ plugin.tx_typo3blog_pi1 {
 		# SECTION TEMPLATE MARKER FOR BLOGLIST TEMPLATE
 		#----------------------------------------------------
 		marker {
-			# page field uid setup for templatemarker '###BLOGSINGLE_UID###'
-			uid = TEXT
-			uid {
-				wrap = |
-				field = uid
-			}
 
-			# page field pid setup for templatemarker '###BLOGSINGLE_PID###'
-			pid = TEXT
-			pid {
-				wrap = |
-				field = pid
-			}
+			# additionalheader setup for templatemarker '###BLOGSINGLE_ADDITIONALHEADER###'
+			additionalheader = COA
+			additionalheader {
 
-			# page field subtitle setup for templatemarker '###BLOGSINGLE_SUBTITLE###'
-			subtitle = TEXT
-			subtitle {
-				wrap = |
-				field = subtitle
 			}
 
 			# page field title setup for templatemarker '###BLOGSINGLE_TITLE###'
@@ -62,13 +48,16 @@ plugin.tx_typo3blog_pi1 {
 				field = title
 			}
 
-			# page field v (format as date '%d.%m.%Y' via strftime) setup for templatemarker '###BLOGLIST_TX_TYPO3BLOG_CREATE_DATETIME###'
-			tx_typo3blog_create_datetime = TEXT
-			tx_typo3blog_create_datetime {
-				field = tx_typo3blog_create_datetime
-				strftime = {$plugin.tx_typo3blog_pi1.dateFromat}
+			# page field title (from parent page) setup for templatemarker '###BLOGSINGLE_CATEGORY###'
+			category = TEXT
+			category {
+				field = category
 				wrap = <li> | </li>
 				required = 1
+				typolink {
+					parameter.dataWrap = {field:pid}
+					useCacheHash = 1
+				}
 			}
 
 			# page field author setup for templatemarker '###BLOGSINGLE_AUTHOR###'
@@ -87,24 +76,13 @@ plugin.tx_typo3blog_pi1 {
 				required = 1
 			}
 
-			# page field nav_title setup for templatemarker '###BLOGSINGLE_NAV_TITLE###'
-			nav_title = TEXT
-			nav_title {
-				field = nav_title
+			# page field v (format as date '%d.%m.%Y' via strftime) setup for templatemarker '###BLOGLIST_TX_TYPO3BLOG_CREATE_DATETIME###'
+			tx_typo3blog_create_datetime = TEXT
+			tx_typo3blog_create_datetime {
+				field = tx_typo3blog_create_datetime
+				strftime = {$plugin.tx_typo3blog_pi1.dateFromat}
 				wrap = <li> | </li>
 				required = 1
-			}
-
-			# page field title (from parent page) setup for templatemarker '###BLOGSINGLE_CATEGORY###'
-			category = TEXT
-			category {
-				field = category
-				wrap = <li> | </li>
-				required = 1
-				typolink {
-					parameter.dataWrap = {field:pid}
-					useCacheHash = 1
-				}
 			}
 
 			# page field tx_typo3_tagcloud setup for templatemarker '###BLOGLIST_TX_TYPO3BLOG_TAGS###'
@@ -152,14 +130,6 @@ plugin.tx_typo3blog_pi1 {
 				}
 			}
 
-			# pagecontent setup for templatemarker '###BLOGSINGLE_PAGECONTENT###'
-			pagecontent = COA
-			pagecontent {
-				10 = CONTENT
-				10.table = tt_content
-				10.select.pidInList = this
-			}
-
 			# gravatar setup for templatemarker '###BLOGSINGLE_GRAVATAR###'
 			gravatar = TEXT
 			gravatar {
@@ -168,16 +138,12 @@ plugin.tx_typo3blog_pi1 {
 				required = 1
 			}
 
-			# link to post setup for templatemarker '###BLOGSINGLE_LINKTOPOST###'
-			linktopost = TEXT
-			linktopost {
-				wrap = |
-			}
-
-			# additionalheader setup for templatemarker '###BLOGSINGLE_ADDITIONALHEADER###'
-			additionalheader = COA
-			additionalheader {
-
+			# pagecontent setup for templatemarker '###BLOGSINGLE_PAGECONTENT###'
+			pagecontent = COA
+			pagecontent {
+				10 = CONTENT
+				10.table = tt_content
+				10.select.pidInList = this
 			}
 
 			# additionalfooter setup for templatemarker '###BLOGSINGLE_ADDITIONALFOOTER###'

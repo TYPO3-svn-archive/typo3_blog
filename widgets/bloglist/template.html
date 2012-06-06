@@ -21,23 +21,20 @@
 These are substituted throughout the whole template.
 
 <em>Markers:</em>
+BLOGLIST_ADDITIONALHEADER               - marker for additional header content
+
+BLOGLIST_GRAVATAR                       - gravatar image from gravatar.com by author_email
 BLOGLIST_TITLE                          - title of the bloglist page
-BLOGLIST_TX_TYPO3BLOG_CREATE_DATETIME   - tx_typo3blog_create_datetime of the bloglist page
+BLOGLIST_CATEGORY                       - category name of the bloglist page
 BLOGLIST_AUTHOR                         - author of the bloglist page
 BLOGLIST_AUTHOR_EMAIL                   - author_email of the bloglist page
-BLOGLIST_CATEGORY                       - category name of the bloglist page
-BLOGLIST_TAGS                           - tx_typo3blog_tags of the bloglist page
+BLOGLIST_TX_TYPO3BLOG_CREATE_DATETIME   - tx_typo3blog_create_datetime of the bloglist page
+BLOGLIST_TX_TYPO3BLOG_TAGS              - tx_typo3blog_tags of the bloglist page
 BLOGLIST_PAGECONTENT                    - tt_content of the blogpage page
-BLOGLIST_GRAVATAR                       - gravatar image from gravatar.com by author_email
 BLOGLIST_SHOWMORE                       - show more link to blog page
 
-BLOGLIST_ADDITIONALHEADER - marker for additional header content
-BLOGLIST_ADDITIONALFOOTER - marker for additional footer content
-
-BE_USER_USERNAME     - Backenduser username
-BE_USER_REALNAME     - Backenduser Realname
-BE_USER_EMAIL        - Backenduser mail-address
-BE_USER_EMAIL_SECURE - MD5 from BE_USER_EMAIL (used for gravatar)
+BLOGLIST_ADDITIONALFOOTER               - marker for additional footer content
+BLOGLIST_PAGEBROWSER                    - marker for pagebrowse extension
 
 
 <br /><br /><br /><br /><hr />
@@ -48,7 +45,6 @@ BE_USER_EMAIL_SECURE - MD5 from BE_USER_EMAIL (used for gravatar)
 <br />
 <br />
 <br />
-
 
 
 <!-- ###BLOGLIST_TEMPLATE### begin-->
@@ -65,7 +61,6 @@ BE_USER_EMAIL_SECURE - MD5 from BE_USER_EMAIL (used for gravatar)
 			###BLOGLIST_TX_TYPO3BLOG_TAGS###
 		</ul>
 		###BLOGLIST_PAGECONTENT###
-		###BLOGLIST_ADDITIONALFOOTER###
 		###BLOGLIST_SHOWMORE###
 		<hr />
 	</article>

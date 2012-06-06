@@ -17,11 +17,13 @@ plugin.tx_typo3blog_pi1 {
 		}
 
 		marker {
+			# title from widget
 			widgetTitle =TEXT
 			widgetTitle {
 				data = LLL:EXT:typo3_blog/pi1/locallang.xml:tx_typo3blog_widget_archive.title
 			}
 
+			# year setup for template marker ###YEAR###
 			year = TEXT
 			year {
 				wrap = |
@@ -47,6 +49,7 @@ plugin.tx_typo3blog_pi1 {
 				}
 			}
 
+			# month setup for template marker ###MONTH###
 			month = TEXT
 			month {
 				wrap = |
@@ -80,12 +83,14 @@ plugin.tx_typo3blog_pi1 {
 				}
 			}
 
+			# quantity setup used in month setup
 			quantity = TEXT
 			quantity {
 				field = quantity
 				wrap = |
 			}
 
+			# title setup for template marker ###TITLE###
 			title = TEXT
 			title {
 				wrap = |

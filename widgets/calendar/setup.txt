@@ -4,24 +4,29 @@ plugin.tx_typo3blog_pi1 {
 		includeLibs = EXT:typo3_blog/widgets/calendar/class.tx_typo3blog_widget_calendar.php
 		userFunc = tx_typo3blog_widget_calendar->main
 
+		# noConflict = 1, default 0
 		jQueryNoConflict = 0
+
+		# Move javascript footer = 1, default = 0
 		jsInFooter = 0
+
+		# make jsMinified = 1, default = 0
 		jsMinify = 0
+
+		# js is inline = 1, default = 0
 		jsInline = 0
+
+		# make css minified = 1, default = 0
 		cssMinify = 0
 
+		# path to template file
 		templateFile = {$plugin.tx_typo3blog_pi1.calendar.templateFile}
 
+		# container for jQueri UI calendar
 		datepicker = COA
 		datepicker {
 			10 = TEXT
 			10.wrap = <div id="tx_typo3blog_widget_calendar" class="tx-typo3blog-pi1-widget-calendar"> | </div>
 		}
-
-		language = TEXT
-		language {
-			value = de
-		}
-
 	}
 }

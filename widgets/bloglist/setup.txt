@@ -23,7 +23,7 @@ plugin.tx_typo3blog_pi1 {
 		# SECTION TEMPLATE MARKER FOR BLOGLIST TEMPLATE
 		#----------------------------------------------------
 		marker {
-			# page field title setup for templatemarker '###BLOGLIST_TITLE###'
+			# table page field title setup for templatemarker '###BLOGLIST_TITLE###'
 			title = TEXT
 			title {
 				wrap = |
@@ -34,7 +34,7 @@ plugin.tx_typo3blog_pi1 {
 				}
 			}
 
-			# page field crdate (format as date '%d.%m.%Y' via strftime) setup for templatemarker '###BLOGLIST_TX_TYPO3BLOG_CREATE_DATETIME###'
+			# table page field crdate (format as date '%d.%m.%Y' via strftime) setup for templatemarker '###BLOGLIST_TX_TYPO3BLOG_CREATE_DATETIME###'
 			tx_typo3blog_create_datetime = TEXT
 			tx_typo3blog_create_datetime {
 				field = tx_typo3blog_create_datetime
@@ -43,7 +43,7 @@ plugin.tx_typo3blog_pi1 {
 				required = 1
 			}
 
-			# page field author setup for templatemarker '###BLOGLIST_AUTHOR###'
+			# table be_users field username setup for templatemarker '###BLOGLIST_AUTHOR###'
 			author = TEXT
 			author {
 				field = be_user_realName
@@ -51,7 +51,7 @@ plugin.tx_typo3blog_pi1 {
 				required = 1
 			}
 
-			# page field author_email setup for templatemarker '###BLOGLIST_AUTHOR_EMAIL###'
+			# table be_users field email setup for templatemarker '###BLOGLIST_AUTHOR_EMAIL###'
 			author_email = TEXT
 			author_email {
 				field = be_user_email
@@ -59,7 +59,7 @@ plugin.tx_typo3blog_pi1 {
 				required = 1
 			}
 
-			# page field author_email as gravatar setup for templatemarker '###BLOGLIST_GRAVATAR###'
+			# be_user_email_secure (md5)  as gravatar setup for templatemarker '###BLOGLIST_GRAVATAR###'
 			gravatar = TEXT
 			gravatar {
 				field = be_user_email_secure
@@ -67,7 +67,7 @@ plugin.tx_typo3blog_pi1 {
 				required = 1
 			}
 
-			# page field title (from parent page) setup for templatemarker '###BLOGLIST_CATEGORY###'
+			# table page field title (from parent page) setup for templatemarker '###BLOGLIST_CATEGORY###'
 			category = TEXT
 			category {
 				field = category
@@ -79,7 +79,7 @@ plugin.tx_typo3blog_pi1 {
 				}
 			}
 
-			# page field tx_typo3_tagcloud setup for templatemarker '###BLOGLIST_TX_TYPO3BLOG_TAGS###'
+			# table page field tx_typo3_tagcloud setup for templatemarker '###BLOGLIST_TX_TYPO3BLOG_TAGS###'
 			tx_typo3blog_tags = COA
 			tx_typo3blog_tags {
 				if.isTrue.field = {$plugin.tx_typo3blog_pi1.columnWithTags}
