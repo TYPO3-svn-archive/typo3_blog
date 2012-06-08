@@ -142,7 +142,7 @@ class tx_typo3blog_widget_relatedposts extends tslib_pibase
 				'WHERE'   => 'uid IN (' . $this->getPostByRootLine() . ') '.$this->cObj->enableFields('pages').' AND doktype != ' . $this->blog_doktype_id . ' ' . $this->getKeywordFilterQuery(),
 				'GROUPBY' => '',
 				'ORDERBY' => 'tx_typo3blog_create_datetime DESC',
-				'LIMIT'   => 5
+				'LIMIT'   => intval($this->conf['itemsToDisplay'])
 			)
 		);
 
@@ -227,7 +227,7 @@ class tx_typo3blog_widget_relatedposts extends tslib_pibase
 		// Query to load current page with all post pages in rootline
 		$currentPageSql = $GLOBALS['TYPO3_DB']->exec_SELECT_queryArray(
 			array(
-				'SELECT'  => 'uid,tx_typo3blog_tags',
+				'SELECT'  => 'uid,'.$this->conf['keywordsColumn'],
 				'FROM'    => 'pages',
 				'WHERE'   => 'uid IN (' . $this->page_uid . ') '.$this->cObj->enableFields('pages').' AND doktype != ' . $this->blog_doktype_id,
 				'GROUPBY' => '',
@@ -237,8 +237,8 @@ class tx_typo3blog_widget_relatedposts extends tslib_pibase
 		);
 		$currentPage = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($currentPageSql);
 
-		if ($currentPage['tx_typo3blog_tags']) {
-			$tags = explode(',', trim($currentPage['tx_typo3blog_tags']));
+		if ($currentPage[$this->conf['keywordsColumn']]) {
+			$tags = explode(',', trim($currentPage[$this->conf['keywordsColumn']]));
 			$where .= ' AND (';
 			for ($i = 0; $i < count($tags); $i++) {
 				if ($i < 1) {

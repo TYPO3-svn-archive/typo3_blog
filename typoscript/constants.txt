@@ -86,9 +86,6 @@ plugin.tx_typo3blog_pi1 {
 	# cat=plugin.typo3blog: widget relatedPosts/basic/010; type=string; label=Template location for relatedposts widget  (see manual!)
 	relatedPosts.templateFile = EXT:typo3_blog/widgets/relatedposts/template.html
 
-	# cat=plugin.typo3blog: widget relatedPosts/basic/010; type=string; label=Column from table pages to use   (see manual!)
-	relatedPosts.keywordsColumn = tx_typo3blog_tags
-
 	# cat=plugin.typo3blog: widget relatedPosts/basic/020; type=string; label=Items to display for relatedPosts   (see manual!)
 	relatedPosts.itemsToDisplay = 5
 
