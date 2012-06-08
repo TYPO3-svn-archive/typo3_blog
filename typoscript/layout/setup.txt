@@ -156,6 +156,7 @@ plugin.tx_typo3blog_pi1.blogSingle {
 		}
 
 		author_email >
+		gravatar >
 
 		tx_typo3blog_create_datetime {
 			wrap = <li><span class="divider">/</span> | </li>

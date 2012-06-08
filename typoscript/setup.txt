@@ -18,7 +18,6 @@ plugin.tx_typo3blog_pi1 {
 	jQueryTreeView = {$plugin.tx_typo3blog_pi1.file.jQueryTreeView}
 	jQueryTreeViewStyle = {$plugin.tx_typo3blog_pi1.file.jQueryTreeViewStyle}
 
-	what_to_display =
 	startPid = {$plugin.tx_typo3blog_pi1.startPid}
 	searchPid = {$plugin.tx_typo3blog_pi1.searchPid}
 	entryLevel = {$plugin.tx_typo3blog_pi1.entryLevel}
