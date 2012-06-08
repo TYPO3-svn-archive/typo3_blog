@@ -33,7 +33,7 @@
  *   97:     public function getPageContent($id, $limit)
  *  134:     public function getPostCategoryName($pid, $field = 'title')
  *  161:     public function getExtensionVersion($key)
- *  178:     function pi_wrapInBaseClass($str, $widgetId)
+ *  177:     function pi_wrapInBaseClass($str, $widgetId)
  *
  * TOTAL FUNCTIONS: 6
  * (This index is automatically created/updated by the extension "extdeveval")
@@ -87,42 +87,6 @@ class typo3blog_func
 	}
 
 	/**
-	 * Retrieve all records from tt_content by current page uid
-	 *
-	 * @param	integer		$id:		Page uid from blog post page
-	 * @param	integer		$limit:		Limit to display content elements on list view
-	 * @return	string
-	 * @access public
-	 */
-	public function getPageContent($id, $limit)
-	{
-		// Define return value
-		$content = '';
-
-		// Select the uid from tt_content
-		$sql = $GLOBALS['TYPO3_DB']->exec_SELECT_queryArray(array(
-				'SELECT'	=> 'uid',
-				'FROM'		=> 'tt_content',
-				'WHERE'		=> 'pid=' . intval($id) . ' ' . $this->cObj->enableFields('tt_content'),
-				'GROUPBY'	=> '',
-				'ORDERBY'	=> 'sorting',
-				'LIMIT'		=> intval($limit)
-			)
-		);
-
-		// Execute sql and add tt_content entries in cObj RECORDS in return value $content
-		while ($row = mysql_fetch_assoc($sql)) {
-			$conf['tables'] = 'tt_content';
-			$conf['source'] = intval($row['uid']);
-			$conf['dontCheckPid'] = 1;
-			$content .= $this->cObj->RECORDS($conf);
-		}
-
-		// return the content
-		return $content;
-	}
-
-	/**
 	 * Return the category name from parent page
 	 * The parent page is the category page
 	 *
@@ -162,7 +126,6 @@ class typo3blog_func
 		if (! t3lib_extMgm::isLoaded($key)) {
 			return '';
 		}
-		$_EXTKEY = $key;
 		include(t3lib_extMgm::extPath($key) . 'ext_emconf.php');
 		return $EM_CONF[$key]['version'];
 	}

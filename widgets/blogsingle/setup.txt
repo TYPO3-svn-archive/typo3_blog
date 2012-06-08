@@ -144,6 +144,7 @@ plugin.tx_typo3blog_pi1 {
 				10 = CONTENT
 				10.table = tt_content
 				10.select.pidInList = this
+				10.select.where=colPos=0
 			}
 
 			# additionalfooter setup for templatemarker '###BLOGSINGLE_ADDITIONALFOOTER###'

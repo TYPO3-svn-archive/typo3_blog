@@ -29,11 +29,11 @@
  *   55: class tx_typo3blog_widget_bloglist extends tslib_pibase
  *   75:     private function init()
  *  112:     public function main($content, $conf)
- *  224:     private function getPageBrowseLimit()
- *  241:     private function getListGetPageBrowser($numberOfPages)
- *  263:     private function getNumberOfPostsInCategoryPage($page_id)
- *  288:     private function getPostByRootLine()
- *  304:     public function getWhereFilterQuery()
+ *  226:     private function getPageBrowseLimit()
+ *  243:     private function getListGetPageBrowser($numberOfPages)
+ *  265:     private function getNumberOfPostsInCategoryPage($page_id)
+ *  290:     private function getPostByRootLine()
+ *  306:     public function getWhereFilterQuery()
  *
  * TOTAL FUNCTIONS: 7
  * (This index is automatically created/updated by the extension "extdeveval")
@@ -167,7 +167,7 @@ class tx_typo3blog_widget_bloglist extends tslib_pibase
 			$row['be_user_email']        = $row_user['email'];
 			$row['be_user_email_secure'] = md5($row_user['email']);
 			$row['category']             = $this->typo3BlogFunc->getPostCategoryName($row['pid'], 'title');
-			$row['pagecontent']          = $this->typo3BlogFunc->getPageContent($row['uid'], $this->conf['contentItemsToDisplay']);
+			$row['pagecontent']          = NULL;
 			$row['showmore']             = NULL;
 			$row['gravatar']             = NULL;
 
@@ -247,7 +247,6 @@ class tx_typo3blog_widget_bloglist extends tslib_pibase
 		$conf['pageParameterName'] = $this->prefixId . '|page';
 		$conf['numberOfPages'] = $numberOfPages;
 
-		//echo "<pre>"; print_r($conf);exit;
 		// Get page browser
 		$this->cObj->start(array(), '');
 		$content = $this->cObj->cObjGetSingle('USER', $conf);
