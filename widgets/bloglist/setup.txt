@@ -131,7 +131,7 @@ plugin.tx_typo3blog_pi1 {
 				10.table = tt_content
 				10.select.pidInList.dataWrap = {field:uid}
 				10.select.where = colPos=0
-				10.select.max = 1
+				10.select.max = {$plugin.tx_typo3blog_pi1.blogList.contentItemsToDisplay}
 			}
 
 			# showMore setup for templatemarker '###BLOGLIST_SHOWMORE###'
