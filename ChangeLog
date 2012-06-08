@@ -1,3 +1,19 @@
+2012-06-02 Roland Schmidt  <rsch73@gmail.com>
+
+	" [Bug #37826]     The select from tt_content in blogList and blogSingle widget only from one colPos and not from all colPos
+	* [Task #37766]    Rename the pagetype "Blog" to "Blog Category"
+	* [Task #37760]    Add config.xhtml_cleaning = 0 in form4_pages_rss configuration
+	* [Task #37757]    Remove add and edit wizard from blogroll widget tca
+	* [Task #37752]    Move typoscript configuration from other extension in typoscript/layout
+	* [Task #37746]    Remove all markers from typoscript which are not used in template
+	* [Task #37706]    Refacture widget relatedPosts
+	* [Task #37703]    Blogroll needs a new field "title"
+	* [Task #37703]    Blogroll needs a new field "title"
+	* [BUG #37702]     Blogroll does not have a title
+	* [Bug #37695]     Possibility to show the parent Category
+	* Released version 0.0.4
+
+
 2012-05-27 Roland Schmidt  <rsch73@gmail.com>
 
 	* [Task #37527]    Remove dependency in core widgets to other extension

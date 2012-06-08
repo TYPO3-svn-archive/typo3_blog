@@ -30,7 +30,7 @@ plugin.tx_typo3blog_pi1 {
 			# page field title setup for templatemarker '###TITLE###'
 			title = TEXT
 			title {
-				wrap = <li>|</li>
+				wrap = |
 				field = title
 				typolink {
 					parameter.dataWrap = {field:uid}
