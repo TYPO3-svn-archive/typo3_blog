@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>News example template</title>
+</head>
+
+<body>
+
+<h1>RELATEDPOSTS TEMPLATES</h1>
+<h2>EXAMPLE</h2>
+
+
+
+
+
+
+<br />
+<br />
+<br />
+<strong>Global markers, as set up in TypoScript:</strong>
+These are substituted throughout the whole template.
+
+<em>Markers:</em>
+ADDITIONALHEADER               - marker for additional header content
+TITLE                          - title of the bloglist page
+ADDITIONALFOOTER               - marker for additional footer content
+
+
+<br /><br /><br /><br /><hr />
+<br />
+<h3>RELATEDPOSTS_TEMPLATE</h3>
+<em>This is the template for the list of posts, typically displayed on a frontpage.</em>
+<br />
+<br />
+<br />
+<br />
+
+
+<!-- ###RELATEDPOSTS_TEMPLATE### begin-->
+	###ADDITIONALHEADER###
+	<!--###ITEM### begin -->
+		<li>###TITLE###</li>
+
+	<!--###ITEM### end -->
+	###ADDITIONALFOOTER###
+
+<!-- ###RELATEDPOSTS_TEMPLATE### end -->
+
+
+</body>
+</html>

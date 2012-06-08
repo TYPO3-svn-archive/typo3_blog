@@ -2,44 +2,46 @@
 # Setup typo3blog relatedposts
 #
 plugin.tx_typo3blog_pi1 {
-	relatedPosts < tt_content.menu.20.6
+	relatedPosts = USER_INT
 	relatedPosts {
-		wrap >
+		includeLibs = EXT:typo3_blog/widgets/relatedposts/class.tx_typo3blog_widget_relatedposts.php
+		userFunc = tx_typo3blog_widget_relatedposts->main
+
+		# startPID from blog
+		startPID = {$plugin.tx_typo3blog_pi1.startPid}
+
+		# Bloglist template file
+		templateFile = EXT:typo3_blog/widgets/relatedposts/template.html
+
 		stdWrap {
-			outerWrap >
-			dataWrap = <div class="tx-typo3blog-pi1-widget-relatedposts"><h3>{LLL:EXT:typo3_blog/pi1/locallang.xml:tx_typo3blog_widget_relatedposts.title}</h3> | </div>
-			wrap = <ul> | </ul>
-			required = 1
+			dataWrap = <div class="tx-typo3blog-pi1-widget-relatedposts"><h3>{LLL:EXT:typo3_blog/pi1/locallang.xml:tx_typo3blog_widget_relatedposts.title}</h3> <ul>|</ul> </div>
 		}
-		special {
-			entryLevel = {$plugin.tx_typo3blog_pi1.entryLevel}
-			mode = manual
-			keywordsField = {$plugin.tx_typo3blog_pi1.relatedPosts.keywordsColumn}
-			keywordsField.sourceField = {$plugin.tx_typo3blog_pi1.relatedPosts.keywordsColumn}
-			depth = 20
-			limit = {$plugin.tx_typo3blog_pi1.relatedPosts.itemsToDisplay}
-			excludeNoSearchPages = 1
-		}
-		excludeDoktypes = {$plugin.tx_typo3blog_pi1.excludeDoktypes}
-		1.NO.stdWrap >
-		1.NO.stdWrap.cObject = COA
-		1.NO.stdWrap.cObject {
-			stdWrap >
-			10 = TEXT
-			10 {
-				data = field:author
-				wrap = <span>|
+
+		# SECTION TEMPLATE MARKER FOR RELATEDPOSTS TEMPLATE
+		#----------------------------------------------------
+		marker {
+
+			# additionalheader setup for templatemarker '###ADDITIONALHEADER###'
+			additionalheader = COA
+			additionalheader {
+
 			}
-			20 = TEXT
-			20 {
-				data = field:tx_typo3blog_create_datetime
-				strftime = {$plugin.tx_typo3blog_pi1.dateFromat}
-				wrap = &nbsp;|&nbsp;</span><br />
+
+			# page field title setup for templatemarker '###TITLE###'
+			title = TEXT
+			title {
+				wrap = <li>|</li>
+				field = title
+				typolink {
+					parameter.dataWrap = {field:uid}
+					title.field = title
+				}
 			}
-			30 = TEXT
-			30 {
-				data = field:title
-				wrap = <span>|</span>
+
+			# additionalfooter setup for templatemarker '###ADDITIONALFOOTER###'
+			additionalfooter = COA
+			additionalfooter {
+
 			}
 		}
 	}
