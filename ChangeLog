@@ -1,6 +1,8 @@
 2012-06-02 Roland Schmidt  <rsch73@gmail.com>
 
-	" [Bug #37826]     The select from tt_content in blogList and blogSingle widget only from one colPos and not from all colPos
+	* [Task #37861]    Remove präfix in templates for blogList and blogSingle widget
+	* [Task #36920]    Create extension manual
+	* [Bug #37826]     The select from tt_content in blogList and blogSingle widget only from one colPos and not from all colPos
 	* [Task #37766]    Rename the pagetype "Blog" to "Blog Category"
 	* [Task #37760]    Add config.xhtml_cleaning = 0 in form4_pages_rss configuration
 	* [Task #37757]    Remove add and edit wizard from blogroll widget tca
