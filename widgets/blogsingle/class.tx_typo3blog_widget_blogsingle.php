@@ -166,7 +166,7 @@ class tx_typo3blog_widget_blogsingle extends tslib_pibase
 					$value = $this->cObj->cObjGetSingle($this->conf['marker.'][$column], $this->conf['marker.'][$column . '.']);
 				}
 				$this->cObj->setCurrentVal(false);
-				$markers['###BLOGSINGLE_' . strtoupper($column) . '###'] = $value;
+				$markers['###' . strtoupper($column) . '###'] = $value;
 			}
 		}
 

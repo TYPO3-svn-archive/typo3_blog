@@ -21,20 +21,20 @@
 These are substituted throughout the whole template.
 
 <em>Markers:</em>
-BLOGLIST_ADDITIONALHEADER               - marker for additional header content
+ADDITIONALHEADER               - marker for additional header content
 
-BLOGLIST_GRAVATAR                       - gravatar image from gravatar.com by author_email
-BLOGLIST_TITLE                          - title of the bloglist page
-BLOGLIST_CATEGORY                       - category name of the bloglist page
-BLOGLIST_AUTHOR                         - author of the bloglist page
-BLOGLIST_AUTHOR_EMAIL                   - author_email of the bloglist page
-BLOGLIST_TX_TYPO3BLOG_CREATE_DATETIME   - tx_typo3blog_create_datetime of the bloglist page
-BLOGLIST_TX_TYPO3BLOG_TAGS              - tx_typo3blog_tags of the bloglist page
-BLOGLIST_PAGECONTENT                    - tt_content of the blogpage page
-BLOGLIST_SHOWMORE                       - show more link to blog page
+GRAVATAR                       - gravatar image from gravatar.com by author_email
+TITLE                          - title of the bloglist page
+CATEGORY                       - category name of the bloglist page
+AUTHOR                         - author of the bloglist page
+AUTHOR_EMAIL                   - author_email of the bloglist page
+TX_TYPO3BLOG_CREATE_DATETIME   - tx_typo3blog_create_datetime of the bloglist page
+TX_TYPO3BLOG_TAGS              - tx_typo3blog_tags of the bloglist page
+PAGECONTENT                    - tt_content of the blogpage page
+SHOWMORE                       - show more link to blog page
 
-BLOGLIST_ADDITIONALFOOTER               - marker for additional footer content
-BLOGLIST_PAGEBROWSER                    - marker for pagebrowse extension
+ADDITIONALFOOTER               - marker for additional footer content
+PAGEBROWSER                    - marker for pagebrowse extension
 
 
 <br /><br /><br /><br /><hr />
@@ -48,25 +48,25 @@ BLOGLIST_PAGEBROWSER                    - marker for pagebrowse extension
 
 
 <!-- ###BLOGLIST_TEMPLATE### begin-->
-	###BLOGLIST_ADDITIONALHEADER###
+	###ADDITIONALHEADER###
 	<!--###ITEM### begin -->
 	<article id="post###BLOGLIST_UID###">
-		###BLOGLIST_GRAVATAR###
-		###BLOGLIST_TITLE###
+		###GRAVATAR###
+		###TITLE###
 		<ul class="breadcrumb">
-			###BLOGLIST_CATEGORY###
-			###BLOGLIST_AUTHOR###
-			###BLOGLIST_AUTHOR_EMAIL###
-			###BLOGLIST_TX_TYPO3BLOG_CREATE_DATETIME###
-			###BLOGLIST_TX_TYPO3BLOG_TAGS###
+			###CATEGORY###
+			###AUTHOR###
+			###AUTHOR_EMAIL###
+			###TX_TYPO3BLOG_CREATE_DATETIME###
+			###TX_TYPO3BLOG_TAGS###
 		</ul>
-		###BLOGLIST_PAGECONTENT###
-		###BLOGLIST_SHOWMORE###
+		###PAGECONTENT###
+		###SHOWMORE###
 		<hr />
 	</article>
 	<!--###ITEM### end -->
-	###BLOGLIST_ADDITIONALFOOTER###
-	###BLOGLIST_PAGEBROWSER###
+	###ADDITIONALFOOTER###
+	###PAGEBROWSER###
 <!-- ###BLOGLIST_TEMPLATE### end -->
 
 

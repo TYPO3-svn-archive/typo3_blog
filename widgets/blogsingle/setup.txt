@@ -35,20 +35,20 @@ plugin.tx_typo3blog_pi1 {
 		#----------------------------------------------------
 		marker {
 
-			# additionalheader setup for templatemarker '###BLOGSINGLE_ADDITIONALHEADER###'
+			# additionalheader setup for templatemarker '###ADDITIONALHEADER###'
 			additionalheader = COA
 			additionalheader {
 
 			}
 
-			# page field title setup for templatemarker '###BLOGSINGLE_TITLE###'
+			# page field title setup for templatemarker '###TITLE###'
 			title = TEXT
 			title {
 				wrap = <h2>|</h2>
 				field = title
 			}
 
-			# page field title (from parent page) setup for templatemarker '###BLOGSINGLE_CATEGORY###'
+			# page field title (from parent page) setup for templatemarker '###CATEGORY###'
 			category = TEXT
 			category {
 				field = category
@@ -60,7 +60,7 @@ plugin.tx_typo3blog_pi1 {
 				}
 			}
 
-			# page field author setup for templatemarker '###BLOGSINGLE_AUTHOR###'
+			# page field author setup for templatemarker '###AUTHOR###'
 			author = TEXT
 			author {
 				field = be_user_realName
@@ -68,7 +68,7 @@ plugin.tx_typo3blog_pi1 {
 				required = 1
 			}
 
-			# page field autor_email setup for templatemarker '###BLOGSINGLE_AUTHOR_EMAIL###'
+			# page field autor_email setup for templatemarker '###AUTHOR_EMAIL###'
 			author_email = TEXT
 			author_email {
 				field = be_user_email
@@ -76,7 +76,7 @@ plugin.tx_typo3blog_pi1 {
 				required = 1
 			}
 
-			# page field v (format as date '%d.%m.%Y' via strftime) setup for templatemarker '###BLOGLIST_TX_TYPO3BLOG_CREATE_DATETIME###'
+			# page field v (format as date '%d.%m.%Y' via strftime) setup for templatemarker '###TX_TYPO3BLOG_CREATE_DATETIME###'
 			tx_typo3blog_create_datetime = TEXT
 			tx_typo3blog_create_datetime {
 				field = tx_typo3blog_create_datetime
@@ -85,7 +85,7 @@ plugin.tx_typo3blog_pi1 {
 				required = 1
 			}
 
-			# page field tx_typo3_tagcloud setup for templatemarker '###BLOGLIST_TX_TYPO3BLOG_TAGS###'
+			# page field tx_typo3_tagcloud setup for templatemarker '###TX_TYPO3BLOG_TAGS###'
 			tx_typo3blog_tags = COA
 			tx_typo3blog_tags {
 				if.isTrue.field = {$plugin.tx_typo3blog_pi1.columnWithTags}
@@ -130,7 +130,7 @@ plugin.tx_typo3blog_pi1 {
 				}
 			}
 
-			# gravatar setup for templatemarker '###BLOGSINGLE_GRAVATAR###'
+			# gravatar setup for templatemarker '###GRAVATAR###'
 			gravatar = TEXT
 			gravatar {
 				field = be_user_email_secure
@@ -138,7 +138,7 @@ plugin.tx_typo3blog_pi1 {
 				required = 1
 			}
 
-			# pagecontent setup for templatemarker '###BLOGSINGLE_PAGECONTENT###'
+			# pagecontent setup for templatemarker '###PAGECONTENT###'
 			pagecontent = COA
 			pagecontent {
 				10 = CONTENT
@@ -147,7 +147,7 @@ plugin.tx_typo3blog_pi1 {
 				10.select.where=colPos=0
 			}
 
-			# additionalfooter setup for templatemarker '###BLOGSINGLE_ADDITIONALFOOTER###'
+			# additionalfooter setup for templatemarker '###ADDITIONALFOOTER###'
 			additionalfooter = COA
 			additionalfooter {
 

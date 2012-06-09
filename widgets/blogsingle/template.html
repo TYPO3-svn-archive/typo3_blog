@@ -19,27 +19,27 @@
 These are substituted throughout the whole template.
 
 <em>Markers:</em>
-BLOGSINGLE_UID                          - uid number of the blogsingle page
-BLOGSINGLE_PID                          - pid number of the blogsingle page
-BLOGSINGLE_STARTTIME                    - starttime of the blogsingle page
-BLOGSINGLE_ENDTIME                      - endtime of the blogsingle page
-BLOGSINGLE_SUBTITLE                     - subtitle of the blogsingle page
-BLOGSINGLE_TITLE                        - title of the blogsingle page
-BLOGSINGLE_TX_TYPO3BLOG_CREATE_DATETIME - crdate of the blogsingle page
-BLOGSINGLE_AUTHOR                       - author of the blogsingle page
-BLOGSINGLE_AUTHOR_EMAIL                 - author_email of the blogsingle page
-BLOGSINGLE_NAVTITLE                     - navtitle of the blogsingle page
-BLOGSINGLE_CATEGORY                     - category name of the blogsingle page
-BLOGSINGLE_CATEGORYIMAGE                - tx_typo3blog_image of the blogsingle page
-BLOGSINGLE_TAGS                         - tx_typo3blog_tags of the blogsingle page
-BLOGSINGLE_VIEWCOUNT                    - tx_typo3blog_viewcount of the blogsingle page
-BLOGSINGLE_CONTENT                      - tt_content of the blogsingle page
-BLOGSINGLE_GRAVATAR                     - gravatar image from gravatar.com by author_email
-BLOGSINGLE_LINKTOPOST                   - url to blogpage
-BLOGSINGLE_TX_PAGEHITS_HITS             - Pagehit count from plugin pagehits
+UID                          - uid number of the blogsingle page
+PID                          - pid number of the blogsingle page
+STARTTIME                    - starttime of the blogsingle page
+ENDTIME                      - endtime of the blogsingle page
+SUBTITLE                     - subtitle of the blogsingle page
+TITLE                        - title of the blogsingle page
+TX_TYPO3BLOG_CREATE_DATETIME - crdate of the blogsingle page
+AUTHOR                       - author of the blogsingle page
+AUTHOR_EMAIL                 - author_email of the blogsingle page
+NAVTITLE                     - navtitle of the blogsingle page
+CATEGORY                     - category name of the blogsingle page
+CATEGORYIMAGE                - tx_typo3blog_image of the blogsingle page
+TAGS                         - tx_typo3blog_tags of the blogsingle page
+VIEWCOUNT                    - tx_typo3blog_viewcount of the blogsingle page
+CONTENT                      - tt_content of the blogsingle page
+GRAVATAR                     - gravatar image from gravatar.com by author_email
+LINKTOPOST                   - url to blogpage
+TX_PAGEHITS_HITS             - Pagehit count from plugin pagehits
 
-BLOGSINGLE_ADDITIONALHEADER - marker for additional header content
-BLOGSINGLE_ADDITIONALFOOTER - marker for additional footer content
+ADDITIONALHEADER - marker for additional header content
+ADDITIONALFOOTER - marker for additional footer content
 
 BE_USER_USERNAME     - Backenduser username
 BE_USER_REALNAME     - Backenduser Realname
@@ -62,21 +62,21 @@ BE_USER_EMAIL_SECURE - MD5 from BE_USER_EMAIL (used for gravatar)
 
 <!-- ###BLOGSINGLE_TEMPLATE### begin-->
 <article>
-	###BLOGSINGLE_ADDITIONALHEADER###
-	###BLOGSINGLE_TITLE###
+	###ADDITIONALHEADER###
+	###TITLE###
 	<ul class="breadcrumb">
-		###BLOGSINGLE_CATEGORY###
-		###BLOGSINGLE_AUTHOR###
-		###BLOGSINGLE_AUTHOR_EMAIL###
-		###BLOGSINGLE_TX_TYPO3BLOG_CREATE_DATETIME###
-		###BLOGSINGLE_TX_PAGEHITS_HITS###
-		###BLOGSINGLE_TX_TYPO3BLOG_TAGS###
+		###CATEGORY###
+		###AUTHOR###
+		###AUTHOR_EMAIL###
+		###TX_TYPO3BLOG_CREATE_DATETIME###
+		###TX_PAGEHITS_HITS###
+		###TX_TYPO3BLOG_TAGS###
 	</ul>
-	###BLOGSINGLE_GRAVATAR###
+	###GRAVATAR###
 	<!--TYPO3SEARCH_begin-->
-	###BLOGSINGLE_PAGECONTENT###
+	###PAGECONTENT###
 	<!--TYPO3SEARCH_end-->
-	###BLOGSINGLE_ADDITIONALFOOTER###
+	###ADDITIONALFOOTER###
 </article>
 <!-- ###BLOGSINGLE_TEMPLATE### end -->
 

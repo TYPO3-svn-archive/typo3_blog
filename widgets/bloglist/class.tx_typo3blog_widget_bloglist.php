@@ -181,7 +181,7 @@ class tx_typo3blog_widget_bloglist extends tslib_pibase
 					$data = $this->cObj->cObjGetSingle($this->conf['marker.'][$column], $this->conf['marker.'][$column . '.']);
 				}
 				$this->cObj->setCurrentVal(false);
-				$markerArray['###BLOGLIST_' . strtoupper($column) . '###'] = $data;
+				$markerArray['###' . strtoupper($column) . '###'] = $data;
 			}
 			$subparts['###ITEM###'] .= $this->cObj->substituteMarkerArrayCached($subpartItem, $markerArray);
 		}
@@ -191,12 +191,12 @@ class tx_typo3blog_widget_bloglist extends tslib_pibase
 		$itemstodisplay = intval($this->conf['itemsToDisplay']);
 
 		//additional header and footer in HTML Template marker
-		$markers['###BLOGLIST_ADDITIONALHEADER###'] = $this->cObj->cObjGetSingle($this->conf['marker.']['additionalheader'], $this->conf['marker.']['additionalheader' . '.']);
-		$markers['###BLOGLIST_ADDITIONALFOOTER###'] = $this->cObj->cObjGetSingle($this->conf['marker.']['additionalfooter'], $this->conf['marker.']['additionalfooter' . '.']);
+		$markers['###ADDITIONALHEADER###'] = $this->cObj->cObjGetSingle($this->conf['marker.']['additionalheader'], $this->conf['marker.']['additionalheader' . '.']);
+		$markers['###ADDITIONALFOOTER###'] = $this->cObj->cObjGetSingle($this->conf['marker.']['additionalfooter'], $this->conf['marker.']['additionalfooter' . '.']);
 
 		// calc pages for pagebrowser
 		$pagestodisplay = ($poststotal - ($poststotal % $itemstodisplay)) / $itemstodisplay + (($poststotal % $itemstodisplay) == 0 ? 0 : 1);
-		$markers['###BLOGLIST_PAGEBROWSER###'] = $this->getListGetPageBrowser($pagestodisplay);
+		$markers['###PAGEBROWSER###'] = $this->getListGetPageBrowser($pagestodisplay);
 
 		// Add all CSS and JS files
 		if (T3JQUERY === true) {
