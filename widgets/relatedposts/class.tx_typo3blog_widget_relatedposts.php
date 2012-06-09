@@ -27,10 +27,10 @@
  *
  *
  *   52: class tx_typo3blog_widget_relatedposts extends tslib_pibase
- *   72:     private function init()
- *  105:     public function main($content, $conf)
+ *   71:     private function init()
+ *  104:     public function main($content, $conf)
  *  204:     private function getPostByRootLine()
- *  220:     private function getKeywordFilterQuery()
+ *  221:     private function getKeywordFilterQuery()
  *
  * TOTAL FUNCTIONS: 4
  * (This index is automatically created/updated by the extension "extdeveval")

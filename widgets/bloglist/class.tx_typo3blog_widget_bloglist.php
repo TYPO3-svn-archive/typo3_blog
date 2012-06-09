@@ -31,9 +31,9 @@
  *  112:     public function main($content, $conf)
  *  226:     private function getPageBrowseLimit()
  *  243:     private function getListGetPageBrowser($numberOfPages)
- *  265:     private function getNumberOfPostsInCategoryPage($page_id)
- *  290:     private function getPostByRootLine()
- *  306:     public function getWhereFilterQuery()
+ *  264:     private function getNumberOfPostsInCategoryPage($page_id)
+ *  289:     private function getPostByRootLine()
+ *  305:     public function getWhereFilterQuery()
  *
  * TOTAL FUNCTIONS: 7
  * (This index is automatically created/updated by the extension "extdeveval")

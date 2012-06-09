@@ -27,15 +27,14 @@
  *
  *
  *
- *   50: class typo3blog_func
- *   61:     public function setCobj(tslib_cObj $cObj)
- *   77:     public function substituteMarkersAndSubparts($template, array $markers, array $subparts)
- *   97:     public function getPageContent($id, $limit)
- *  134:     public function getPostCategoryName($pid, $field = 'title')
- *  161:     public function getExtensionVersion($key)
- *  177:     function pi_wrapInBaseClass($str, $widgetId)
+ *   49: class typo3blog_func
+ *   60:     public function setCobj(tslib_cObj $cObj)
+ *   76:     public function substituteMarkersAndSubparts($template, array $markers, array $subparts)
+ *   97:     public function getPostCategoryName($pid, $field = 'title')
+ *  124:     public function getExtensionVersion($key)
+ *  140:     function pi_wrapInBaseClass($str, $widgetId)
  *
- * TOTAL FUNCTIONS: 6
+ * TOTAL FUNCTIONS: 5
  * (This index is automatically created/updated by the extension "extdeveval")
  *
  */
