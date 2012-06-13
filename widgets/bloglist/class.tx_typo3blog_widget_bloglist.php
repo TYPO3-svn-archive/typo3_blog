@@ -318,8 +318,8 @@ class tx_typo3blog_widget_bloglist extends tslib_pibase
 
 		// Get GET param datefrom and dateto from url
 		if (strlen($this->piVars['datefrom']) > 0 && strlen($this->piVars['dateto']) > 0) {
-			$datefrom = $GLOBALS['TYPO3_DB']->quoteStr(trim($this->piVars['datefrom'], 'pages'));
-			$dateto   = $GLOBALS['TYPO3_DB']->quoteStr(trim($this->piVars['dateto'], 'pages'));
+			$datefrom = $GLOBALS['TYPO3_DB']->quoteStr(trim($this->piVars['datefrom']), 'pages');
+			$dateto   = $GLOBALS['TYPO3_DB']->quoteStr(trim($this->piVars['dateto']), 'pages');
 
 
 			if (($datefrom != false) AND ($dateto != false)) {
