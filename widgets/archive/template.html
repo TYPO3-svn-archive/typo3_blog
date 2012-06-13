@@ -68,7 +68,10 @@ ARCHIVE_UID - uid number of the blogsingle page
 <!-- ###ARCHIVE_TEMPLATE_JS### begin-->
 jQuery(document).ready(function() {
 	jQuery(".tx_typo3blog_widget_archive").treeview({
-		persist: "cookie"
+		persist: "cookie",
+		cookieOptions: {
+			path: '/'
+		}
 	});
 });
 <!-- ###ARCHIVE_TEMPLATE_JS### end-->
