@@ -11,7 +11,7 @@ plugin.tx_typo3blog_pi1 {
 		startPID = {$plugin.tx_typo3blog_pi1.startPid}
 
 		# Bloglist template file
-		templateFile = EXT:typo3_blog/widgets/relatedposts/template.html
+		templateFile = {$plugin.tx_typo3blog_pi1.relatedPosts.templateFile}
 
 		# Column from table pages to use for keywords
 		keywordsColumn = {$plugin.tx_typo3blog_pi1.columnWithTags}
