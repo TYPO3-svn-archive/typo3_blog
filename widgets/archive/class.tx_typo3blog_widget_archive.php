@@ -121,7 +121,7 @@ class tx_typo3blog_widget_archive extends tslib_pibase
 			);
 		}
 
-		if (!t3lib_div::testInt($this->blog_doktype_id)) {
+		if (!intval($this->blog_doktype_id)) {
 			return $this->pi_wrapInBaseClass(
 				"ERROR: doktype Id for page type blog not found.<br />Please set the doktype ID in extension conf!"
 			);

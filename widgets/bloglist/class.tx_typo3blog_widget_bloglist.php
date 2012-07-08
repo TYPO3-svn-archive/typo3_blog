@@ -123,7 +123,7 @@ class tx_typo3blog_widget_bloglist extends tslib_pibase
 			);
 		}
 
-		if (!t3lib_div::testInt($this->blog_doktype_id)) {
+		if (!intval($this->blog_doktype_id)) {
 			return $this->pi_wrapInBaseClass(
 				"ERROR: doktype Id for page type blog not found.<br />Please set the doktype ID in extension conf!"
 			);
@@ -322,7 +322,7 @@ class tx_typo3blog_widget_bloglist extends tslib_pibase
 			$dateto   = $GLOBALS['TYPO3_DB']->quoteStr(trim($this->piVars['dateto']), 'pages');
 
 
-			if (($datefrom != false) AND ($dateto != false)) {
+			if (($datefrom != false) && ($dateto != false)) {
 				$where .= " AND DATE(FROM_UNIXTIME(tx_typo3blog_create_datetime)) >= '".$datefrom."' AND DATE(FROM_UNIXTIME(tx_typo3blog_create_datetime)) <= '".$dateto."'";
 			}
 		}
