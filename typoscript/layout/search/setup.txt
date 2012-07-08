@@ -8,7 +8,7 @@ tt_content.search.30 {
 	labelWrap.wrap=|
 	stdWrap.wrap = |
 	layout = ###FIELD###
-	method = post" class="navbar-form pull-left
+	method = post" class="navbar-search pull-right
 
 	target >
 	redirect = {$plugin.tx_typo3blog_pi1.searchPid}
@@ -31,6 +31,6 @@ tt_content.search.30 {
 	}
 	params {
 		submit >
-		input= class=search-query
+		input= class=search-query placeholder=search
 	}
 }
