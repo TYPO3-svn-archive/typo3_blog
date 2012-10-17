@@ -108,6 +108,9 @@ class typo3blog_func
 		);
 		// Execute SQL
 		$page = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($sql);
+		if (is_array($page) && $GLOBALS['TSFE']->sys_language_uid) {
+			$page = $GLOBALS['TSFE']->sys_page->getPageOverlay($page, $GLOBALS['TSFE']->sys_language_uid);
+		}
 
 		// return $field from result
 		return $page[$field];

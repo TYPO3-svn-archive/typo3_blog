@@ -161,6 +161,9 @@ class tx_typo3blog_widget_archive extends tslib_pibase
 
 		// Execute sql and set retrieved records in marker for bloglist
 		while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($sql)) {
+			if (is_array($row) && $GLOBALS['TSFE']->sys_language_uid) {
+				$row = $GLOBALS['TSFE']->sys_page->getPageOverlay($row, $GLOBALS['TSFE']->sys_language_uid);
+			}
 			// add data to ts template
 			$this->cObj->data = $row;
 			$this->cObj->data['datefrom'] = date(mktime(0, 0, 0, $row['month'],   1, $row['year']));
@@ -209,6 +212,9 @@ class tx_typo3blog_widget_archive extends tslib_pibase
 
 			// Each all post from result $sqlquery
 			while ($res = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($sqlquery)) {
+				if (is_array($res) && $GLOBALS['TSFE']->sys_language_uid) {
+					$res = $GLOBALS['TSFE']->sys_page->getPageOverlay($res, $GLOBALS['TSFE']->sys_language_uid);
+				}
 				// add data to ts template
 				$this->cObj->data = $res;
 				$subpartArchivePost = $this->cObj->getSubpart($subpartArchiveMonth, '###ARCHIVE_POST###');

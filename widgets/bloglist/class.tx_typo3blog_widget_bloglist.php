@@ -153,6 +153,9 @@ class tx_typo3blog_widget_bloglist extends tslib_pibase
 
 		// Execute sql and set retrieved records in marker for bloglist
 		while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($sql)) {
+			if (is_array($row) && $GLOBALS['TSFE']->sys_language_uid) {
+				$row = $GLOBALS['TSFE']->sys_page->getPageOverlay($row, $GLOBALS['TSFE']->sys_language_uid);
+			}
 			$sql_user = $GLOBALS['TYPO3_DB']->exec_SELECT_queryArray(
 				array(
 					'SELECT' => '*',

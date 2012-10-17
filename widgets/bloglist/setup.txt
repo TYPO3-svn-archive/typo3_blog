@@ -132,6 +132,7 @@ plugin.tx_typo3blog_pi1 {
 				10.select.pidInList.dataWrap = {field:uid}
 				10.select.where = colPos=0
 				10.select.max = {$plugin.tx_typo3blog_pi1.blogList.contentItemsToDisplay}
+				10.select.languageField = sys_language_uid
 			}
 
 			# showMore setup for templatemarker '###SHOWMORE###'

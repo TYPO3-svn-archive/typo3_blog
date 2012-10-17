@@ -15,7 +15,7 @@ plugin.tx_typo3blog_pi1 {
 			pidInList = {$plugin.tx_typo3blog_pi1.startPid}
 			recursive = 10
 			selectFields = pages.uid,pages.tx_typo3blog_create_datetime,be_users.realname,pages.title
-			where = doktype != 73 AND pages.hidden = 0 AND pages.deleted = 0 AND tx_typo3blog_exclude_page = 0
+			where = doktype != {$plugin.tx_typo3blog_pi1.startPid} AND pages.hidden = 0 AND pages.deleted = 0 AND tx_typo3blog_exclude_page = 0
 			leftjoin = be_users ON (pages.tx_typo3blog_author = be_users.uid)
 			orderBy = tx_typo3blog_create_datetime desc
 			max = 5
