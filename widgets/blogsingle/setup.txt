@@ -8,7 +8,7 @@ plugin.tx_typo3blog_pi1 {
 		templateFile = {$plugin.tx_typo3blog_pi1.blogSingle.templateFile}
 
 		stdWrap {
-			outerWrap = <div class="tx-typo3blog-pi1-widget-blogsingle"> | </div>
+			outerWrap = <div class="tx-typo3blog-pi1-container"> | </div>
 		}
 
 		# Menu for single navigation next up preview order by tx_typo3blog_create_datetime desc

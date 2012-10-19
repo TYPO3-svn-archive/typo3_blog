@@ -27,7 +27,7 @@ plugin.tx_typo3blog_pi1 {
 		}
 
 		stdWrap {
-			outerWrap = <div class="tx-typo3blog-pi1-widget-blogroll"> | </div>
+			outerWrap = <div class="tx-typo3blog-pi1-container"> | </div>
 			dataWrap = <h3>{LLL:EXT:typo3_blog/pi1/locallang.xml:tx_typo3blog_widget_blogroll.title}</h3> |
 			wrap = <ul> | </ul>
 			required = 1

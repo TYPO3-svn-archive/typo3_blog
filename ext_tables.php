@@ -15,22 +15,9 @@ t3lib_extMgm::addPlugin(array(
 
 
 if (TYPO3_MODE == 'BE') {
-	//$TBE_MODULES_EXT['xMOD_db_new_content_el']['addElClasses']['tx_typo3blog_pi1_wizicon'] = t3lib_extMgm::extPath($_EXTKEY).'pi1/class.tx_typo3blog_pi1_wizicon.php';
+
 }
 
-//$TCA['tt_content']['types']['list']['subtypes_addlist'][$_EXTKEY.'_pi1'] ='pi_flexform';
-//t3lib_extMgm::addPiFlexFormValue($_EXTKEY.'_pi1', t3lib_extMgm::extRelPath($_EXTKEY) . 'pi1/flexform_ds.xml');
-//t3lib_extMgm::addPiFlexFormValue($_EXTKEY .'_pi1', 'FILE:EXT:typo3_blog/pi1/flexform_ds.xml');
-
-/*
-if(!is_object($GLOBALS['BE_USER']))  {
-	define('TYPO3_PROCEED_IF_NO_USER', true);
-	$GLOBALS['BE_USER'] = t3lib_div::makeInstance('t3lib_beUserAuth');
-	$GLOBALS['BE_USER']->start();
-	$GLOBALS['BE_USER']->backendCheckLogin();
-	define('TYPO3_PROCEED_IF_NO_USER', false);
-}
-*/
 // Get extConf
 $extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$_EXTKEY]);
 
@@ -97,30 +84,6 @@ $tempColumns = array (
 			'size' => 10,
 			'minitems' => 0,
 			'maxitems' => 100,
-			/*
-			'wizards' => array(
-				'_PADDING'  => 2,
-				'_VERTICAL' => 1,
-				'add' => array(
-					'type'   => 'script',
-					'title'  => 'Create new record',
-					'icon'   => 'add.gif',
-					'params' => array(
-						'table'    => 'tx_typo3blog_blogroll',
-						'pid'      => '###CURRENT_PID###',
-						'setValue' => 'prepend'
-					),
-					'script' => 'wizard_add.php',
-				),
-				'edit' => array(
-					'type'                     => 'popup',
-					'title'                    => 'Edit',
-					'script'                   => 'wizard_edit.php',
-					'popup_onlyOpenIfSelected' => 1,
-					'icon'                     => 'edit2.gif',
-					'JSopenParams'             => 'height=350,width=580,status=0,menubar=0,scrollbars=1',
-				),
-			),*/
 		)
 	),
 );

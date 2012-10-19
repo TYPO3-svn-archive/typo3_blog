@@ -30,8 +30,7 @@ lib.content_right < styles.content.getRight
 #
 plugin.tx_typo3blog_pi1.categoryList {
 	stdWrap {
-		outerWrap = <div class="tx-typo3blog-pi1-widget-categorylist well"> | </div>
-		wrap = <ul class="nav nav-list">|</ul>
+		wrap = <ul class="nav nav-tabs nav-stacked">|</ul>
 	}
 	2.wrap = <ul class="nav nav-list">|</ul>
 	3.wrap = <ul class="nav nav-list">|</ul>
@@ -204,9 +203,8 @@ plugin.tx_typo3blog_pi1.blogSingle {
 # Setup plugin typo3blog latest posts
 #
 plugin.tx_typo3blog_pi1.latestPosts {
-	wrap >
 	stdWrap {
-		wrap = <ul class="nav nav-list tx-typo3blog-link-list"> | </ul>
+		wrap = <ul class="nav nav-tabs nav-stacked"> | </ul>
 	}
 	renderObj {
 		10.stdWrap.cObject.10.wrap = <span><i class="icon-user"></i> |
@@ -219,8 +217,7 @@ plugin.tx_typo3blog_pi1.latestPosts {
 #
 plugin.tx_typo3blog_pi1.relatedPosts {
 	stdWrap {
-		dataWrap = <div class="tx-typo3blog-pi1-widget-relatedposts well"><h3>{LLL:EXT:typo3_blog/pi1/locallang.xml:tx_typo3blog_widget_relatedposts.title}</h3> | </div>
-		wrap = <ul class="nav nav-list tx-typo3blog-link-list"> | </ul>
+		wrap = <ul class="nav nav-tabs nav-stacked"> | </ul>
 	}
 	1.NO.stdWrap.cObject {
 		10.wrap = <span class="typo3blog_date"><i class="icon-user"></i> |
@@ -233,7 +230,7 @@ plugin.tx_typo3blog_pi1.relatedPosts {
 # Setup plugin typo3blog latest comments
 #
 plugin.tx_typo3blog_pi1.latestComments {
-	stdWrap.wrap = <ul class="nav nav-list tx-typo3blog-link-list"> | </ul>
+	stdWrap.wrap = <ul class="nav nav-tabs nav-stacked"> | </ul>
 	renderObj {
 		10.stdWrap.cObject.5.wrap = <span><i class="icon-user"></i> |
 		10.stdWrap.cObject.30.wrap = <span><i class="icon-comment"></i> | </span>
@@ -257,8 +254,7 @@ plugin.tx_typo3blog_pi1.blogroll {
 		}
 	}
 	stdWrap {
-		outerWrap = <div class="tx-typo3blog-pi1-widget-blogroll well"> | </div>
-		wrap = <ul class="nav nav-list"> | </ul>
+		wrap = <ul class="nav nav-tabs nav-stacked"> | </ul>
 		required = 1
 	}
 }
@@ -267,9 +263,7 @@ plugin.tx_typo3blog_pi1.blogroll {
 # Setup plugin typo3blog archive
 #
 plugin.tx_typo3blog_pi1.archive {
-	stdWrap {
-		outerWrap = <div class="tx-typo3blog-pi1-widget-archive well"> | </div>
-	}
+
 }
 
 

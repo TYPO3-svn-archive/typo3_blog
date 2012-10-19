@@ -1,3 +1,10 @@
+2012-10-19 Roland Hensch  <rsch73@gmail.com>
+	* Change stdWrap in widgets for simlar usage in typoscript
+	* Update bootstrap 2.1.1 and update css stylesheet
+ 	* [Task #39036]   Implement multilanguage
+ 	* Fix small bugs
+
+
 2012-06-02 Roland Schmidt  <rsch73@gmail.com>
 
 	* [Task #37861]    Remove präfix in templates for blogList and blogSingle widget
@@ -9,7 +16,6 @@
 	* [Task #37752]    Move typoscript configuration from other extension in typoscript/layout
 	* [Task #37746]    Remove all markers from typoscript which are not used in template
 	* [Task #37706]    Refacture widget relatedPosts
-	* [Task #37703]    Blogroll needs a new field "title"
 	* [Task #37703]    Blogroll needs a new field "title"
 	* [BUG #37702]     Blogroll does not have a title
 	* [Bug #37695]     Possibility to show the parent Category

@@ -26,7 +26,7 @@ plugin.tx_typo3blog_pi1 {
 		datepicker = COA
 		datepicker {
 			10 = TEXT
-			10.wrap = <div id="tx_typo3blog_widget_calendar" class="tx-typo3blog-pi1-widget-calendar"> | </div>
+			10.wrap = <div id="tx_typo3blog_widget_calendar"> | </div>
 		}
 	}
 }

@@ -8,82 +8,18 @@
 .tx-vgetagcloud-pi1 ul {float:left;list-style:none outside none;margin:0;padding:0;}
 .tx-vgetagcloud-pi1 li {display:inline;float:left;}
 .tx-vgetagcloud-pi1 li a {padding:4px;text-decoration:none;}
-.pagination .disabled a {
-    background-color: #fff !important;
-}
-div.well {
-	padding: 8px 0;
-}
 
-.typo3blog_date {
-	margin-right: .5em;
-}
-.tx-typo3blog-link-list li {
-	padding: 5px 0;
-	border-bottom: 1px solid #E5E5E5;
+
+.tx-typo3blog-pi1-container {
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 #tx_typo3blog_widget_calendar {
-	margin-bottom: 20px;
+    margin-bottom: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 #tx_typo3blog_widget_calendar .ui-datepicker {
-	width: auto !important;
-}
-
-.tx-sexybookmarks-pi2 div.sexybookmarks {
-	margin: 8px 0 0;
-	clear: none !important;
-}
-.tx-sexybookmarks-pi1 div.sexybookmarks {
-	margin: 20px 0;
-}
-.well h3 {
-	padding-left: 15px;
-}
-.tx_typo3blog_widget_archive {
-	padding: 3px 15px;
-}
-.tx_typo3blog_widget_archive ul {
-	background-color: transparent;
-}
-.tx-typo3blog-pi1-widget-archive .treeview li {
-	padding: 0 0 2px 16px;
-}
-.tx-typo3blog-pi1-widget-archive .treeview a {
-	padding-left: 3px;
-}
-
-.tx-comments-no-comments,
-.tx-comments-comment-1,
-.tx-comments-comment-2 {
-	border: none !important;
-	padding: 5px 15px !important;
-}
-
-.tx-comments-comment-content {
-	border-top: 1px solid #E5E5E5;
-	padding: 5px 0 !important;
-	margin-top: 5px;
-}
-
-.extended_main {
-	padding: 8px 0;
-}
-
-.tx-typo3blog-pi1-widget-latestposts h3,
-.tx-typo3blog-pi1-widget-latestcomments h3,
-.tx-vgetagcloud-pi1 h3 {
-	padding-left: 15px;
-}
-
-.tx-vgetagcloud-pi1 ul {
-	padding-left: 15px;
-	padding-right: 15px;
-}
-
-.row.tx-typo3blog-pi1-post-title {
-	margin-left: 0;
-}
-.row.tx-typo3blog-pi1-post-title h2 {
-	margin-top: .5em;
+    width: auto !important;
 }

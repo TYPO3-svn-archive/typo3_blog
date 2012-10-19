@@ -18,9 +18,11 @@ plugin.tx_typo3blog_pi1 {
 
 		itemsToDisplay = {$plugin.tx_typo3blog_pi1.relatedPosts.itemsToDisplay}
 
-
 		stdWrap {
-			dataWrap = <div class="tx-typo3blog-pi1-widget-relatedposts"><h3>{LLL:EXT:typo3_blog/pi1/locallang.xml:tx_typo3blog_widget_relatedposts.title}</h3> <ul>|</ul> </div>
+			outerWrap = <div class="tx-typo3blog-pi1-container"> | </div>
+			dataWrap = <h3>{LLL:EXT:typo3_blog/pi1/locallang.xml:tx_typo3blog_widget_relatedposts.title}</h3>
+			wrap = <ul> | </ul>
+			required = 1
 		}
 
 		# SECTION TEMPLATE MARKER FOR RELATEDPOSTS TEMPLATE
