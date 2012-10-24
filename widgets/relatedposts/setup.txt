@@ -42,7 +42,7 @@ plugin.tx_typo3blog_pi1 {
 				field = title
 				typolink {
 					parameter.dataWrap = {field:uid}
-					title.field = title
+					title.field = subtitle // title
 				}
 			}
 

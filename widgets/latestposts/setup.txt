@@ -54,6 +54,7 @@ plugin.tx_typo3blog_pi1 {
 					parameter.cObject {
 						field = uid
 					}
+					title.field = subtitle // title
 				}
 			}
 		}

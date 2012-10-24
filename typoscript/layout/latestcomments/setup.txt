@@ -52,6 +52,7 @@ plugin.tx_typo3blog_pi1 {
 							pages_ =
 						}
 					}
+					title.field = content
 				}
 			}
 		}

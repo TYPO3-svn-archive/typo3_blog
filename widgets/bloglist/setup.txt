@@ -30,6 +30,7 @@ plugin.tx_typo3blog_pi1 {
 				field = title
 				typolink {
 					parameter.dataWrap = {field:uid}
+					title.field = subtitle // title
 					useCacheHash = 1
 				}
 			}
@@ -75,6 +76,7 @@ plugin.tx_typo3blog_pi1 {
 				required = 1
 				typolink {
 					parameter.dataWrap = {field:pid}
+					title.field = category
 					useCacheHash = 1
 				}
 			}
@@ -114,6 +116,7 @@ plugin.tx_typo3blog_pi1 {
 								typolink {
 									parameter.dataWrap = {$plugin.tx_typo3blog_pi1.startPid}
 									additionalParams.dataWrap = &tx_typo3blog_pi1[tagsearch]={register:linkparam}
+									title.current = 1
 									useCacheHash = 1
 								}
 								noTrimWrap = | ||
@@ -143,6 +146,7 @@ plugin.tx_typo3blog_pi1 {
 				required = 1
 				typolink {
 					parameter.dataWrap = {field:uid}
+					title.data = LLL:EXT:typo3_blog/pi1/locallang.xml:tx_typo3blog_widget_bloglist.showmore
 				}
 			}
 

@@ -19,12 +19,14 @@ plugin.tx_typo3blog_pi1 {
 		1.NO {
 			wrapItemAndSub = <li> | </li>
 			stdWrap.htmlSpecialChars = 1
+			ATagTitle.field = subtitle // title
 		}
 
 		1.CUR = 1
 		1.CUR {
 			wrapItemAndSub = <li class="active"> | </li>
 			stdWrap.htmlSpecialChars = 1
+			ATagTitle.field = subtitle // title
 		}
 
 		1.ACT < .1.CUR

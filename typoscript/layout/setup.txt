@@ -54,6 +54,7 @@ plugin.tx_typo3blog_pi1.blogList {
 				field = title
 				typolink {
 					parameter.dataWrap = {field:uid}
+					title.field = subtitle // title
 					useCacheHash = 1
 				}
 			}
@@ -76,6 +77,7 @@ plugin.tx_typo3blog_pi1.blogList {
 			required = 1
 			typolink {
 				parameter.field = be_user_email
+				title.field = be_user_username
 			}
 		}
 
@@ -133,6 +135,7 @@ plugin.tx_typo3blog_pi1.blogSingle {
 				field = title
 				typolink {
 					parameter.dataWrap = {field:uid}
+					title.field = subtitle // title
 					useCacheHash = 1
 				}
 			}

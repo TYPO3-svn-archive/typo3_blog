@@ -28,6 +28,7 @@ plugin.tx_typo3blog_pi1 {
 			1.NO {
 				linkWrap = <li>|</li>
 				stdWrap.htmlSpecialChars = 1
+				ATagTitle.field = subtitle // title
 			}
 		}
 
@@ -56,6 +57,7 @@ plugin.tx_typo3blog_pi1 {
 				required = 1
 				typolink {
 					parameter.dataWrap = {field:pid}
+					title.field = category
 					useCacheHash = 1
 				}
 			}

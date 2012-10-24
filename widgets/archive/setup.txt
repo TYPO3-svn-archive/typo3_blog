@@ -45,6 +45,7 @@ plugin.tx_typo3blog_pi1 {
 							wrap = &tx_typo3blog_pi1[dateto]=|
 						}
 					}
+					title.field = year
 					useCacheHash = 1
 				}
 			}
@@ -79,6 +80,19 @@ plugin.tx_typo3blog_pi1 {
 							wrap = &tx_typo3blog_pi1[dateto]=|
 						}
 					}
+					title.cObject = COA
+					title.cObject {
+						10 = TEXT
+						10 {
+							field = tx_typo3blog_create_datetime
+							strftime = %B
+						}
+						20 = TEXT
+						20 {
+							noTrimWrap = | ||
+							field = year
+						}
+					}
 					useCacheHash = 1
 				}
 			}
@@ -97,6 +111,7 @@ plugin.tx_typo3blog_pi1 {
 				field = title
 				typolink {
 					parameter.dataWrap = {field:uid}
+					title.field = subtitle // title
 					useCacheHash = 1
 				}
 			}
