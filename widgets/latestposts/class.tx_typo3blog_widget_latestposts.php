@@ -49,10 +49,10 @@ include_once(PATH_site . 'typo3/sysext/cms/tslib/class.tslib_content.php');
  * @package			TYPO3
  * @subpackage		tx_typo3blog
  */
-class tx_typo3blog_widget_relatedposts extends tslib_pibase
+class tx_typo3blog_widget_latestposts extends tslib_pibase
 {
 	public $prefixId = 'tx_typo3blog_pi1'; // Same as class name
-	public $scriptRelPath = 'widgets/bloglist/class.tx_typo3blog_widget_relatedposts.php'; // Path to this script relative to the extension dir.
+	public $scriptRelPath = 'widgets/bloglist/class.tx_typo3blog_widget_latestposts.php'; // Path to this script relative to the extension dir.
 	public $extKey = 'typo3_blog'; // The extension key.
 	public $pi_checkCHash = TRUE;
 
@@ -80,9 +80,6 @@ class tx_typo3blog_widget_relatedposts extends tslib_pibase
 
 		// unserialize extension conf
 		$this->extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['typo3_blog']);
-
-		// Set current page id
-		$this->page_uid = intval($GLOBALS['TSFE']->page['uid']);
 
 		// Set blog start page uid
 		$this->startPid = intval($this->parentConf['startPid']);
@@ -126,8 +123,8 @@ class tx_typo3blog_widget_relatedposts extends tslib_pibase
 			);
 		}
 
-		// Get subparts from HTML template RELATEDPOSTS_TEMPLATE
-		$template = $this->cObj->getSubpart($this->template, '###RELATEDPOSTS_TEMPLATE###');
+		// Get subparts from HTML template LATESTPOSTS_TEMPLATE
+		$template = $this->cObj->getSubpart($this->template, '###LATESTPOSTS_TEMPLATE###');
 		$subpartItem = $this->cObj->getSubpart($template, '###ITEM###');
 
 		// Define array and vars for template
@@ -137,7 +134,7 @@ class tx_typo3blog_widget_relatedposts extends tslib_pibase
 		$markers = array();
 
 		// Query to load current category page with all post pages in rootline
-		$sql = $this->getRelatedPosts();
+		$sql = $this->getLatestPosts();
 
 		// Execute sql and set retrieved records from be_users
 		while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($sql)) {
@@ -196,12 +193,12 @@ class tx_typo3blog_widget_relatedposts extends tslib_pibase
 	 * @return bool
 	 * @access private
 	 */
-	private function getRelatedPosts()
+	private function getLatestPosts()
 	{
 		$sql_array = array(
 			'SELECT'  => 'pages.*',
 			'FROM'    => 'pages',
-			'WHERE'   => '(' . $this->getPostsInRootLine() . ') '.$this->cObj->enableFields('pages').' AND doktype != ' . $this->blog_doktype_id . ' ' . $this->getKeywordFilterQuery().' '.$this->typo3BlogFunc->getWhereFilterQuery(),
+			'WHERE'   => '(' . $this->getPostsInRootLine() . ') '.$this->cObj->enableFields('pages').' AND doktype != ' . $this->blog_doktype_id . ' ' .$this->typo3BlogFunc->getWhereFilterQuery(),
 			'GROUPBY' => '',
 			'ORDERBY' => 'tx_typo3blog_create_datetime DESC',
 			'LIMIT'   => intval($this->conf['itemsToDisplay'])
@@ -209,36 +206,13 @@ class tx_typo3blog_widget_relatedposts extends tslib_pibase
 
 		if ($this->typo3BlogFunc->getSysLanguageUid() > 0 && $GLOBALS['TYPO3_CONF_VARS']['FE']['hidePagesIfNotTranslatedByDefault'] > 0)	{
 			$sql_array['FROM'] = 'pages, pages_language_overlay';
-			$sql_array['WHERE'] = 'pages_language_overlay.pid = pages.uid AND (' . $this->getPostsInRootLine() . ') '.$this->cObj->enableFields('pages').' AND pages.doktype != ' . $this->blog_doktype_id . ' ' . $this->getKeywordFilterQuery().' '.$this->typo3BlogFunc->getWhereFilterQuery();
+			$sql_array['WHERE'] = 'pages_language_overlay.pid = pages.uid AND (' . $this->getPostsInRootLine() . ') '.$this->cObj->enableFields('pages').' AND pages.doktype != ' . $this->blog_doktype_id . ' '.$this->typo3BlogFunc->getWhereFilterQuery();
 			$sql_array['ORDERBY'] = 'pages_language_overlay.tx_typo3blog_create_datetime DESC';
 		}
 
 		$sql = $GLOBALS['TYPO3_DB']->exec_SELECT_queryArray($sql_array);
 
 		return $sql;
-	}
-
-	/**
-	 * Return  MySQL select result pointer of current page
-	 *
-	 * @return bool
-	 * @access private
-	 */
-	private function getCurrentPage()
-	{
-		$sql_array = array(
-			'SELECT'  => 'uid,'.$this->conf['keywordsColumn'],
-			'FROM'    => 'pages',
-			'WHERE'   => 'uid = '.$this->page_uid.' '.$this->cObj->enableFields('pages'),
-			'GROUPBY' => '',
-			'ORDERBY' => 'tx_typo3blog_create_datetime DESC',
-			'LIMIT'   => 1
-		);
-
-		$sql = $GLOBALS['TYPO3_DB']->exec_SELECT_queryArray($sql_array);
-
-		return $sql;
-
 	}
 
 	/**
@@ -258,48 +232,10 @@ class tx_typo3blog_widget_relatedposts extends tslib_pibase
 			$addWhereParts[] = "pages.uid = {$pid}";
 		}
 		$pidWhere = implode(' OR ', $addWhereParts);
+
 		return $pidWhere;
 	}
 
-	/**
-	 * Get the where clause to filter in bloglist
-	 *
-	 * @return	string
-	 * @access	public
-	 */
-	private function getKeywordFilterQuery()
-	{
-		$where = '';
-
-		// Query to load current page with all post pages in rootline
-		$sql = $this->getCurrentPage();
-		while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($sql)) {
-			if (is_array($row) && $this->typo3BlogFunc->getSysLanguageUid() > 0) {
-				$row = $GLOBALS['TSFE']->sys_page->getPageOverlay($row, $this->typo3BlogFunc->getSysLanguageUid());
-			}
-
-			// exclude current post page
-			$where = ' AND pages.uid != '.intval($row['uid']);
-
-			if ($row[$this->conf['keywordsColumn']] && !empty($row[$this->conf['keywordsColumn']])) {
-				$tags = explode(',', trim($row[$this->conf['keywordsColumn']]));
-				$where .= ' AND (';
-				for ($i = 0; $i < count($tags); $i++) {
-					if ($i < 1) {
-						$andOr = '';
-					} else {
-						$andOr = 'OR';
-					}
-
-					// Trim tx_typo3blog_tags and replace " ," and ", " with "," for clean list without spaces
-					$where .= " ". $andOr." FIND_IN_SET('".trim($tags[$i])."',TRIM(REPLACE(REPLACE(LOWER(tx_typo3blog_tags), ', ', ','), ' ,', ','))) > 0";
-					//$where .= " ". $andOr." FIND_IN_SET('".trim($tags[$i])."',TRIM(LOWER(tx_typo3blog_tags))) > 0";
-				}
-				$where .= ")";
-			}
-		}
-		return $where;
-	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/typo3_blog/widgets/bloglist/class.tx_typo3blog_widget_bloglist.php']) {

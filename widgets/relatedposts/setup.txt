@@ -2,15 +2,18 @@
 # Setup typo3blog relatedposts
 #
 plugin.tx_typo3blog_pi1 {
-	relatedPosts = USER_INT
+	relatedPosts = USER
 	relatedPosts {
 		includeLibs = EXT:typo3_blog/widgets/relatedposts/class.tx_typo3blog_widget_relatedposts.php
 		userFunc = tx_typo3blog_widget_relatedposts->main
 
+		# SECTION RELATEDPOSTS SETTINGS
+		#----------------------------------------------------
+
 		# startPID from blog
 		startPID = {$plugin.tx_typo3blog_pi1.startPid}
 
-		# Bloglist template file
+		# relatedPosts template file
 		templateFile = {$plugin.tx_typo3blog_pi1.relatedPosts.templateFile}
 
 		# Column from table pages to use for keywords

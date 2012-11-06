@@ -4,6 +4,9 @@ plugin.tx_typo3blog_pi1 {
 		includeLibs = EXT:typo3_blog/widgets/calendar/class.tx_typo3blog_widget_calendar.php
 		userFunc = tx_typo3blog_widget_calendar->main
 
+		# SECTION CALENDAR SETTINGS
+		#----------------------------------------------------
+
 		# noConflict = 1, default 0
 		jQueryNoConflict = 0
 

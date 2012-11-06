@@ -4,6 +4,8 @@ plugin.tx_typo3blog_pi1 {
 		includeLibs = EXT:typo3_blog/widgets/archive/class.tx_typo3blog_widget_archive.php
 		userFunc = tx_typo3blog_widget_archive->main
 
+		# SECTION ARCHIVE SETTINGS
+		#----------------------------------------------------
 		jQueryNoConflict = 0
 		jsInFooter = 0
 		jsMinify = 0
@@ -16,6 +18,8 @@ plugin.tx_typo3blog_pi1 {
 			outerWrap = <div class="tx-typo3blog-pi1-container"> | </div>
 		}
 
+		# SECTION TEMPLATE MARKER FOR ARCHIVE TEMPLATE
+		#----------------------------------------------------
 		marker {
 			# title from widget
 			widgetTitle =TEXT

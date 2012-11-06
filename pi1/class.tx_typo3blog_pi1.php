@@ -36,7 +36,7 @@
  */
 
 require_once(PATH_tslib . 'class.tslib_pibase.php');
-require_once(t3lib_extMgm::extPath('typo3_blog') . 'lib/class.typo3blog_func.php');
+require_once(t3lib_extMgm::extPath('typo3_blog') . 'lib/class.tx_typo3blog_func.php');
 include_once(PATH_site . 'typo3/sysext/cms/tslib/class.tslib_content.php');
 
 
@@ -64,7 +64,7 @@ class tx_typo3blog_pi1 extends tslib_pibase
 	 */
 	private function init()
 	{
-		$this->typo3blog_func = new typo3blog_func();
+		$this->typo3blog_func = new tx_typo3blog_func();
 		$this->extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['typo3_blog']);
 	}
 

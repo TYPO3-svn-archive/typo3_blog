@@ -4,6 +4,8 @@ plugin.tx_typo3blog_pi1 {
 		includeLibs = EXT:typo3_blog/widgets/bloglist/class.tx_typo3blog_widget_bloglist.php
 		userFunc = tx_typo3blog_widget_bloglist->main
 
+
+
 		# SECTION BLOGLIST SETTINGS
 		#----------------------------------------------------
 
@@ -23,6 +25,11 @@ plugin.tx_typo3blog_pi1 {
 		# SECTION TEMPLATE MARKER FOR BLOGLIST TEMPLATE
 		#----------------------------------------------------
 		marker {
+
+			uid = TEXT
+			uid {
+				field = uid
+			}
 			# table page field title setup for templatemarker '###TITLE###'
 			title = TEXT
 			title {

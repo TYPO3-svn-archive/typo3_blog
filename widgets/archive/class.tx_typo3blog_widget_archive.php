@@ -38,7 +38,7 @@
  */
 
 require_once(PATH_tslib . 'class.tslib_pibase.php');
-require_once(t3lib_extMgm::extPath('typo3_blog') . 'lib/class.typo3blog_func.php');
+require_once(t3lib_extMgm::extPath('typo3_blog') . 'lib/class.tx_typo3blog_func.php');
 require_once(t3lib_extMgm::extPath('typo3_blog').'lib/class.typo3blog_pagerenderer.php');
 include_once(PATH_site . 'typo3/sysext/cms/tslib/class.tslib_content.php');
 
@@ -59,7 +59,7 @@ class tx_typo3blog_widget_archive extends tslib_pibase
 
 	private $template = NULL;
 	private $extConf = NULL;
-	private $page_uid = NULL;
+	private $startPid = NULL;
 	private $blog_doktype_id = NULL;
 	private $typo3BlogFunc = NULL;
 	private $parentConf = array();
@@ -83,14 +83,14 @@ class tx_typo3blog_widget_archive extends tslib_pibase
 		$this->pagerenderer->setConf($this->conf);
 
 		// Make instance of tslib_cObj
-		$this->typo3BlogFunc = t3lib_div::makeInstance('typo3blog_func');
-		$this->typo3BlogFunc->setCobj($this->cObj);
+		$this->typo3BlogFunc = t3lib_div::makeInstance('tx_typo3blog_func');
+		$this->typo3BlogFunc->init($this->cObj,$this->piVars, $this->getPostsInRootLine);
 
 		// unserialize extension conf
 		$this->extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['typo3_blog']);
 
-		// Set current page id
-		$this->page_uid = intval($this->parentConf['startPid']);
+		// Set blog start page uid
+		$this->startPid = intval($this->parentConf['startPid']);
 
 		// Set doktype id from extension conf
 		$this->blog_doktype_id = $this->extConf['doktypeId'];
@@ -145,25 +145,17 @@ class tx_typo3blog_widget_archive extends tslib_pibase
 
 		$markers['###ARCHIVE_TITLE###'] = $this->cObj->cObjGetSingle($this->conf['marker.']['widgetTitle'], $this->conf['marker.']['widgetTitle.']);;
 
-		// Query to load current category page with all post pages in rootline
-		$sql = $GLOBALS['TYPO3_DB']->exec_SELECT_queryArray(array(
-				'SELECT'	=> 'MONTH(FROM_UNIXTIME(tx_typo3blog_create_datetime)) as month, YEAR(FROM_UNIXTIME(tx_typo3blog_create_datetime)) as year, count(*) as quantity, tx_typo3blog_create_datetime',
-				'FROM'		=> 'pages',
-				'WHERE'		=> 'pid IN (' . $this->getPostByRootLine() . ') AND doktype != ' . $this->blog_doktype_id . $this->cObj->enableFields('pages') . $this->getWhereFilterQuery(),
-				'GROUPBY'	=> 'year, month',
-				'ORDERBY'	=> 'tx_typo3blog_create_datetime DESC',
-				'LIMIT'		=> ''
-			)
-		);
-
 		$subpartArchiveYear = $this->cObj->getSubpart($subpartArchiveItems, '###ARCHIVE_YEAR###');
 		$currentYear = NULL;
 
+		$sql = $this->getDateFromPages();
+
 		// Execute sql and set retrieved records in marker for bloglist
 		while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($sql)) {
-			if (is_array($row) && $GLOBALS['TSFE']->sys_language_uid) {
+			if (is_array($row) && $this->typo3BlogFunc->getSysLanguageUid() > 0) {
 				$row = $GLOBALS['TSFE']->sys_page->getPageOverlay($row, $GLOBALS['TSFE']->sys_language_uid);
 			}
+
 			// add data to ts template
 			$this->cObj->data = $row;
 			$this->cObj->data['datefrom'] = date(mktime(0, 0, 0, $row['month'],   1, $row['year']));
@@ -187,7 +179,6 @@ class tx_typo3blog_widget_archive extends tslib_pibase
 				$subparts['###ARCHIVE_MONTH_ITEMS###'] = "";
 			}
 
-
 			$subpartArchiveMonth = $this->cObj->getSubpart($subpartArchiveYear, '###ARCHIVE_MONTH###');
 			$month = $this->cObj->cObjGetSingle($this->conf['marker.']['month'], $this->conf['marker.']['month.']);
 			$quantity = $this->cObj->cObjGetSingle($this->conf['marker.']['quantity'], $this->conf['marker.']['quantity' . '.']);
@@ -200,21 +191,14 @@ class tx_typo3blog_widget_archive extends tslib_pibase
 			$subparts['###ARCHIVE_MONTH###'] = $this->cObj->substituteMarkerArrayCached($subpartArchiveMonth, $markerArray);
 
 			// Query to load pages for archive
-			$sqlquery = $GLOBALS['TYPO3_DB']->exec_SELECT_queryArray(array(
-					'SELECT'	=> '*',
-					'FROM'		=> 'pages',
-					'WHERE'		=> 'pid IN (' . $this->getPostByRootLine() . ') AND doktype != ' . $this->blog_doktype_id . ' AND MONTH(FROM_UNIXTIME(tx_typo3blog_create_datetime)) = '.intval($row['month']) . ' AND YEAR(FROM_UNIXTIME(tx_typo3blog_create_datetime)) = ' . intval($row['year']) .$this->cObj->enableFields('pages') . ' '.$this->getWhereFilterQuery(),
-					'GROUPBY'	=> '',
-					'ORDERBY'	=> 'tx_typo3blog_create_datetime DESC',
-					'LIMIT'		=> ''
-				)
-			);
+			$sqlquery = $this->getArchivePostPages($row);
 
 			// Each all post from result $sqlquery
 			while ($res = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($sqlquery)) {
-				if (is_array($res) && $GLOBALS['TSFE']->sys_language_uid) {
+				if (is_array($res) && $this->typo3BlogFunc->getSysLanguageUid() > 0) {
 					$res = $GLOBALS['TSFE']->sys_page->getPageOverlay($res, $GLOBALS['TSFE']->sys_language_uid);
 				}
+
 				// add data to ts template
 				$this->cObj->data = $res;
 				$subpartArchivePost = $this->cObj->getSubpart($subpartArchiveMonth, '###ARCHIVE_POST###');
@@ -239,6 +223,7 @@ class tx_typo3blog_widget_archive extends tslib_pibase
 			$subparts['###ARCHIVE_POST###'] = '';
 		}
 		$subparts['###ARCHIVE_ITEMS###'] .=  $this->cObj->substituteSubpartArray($subpartArchiveItems, $subparts);
+
 		// Add all CSS and JS files
 		if (T3JQUERY === true) {
 			tx_t3jquery::addJqJS();
@@ -265,34 +250,80 @@ class tx_typo3blog_widget_archive extends tslib_pibase
 	}
 
 	/**
-	 * Get all sub pages from current page_id as string "123,124,125"
+	 * Return all Post pages for archive
+	 *
+	 * @return array()
+	 * @access private
+	 */
+	private function getArchivePostPages($row)
+	{
+		$sql_array = array(
+			'SELECT'	=> 'pages.*',
+			'FROM'		=> 'pages',
+			'WHERE'		=> '('.$this->getPostsInRootLine().') AND pages.doktype != '.$this->blog_doktype_id.' AND MONTH(FROM_UNIXTIME(pages.tx_typo3blog_create_datetime)) = '.intval($row['month']) . ' AND YEAR(FROM_UNIXTIME(pages.tx_typo3blog_create_datetime)) = ' . intval($row['year']) .$this->cObj->enableFields('pages') . ' '.$this->typo3BlogFunc->getWhereFilterQuery(),
+			'GROUPBY'	=> '',
+			'ORDERBY'	=> 'tx_typo3blog_create_datetime DESC',
+			'LIMIT'		=> ''
+		);
+
+		if ($this->typo3BlogFunc->getSysLanguageUid() > 0  && $GLOBALS['TYPO3_CONF_VARS']['FE']['hidePagesIfNotTranslatedByDefault'] > 0) {
+			$sql_array['FROM'] = 'pages, pages_language_overlay';
+			$sql_array['WHERE'] = 'pages_language_overlay.pid = pages.uid AND ('.$this->getPostsInRootLine().') AND pages.doktype != '.$this->blog_doktype_id.' AND MONTH(FROM_UNIXTIME(pages.tx_typo3blog_create_datetime)) = '.intval($row['month']) . ' AND YEAR(FROM_UNIXTIME(pages.tx_typo3blog_create_datetime)) = ' . intval($row['year']) .$this->cObj->enableFields('pages') . ' '.$this->typo3BlogFunc->getWhereFilterQuery();
+			$sql_array['ORDERBY'] = 'pages_language_overlay.tx_typo3blog_create_datetime DESC';
+		}
+
+		$sql = $GLOBALS['TYPO3_DB']->exec_SELECT_queryArray($sql_array);
+
+		return $sql;
+	}
+
+	/**
+	 * Return the Date from all Post pages
+	 *
+	 * @return array()
+	 * @access private
+	 */
+	private function getDateFromPages()
+	{
+		$sql_array = array(
+			'SELECT'  => 'MONTH(FROM_UNIXTIME(pages.tx_typo3blog_create_datetime)) as month, YEAR(FROM_UNIXTIME(pages.tx_typo3blog_create_datetime)) as year, count(*) as quantity, pages.tx_typo3blog_create_datetime',
+			'FROM'    => 'pages',
+			'WHERE'   => '('.$this->getPostsInRootLine().') '.$this->cObj->enableFields('pages').' AND pages.doktype != ' . $this->blog_doktype_id . ' ' . $this->typo3BlogFunc->getWhereFilterQuery(),
+			'GROUPBY' => 'year, month',
+			'ORDERBY' => 'pages.tx_typo3blog_create_datetime DESC',
+			'LIMIT'   => ''
+		);
+
+		if ($this->typo3BlogFunc->getSysLanguageUid() > 0  && $GLOBALS['TYPO3_CONF_VARS']['FE']['hidePagesIfNotTranslatedByDefault'] > 0) {
+			$sql_array['FROM'] = 'pages, pages_language_overlay';
+			$sql_array['WHERE'] = 'pages_language_overlay.pid = pages.uid AND ('.$this->getPostsInRootLine().') '.$this->cObj->enableFields('pages').' AND pages.doktype != ' . $this->blog_doktype_id . ' ' . $this->typo3BlogFunc->getWhereFilterQuery();
+			$sql_array['ORDERBY'] = 'pages_language_overlay.tx_typo3blog_create_datetime DESC';
+		}
+
+		$sql = $GLOBALS['TYPO3_DB']->exec_SELECT_queryArray($sql_array);
+
+		return $sql;
+	}
+
+	/**
+	 * Get all post pages from current startpid as sql string
 	 *
 	 * @return	string
 	 * @access private
 	 */
-	private function getPostByRootLine()
+	private function getPostsInRootLine()
 	{
 		// Read all post uid's from rootline by current category page
 		$this->cObj->data['recursive'] = 4;
-		$pidList = $this->pi_getPidList(intval($this->page_uid), $this->cObj->data['recursive']);
+		$pidList = $this->pi_getPidList(intval($this->startPid), $this->cObj->data['recursive']);
+		$addWhereParts = array();
+		$pidArray = explode(',', $GLOBALS['TYPO3_DB']->cleanIntList($pidList));
+		foreach ($pidArray as $pid) {
+			$addWhereParts[] = "pages.uid = {$pid}";
+		}
+		$pidWhere = implode(' OR ', $addWhereParts);
 
-		// return the string with all uid's and clean up
-		return $GLOBALS['TYPO3_DB']->cleanIntList($pidList);
-	}
-
-	/**
-	 * Get the where clause
-	 *
-	 * @return	string
-	 * @access public
-	 */
-	public function getWhereFilterQuery()
-	{
-		$where = '';
-		// ignore excluded page
-		$where .= ' AND tx_typo3blog_exclude_page = 0';
-
-		return $where;
+		return $pidWhere;
 	}
 }
 

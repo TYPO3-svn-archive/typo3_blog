@@ -132,6 +132,8 @@ class typo3blog_func
 		return $EM_CONF[$key]['version'];
 	}
 
+
+
 	/**
 	 * Wraps the input string in a <div> tag with the class attribute set to the prefixId.
 	 * All content returned from your plugins should be returned through this function so all content from your plugin is encapsulated in a <div>-tag nicely identifying the content of your plugin.

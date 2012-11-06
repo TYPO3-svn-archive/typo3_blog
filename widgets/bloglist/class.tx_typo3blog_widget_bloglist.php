@@ -41,7 +41,8 @@
  */
 
 require_once(PATH_tslib . 'class.tslib_pibase.php');
-require_once(t3lib_extMgm::extPath('typo3_blog') . 'lib/class.typo3blog_func.php');
+require_once(t3lib_extMgm::extPath('typo3_blog') . 'lib/class.tx_typo3blog_func.php');
+require_once(t3lib_extMgm::extPath('typo3_blog').'lib/class.typo3blog_pagerenderer.php');
 include_once(PATH_site . 'typo3/sysext/cms/tslib/class.tslib_content.php');
 
 
@@ -58,13 +59,13 @@ class tx_typo3blog_widget_bloglist extends tslib_pibase
 	public $scriptRelPath = 'widgets/bloglist/class.tx_typo3blog_widget_bloglist.php'; // Path to this script relative to the extension dir.
 	public $extKey = 'typo3_blog'; // The extension key.
 	public $pi_checkCHash = TRUE;
-	private $envErrors = array();
-
 	private $template = NULL;
 	private $extConf = NULL;
 	private $page_uid = NULL;
 	private $blog_doktype_id = NULL;
 	private $typo3BlogFunc = NULL;
+
+	private $postsInRootLine = NULL;
 
 	/**
 	 * initializes this class
@@ -84,10 +85,6 @@ class tx_typo3blog_widget_bloglist extends tslib_pibase
 		$this->pagerenderer = t3lib_div::makeInstance('typo3blog_pagerenderer');
 		$this->pagerenderer->setConf($this->conf);
 
-		// Make instance of tslib_cObj
-		$this->typo3BlogFunc = t3lib_div::makeInstance('typo3blog_func');
-		$this->typo3BlogFunc->setCobj($this->cObj);
-
 		// unserialize extension conf
 		$this->extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['typo3_blog']);
 
@@ -99,10 +96,17 @@ class tx_typo3blog_widget_bloglist extends tslib_pibase
 
 		// Read template file
 		$this->template = $this->cObj->fileResource($this->conf['templateFile']);
+
+		// Make instance of tslib_cObj
+		$this->typo3BlogFunc = t3lib_div::makeInstance('tx_typo3blog_func');
+		$this->typo3BlogFunc->init(
+			$this->cObj,
+			$this->piVars,
+			$this->getPostsInRootLine());
 	}
 
 	/**
-	 * The main method of the PlugIn
+	 * The main method of the Plugin
 	 *
 	 * @param	string		$content:		The PlugIn content
 	 * @param	array		$conf:			The PlugIn configuration
@@ -140,22 +144,14 @@ class tx_typo3blog_widget_bloglist extends tslib_pibase
 		$markers = array();
 
 		// Query to load current category page with all post pages in rootline
-		$sql = $GLOBALS['TYPO3_DB']->exec_SELECT_queryArray(
-			array(
-				'SELECT'  => '*',
-				'FROM'    => 'pages',
-				'WHERE'   => 'pid IN (' . $this->getPostByRootLine() . ') '.$this->cObj->enableFields('pages').' AND doktype != ' . $this->blog_doktype_id . ' ' . $this->getWhereFilterQuery(),
-				'GROUPBY' => '',
-				'ORDERBY' => 'tx_typo3blog_create_datetime DESC',
-				'LIMIT'   => intval($this->getPageBrowseLimit()) . ',' . intval($this->conf['itemsToDisplay'])
-			)
-		);
+		$sql = $this->findBlogListPages();
 
 		// Execute sql and set retrieved records in marker for bloglist
 		while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($sql)) {
-			if (is_array($row) && $GLOBALS['TSFE']->sys_language_uid) {
-				$row = $GLOBALS['TSFE']->sys_page->getPageOverlay($row, $GLOBALS['TSFE']->sys_language_uid);
+			if (is_array($row) && $this->typo3BlogFunc->getSysLanguageUid() > 0) {
+				$row = $GLOBALS['TSFE']->sys_page->getPageOverlay($row, $this->typo3BlogFunc->getSysLanguageUid());
 			}
+
 			$sql_user = $GLOBALS['TYPO3_DB']->exec_SELECT_queryArray(
 				array(
 					'SELECT' => '*',
@@ -163,6 +159,7 @@ class tx_typo3blog_widget_bloglist extends tslib_pibase
 					'WHERE'  => "uid = '" . intval($row['tx_typo3blog_author']) . "' " . $this->cObj->enableFields('be_users'),
 				)
 			);
+
 			// add additional data to ts template
 			$row_user = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($sql_user);
 			$row['be_user_username']     = $row_user['username'];
@@ -190,7 +187,7 @@ class tx_typo3blog_widget_bloglist extends tslib_pibase
 		}
 
 		// Set pagebrowser marker in HTML Template marker
-		$poststotal = intval($this->getNumberOfPostsInCategoryPage(intval($this->page_uid)));
+		$poststotal = $this->getCountOfPosts();
 		$itemstodisplay = intval($this->conf['itemsToDisplay']);
 
 		//additional header and footer in HTML Template marker
@@ -221,22 +218,6 @@ class tx_typo3blog_widget_bloglist extends tslib_pibase
 	}
 
 	/**
-	 * Return the start limit for pagebrowser
-	 *
-	 * @return	integer		$limit:		The limit as start limit for bloglist
-	 * @access private
-	 */
-	private function getPageBrowseLimit()
-	{
-		if (!$this->piVars['page']) {
-			$limit = 0;
-		} else {
-			$limit = $this->piVars['page'] * $this->conf['itemsToDisplay'];
-		}
-		return $limit;
-	}
-
-	/**
 	 * Return pagebrowse
 	 *
 	 * @param	integer		$numberOfPages:		The number of display page
@@ -258,81 +239,125 @@ class tx_typo3blog_widget_bloglist extends tslib_pibase
 	}
 
 	/**
-	 * Return the number of posts in category page
-	 *
-	 * @param	integer		$page_id:		The category page id
-	 * @return	integer		$posts:			Count of current posts in category page
-	 * @access private
-	 */
-	private function getNumberOfPostsInCategoryPage($page_id)
-	{
-		// Query to load all blog post pages in rootline from current category page
-		$sql = $GLOBALS['TYPO3_DB']->exec_SELECT_queryArray(array(
-			'SELECT'	=> '*',
-			'FROM'		=> 'pages',
-			'WHERE'		=> 'pid IN (' . $this->getPostByRootLine($page_id) . ') '.$this->cObj->enableFields('pages').' AND doktype != ' . $this->extConf["doktypeId"] . ' ' . $this->getWhereFilterQuery(),
-			'GROUPBY'	=> '',
-			'ORDERBY'	=> 'tx_typo3blog_create_datetime DESC',
-			'LIMIT'		=> ''
-			)
-		);
-		// Execute sql and count the result
-		$posts = $GLOBALS['TYPO3_DB']->sql_num_rows($sql);
-
-		// Return count of result
-		return $posts;
-	}
-
-	/**
 	 * Get all sub pages from current page_id as string "123,124,125"
 	 *
 	 * @return	string
 	 * @access private
 	 */
-	private function getPostByRootLine()
+	private function getPostsInRootLine()
 	{
-		// Read all post uid's from rootline by current category page
-		$this->cObj->data['recursive'] = 4;
-		$pidList = $this->pi_getPidList(intval($this->page_uid), $this->cObj->data['recursive']);
+		if (is_null($this->postsInRootLine)) {
+			$this->cObj->data['recursive'] = 4;
+			$pidList = $this->pi_getPidList(intval($this->page_uid), $this->cObj->data['recursive']);
+			$addWhereParts = array();
+			$pidArray = explode(',', $GLOBALS['TYPO3_DB']->cleanIntList($pidList));
+			foreach ($pidArray as $pid) {
+				$addWhereParts[] = "pages.uid = {$pid}";
+			}
 
-		// return the string with all uid's and clean up
-		return $GLOBALS['TYPO3_DB']->cleanIntList($pidList);
+			$this->postsInRootLine = implode(' OR ', $addWhereParts);
+			return $this->postsInRootLine;
+		} else {
+			return $this->postsInRootLine;
+		}
 	}
 
 	/**
-	 * Get the where clause to filter in bloglist
+	 * Return a Posts of current category Page
 	 *
-	 * @return	string
+	 * @return array
 	 * @access public
 	 */
-	public function getWhereFilterQuery()
+	private function findBlogListPages()
 	{
-		$where = '';
-		// ignore excluded page
-		$where .= ' AND tx_typo3blog_exclude_page = 0';
+		$sql_array = array(
+			'SELECT'  => 'pages.*',
+			'FROM'    => 'pages',
+			'WHERE'   => '('.$this->getPostsInRootLine().') '.$this->cObj->enableFields('pages').' AND pages.doktype != ' . $this->blog_doktype_id . ' ' . $this->typo3BlogFunc->getWhereFilterQuery().' '.$this->getDateWhere(),
+			'GROUPBY' => '',
+			'ORDERBY' => 'pages.tx_typo3blog_create_datetime DESC',
+			'LIMIT'   => intval($this->getPageBrowseLimit()) . ',' . intval($this->conf['itemsToDisplay'])
+		);
 
-		// Get GET param tagsearch from url
-		if (strlen($this->piVars['tagsearch']) > 0) {
-			$tag = $GLOBALS['TYPO3_DB']->quoteStr(strtolower($this->piVars['tagsearch']), 'pages');
-
-			// Trim tx_typo3blog_tags and replace " ," and ", " with "," for clean list without spaces
-			$where .= " AND  FIND_IN_SET('".$tag."',TRIM(REPLACE(REPLACE(LOWER(tx_typo3blog_tags), ', ', ','), ' ,', ','))) > 0";
+		if ($this->typo3BlogFunc->getSysLanguageUid() > 0 && $GLOBALS['TYPO3_CONF_VARS']['FE']['hidePagesIfNotTranslatedByDefault'] > 0) {
+			$sql_array['FROM'] = 'pages, pages_language_overlay';
+			$sql_array['WHERE'] = 'pages_language_overlay.pid = pages.uid AND ('.$this->getPostsInRootLine().') '.$this->cObj->enableFields('pages').' AND pages.doktype != ' . $this->blog_doktype_id . ' ' . $this->typo3BlogFunc->getWhereFilterQuery().' '.$this->getDateWhere();
+			$sql_array['ORDERBY'] = 'pages_language_overlay.tx_typo3blog_create_datetime DESC';
 		}
 
+		$sql = $GLOBALS['TYPO3_DB']->exec_SELECT_queryArray($sql_array);
+
+		return $sql;
+	}
+
+	/**
+	 * Return the start limit for pagebrowser
+	 *
+	 * @return	integer		$limit:		The limit as start limit for bloglist
+	 * @access	private
+	 */
+	private function getPageBrowseLimit()
+	{
+		if (!$this->piVars['page']) {
+			$limit = 0;
+		} else {
+			$limit = $this->piVars['page'] * $this->conf['itemsToDisplay'];
+		}
+		return $limit;
+	}
+
+	public function getCountOfPosts() {
+		$sql_array = array(
+			'SELECT'	=> 'pages.uid',
+			'FROM'		=> 'pages',
+			'WHERE'		=> '('.$this->getPostsInRootLine().') '.$this->cObj->enableFields('pages').' AND pages.doktype != '.$this->blog_doktype_id.' ' . $this->typo3BlogFunc->getWhereFilterQuery().' '.$this->getDateWhere(),
+			'GROUPBY'	=> '',
+			'ORDERBY'	=> '',
+			'LIMIT'		=> ''
+		);
+
+		if ($this->typo3BlogFunc->getSysLanguageUid() > 0 && $GLOBALS['TYPO3_CONF_VARS']['FE']['hidePagesIfNotTranslatedByDefault'])	{
+			$sql_array['FROM']    = 'pages, pages_language_overlay';
+			$sql_array['WHERE']   = 'pages_language_overlay.pid = pages.uid AND ('.$this->getPostsInRootLine().') '.$this->cObj->enableFields('pages').' AND pages.doktype != ' . $this->blog_doktype_id . ' ' . $this->typo3BlogFunc->getWhereFilterQuery().' '.$this->getDateWhere();
+			$sql_array['ORDERBY'] = '';
+		}
+
+		// Return count of result
+		$res = $GLOBALS['TYPO3_DB']->exec_SELECT_queryArray($sql_array);
+		$count = $GLOBALS['TYPO3_DB']->sql_num_rows($res);
+
+		return intval($count);
+	}
+
+	/**
+	 * Return SQL date where
+	 *
+	 * @return	$where		SQL datefrom and dateto
+	 * @access private
+	 */
+	private function getDateWhere()	{
+		$where = '';
 		// Get GET param datefrom and dateto from url
 		if (strlen($this->piVars['datefrom']) > 0 && strlen($this->piVars['dateto']) > 0) {
-			$datefrom = $GLOBALS['TYPO3_DB']->quoteStr(trim($this->piVars['datefrom']), 'pages');
-			$dateto   = $GLOBALS['TYPO3_DB']->quoteStr(trim($this->piVars['dateto']), 'pages');
-
+			if ($this->typo3BlogFunc->getSysLanguageUid() > 0 && $GLOBALS['TYPO3_CONF_VARS']['FE']['hidePagesIfNotTranslatedByDefault']) {
+				$datefrom = $GLOBALS['TYPO3_DB']->quoteStr(trim($this->piVars['datefrom']), 'pages_language_overlay');
+				$dateto   = $GLOBALS['TYPO3_DB']->quoteStr(trim($this->piVars['dateto']), 'pages_language_overlay');
+			} else {
+				$datefrom = $GLOBALS['TYPO3_DB']->quoteStr(trim($this->piVars['datefrom']), 'pages');
+				$dateto   = $GLOBALS['TYPO3_DB']->quoteStr(trim($this->piVars['dateto']), 'pages');
+			}
 
 			if (($datefrom != false) && ($dateto != false)) {
-				$where .= " AND DATE(FROM_UNIXTIME(tx_typo3blog_create_datetime)) >= '".$datefrom."' AND DATE(FROM_UNIXTIME(tx_typo3blog_create_datetime)) <= '".$dateto."'";
+				if ($this->typo3BlogFunc->getSysLanguageUid() > 0) {
+					$where .= " AND DATE(FROM_UNIXTIME(pages_language_overlay.tx_typo3blog_create_datetime)) >= '".$datefrom."' AND DATE(FROM_UNIXTIME(pages_language_overlay.tx_typo3blog_create_datetime)) <= '".$dateto."'";
+				} else {
+					$where .= " AND DATE(FROM_UNIXTIME(tx_typo3blog_create_datetime)) >= '".$datefrom."' AND DATE(FROM_UNIXTIME(tx_typo3blog_create_datetime)) <= '".$dateto."'";
+				}
 			}
 		}
-
-		// Return empty string if GET param tagsearch not exist
 		return $where;
 	}
+
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/typo3_blog/widgets/bloglist/class.tx_typo3blog_widget_bloglist.php']) {

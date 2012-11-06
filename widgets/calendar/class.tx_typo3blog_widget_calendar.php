@@ -37,7 +37,7 @@
  */
 
 require_once(PATH_tslib . 'class.tslib_pibase.php');
-require_once(t3lib_extMgm::extPath('typo3_blog') . 'lib/class.typo3blog_func.php');
+require_once(t3lib_extMgm::extPath('typo3_blog') . 'lib/class.tx_typo3blog_func.php');
 require_once(t3lib_extMgm::extPath('typo3_blog').'lib/class.typo3blog_pagerenderer.php');
 include_once(PATH_site . 'typo3/sysext/cms/tslib/class.tslib_content.php');
 
@@ -80,10 +80,6 @@ class tx_typo3blog_widget_calendar extends tslib_pibase
 		$this->pagerenderer = t3lib_div::makeInstance('typo3blog_pagerenderer');
 		$this->pagerenderer->setConf($this->conf);
 
-		// Make instance of tslib_cObj
-		$this->typo3BlogFunc = t3lib_div::makeInstance('typo3blog_func');
-		$this->typo3BlogFunc->setCobj($this->cObj);
-
 		// unserialize extension conf
 		$this->extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['typo3_blog']);
 
@@ -95,6 +91,11 @@ class tx_typo3blog_widget_calendar extends tslib_pibase
 
 		// Read template file
 		$this->template = $this->cObj->fileResource($this->conf['templateFile']);
+
+		// Make instance of tslib_cObj
+		$this->typo3BlogFunc = t3lib_div::makeInstance('tx_typo3blog_func');
+		$this->typo3BlogFunc->init($this->cObj, $this->piVars, $this->getPostsInRootLine());
+
 	}
 
 	/**
@@ -139,30 +140,32 @@ class tx_typo3blog_widget_calendar extends tslib_pibase
 		$templateCode = $this->cObj->substituteMarkerArray($templateCode, $markerArray, '###|###', 0);
 
 		$dateItem = trim($this->cObj->getSubpart($templateCode, "###DATES_ITEM###"));
-		$blogdates = $this->getBlogDates();
-
+		$sql = $this->getBlogDates();
 		$dateArray = array();
 		$key = 0;
 
-		if (count($blogdates) > 0) {
-			foreach ($blogdates as $date) {
-				$link = $this->pi_getPageLink($this->page_uid, '', array(
-					$this->prefixId.'[datefrom]' => $date['day'],
-					$this->prefixId.'[dateto]'   => $date['day'],
-				));
-				$markerArray = array();
-				$markerArray["KEY"] = $key;
-				$markerArray["DATE"] = $date['day'];
-				$markerArray["LINK"] = t3lib_div::getIndpEnv("TYPO3_SITE_URL") . $link;
-				$markerArray["COUNT"] = $date['counter'];
-				$class = '';
-				if (strtotime($date['day']) >= strtotime($this->piVars['blogList']['datefrom']) && strtotime($date['day']) <= strtotime($this->piVars['blogList']['dateto'])) {
-					$class = 'ui-state-highlight';
-				}
-				$markerArray["CLASS"] = $class;
-				$dateArray[] = $this->cObj->substituteMarkerArray($dateItem, $markerArray, '###|###', 0);
-				$key ++;
+		while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($sql)) {
+
+			$link = $this->pi_getPageLink($this->page_uid, '', array(
+				$this->prefixId.'[datefrom]' => $row['day'],
+				$this->prefixId.'[dateto]'   => $row['day'],
+			));
+
+			$markerArray = array();
+			$markerArray["KEY"] = $key;
+			$markerArray["DATE"] = $row['day'];
+			$markerArray["LINK"] = t3lib_div::getIndpEnv("TYPO3_SITE_URL") . $link;
+			$markerArray["COUNT"] = $row['counter'];
+			$markerArray["DATE_TO"] = $this->piVars['dateto'];
+			$class = '';
+
+			if (strtotime($row['day']) >= strtotime($this->piVars['datefrom']) && strtotime($row['day']) <= strtotime($this->piVars['dateto'])) {
+				$class = 'ui-state-highlight';
 			}
+
+			$markerArray["CLASS"] = $class;
+			$dateArray[] = $this->cObj->substituteMarkerArray($dateItem, $markerArray, '###|###', 0);
+			$key ++;
 		}
 		$templateCode = trim($this->cObj->substituteSubpart($templateCode, '###DATES_ITEM###', implode('', $dateArray), 0));
 
@@ -179,10 +182,33 @@ class tx_typo3blog_widget_calendar extends tslib_pibase
 
 		$this->pagerenderer->addResources();
 
-		$content = $this->cObj->cObjGetSingle($this->conf['datepicker'], $this->conf['datepicker.']);
+		//$content = $this->cObj->cObjGetSingle($this->conf['datepicker'], $this->conf['datepicker.']);
+		$content .= $this->cObj->cObjGetSingle($this->conf['datepicker'], $this->conf['datepicker.']);
 
 		// Return the content to display in frontend
 		return $this->typo3BlogFunc->pi_wrapInBaseClass($content,$this->prefixId.'-widget_calendar');
+
+	}
+
+	/**
+	 * Get all sub pages from current page_id as string "123,124,125"
+	 *
+	 * @return	string
+	 * @access private
+	 */
+	private function getPostsInRootLine()
+	{
+		// Read all post uid's from rootline by current category page
+		$this->cObj->data['recursive'] = 4;
+		$pidList = $this->pi_getPidList(intval($this->page_uid), $this->cObj->data['recursive']);
+		$addWhereParts = array();
+		$pidArray = explode(',', $GLOBALS['TYPO3_DB']->cleanIntList($pidList));
+		foreach ($pidArray as $pid) {
+			$addWhereParts[] = "pages.uid = {$pid}";
+		}
+
+		$pidWhere = implode(' OR ', $addWhereParts);
+		return $pidWhere;
 	}
 
 	/**
@@ -191,20 +217,26 @@ class tx_typo3blog_widget_calendar extends tslib_pibase
 	 * @return	array
 	 */
 	private function getBlogDates() {
-		$uids = $this->pi_getPidList($this->page_uid, 100);
-		if ($uids) {
-			$rows = $GLOBALS['TYPO3_DB']->exec_SELECTgetRows(
-				'count(*) AS counter, DATE(FROM_UNIXTIME(tx_typo3blog_create_datetime)) as day',
-				'pages',
-				"uid IN (".$uids.") AND doktype != '".($this->extConf['doktypeId'] ? $this->extConf['doktypeId'] : 73)."'" . $this->cObj->enableFields('pages'),
-				'day',
-				'',
-				'',
-				'day'
+			$sql_array = array(
+				'SELECT'	=> 'pages.uid,pages.l18n_cfg,DATE(FROM_UNIXTIME(pages.tx_typo3blog_create_datetime)) as day, count(*) AS counter',
+				'FROM'		=> 'pages',
+				'WHERE'		=> '('.$this->getPostsInRootLine().') '.$this->cObj->enableFields('pages').' AND doktype != '.$this->blog_doktype_id.' ' . $this->typo3BlogFunc->getWhereFilterQuery(),
+				'GROUPBY'	=> 'day',
+				'ORDERBY'	=> '',
+				'LIMIT'		=> ''
 			);
+
+			if ($this->typo3BlogFunc->getSysLanguageUid() > 0 && $GLOBALS['TYPO3_CONF_VARS']['FE']['hidePagesIfNotTranslatedByDefault'] > 0) {
+				$sql_array['SELECT']  = 'pages.uid,pages.l18n_cfg,DATE(FROM_UNIXTIME(pages_language_overlay.tx_typo3blog_create_datetime)) as day, count(*) AS counter';
+				$sql_array['FROM']    = 'pages, pages_language_overlay';
+				$sql_array['WHERE']   = 'pages_language_overlay.pid = pages.uid AND ('.$this->getPostsInRootLine().') '.$this->cObj->enableFields('pages').' AND pages.doktype != '.$this->blog_doktype_id.' ' . $this->typo3BlogFunc->getWhereFilterQuery();
+				$sql_array['ORDERBY'] = '';
+			}
+
+			// Return count of result
+			$rows = $GLOBALS['TYPO3_DB']->exec_SELECT_queryArray($sql_array);
+
 			return $rows;
-		}
-		return array();
 	}
 }
 

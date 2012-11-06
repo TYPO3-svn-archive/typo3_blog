@@ -308,7 +308,7 @@ lib.content_right {
 # Check if requested page a search page
 # then set the tt_content.search.20 for content main (override blogSingle widget)
 [globalVar = TSFE:id = {$plugin.tx_typo3blog_pi1.searchPid}]
-	lib.content_main < tt_content.search.20
+	#lib.content_main < plugin.tx_indexedsearch
 [end]
 
 
@@ -338,12 +338,6 @@ page {
 		# Character sets
 		renderCharset = utf-8
 		metaCharset = utf-8
-
-		# Set Language
-		htmlTag_langKey = en
-		sys_language_uid = 0
-		language = en
-		locale_all = en_US
 
 		# Cache settings
 		cache_period = 43200
@@ -385,7 +379,7 @@ page {
 		# Define template subparts
 		workOnSubpart = DOCUMENT_BODY
 
-		subparts.INDEXSEARCHBOX < tt_content.search.30
+		#subparts.INDEXSEARCHBOX < plugin.tx_typo3blog_pi1.searchbox
 
 		#Sexybookmarks
 		subparts.SEXYBOOKMARKS_PI2 < plugin.tx_sexybookmarks_pi2

@@ -79,6 +79,9 @@ plugin.tx_typo3blog_pi1 {
 	# cat=plugin.typo3blog: widget latestPosts/basic/010; type=string; label=Items to display for latestPosts   (see manual!)
 	latestPosts.itemsToDisplay = 5
 
+	# cat=plugin.typo3blog: widget latestPosts/basic/020; type=string; label=Template location for latestPosts widget  (see manual!)
+	latestPosts.templateFile = EXT:typo3_blog/widgets/latestposts/template.html
+
 	# cat=plugin.typo3blog: widget latestPosts/basic/basic/30; type=string; label=Exclude doctype: Exclude doctype for latest posts (see manual!)
 	latestPosts.excludeDoktypes = 5,6,73
 

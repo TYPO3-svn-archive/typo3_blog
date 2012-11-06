@@ -5,6 +5,7 @@ plugin.tx_typo3blog_pi1 {
 		special = directory
 		special.value = {$plugin.tx_typo3blog_pi1.startPid}
 		excludeDoktypes = 1
+		useCacheHash = 1
 
 		stdWrap {
 			outerWrap = <div class="tx-typo3blog-pi1-container"> | </div>

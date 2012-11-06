@@ -36,7 +36,8 @@
  */
 
 require_once(PATH_tslib . 'class.tslib_pibase.php');
-require_once(t3lib_extMgm::extPath('typo3_blog') . 'lib/class.typo3blog_func.php');
+require_once(t3lib_extMgm::extPath('typo3_blog') . 'lib/class.tx_typo3blog_func.php');
+require_once(t3lib_extMgm::extPath('typo3_blog').'lib/class.typo3blog_pagerenderer.php');
 include_once(PATH_site . 'typo3/sysext/cms/tslib/class.tslib_content.php');
 
 
@@ -77,10 +78,6 @@ class tx_typo3blog_widget_blogsingle extends tslib_pibase
 		$this->pagerenderer = t3lib_div::makeInstance('typo3blog_pagerenderer');
 		$this->pagerenderer->setConf($this->conf);
 
-		// Make instance of tslib_cObj
-		$this->typo3BlogFunc = t3lib_div::makeInstance('typo3blog_func');
-		$this->typo3BlogFunc->setCobj($this->cObj);
-
 		// unserialize extension conf
 		$this->extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['typo3_blog']);
 
@@ -89,6 +86,12 @@ class tx_typo3blog_widget_blogsingle extends tslib_pibase
 
 		// Read template file
 		$this->template = $this->cObj->fileResource($this->conf['templateFile']);
+
+		// Make instance of tslib_cObj
+		$this->typo3BlogFunc = t3lib_div::makeInstance('tx_typo3blog_func');
+		$this->typo3BlogFunc->init(
+			$this->cObj,
+			$this->piVars);
 	}
 
 	/**
@@ -125,7 +128,7 @@ class tx_typo3blog_widget_blogsingle extends tslib_pibase
 
 		// Select the current blog post page
 		$sql = $GLOBALS['TYPO3_DB']->exec_SELECT_queryArray(array(
-				'SELECT'	=> '*',
+				'SELECT'	=> 'pages.*',
 				'FROM'		=> 'pages',
 				'WHERE'		=> 'uid=' . intval($this->page_uid) . ' ' . $this->cObj->enableFields('pages'),
 				'GROUPBY'	=> '',
@@ -136,9 +139,10 @@ class tx_typo3blog_widget_blogsingle extends tslib_pibase
 
 		// Execute the sql and each all selected fields
 		while ($row = mysql_fetch_assoc($sql)) {
-			if (is_array($row) && $GLOBALS['TSFE']->sys_language_uid) {
-				$row = $GLOBALS['TSFE']->sys_page->getPageOverlay($row, $GLOBALS['TSFE']->sys_language_uid);
+			if (is_array($row) && $this->typo3BlogFunc->getSysLanguageUid() > 0) {
+				$row = $GLOBALS['TSFE']->sys_page->getPageOverlay($row, $this->typo3BlogFunc->getSysLanguageUid());
 			}
+
 			$sql_user = $GLOBALS['TYPO3_DB']->exec_SELECT_queryArray(
 				array(
 					'SELECT'	=> '*',
@@ -146,6 +150,7 @@ class tx_typo3blog_widget_blogsingle extends tslib_pibase
 					'WHERE'		=> "uid = ".$row['tx_typo3blog_author']." ".$this->cObj->enableFields('be_users'),
 				)
 			);
+
 			// Define additional fields for ts and add initialize this or add the content
 			$row_user = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($sql_user);
 			$row['be_user_username']     = $row_user['username'];

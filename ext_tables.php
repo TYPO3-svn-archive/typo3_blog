@@ -92,10 +92,15 @@ t3lib_div::loadTCA('pages');
 t3lib_extMgm::addTCAcolumns('pages',$tempColumns,1);
 t3lib_extMgm::addToAllTCAtypes('pages', '--div--;LLL:EXT:typo3_blog/locallang_db.xml:pages.tx_typo3blog_tab, tx_typo3blog_author, tx_typo3blog_allow_comments, tx_typo3blog_create_datetime, tx_typo3blog_tags, tx_typo3blog_exclude_page, tx_typo3blog_blogrolls');
 
+t3lib_div::loadTCA('pages_language_overlay');
+t3lib_extMgm::addTCAcolumns('pages_language_overlay',$tempColumns,1);
+t3lib_extMgm::addToAllTCAtypes('pages_language_overlay', '--div--;LLL:EXT:typo3_blog/locallang_db.xml:pages.tx_typo3blog_tab, tx_typo3blog_author, tx_typo3blog_allow_comments, tx_typo3blog_create_datetime, tx_typo3blog_tags, tx_typo3blog_exclude_page, tx_typo3blog_blogrolls');
+
 // Define Page type ID
 $doktype = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'][$_EXTKEY]['doktypeId'];
 
 $TCA['pages']['columns']['doktype']['config']['items'][] = Array ('Blog Category', $doktype, t3lib_extMgm::extRelPath($_EXTKEY). 'res/pageicon.png');
+$TCA['pages_language_overlay']['columns']['doktype']['config']['items'][] = Array ('Blog Category', $doktype, t3lib_extMgm::extRelPath($_EXTKEY). 'res/pageicon.png');
 
 
 

@@ -4,7 +4,10 @@ plugin.tx_typo3blog_pi1 {
 		includeLibs = EXT:typo3_blog/widgets/blogsingle/class.tx_typo3blog_widget_blogsingle.php
 		userFunc = tx_typo3blog_widget_blogsingle->main
 
-		# Bloglist template file
+		# SECTION BLOGSINGLE SETTINGS
+		#----------------------------------------------------
+
+		# Blogsingle template file
 		templateFile = {$plugin.tx_typo3blog_pi1.blogSingle.templateFile}
 
 		stdWrap {
@@ -32,7 +35,7 @@ plugin.tx_typo3blog_pi1 {
 			}
 		}
 
-		# SECTION TEMPLATE MARKER FOR BLOGLIST TEMPLATE
+		# SECTION TEMPLATE MARKER FOR BLOGSINGLE TEMPLATE
 		#----------------------------------------------------
 		marker {
 
