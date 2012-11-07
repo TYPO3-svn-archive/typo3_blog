@@ -26,13 +26,15 @@
  *
  *
  *
- *   52: class tx_typo3blog_widget_relatedposts extends tslib_pibase
- *   71:     private function init()
- *  104:     public function main($content, $conf)
- *  204:     private function getPostByRootLine()
- *  221:     private function getKeywordFilterQuery()
+ *   54: class tx_typo3blog_widget_relatedposts extends tslib_pibase
+ *   76:     private function init()
+ *  112:     public function main($content, $conf)
+ *  202:     private function getRelatedPosts()
+ *  230:     private function getCurrentPage()
+ *  253:     private function getPostsInRootLine()
+ *  276:     private function getKeywordFilterQuery()
  *
- * TOTAL FUNCTIONS: 4
+ * TOTAL FUNCTIONS: 6
  * (This index is automatically created/updated by the extension "extdeveval")
  *
  */
@@ -63,6 +65,7 @@ class tx_typo3blog_widget_relatedposts extends tslib_pibase
 	private $startPid = NULL;
 	private $blog_doktype_id = NULL;
 	private $typo3BlogFunc = NULL;
+	private $postsInRootLine = NULL;
 
 	/**
 	 * initializes this class
@@ -193,7 +196,7 @@ class tx_typo3blog_widget_relatedposts extends tslib_pibase
 	/**
 	 * Return  MySQL select result pointer of related posts
 	 *
-	 * @return bool
+	 * @return	bool
 	 * @access private
 	 */
 	private function getRelatedPosts()
@@ -221,7 +224,7 @@ class tx_typo3blog_widget_relatedposts extends tslib_pibase
 	/**
 	 * Return  MySQL select result pointer of current page
 	 *
-	 * @return bool
+	 * @return	bool
 	 * @access private
 	 */
 	private function getCurrentPage()
@@ -249,23 +252,26 @@ class tx_typo3blog_widget_relatedposts extends tslib_pibase
 	 */
 	private function getPostsInRootLine()
 	{
-		// Read all post uid's from rootline by current category page
-		$this->cObj->data['recursive'] = 4;
-		$pidList = $this->pi_getPidList(intval($this->startPid), $this->cObj->data['recursive']);
-		$addWhereParts = array();
-		$pidArray = explode(',', $GLOBALS['TYPO3_DB']->cleanIntList($pidList));
-		foreach ($pidArray as $pid) {
-			$addWhereParts[] = "pages.uid = {$pid}";
+		if (is_null($this->postsInRootLine)) {
+			$this->cObj->data['recursive'] = 4;
+			$pidList = $this->pi_getPidList(intval($this->startPid), $this->cObj->data['recursive']);
+			$addWhereParts = array();
+			$pidArray = explode(',', $GLOBALS['TYPO3_DB']->cleanIntList($pidList));
+			foreach ($pidArray as $pid) {
+				$addWhereParts[] = "pages.uid = {$pid}";
+			}
+			$this->postsInRootLine = implode(' OR ', $addWhereParts);
+			return $this->postsInRootLine;
+		} else {
+			return $this->postsInRootLine;
 		}
-		$pidWhere = implode(' OR ', $addWhereParts);
-		return $pidWhere;
 	}
 
 	/**
 	 * Get the where clause to filter in bloglist
 	 *
 	 * @return	string
-	 * @access	public
+	 * @access public
 	 */
 	private function getKeywordFilterQuery()
 	{

@@ -59,10 +59,10 @@ class tx_typo3blog_widget_latestposts extends tslib_pibase
 	private $template = NULL;
 	private $extConf = NULL;
 	private $parentConf = NULL;
-	private $page_uid = NULL;
 	private $startPid = NULL;
 	private $blog_doktype_id = NULL;
 	private $typo3BlogFunc = NULL;
+	private $postsInRootLine = NULL;
 
 	/**
 	 * initializes this class
@@ -223,17 +223,20 @@ class tx_typo3blog_widget_latestposts extends tslib_pibase
 	 */
 	private function getPostsInRootLine()
 	{
-		// Read all post uid's from rootline by current category page
-		$this->cObj->data['recursive'] = 4;
-		$pidList = $this->pi_getPidList(intval($this->startPid), $this->cObj->data['recursive']);
-		$addWhereParts = array();
-		$pidArray = explode(',', $GLOBALS['TYPO3_DB']->cleanIntList($pidList));
-		foreach ($pidArray as $pid) {
-			$addWhereParts[] = "pages.uid = {$pid}";
-		}
-		$pidWhere = implode(' OR ', $addWhereParts);
+		if (is_null($this->postsInRootLine)) {
+			$this->cObj->data['recursive'] = 4;
+			$pidList = $this->pi_getPidList(intval($this->startPid), $this->cObj->data['recursive']);
+			$addWhereParts = array();
+			$pidArray = explode(',', $GLOBALS['TYPO3_DB']->cleanIntList($pidList));
+			foreach ($pidArray as $pid) {
+				$addWhereParts[] = "pages.uid = {$pid}";
+			}
 
-		return $pidWhere;
+			$this->postsInRootLine = implode(' OR ', $addWhereParts);
+			return $this->postsInRootLine;
+		} else {
+			return $this->postsInRootLine;
+		}
 	}
 
 }

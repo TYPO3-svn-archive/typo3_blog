@@ -26,12 +26,13 @@
  *
  *
  *
- *   51: class tx_typo3blog_widget_calendar extends tslib_pibase
- *   71:     private function init()
- *  108:     public function main($content, $conf)
- *  193:     private function getBlogDates()
+ *   52: class tx_typo3blog_widget_calendar extends tslib_pibase
+ *   73:     private function init()
+ *  111:     public function main($content, $conf)
+ *  201:     private function getPostsInRootLine()
+ *  225:     private function getBlogDates()
  *
- * TOTAL FUNCTIONS: 3
+ * TOTAL FUNCTIONS: 4
  * (This index is automatically created/updated by the extension "extdeveval")
  *
  */
@@ -61,6 +62,7 @@ class tx_typo3blog_widget_calendar extends tslib_pibase
 	private $blog_doktype_id = NULL;
 	private $typo3BlogFunc = NULL;
 	private $parentConf = array();
+	private $postsInRootLine = NULL;
 
 	/**
 	 * initializes this class
@@ -198,17 +200,21 @@ class tx_typo3blog_widget_calendar extends tslib_pibase
 	 */
 	private function getPostsInRootLine()
 	{
-		// Read all post uid's from rootline by current category page
-		$this->cObj->data['recursive'] = 4;
-		$pidList = $this->pi_getPidList(intval($this->page_uid), $this->cObj->data['recursive']);
-		$addWhereParts = array();
-		$pidArray = explode(',', $GLOBALS['TYPO3_DB']->cleanIntList($pidList));
-		foreach ($pidArray as $pid) {
-			$addWhereParts[] = "pages.uid = {$pid}";
-		}
+		if (is_null($this->postsInRootLine)) {
+			// Read all post uid's from rootline by current category page
+			$this->cObj->data['recursive'] = 4;
+			$pidList = $this->pi_getPidList(intval($this->page_uid), $this->cObj->data['recursive']);
+			$addWhereParts = array();
+			$pidArray = explode(',', $GLOBALS['TYPO3_DB']->cleanIntList($pidList));
+			foreach ($pidArray as $pid) {
+				$addWhereParts[] = "pages.uid = {$pid}";
+			}
 
-		$pidWhere = implode(' OR ', $addWhereParts);
-		return $pidWhere;
+			$this->postsInRootLine = implode(' OR ', $addWhereParts);
+			return $this->postsInRootLine;
+		} else {
+			return $this->postsInRootLine;
+		}
 	}
 
 	/**

@@ -26,16 +26,17 @@
  *
  *
  *
- *   55: class tx_typo3blog_widget_bloglist extends tslib_pibase
- *   75:     private function init()
- *  112:     public function main($content, $conf)
- *  226:     private function getPageBrowseLimit()
- *  243:     private function getListGetPageBrowser($numberOfPages)
- *  264:     private function getNumberOfPostsInCategoryPage($page_id)
- *  289:     private function getPostByRootLine()
- *  305:     public function getWhereFilterQuery()
+ *   57: class tx_typo3blog_widget_bloglist extends tslib_pibase
+ *   76:     private function init()
+ *  116:     public function main($content, $conf)
+ *  227:     private function getListGetPageBrowser($numberOfPages)
+ *  247:     private function getPostsInRootLine()
+ *  271:     private function findBlogListPages()
+ *  299:     private function getPageBrowseLimit()
+ *  314:     public function getCountOfPosts()
+ *  343:     private function getDateWhere()
  *
- * TOTAL FUNCTIONS: 7
+ * TOTAL FUNCTIONS: 8
  * (This index is automatically created/updated by the extension "extdeveval")
  *
  */
@@ -64,7 +65,6 @@ class tx_typo3blog_widget_bloglist extends tslib_pibase
 	private $page_uid = NULL;
 	private $blog_doktype_id = NULL;
 	private $typo3BlogFunc = NULL;
-
 	private $postsInRootLine = NULL;
 
 	/**
@@ -239,7 +239,7 @@ class tx_typo3blog_widget_bloglist extends tslib_pibase
 	}
 
 	/**
-	 * Get all sub pages from current page_id as string "123,124,125"
+	 * Get all sub pages from current page_id as SQL OR string "pages.uid = 123 OR pages.uid = 124 OR pages.uid = 125"
 	 *
 	 * @return	string
 	 * @access private
@@ -265,7 +265,7 @@ class tx_typo3blog_widget_bloglist extends tslib_pibase
 	/**
 	 * Return a Posts of current category Page
 	 *
-	 * @return array
+	 * @return	array
 	 * @access public
 	 */
 	private function findBlogListPages()
@@ -294,7 +294,7 @@ class tx_typo3blog_widget_bloglist extends tslib_pibase
 	 * Return the start limit for pagebrowser
 	 *
 	 * @return	integer		$limit:		The limit as start limit for bloglist
-	 * @access	private
+	 * @access private
 	 */
 	private function getPageBrowseLimit()
 	{
@@ -306,7 +306,13 @@ class tx_typo3blog_widget_bloglist extends tslib_pibase
 		return $limit;
 	}
 
-	public function getCountOfPosts() {
+	/**
+	 * Return the total count of posts
+	 *
+	 * @return	int
+	 * @access private
+	 */
+	private function getCountOfPosts() {
 		$sql_array = array(
 			'SELECT'	=> 'pages.uid',
 			'FROM'		=> 'pages',
@@ -333,7 +339,7 @@ class tx_typo3blog_widget_bloglist extends tslib_pibase
 	 * Return SQL date where
 	 *
 	 * @return	$where		SQL datefrom and dateto
-	 * @access private
+	 * @access	private
 	 */
 	private function getDateWhere()	{
 		$where = '';

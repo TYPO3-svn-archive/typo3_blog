@@ -26,11 +26,10 @@
  *
  *
  *
- *   50: class tx_typo3blog_pi1 extends tslib_pibase
- *   65:     private function init()
- *   79:     public function main($content, $conf)
+ *   49: class tx_typo3blog_pi1 extends tslib_pibase
+ *   64:     public function main($content, $conf)
  *
- * TOTAL FUNCTIONS: 2
+ * TOTAL FUNCTIONS: 1
  * (This index is automatically created/updated by the extension "extdeveval")
  *
  */
@@ -53,20 +52,6 @@ class tx_typo3blog_pi1 extends tslib_pibase
 	public $scriptRelPath = 'pi1/class.tx_typo3blog_pi1.php'; // Path to this script relative to the extension dir.
 	public $extKey = 'typo3_blog'; // The extension key.
 	public $pi_checkCHash = TRUE;
-	protected $typo3blog_func = NULL;
-
-
-	/**
-	 * initializes this class
-	 *
-	 * @return	void
-	 * @access private
-	 */
-	private function init()
-	{
-		$this->typo3blog_func = new tx_typo3blog_func();
-		$this->extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['typo3_blog']);
-	}
 
 	/**
 	 * The main method of the PlugIn

@@ -26,13 +26,14 @@
  *
  *
  *
- *   53: class tx_typo3blog_widget_archive extends tslib_pibase
- *   73:     private function init()
- *  110:     public function main($content, $conf)
- *  267:     private function getPostByRootLine()
- *  283:     public function getWhereFilterQuery()
+ *   54: class tx_typo3blog_widget_archive extends tslib_pibase
+ *   75:     private function init()
+ *  112:     public function main($content, $conf)
+ *  261:     private function getArchivePostPages($row)
+ *  289:     private function getDateFromPages()
+ *  317:     private function getPostsInRootLine()
  *
- * TOTAL FUNCTIONS: 4
+ * TOTAL FUNCTIONS: 5
  * (This index is automatically created/updated by the extension "extdeveval")
  *
  */
@@ -63,6 +64,7 @@ class tx_typo3blog_widget_archive extends tslib_pibase
 	private $blog_doktype_id = NULL;
 	private $typo3BlogFunc = NULL;
 	private $parentConf = array();
+	private $postsInRootLine = NULL;
 
 	/**
 	 * initializes this class
@@ -252,7 +254,8 @@ class tx_typo3blog_widget_archive extends tslib_pibase
 	/**
 	 * Return all Post pages for archive
 	 *
-	 * @return array()
+	 * @param	[type]		$row: ...
+	 * @return	array()
 	 * @access private
 	 */
 	private function getArchivePostPages($row)
@@ -280,7 +283,7 @@ class tx_typo3blog_widget_archive extends tslib_pibase
 	/**
 	 * Return the Date from all Post pages
 	 *
-	 * @return array()
+	 * @return	array()
 	 * @access private
 	 */
 	private function getDateFromPages()
@@ -313,17 +316,21 @@ class tx_typo3blog_widget_archive extends tslib_pibase
 	 */
 	private function getPostsInRootLine()
 	{
-		// Read all post uid's from rootline by current category page
-		$this->cObj->data['recursive'] = 4;
-		$pidList = $this->pi_getPidList(intval($this->startPid), $this->cObj->data['recursive']);
-		$addWhereParts = array();
-		$pidArray = explode(',', $GLOBALS['TYPO3_DB']->cleanIntList($pidList));
-		foreach ($pidArray as $pid) {
-			$addWhereParts[] = "pages.uid = {$pid}";
-		}
-		$pidWhere = implode(' OR ', $addWhereParts);
+		if (is_null($this->postsInRootLine)) {
+			// Read all post uid's from rootline by current category page
+			$this->cObj->data['recursive'] = 4;
+			$pidList = $this->pi_getPidList(intval($this->startPid), $this->cObj->data['recursive']);
+			$addWhereParts = array();
+			$pidArray = explode(',', $GLOBALS['TYPO3_DB']->cleanIntList($pidList));
+			foreach ($pidArray as $pid) {
+				$addWhereParts[] = "pages.uid = {$pid}";
+			}
+			$this->postsInRootLine = implode(' OR ', $addWhereParts);
 
-		return $pidWhere;
+			return $this->postsInRootLine;
+		} else {
+			return $this->postsInRootLine;
+		}
 	}
 }
 

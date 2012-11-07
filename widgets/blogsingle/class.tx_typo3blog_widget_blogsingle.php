@@ -26,9 +26,9 @@
  *
  *
  *
- *   50: class tx_typo3blog_widget_blogsingle extends tslib_pibase
- *   68:     private function init()
- *  102:     public function main($content, $conf)
+ *   51: class tx_typo3blog_widget_blogsingle extends tslib_pibase
+ *   69:     private function init()
+ *  105:     public function main($content, $conf)
  *
  * TOTAL FUNCTIONS: 2
  * (This index is automatically created/updated by the extension "extdeveval")

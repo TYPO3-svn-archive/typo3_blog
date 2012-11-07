@@ -27,15 +27,16 @@
  *
  *
  *
- *   50: class typo3blog_func
- *   63:     public function setCobj(tslib_cObj $cObj)
- *   74:     public function getSysLanguageUid()
- *   91:     public function substituteMarkersAndSubparts($template, array $markers, array $subparts)
- *  112:     public function getPostCategoryName($pid, $field = 'title')
- *  142:     public function getExtensionVersion($key)
- *  158:     function pi_wrapInBaseClass($str, $widgetId)
+ *   51: class tx_typo3blog_func
+ *   68:     public function init(tslib_cObj $cObj, $piVars, $postsInRootLine)
+ *   86:     public function getSysLanguageUid()
+ *  103:     public function substituteMarkersAndSubparts($template, array $markers, array $subparts)
+ *  124:     public function getPostCategoryName($pid, $field = 'title')
+ *  153:     public function getExtensionVersion($key)
+ *  167:     public function getWhereFilterQuery()
+ *  214:     function pi_wrapInBaseClass($str, $widgetId)
  *
- * TOTAL FUNCTIONS: 6
+ * TOTAL FUNCTIONS: 7
  * (This index is automatically created/updated by the extension "extdeveval")
  *
  */
@@ -59,6 +60,8 @@ class tx_typo3blog_func
 	 * Init this class
 	 *
 	 * @param	object		$cObj		tslib_cObj class
+	 * @param	[type]		$piVars: ...
+	 * @param	[type]		$postsInRootLine: ...
 	 * @return	void
 	 * @access public
 	 */

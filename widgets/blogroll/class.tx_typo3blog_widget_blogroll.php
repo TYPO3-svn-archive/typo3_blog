@@ -26,8 +26,8 @@
  *
  *
  *
- *   50: class tx_typo3blog_widget_blogroll
- *   65:     public function getBlogRollIds($content, $conf)
+ *   48: class tx_typo3blog_widget_blogroll
+ *   63:     public function getBlogRollIds($content, $conf)
  *
  * TOTAL FUNCTIONS: 1
  * (This index is automatically created/updated by the extension "extdeveval")
