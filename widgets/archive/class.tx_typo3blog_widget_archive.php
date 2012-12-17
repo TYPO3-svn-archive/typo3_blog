@@ -31,7 +31,7 @@
  *  112:     public function main($content, $conf)
  *  261:     private function getArchivePostPages($row)
  *  289:     private function getDateFromPages()
- *  317:     private function getPostsInRootLine()
+ *  318:     private function getPostsInRootLine()
  *
  * TOTAL FUNCTIONS: 5
  * (This index is automatically created/updated by the extension "extdeveval")
@@ -86,7 +86,7 @@ class tx_typo3blog_widget_archive extends tslib_pibase
 
 		// Make instance of tslib_cObj
 		$this->typo3BlogFunc = t3lib_div::makeInstance('tx_typo3blog_func');
-		$this->typo3BlogFunc->init($this->cObj,$this->piVars, $this->getPostsInRootLine);
+		$this->typo3BlogFunc->init($this->cObj,$this->piVars);
 
 		// unserialize extension conf
 		$this->extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['typo3_blog']);
@@ -302,8 +302,9 @@ class tx_typo3blog_widget_archive extends tslib_pibase
 			$sql_array['WHERE'] = 'pages_language_overlay.pid = pages.uid AND ('.$this->getPostsInRootLine().') '.$this->cObj->enableFields('pages').' AND pages.doktype != ' . $this->blog_doktype_id . ' ' . $this->typo3BlogFunc->getWhereFilterQuery();
 			$sql_array['ORDERBY'] = 'pages_language_overlay.tx_typo3blog_create_datetime DESC';
 		}
-
+		//$GLOBALS['TYPO3_DB']->store_lastBuiltQuery = true;
 		$sql = $GLOBALS['TYPO3_DB']->exec_SELECT_queryArray($sql_array);
+		//echo $GLOBALS['TYPO3_DB']->debug_lastBuiltQuery;
 
 		return $sql;
 	}

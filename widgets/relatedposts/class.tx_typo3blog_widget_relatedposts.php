@@ -98,7 +98,7 @@ class tx_typo3blog_widget_relatedposts extends tslib_pibase
 
 		// Make instance of tslib_cObj
 		$this->typo3BlogFunc = t3lib_div::makeInstance('tx_typo3blog_func');
-		$this->typo3BlogFunc->init($this->cObj, $this->piVars, $this->getPostsInRootLine());
+		$this->typo3BlogFunc->init($this->cObj, $this->piVars);
 	}
 
 	/**

@@ -1,5 +1,5 @@
 plugin.tx_typo3blog_pi1 {
-	blogList = USER
+	blogList = USER_INT
 	blogList {
 		includeLibs = EXT:typo3_blog/widgets/bloglist/class.tx_typo3blog_widget_bloglist.php
 		userFunc = tx_typo3blog_widget_bloglist->main

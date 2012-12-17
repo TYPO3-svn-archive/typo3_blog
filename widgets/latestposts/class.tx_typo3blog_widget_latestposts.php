@@ -26,11 +26,11 @@
  *
  *
  *
- *   52: class tx_typo3blog_widget_relatedposts extends tslib_pibase
- *   71:     private function init()
- *  104:     public function main($content, $conf)
- *  204:     private function getPostByRootLine()
- *  221:     private function getKeywordFilterQuery()
+ *   52: class tx_typo3blog_widget_latestposts extends tslib_pibase
+ *   73:     private function init()
+ *  106:     public function main($content, $conf)
+ *  196:     private function getLatestPosts()
+ *  224:     private function getPostsInRootLine()
  *
  * TOTAL FUNCTIONS: 4
  * (This index is automatically created/updated by the extension "extdeveval")
@@ -92,7 +92,7 @@ class tx_typo3blog_widget_latestposts extends tslib_pibase
 
 		// Make instance of tslib_cObj
 		$this->typo3BlogFunc = t3lib_div::makeInstance('tx_typo3blog_func');
-		$this->typo3BlogFunc->init($this->cObj, $this->piVars, $this->getPostsInRootLine());
+		$this->typo3BlogFunc->init($this->cObj, $this->piVars);
 	}
 
 	/**
@@ -190,7 +190,7 @@ class tx_typo3blog_widget_latestposts extends tslib_pibase
 	/**
 	 * Return  MySQL select result pointer of related posts
 	 *
-	 * @return bool
+	 * @return	bool
 	 * @access private
 	 */
 	private function getLatestPosts()

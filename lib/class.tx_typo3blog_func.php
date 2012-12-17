@@ -27,16 +27,17 @@
  *
  *
  *
- *   51: class tx_typo3blog_func
- *   68:     public function init(tslib_cObj $cObj, $piVars, $postsInRootLine)
- *   86:     public function getSysLanguageUid()
- *  103:     public function substituteMarkersAndSubparts($template, array $markers, array $subparts)
- *  124:     public function getPostCategoryName($pid, $field = 'title')
- *  153:     public function getExtensionVersion($key)
- *  167:     public function getWhereFilterQuery()
- *  214:     function pi_wrapInBaseClass($str, $widgetId)
+ *   52: class tx_typo3blog_func
+ *   69:     public function init(tslib_cObj $cObj, $piVars, $postsInRootLine)
+ *   87:     public function getSysLanguageUid()
+ *  104:     public function substituteMarkersAndSubparts($template, array $markers, array $subparts)
+ *  125:     public function getPostCategoryName($pid, $field = 'title')
+ *  154:     public function getExtensionVersion($key)
+ *  168:     public function getWhereFilterQuery()
+ *  199:     public function getWhereTagsearchFilterQuery()
+ *  226:     function pi_wrapInBaseClass($str, $widgetId)
  *
- * TOTAL FUNCTIONS: 7
+ * TOTAL FUNCTIONS: 8
  * (This index is automatically created/updated by the extension "extdeveval")
  *
  */
@@ -65,16 +66,13 @@ class tx_typo3blog_func
 	 * @return	void
 	 * @access public
 	 */
-	public function init(tslib_cObj $cObj, $piVars, $postsInRootLine)
+	public function init(tslib_cObj $cObj, $piVars)
 	{
 		// Set cObj
 		$this->cObj = $cObj;
 
 		// Set piVars
 		$this->piVars = $piVars;
-
-		// All pages in rootline from current page
-		$this->postsInRootLine = $postsInRootLine;
 	}
 
 	/**
@@ -166,26 +164,12 @@ class tx_typo3blog_func
 	 */
 	public function getWhereFilterQuery()
 	{
-
 		$where = '';
 		// ignore excluded page
 		if ($this->getSysLanguageUid() > 0 && $GLOBALS['TYPO3_CONF_VARS']['FE']['hidePagesIfNotTranslatedByDefault']) {
 			$where .= ' AND pages_language_overlay.tx_typo3blog_exclude_page = 0';
 		} else {
 			$where .= ' AND pages.tx_typo3blog_exclude_page = 0';
-		}
-
-		// Get GET param tagsearch from url
-		if (strlen($this->piVars['tagsearch']) > 0) {
-			if ($this->getSysLanguageUid() > 0 && $GLOBALS['TYPO3_CONF_VARS']['FE']['hidePagesIfNotTranslatedByDefault']) {
-				$tag = $GLOBALS['TYPO3_DB']->quoteStr(strtolower($this->piVars['tagsearch']), 'pages_language_overlay');
-				// Trim tx_typo3blog_tags and replace " ," and ", " with "," for clean list without spaces
-				$where .= " AND  FIND_IN_SET('".$tag."',TRIM(REPLACE(REPLACE(LOWER(pages_language_overlay.tx_typo3blog_tags), ', ', ','), ' ,', ','))) > 0";
-			} else {
-				$tag = $GLOBALS['TYPO3_DB']->quoteStr(strtolower($this->piVars['tagsearch']), 'pages');
-				// Trim tx_typo3blog_tags and replace " ," and ", " with "," for clean list without spaces
-				$where .= " AND  FIND_IN_SET('".$tag."',TRIM(REPLACE(REPLACE(LOWER(pages.tx_typo3blog_tags), ', ', ','), ' ,', ','))) > 0";
-			}
 		}
 
 		if ($this->getSysLanguageUid() > 0) {
@@ -199,7 +183,32 @@ class tx_typo3blog_func
 			$where .= " AND pages.l18n_cfg != 1";
 		}
 
-		// Return empty string if GET param tagsearch not exist
+		// Return empty string if sys_language_uid = 0
+		return $where;
+	}
+
+	/**
+	 * Get the where clause to filter in bloglist by tagsearch
+	 *
+	 * @return	string
+	 * @access public
+	 */
+	public function getWhereTagsearchFilterQuery()
+	{
+		// Get GET param tagsearch from url
+		if (strlen($this->piVars['tagsearch']) > 0) {
+			$where = '';
+			if ($this->getSysLanguageUid() > 0 && $GLOBALS['TYPO3_CONF_VARS']['FE']['hidePagesIfNotTranslatedByDefault']) {
+				$tag = $GLOBALS['TYPO3_DB']->quoteStr(strtolower($this->piVars['tagsearch']), 'pages_language_overlay');
+				// Trim tx_typo3blog_tags and replace " ," and ", " with "," for clean list without spaces
+				$where .= " AND  FIND_IN_SET('".$tag."',TRIM(REPLACE(REPLACE(LOWER(pages_language_overlay.tx_typo3blog_tags), ', ', ','), ' ,', ','))) > 0";
+			} else {
+				$tag = $GLOBALS['TYPO3_DB']->quoteStr(strtolower($this->piVars['tagsearch']), 'pages');
+				// Trim tx_typo3blog_tags and replace " ," and ", " with "," for clean list without spaces
+				$where .= " AND  FIND_IN_SET('".$tag."',TRIM(REPLACE(REPLACE(LOWER(pages.tx_typo3blog_tags), ', ', ','), ' ,', ','))) > 0";
+			}
+		}
+		// Return empty string if GET param tagsearch nit exist;
 		return $where;
 	}
 
@@ -207,8 +216,8 @@ class tx_typo3blog_func
 	 * Wraps the input string in a <div> tag with the class attribute set to the prefixId.
 	 * All content returned from your plugins should be returned through this function so all content from your plugin is encapsulated in a <div>-tag nicely identifying the content of your plugin.
 	 *
-	 * @param	string		HTML content to wrap in the div-tags with the "main class" of the plugin
-	 * @param	[type]		$widgetId: ...
+	 * @param	string		$str:		HTML content to wrap in the div-tags with the "main class" of the plugin
+	 * @param	string		$widgetId:	HTML ID
 	 * @return	string		HTML content wrapped, ready to return to the parent object.
 	 */
 	function pi_wrapInBaseClass($str, $widgetId)	{
