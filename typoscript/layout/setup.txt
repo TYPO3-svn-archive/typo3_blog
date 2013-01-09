@@ -207,11 +207,52 @@ plugin.tx_typo3blog_pi1.blogSingle {
 #
 plugin.tx_typo3blog_pi1.latestPosts {
 	stdWrap {
+		outerWrap = <div class="tx-typo3blog-pi1-container"> | </div>
 		wrap = <ul class="nav nav-tabs nav-stacked"> | </ul>
 	}
-	renderObj {
-		10.stdWrap.cObject.10.wrap = <span><i class="icon-user"></i> |
-		10.stdWrap.cObject.30.wrap = <span><i class="icon-comment"></i> | </span>
+	# SECTION TEMPLATE MARKER FOR LATESTPOSTS TEMPLATE
+		#----------------------------------------------------
+
+	marker {
+		# page field title setup for templatemarker '###TITLE###'
+		title >
+		title = COA
+		title {
+			stdWrap.wrap = <li>|</li>
+			stdWrap.typolink {
+				parameter.dataWrap = {field:uid}
+				title.field = subtitle // title
+				useCacheHash = 1
+			}
+			10 = TEXT
+			10 {
+				stdWrap.cObject = COA
+				stdWrap.cObject {
+					10 = TEXT
+					10 {
+						wrap = <span><i class="icon-user"></i> |</span>
+						field = be_user_realName
+						required = 1
+					}
+
+					20 = TEXT
+					20 {
+						wrap = &nbsp;vom&nbsp; |
+						strftime = {$plugin.tx_typo3blog_pi1.dateFromat}
+						field = tx_typo3blog_create_datetime
+						required = 1
+					}
+
+
+					30 = TEXT
+					30 {
+						wrap = <br /><span><i class="icon-list-alt"></i>|</span>
+						field = title
+						required = 1
+					}
+				}
+			}
+		}
 	}
 }
 
@@ -232,6 +273,7 @@ plugin.tx_typo3blog_pi1.relatedPosts {
 #
 # Setup plugin typo3blog latest comments
 #
+plugin.tx_typo3blog_pi1.latestComments < plugin.tx_typo3blog_pi1.latestComments
 plugin.tx_typo3blog_pi1.latestComments {
 	stdWrap.wrap = <ul class="nav nav-tabs nav-stacked"> | </ul>
 	renderObj {
@@ -308,7 +350,7 @@ lib.content_right {
 # Check if requested page a search page
 # then set the tt_content.search.20 for content main (override blogSingle widget)
 [globalVar = TSFE:id = {$plugin.tx_typo3blog_pi1.searchPid}]
-	#lib.content_main < plugin.tx_indexedsearch
+	#lib.content_main < tt_content.search.20
 [end]
 
 
@@ -379,7 +421,7 @@ page {
 		# Define template subparts
 		workOnSubpart = DOCUMENT_BODY
 
-		#subparts.INDEXSEARCHBOX < plugin.tx_typo3blog_pi1.searchbox
+		#subparts.SEARCHBOX < tt_content.search.30
 
 		#Sexybookmarks
 		subparts.SEXYBOOKMARKS_PI2 < plugin.tx_sexybookmarks_pi2
@@ -387,13 +429,13 @@ page {
 		#Content Normal
 		subparts.CONTENT_NORMAL < lib.content_main
 
-		#Content Normal
+		#Content Extended left
 		subparts.EXTENDED_NORMAL_1 < plugin.tx_typo3blog_pi1.latestPosts
 
-		#Content Normal
+		#Content Extended center
 		subparts.EXTENDED_NORMAL_2 < plugin.tx_typo3blog_pi1.latestComments
 
-		#Content Normal
+		#Content Extended right
 		subparts.EXTENDED_NORMAL_3 < plugin.tx_vgetagcloud_pi1
 
 		# Content RIGHT

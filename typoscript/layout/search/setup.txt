@@ -1,5 +1,5 @@
 tt_content.search.20 {
-	allowedCols = pages.title-subtitle-keywords-description-tx_typo3blog_tags : tt_content.header-bodytext-imagecaption : tt_address.name-title-address-email-company-city-country : tt_links.title-note-note2-url : tt_board.subject-message-author-email : tt_calender.title-note : tt_products.title-note-itemnumber
+	allowedCols = pages.title-subtitle-keywords-description-tx_typo3blog_tags : tt_content.header-bodytext-imagecaption
 }
 
 tt_content.search.30 {

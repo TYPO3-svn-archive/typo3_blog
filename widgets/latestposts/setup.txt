@@ -18,7 +18,6 @@ plugin.tx_typo3blog_pi1 {
 
 		stdWrap {
 			outerWrap = <div class="tx-typo3blog-pi1-container"> | </div>
-			dataWrap = <h3>{LLL:EXT:typo3_blog/pi1/locallang.xml:tx_typo3blog_widget_latestposts.title}</h3>
 			wrap = <ul> | </ul>
 			required = 1
 		}
@@ -27,6 +26,12 @@ plugin.tx_typo3blog_pi1 {
 		# SECTION TEMPLATE MARKER FOR LATESTPOSTS TEMPLATE
 		#----------------------------------------------------
 		marker {
+
+			widgetTitle =TEXT
+			widgetTitle {
+				data = LLL:EXT:typo3_blog/pi1/locallang.xml:tx_typo3blog_widget_latestposts.title
+			}
+
 
 			# additionalheader setup for templatemarker '###ADDITIONALHEADER###'
 			additionalheader = COA

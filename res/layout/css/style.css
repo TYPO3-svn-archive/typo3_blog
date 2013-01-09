@@ -11,14 +11,10 @@
 
 
 .tx-typo3blog-pi1-container {
-    padding-left: 15px;
-    padding-right: 15px;
 }
 
 #tx_typo3blog_widget_calendar {
     margin-bottom: 20px;
-    padding-left: 15px;
-    padding-right: 15px;
 }
 #tx_typo3blog_widget_calendar .ui-datepicker {
     width: auto !important;

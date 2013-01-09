@@ -3,6 +3,12 @@ if (!defined('TYPO3_MODE')) {
 	die ('Access denied.');
 }
 
+// Hooks
+/*
+$TYPO3_CONF_VARS['EXTCONF']['indexed_search']['pi1_hooks'] = array (
+	'getDisplayResults' => 'EXT:typo3_blog/hooks/class.tx_typo3_blog_indexedsearch_hooks.php:&tx_typo3_blog_indexedsearch_hooks',
+);
+*/
 $TYPO3_CONF_VARS['FE']['pageOverlayFields'] .= ',tx_typo3blog_author,tx_typo3blog_allow_comments,tx_typo3blog_create_datetime,tx_typo3blog_tags,tx_typo3blog_exclude_page,tx_typo3blog_blogrolls';
 //$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_pagerenderer.php']['render-preProcess'][typo3_blog] =  'EXT:typo3_blog/lib/class.tx_typo3blog_func.php:tx_typo3log_func->user_includeJS';
 

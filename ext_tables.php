@@ -129,18 +129,21 @@ $TCA['tx_typo3blog_blogroll'] = array (
 );
 
 
+if (class_exists(t3lib_utility_VersionNumber)) {
+	$TYPO3_version = t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version);
+} else {
+	$TYPO3_version = t3lib_div::int_from_ver(TYPO3_version);
+}
 
-if (t3lib_div::int_from_ver(TYPO3_version) >= 4004000) {
+if ($TYPO3_version >= 4004000) {
 	t3lib_SpriteManager::addTcaTypeIcon('pages', $doktype, t3lib_extMgm::extRelPath($_EXTKEY) . 'res/pageicon.png');
 }else{
 	$PAGES_TYPES[$doktype] = Array ('icon' => t3lib_extMgm::extRelPath($_EXTKEY) . 'res/pageicon.gif');
 }
 
-$GLOBALS['TYPO3_CONF_VARS']['BE']['defaultUserTSconfig'] .= '
-options.pageTree {
-doktypesToShowInNewPageDragArea = 1,6,4,7,3,'.$doktype.',254,255,199
-}
-';
+$GLOBALS['TYPO3_CONF_VARS']['BE']['defaultUserTSconfig'] .= ' options.pageTree {
+	doktypesToShowInNewPageDragArea = 1,6,4,7,3,'.$doktype.',254,255,199
+}';
 
 
 t3lib_extMgm::addStaticFile($_EXTKEY,'typoscript/', 'Typo3Blog Setup');

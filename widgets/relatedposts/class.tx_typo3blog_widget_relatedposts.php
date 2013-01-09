@@ -139,6 +139,8 @@ class tx_typo3blog_widget_relatedposts extends tslib_pibase
 		$markerArray = array();
 		$markers = array();
 
+		$markers['###RELATEDPOSTS_TITLE###'] = $this->cObj->cObjGetSingle($this->conf['marker.']['widgetTitle'], $this->conf['marker.']['widgetTitle.']);
+
 		// Query to load current category page with all post pages in rootline
 		$sql = $this->getRelatedPosts();
 
