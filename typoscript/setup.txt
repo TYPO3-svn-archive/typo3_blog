@@ -1,5 +1,4 @@
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/widgets/archive/setup.txt">
-<INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/widgets/comments/setup.txt">
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/widgets/latestcomments/setup.txt">
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/widgets/blogroll/setup.txt">
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/widgets/bloglist/setup.txt">
@@ -8,6 +7,7 @@
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/widgets/category/setup.txt">
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/widgets/latestposts/setup.txt">
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/widgets/relatedposts/setup.txt">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/widgets/tx_comments/setup.txt">
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/widgets/form4_pages_rss/setup.txt">
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/widgets/vge_tagcloud/setup.txt">
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/widgets/indexsearch/setup.txt">
