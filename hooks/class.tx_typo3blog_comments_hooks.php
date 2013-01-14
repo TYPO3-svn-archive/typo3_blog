@@ -13,7 +13,6 @@ class tx_typo3blog_comments_hooks
 	{
 		$markerArray = $params['markers'];
 		$markerArray['###UID###'] = $params['row']['uid'];
-		$markerArray['###WIDGETTITLE###'] = $params['row']['uid'];
 		return $markerArray;
 	}
 }
