@@ -133,7 +133,7 @@ class tx_typo3blog_widget_latestposts extends tslib_pibase
 		$markerArray = array();
 		$markers = array();
 
-		$markers['###LATESTPOSTS_TITLE###'] = $this->cObj->cObjGetSingle($this->conf['marker.']['widgetTitle'], $this->conf['marker.']['widgetTitle.']);
+		$markers['###WIDGET_TITLE###'] = $this->cObj->cObjGetSingle($this->conf['marker.']['widgetTitle'], $this->conf['marker.']['widgetTitle.']);
 
 		// Query to load current category page with all post pages in rootline
 		$sql = $this->getLatestPosts();
@@ -167,7 +167,7 @@ class tx_typo3blog_widget_latestposts extends tslib_pibase
 			foreach ($row as $column => $data) {
 				$this->cObj->setCurrentVal($data);
 				if ($this->conf['marker.'][$column]) {
-					$data = $this->cObj->cObjGetSingle($this->conf['marker.'][$column], $this->conf['marker.'][$column . '.']);
+					$data = $this->cObj->stdWrap($this->conf['marker.'][$column], $this->conf['marker.'][$column . '.']);
 				}
 				$this->cObj->setCurrentVal(false);
 				$markerArray['###' . strtoupper($column) . '###'] = $data;
@@ -182,11 +182,14 @@ class tx_typo3blog_widget_latestposts extends tslib_pibase
 		// Complete the template expansion by replacing the "content" marker in the template
 		$content = $this->typo3BlogFunc->substituteMarkersAndSubparts($template, $markers, $subparts);
 
-		// wrap the content
-		$content = $this->cObj->stdWrap($content, $this->conf['stdWrap.']);
+		// Wrap the content and return the content to display in frontend
+		if ($this->conf['baseWrap.'])  {
+			return $this->cObj->stdWrap($content, $this->conf['baseWrap.']);
+		} else {
+			return $this->typo3BlogFunc->pi_wrapInBaseClass($content,"latestposts-widget");
+		}
 
-		// Return the content to display in frontend
-		return $content;
+
 	}
 
 	/**

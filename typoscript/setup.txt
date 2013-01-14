@@ -1,4 +1,6 @@
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/widgets/archive/setup.txt">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/widgets/comments/setup.txt">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/widgets/latestcomments/setup.txt">
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/widgets/blogroll/setup.txt">
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/widgets/bloglist/setup.txt">
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/widgets/blogsingle/setup.txt">
@@ -6,6 +8,11 @@
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/widgets/category/setup.txt">
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/widgets/latestposts/setup.txt">
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/widgets/relatedposts/setup.txt">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/widgets/form4_pages_rss/setup.txt">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/widgets/vge_tagcloud/setup.txt">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/widgets/indexsearch/setup.txt">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/widgets/sexybookmarks/setup.txt">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/widgets/tt_contentsearch/setup.txt">
 
 
 plugin.tx_typo3blog_pi1 {
@@ -22,3 +29,8 @@ plugin.tx_typo3blog_pi1 {
 	searchPid = {$plugin.tx_typo3blog_pi1.searchPid}
 	entryLevel = {$plugin.tx_typo3blog_pi1.entryLevel}
 }
+
+plugin.tx_pagebrowse_pi1 {
+	templateFile = {$plugin.tx_pagebrowse_pi1.templateFile}
+}
+

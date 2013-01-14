@@ -8,7 +8,7 @@ plugin.tx_typo3blog_pi1 {
 		useCacheHash = 1
 
 		stdWrap {
-			outerWrap = <div class="tx-typo3blog-pi1-container"> | </div>
+			outerWrap = <div class="tx-typo3blog-pi1"> | </div>
 			dataWrap = <h3>{LLL:EXT:typo3_blog/pi1/locallang.xml:tx_typo3blog_widget_categorylist.title}</h3> |
 			wrap = <ul> | </ul>
 			required = 1

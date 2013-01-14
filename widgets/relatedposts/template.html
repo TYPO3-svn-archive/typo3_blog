@@ -21,6 +21,7 @@
 These are substituted throughout the whole template.
 
 <em>Markers:</em>
+WIDGET_TITLE                   - marker for widget title
 ADDITIONALHEADER               - marker for additional header content
 TITLE                          - title of the bloglist page
 ADDITIONALFOOTER               - marker for additional footer content
@@ -37,12 +38,13 @@ ADDITIONALFOOTER               - marker for additional footer content
 
 
 <!-- ###RELATEDPOSTS_TEMPLATE### begin-->
-	<h3>###RELATEDPOSTS_TITLE###</h3>
+	###WIDGET_TITLE###
 	###ADDITIONALHEADER###
+	<ul>
 	<!--###ITEM### begin -->
 		###TITLE###
-
 	<!--###ITEM### end -->
+	</ul>
 	###ADDITIONALFOOTER###
 
 <!-- ###RELATEDPOSTS_TEMPLATE### end -->

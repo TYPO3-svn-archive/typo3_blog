@@ -10,8 +10,8 @@ plugin.tx_typo3blog_pi1 {
 		# Blogsingle template file
 		templateFile = {$plugin.tx_typo3blog_pi1.blogSingle.templateFile}
 
-		stdWrap {
-			outerWrap = <div class="tx-typo3blog-pi1-container"> | </div>
+		baseWrap {
+			outerWrap = <div class="tx-typo3blog-pi1"> | </div>
 		}
 
 		# Menu for single navigation next up preview order by tx_typo3blog_create_datetime desc
@@ -156,7 +156,13 @@ plugin.tx_typo3blog_pi1 {
 			# additionalfooter setup for templatemarker '###ADDITIONALFOOTER###'
 			additionalfooter = COA
 			additionalfooter {
-
+				# if tx_typo3blog_allow_comments true show comments form
+				10 = TEXT
+				10 {
+				if.isTrue.field = tx_typo3blog_allow_comments
+					stdWrap.cObject = CONTENT
+					stdWrap.cObject < plugin.tx_typo3blog_pi1.commentsForm
+				}
 			}
 		}
 	}

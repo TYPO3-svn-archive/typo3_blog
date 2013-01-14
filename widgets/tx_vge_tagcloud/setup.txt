@@ -18,6 +18,12 @@ plugin.tx_vgetagcloud_pi1 {
 		}
 	}
 	cloudWrap.wrap >
+	baseWrap{
+	 wrap = <div class="tx-typo3blog-pi1">|</div>
+
+	}
 	cloudWrap.dataWrap = <h3>{LLL:EXT:typo3_blog/pi1/locallang.xml:tx_typo3blog_widget_tagcloud.title}</h3><ul>|</ul>
 	_CSS_DEFAULT_STYLE >
 }
+
+plugin.tx_typo3blog_pi1.vge_tagcloud <  plugin.tx_vgetagcloud_pi1

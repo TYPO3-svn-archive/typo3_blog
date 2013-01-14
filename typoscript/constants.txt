@@ -92,4 +92,10 @@ plugin.tx_typo3blog_pi1 {
 	# cat=plugin.typo3blog: widget relatedPosts/basic/020; type=string; label=Items to display for relatedPosts   (see manual!)
 	relatedPosts.itemsToDisplay = 5
 
+
+	# cat=plugin.typo3blog: Layout/Template/pagebrowse/030; type=file; label=Template location for pagebrowse extensions
+	pagebrowse.templateFile = EXT:typo3_blog/res/layout/pluginTemplates/pagebrowse/template.html
+
+	# cat=plugin.typo3blog: Layout/Template/comments/040; type=file; label=Template location for comments extension
+	comments.templateFile = EXT:typo3_blog/res/layout/pluginTemplates/comments/template.html
 }

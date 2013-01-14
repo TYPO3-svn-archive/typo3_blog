@@ -1,0 +1,32 @@
+#
+# Setup plugin comments pageBrowser configuration
+#
+plugin.tx_comments_pi1.pageBrowser.templateFile = {$plugin.tx_pagebrowse_pi1.templateFile}
+
+#
+# Setup plugin comments configuration FORM only
+#
+
+plugin.tx_comments_pi1 = USER_INT
+plugin.tx_typo3blog_pi1.comments = COA
+plugin.tx_typo3blog_pi1.comments {
+
+	#comments list
+	10 = COA
+	10.5 < plugin.tx_comments_pi1
+	10.5 {
+		templateFile = {$plugin.tx_comments_pi1.templateFile}
+		code = COMMENTS
+	}
+	10.wrap = <h3>Kommentar</h3><hr>|
+
+	# comments form
+	20 < plugin.tx_comments_pi1
+	20 {
+		templateFile = {$plugin.tx_comments_pi1.templateFile}
+		code = FORM
+		requiredFields_errorWrap {
+			dataWrap = <span class="help-inline tx-comments-pi1-error">{LLL:EXT:comments/pi1/locallang.xml:error}:&#32;|</span>
+		}
+	}
+}

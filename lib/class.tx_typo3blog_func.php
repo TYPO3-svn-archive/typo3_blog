@@ -52,10 +52,9 @@
 class tx_typo3blog_func
 {
 	private $cObj = NULL;
-
 	private $sys_language_uid = 0;
-
 	private $piVars;
+	public $prefixId = 'tx_typo3blog_pi1';
 
 	/**
 	 * Init this class
@@ -221,17 +220,17 @@ class tx_typo3blog_func
 	 * @return	string		HTML content wrapped, ready to return to the parent object.
 	 */
 	function pi_wrapInBaseClass($str, $widgetId)	{
-		$content = '<div class="'.str_replace('_','-',$widgetId).'">
+		$content = '<div class="'.str_replace('_','-',$this->prefixId).'">
 		'.$str.'
 		</div>
 		';
 		if(!$GLOBALS['TSFE']->config['config']['disablePrefixComment'])	{
 			$content = '
 			<!--
-				BEGIN: Content of extension "'.$this->extKey.'", plugin "'.$widgetId.'"
+				BEGIN: Content of extension "'.$this->prefixId.'", plugin "'.$widgetId.'"
 			-->
 			'.$content.'
-			<!-- END: Content of extension "'.$this->extKey.'", plugin "'.$widgetId.'" -->
+			<!-- END: Content of extension "'.$this->prefixId.'", plugin "'.$widgetId.'" -->
 			';
 		}
 

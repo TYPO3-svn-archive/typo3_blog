@@ -22,3 +22,5 @@ form4_pages_rss {
 		}
 	}
 }
+
+plugin.tx_typo3blog_pi1.form4_pages_rss < form4_pages_rss

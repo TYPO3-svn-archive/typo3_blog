@@ -184,11 +184,14 @@ class tx_typo3blog_widget_calendar extends tslib_pibase
 
 		$this->pagerenderer->addResources();
 
-		//$content = $this->cObj->cObjGetSingle($this->conf['datepicker'], $this->conf['datepicker.']);
 		$content .= $this->cObj->cObjGetSingle($this->conf['datepicker'], $this->conf['datepicker.']);
 
-		// Return the content to display in frontend
-		return $this->typo3BlogFunc->pi_wrapInBaseClass($content,$this->prefixId.'-container');
+		// Wrap the content and return the content to display in frontend
+		if ($this->conf['baseWrap.'])  {
+			return $this->cObj->stdWrap($content, $this->conf['baseWrap.']);
+		} else {
+			return $this->typo3BlogFunc->pi_wrapInBaseClass($content,"latestposts-widget");
+		}
 
 	}
 

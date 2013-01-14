@@ -11,6 +11,7 @@
 			<label index="tx_typo3blog_widget_archive.title">Archive</label>
 			<label index="tx_typo3blog_widget_latestcomments.title">Latest Comments</label>
 			<label index="tx_typo3blog_widget_latestposts.title">Latest Posts</label>
+            <label index="tx_typo3blog_widget_commentsList.title">Comments</label>
 			<label index="tx_typo3blog_widget_relatedposts.title">Related Posts</label>
 			<label index="tx_typo3blog_widget_tagcloud.title">Tagcloud</label>
 			<label index="tx_typo3blog_widget_blogroll.title">Blogroll</label>
@@ -28,6 +29,7 @@
 			<label index="tx_typo3blog_tags">Tags</label>
 			<label index="tx_typo3blog_views">Aufrufe</label>
 			<label index="tx_typo3blog_widget_archive.title">Archiv</label>
+            <label index="tx_typo3blog_widget_commentsList.title">Kommentar(e)</label>
 			<label index="tx_typo3blog_widget_latestcomments.title">Neuste Kommentare</label>
 			<label index="tx_typo3blog_widget_latestposts.title">Neuste Posts</label>
 			<label index="tx_typo3blog_widget_relatedposts.title">Verwandte Posts</label>

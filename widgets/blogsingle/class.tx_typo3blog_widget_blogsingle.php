@@ -190,11 +190,12 @@ class tx_typo3blog_widget_blogsingle extends tslib_pibase
 		// Complete the template expansion by replacing the "content" marker in the template
 		$content .= $this->typo3BlogFunc->substituteMarkersAndSubparts($template, $markers, $subparts);
 
-		// wrap the content
-		$content = $this->cObj->stdWrap($content, $this->conf['stdWrap.']);
-
-		// Return the content to display in frontend
-		return $content;
+		// Wrap the content and return the content to display in frontend
+		if ($this->conf['baseWrap.'])  {
+			return $this->cObj->stdWrap($content, $this->conf['baseWrap.']);
+		} else {
+			return $this->typo3BlogFunc->pi_wrapInBaseClass($content,"blogsingle-widget");
+		}
 	}
 }
 

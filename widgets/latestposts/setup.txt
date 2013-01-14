@@ -16,20 +16,18 @@ plugin.tx_typo3blog_pi1 {
 		# latestPosts template file
 		templateFile = {$plugin.tx_typo3blog_pi1.latestPosts.templateFile}
 
-		stdWrap {
-			outerWrap = <div class="tx-typo3blog-pi1-container"> | </div>
-			wrap = <ul> | </ul>
-			required = 1
-		}
 
+		baseWrap {
+			outerWrap = <div class="tx-typo3blog-pi1"> | </div>
+		}
 
 		# SECTION TEMPLATE MARKER FOR LATESTPOSTS TEMPLATE
 		#----------------------------------------------------
 		marker {
-
 			widgetTitle =TEXT
 			widgetTitle {
 				data = LLL:EXT:typo3_blog/pi1/locallang.xml:tx_typo3blog_widget_latestposts.title
+				dataWrap = <h3>|</h3>
 			}
 
 
