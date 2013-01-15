@@ -143,11 +143,12 @@ class tx_typo3blog_widget_blogsingle extends tslib_pibase
 				$row = $GLOBALS['TSFE']->sys_page->getPageOverlay($row, $this->typo3BlogFunc->getSysLanguageUid());
 			}
 
+			if (intval($row['tx_typo3blog_author'])) {
 			$sql_user = $GLOBALS['TYPO3_DB']->exec_SELECT_queryArray(
 				array(
 					'SELECT'	=> '*',
 					'FROM'		=> 'be_users',
-					'WHERE'		=> "uid = ".$row['tx_typo3blog_author']." ".$this->cObj->enableFields('be_users'),
+					'WHERE'		=> "uid = ".intval($row['tx_typo3blog_author'])." ".$this->cObj->enableFields('be_users'),
 				)
 			);
 
@@ -157,12 +158,20 @@ class tx_typo3blog_widget_blogsingle extends tslib_pibase
 			$row['be_user_realName']     = $row_user['realName'];
 			$row['be_user_email']        = $row_user['email'];
 			$row['be_user_email_secure'] = md5($row_user['email']);
-			$row['category']             = $this->typo3BlogFunc->getPostCategoryName($row['pid'], 'title');
-			$row['pagecontent']          = "";
-			$row['comments']             = "";
-			$row['gravatar']             = NULL;
-			$row['additionalheader']     = '';
-			$row['additionalfooter']     = '';
+
+			} else {
+				$row['be_user_username']     = "";
+				$row['be_user_realName']     = "";
+				$row['be_user_email']        = "";
+				$row['be_user_email_secure'] = md5("");
+			}
+
+			$row['category']			= $this->typo3BlogFunc->getPostCategoryName($row['pid'], 'title');
+			$row['pagecontent']			= "";
+			$row['comments']			= "";
+			$row['gravatar']			= NULL;
+			$row['additionalheader']	= '';
+			$row['additionalfooter']	= '';
 
 			// Add all fields in ts
 			$this->cObj->data = $row;

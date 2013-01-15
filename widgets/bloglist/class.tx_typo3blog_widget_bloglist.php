@@ -150,21 +150,29 @@ class tx_typo3blog_widget_bloglist extends tslib_pibase
 			if (is_array($row) && $this->typo3BlogFunc->getSysLanguageUid() > 0) {
 				$row = $GLOBALS['TSFE']->sys_page->getPageOverlay($row, $this->typo3BlogFunc->getSysLanguageUid());
 			}
+			if (intval($row['tx_typo3blog_author'])) {
+				$sql_user = $GLOBALS['TYPO3_DB']->exec_SELECT_queryArray(
+					array(
+						'SELECT' => '*',
+						'FROM'   => 'be_users',
+						'WHERE'  => "uid = '" . intval($row['tx_typo3blog_author']) . "' " . $this->cObj->enableFields('be_users'),
+					)
+				);
 
-			$sql_user = $GLOBALS['TYPO3_DB']->exec_SELECT_queryArray(
-				array(
-					'SELECT' => '*',
-					'FROM'   => 'be_users',
-					'WHERE'  => "uid = '" . intval($row['tx_typo3blog_author']) . "' " . $this->cObj->enableFields('be_users'),
-				)
-			);
+				// add additional data to ts template
+				$row_user = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($sql_user);
+				$row['be_user_username']     = $row_user['username'];
+				$row['be_user_realName']     = $row_user['realName'];
+				$row['be_user_email']        = $row_user['email'];
+				$row['be_user_email_secure'] = md5($row_user['email']);
 
-			// add additional data to ts template
-			$row_user = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($sql_user);
-			$row['be_user_username']     = $row_user['username'];
-			$row['be_user_realName']     = $row_user['realName'];
-			$row['be_user_email']        = $row_user['email'];
-			$row['be_user_email_secure'] = md5($row_user['email']);
+			} else {
+				$row['be_user_username']     = "";
+				$row['be_user_realName']     = "";
+				$row['be_user_email']        = "";
+				$row['be_user_email_secure'] = md5("");
+			}
+
 			$row['category']             = $this->typo3BlogFunc->getPostCategoryName($row['pid'], 'title');
 			$row['pagecontent']          = NULL;
 			$row['showmore']             = NULL;
