@@ -25,6 +25,10 @@ plugin.tx_typo3blog_pi1 {
 		# path to template file
 		templateFile = {$plugin.tx_typo3blog_pi1.calendar.templateFile}
 
+		baseWrap {
+			outerWrap = <div class="tx-typo3blog-pi1"> | </div>
+		}
+
 		# container for jQueri UI calendar
 		datepicker = COA
 		datepicker {

@@ -1,6 +1,6 @@
-indexedsearchform = COA_INT
-indexedsearchform {
-	stdWrap.prefixComment = 2 | plugin.tx_typo3blog_pi1.indexedsearch
+plugin.tx_typo3blog_pi1.indexedsearchform = COA_INT
+plugin.tx_typo3blog_pi1.indexedsearchform {
+	stdWrap.prefixComment = 2 | plugin.tx_typo3blog_pi1.indexedsearchfrom
 	10 = TEXT
 	10.typolink.parameter = {$plugin.tx_typo3blog_pi1.searchPid}
 	10.typolink.returnLast = url

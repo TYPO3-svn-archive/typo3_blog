@@ -145,8 +145,6 @@ class tx_typo3blog_widget_archive extends tslib_pibase
 		$markerArray = array();
 		$markers = array();
 
-		$markers['###WIDGET_TITLE###'] = $this->cObj->cObjGetSingle($this->conf['marker.']['widgetTitle'], $this->conf['marker.']['widgetTitle.']);;
-
 		$subpartArchiveYear = $this->cObj->getSubpart($subpartArchiveItems, '###ARCHIVE_YEAR###');
 		$currentYear = NULL;
 
