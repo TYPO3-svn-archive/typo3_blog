@@ -9,7 +9,7 @@
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/widgets/relatedposts/setup.txt">
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/widgets/tx_comments/setup.txt">
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/widgets/form4_pages_rss/setup.txt">
-<INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/widgets/vge_tagcloud/setup.txt">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/widgets/tx_vge_tagcloud/setup.txt">
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/widgets/indexsearchform/setup.txt">
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/widgets/sexybookmarks/setup.txt">
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:typo3_blog/widgets/tt_contentsearch/setup.txt">
