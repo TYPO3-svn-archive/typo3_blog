@@ -26,19 +26,11 @@ plugin.tx_typo3blog_pi1 {
 		# SECTION TEMPLATE MARKER FOR LATESTPOSTS TEMPLATE
 		#----------------------------------------------------
 		marker {
-			#widgetTitle =TEXT
-			#widgetTitle {
-			#	data = LLL:EXT:typo3_blog/pi1/locallang.xml:tx_typo3blog_widget_latestposts.title
-			#	dataWrap = <h3>|</h3>
-			#}
-
 
 			# additionalheader setup for templatemarker '###ADDITIONALHEADER###'
 			additionalheader = COA
 			additionalheader {
-				10 = TEXT
- 				10.value = Das ist ein test
-				10.wrap = <p>|</p>
+
 			}
 
 			# page field title setup for templatemarker '###TITLE###'
