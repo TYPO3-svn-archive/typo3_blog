@@ -18,7 +18,7 @@ plugin.tx_typo3blog_pi1.comments {
 		templateFile = {$plugin.tx_comments_pi1.templateFile}
 		code = COMMENTS
 	}
-	10.wrap = <h3>Kommentar</h3><hr>|
+	10.wrap = <h3>Kommentar</h3>|
 
 	# comments form
 	20 < plugin.tx_comments_pi1

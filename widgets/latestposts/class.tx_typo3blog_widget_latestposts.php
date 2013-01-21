@@ -167,7 +167,7 @@ class tx_typo3blog_widget_latestposts extends tslib_pibase
 			foreach ($row as $column => $data) {
 				$this->cObj->setCurrentVal($data);
 				if ($this->conf['marker.'][$column]) {
-					$data = $this->cObj->stdWrap($this->conf['marker.'][$column], $this->conf['marker.'][$column . '.']);
+					$data = $this->cObj->cObjGetSingle($this->conf['marker.'][$column], $this->conf['marker.'][$column . '.']);
 				}
 				$this->cObj->setCurrentVal(false);
 				$markerArray['###' . strtoupper($column) . '###'] = $data;

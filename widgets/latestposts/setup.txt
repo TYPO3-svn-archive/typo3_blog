@@ -18,9 +18,9 @@ plugin.tx_typo3blog_pi1 {
 
 
 		baseWrap {
-			outerWrap = <div class="tx-typo3blog-pi1 outerWrap"> | </div>
+			outerWrap = <div class="tx-typo3blog-pi1"> | </div>
 			dataWrap = <h3 class="title">{LLL:EXT:typo3_blog/pi1/locallang.xml:tx_typo3blog_widget_latestposts.title}</h3>
-			wrap = <ul class="content">|</ul>
+			wrap = <ul>|</ul>
 		}
 
 		# SECTION TEMPLATE MARKER FOR LATESTPOSTS TEMPLATE
