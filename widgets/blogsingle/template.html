@@ -19,24 +19,15 @@
 These are substituted throughout the whole template.
 
 <em>Markers:</em>
-UID                          - uid number of the blogsingle page
-PID                          - pid number of the blogsingle page
-STARTTIME                    - starttime of the blogsingle page
-ENDTIME                      - endtime of the blogsingle page
-SUBTITLE                     - subtitle of the blogsingle page
 TITLE                        - title of the blogsingle page
 TX_TYPO3BLOG_CREATE_DATETIME - crdate of the blogsingle page
 AUTHOR                       - author of the blogsingle page
 AUTHOR_EMAIL                 - author_email of the blogsingle page
-NAVTITLE                     - navtitle of the blogsingle page
 CATEGORY                     - category name of the blogsingle page
-CATEGORYIMAGE                - tx_typo3blog_image of the blogsingle page
 TAGS                         - tx_typo3blog_tags of the blogsingle page
-VIEWCOUNT                    - tx_typo3blog_viewcount of the blogsingle page
-CONTENT                      - tt_content of the blogsingle page
+PAGECONTENT                  - tt_content of the blogsingle page
 GRAVATAR                     - gravatar image from gravatar.com by author_email
-LINKTOPOST                   - url to blogpage
-TX_PAGEHITS_HITS             - Pagehit count from plugin pagehits
+
 
 ADDITIONALHEADER - marker for additional header content
 ADDITIONALFOOTER - marker for additional footer content
@@ -59,7 +50,6 @@ BE_USER_EMAIL_SECURE - MD5 from BE_USER_EMAIL (used for gravatar)
 <br/>
 
 
-
 <!-- ###BLOGSINGLE_TEMPLATE### begin-->
 <article>
 	###ADDITIONALHEADER###
@@ -67,9 +57,7 @@ BE_USER_EMAIL_SECURE - MD5 from BE_USER_EMAIL (used for gravatar)
 	<ul>
 		###CATEGORY###
 		###AUTHOR###
-		###AUTHOR_EMAIL###
 		###TX_TYPO3BLOG_CREATE_DATETIME###
-		###TX_PAGEHITS_HITS###
 		###TX_TYPO3BLOG_TAGS###
 	</ul>
 	###GRAVATAR###
@@ -79,7 +67,6 @@ BE_USER_EMAIL_SECURE - MD5 from BE_USER_EMAIL (used for gravatar)
 	###ADDITIONALFOOTER###
 </article>
 <!-- ###BLOGSINGLE_TEMPLATE### end -->
-
 
 
 </body>

@@ -207,7 +207,7 @@ class tx_typo3blog_widget_relatedposts extends tslib_pibase
 		$sql_array = array(
 			'SELECT'  => 'pages.*',
 			'FROM'    => 'pages',
-			'WHERE'   => '(' . $this->getPostsInRootLine() . ') '.$this->cObj->enableFields('pages').' AND doktype != ' . $this->blog_doktype_id . ' ' . $this->getKeywordFilterQuery().' '.$this->typo3BlogFunc->getWhereFilterQuery(),
+			'WHERE'   => '(' . $this->getPostsInRootLine() . ') '.$this->cObj->enableFields('pages').' AND doktype = 1 ' . $this->getKeywordFilterQuery().' '.$this->typo3BlogFunc->getWhereFilterQuery(),
 			'GROUPBY' => '',
 			'ORDERBY' => 'tx_typo3blog_create_datetime DESC',
 			'LIMIT'   => intval($this->conf['itemsToDisplay'])
@@ -215,7 +215,7 @@ class tx_typo3blog_widget_relatedposts extends tslib_pibase
 
 		if ($this->typo3BlogFunc->getSysLanguageUid() > 0 && $GLOBALS['TYPO3_CONF_VARS']['FE']['hidePagesIfNotTranslatedByDefault'] > 0)	{
 			$sql_array['FROM'] = 'pages, pages_language_overlay';
-			$sql_array['WHERE'] = 'pages_language_overlay.pid = pages.uid AND (' . $this->getPostsInRootLine() . ') '.$this->cObj->enableFields('pages').' AND pages.doktype != ' . $this->blog_doktype_id . ' ' . $this->getKeywordFilterQuery().' '.$this->typo3BlogFunc->getWhereFilterQuery();
+			$sql_array['WHERE'] = 'pages_language_overlay.pid = pages.uid AND (' . $this->getPostsInRootLine() . ') '.$this->cObj->enableFields('pages').' AND pages.doktype = 1 ' . $this->getKeywordFilterQuery().' '.$this->typo3BlogFunc->getWhereFilterQuery();
 			$sql_array['ORDERBY'] = 'pages_language_overlay.tx_typo3blog_create_datetime DESC';
 		}
 

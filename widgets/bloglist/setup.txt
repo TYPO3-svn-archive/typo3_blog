@@ -9,7 +9,7 @@ plugin.tx_typo3blog_pi1 {
 		# SECTION BLOGLIST SETTINGS
 		#----------------------------------------------------
 
-		# Displaying posts in bloglist
+		# Count to displaying entries in bloglist
 		itemsToDisplay = {$plugin.tx_typo3blog_pi1.blogList.itemsToDisplay}
 
 		#Displaying elements from tt_content as preview
@@ -160,7 +160,6 @@ plugin.tx_typo3blog_pi1 {
 			# additionalheader setup for templatemarker '###ADDITIONALHEADER###'
 			additionalheader = COA
 			additionalheader {
-
 			}
 
 			# additionalfooter setup for templatemarker '###ADDITIONALFOOTER###'

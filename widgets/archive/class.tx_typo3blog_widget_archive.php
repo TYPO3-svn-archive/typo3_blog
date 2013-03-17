@@ -262,7 +262,7 @@ class tx_typo3blog_widget_archive extends tslib_pibase
 		$sql_array = array(
 			'SELECT'	=> 'pages.*',
 			'FROM'		=> 'pages',
-			'WHERE'		=> '('.$this->getPostsInRootLine().') AND pages.doktype != '.$this->blog_doktype_id.' AND MONTH(FROM_UNIXTIME(pages.tx_typo3blog_create_datetime)) = '.intval($row['month']) . ' AND YEAR(FROM_UNIXTIME(pages.tx_typo3blog_create_datetime)) = ' . intval($row['year']) .$this->cObj->enableFields('pages') . ' '.$this->typo3BlogFunc->getWhereFilterQuery(),
+			'WHERE'		=> '('.$this->getPostsInRootLine().') AND pages.doktype = 1 AND MONTH(FROM_UNIXTIME(pages.tx_typo3blog_create_datetime)) = '.intval($row['month']) . ' AND YEAR(FROM_UNIXTIME(pages.tx_typo3blog_create_datetime)) = ' . intval($row['year']) .$this->cObj->enableFields('pages') . ' '.$this->typo3BlogFunc->getWhereFilterQuery(),
 			'GROUPBY'	=> '',
 			'ORDERBY'	=> 'tx_typo3blog_create_datetime DESC',
 			'LIMIT'		=> ''
@@ -270,7 +270,7 @@ class tx_typo3blog_widget_archive extends tslib_pibase
 
 		if ($this->typo3BlogFunc->getSysLanguageUid() > 0  && $GLOBALS['TYPO3_CONF_VARS']['FE']['hidePagesIfNotTranslatedByDefault'] > 0) {
 			$sql_array['FROM'] = 'pages, pages_language_overlay';
-			$sql_array['WHERE'] = 'pages_language_overlay.pid = pages.uid AND ('.$this->getPostsInRootLine().') AND pages.doktype != '.$this->blog_doktype_id.' AND MONTH(FROM_UNIXTIME(pages.tx_typo3blog_create_datetime)) = '.intval($row['month']) . ' AND YEAR(FROM_UNIXTIME(pages.tx_typo3blog_create_datetime)) = ' . intval($row['year']) .$this->cObj->enableFields('pages') . ' '.$this->typo3BlogFunc->getWhereFilterQuery();
+			$sql_array['WHERE'] = 'pages_language_overlay.pid = pages.uid AND ('.$this->getPostsInRootLine().') AND pages.doktype = 1 AND MONTH(FROM_UNIXTIME(pages.tx_typo3blog_create_datetime)) = '.intval($row['month']) . ' AND YEAR(FROM_UNIXTIME(pages.tx_typo3blog_create_datetime)) = ' . intval($row['year']) .$this->cObj->enableFields('pages') . ' '.$this->typo3BlogFunc->getWhereFilterQuery();
 			$sql_array['ORDERBY'] = 'pages_language_overlay.tx_typo3blog_create_datetime DESC';
 		}
 
@@ -290,7 +290,7 @@ class tx_typo3blog_widget_archive extends tslib_pibase
 		$sql_array = array(
 			'SELECT'  => 'MONTH(FROM_UNIXTIME(pages.tx_typo3blog_create_datetime)) as month, YEAR(FROM_UNIXTIME(pages.tx_typo3blog_create_datetime)) as year, count(*) as quantity, pages.tx_typo3blog_create_datetime',
 			'FROM'    => 'pages',
-			'WHERE'   => '('.$this->getPostsInRootLine().') '.$this->cObj->enableFields('pages').' AND pages.doktype != ' . $this->blog_doktype_id . ' ' . $this->typo3BlogFunc->getWhereFilterQuery(),
+			'WHERE'   => '('.$this->getPostsInRootLine().') '.$this->cObj->enableFields('pages').' AND pages.doktype = 1 ' . $this->typo3BlogFunc->getWhereFilterQuery(),
 			'GROUPBY' => 'year, month',
 			'ORDERBY' => 'pages.tx_typo3blog_create_datetime DESC',
 			'LIMIT'   => ''
@@ -298,7 +298,7 @@ class tx_typo3blog_widget_archive extends tslib_pibase
 
 		if ($this->typo3BlogFunc->getSysLanguageUid() > 0  && $GLOBALS['TYPO3_CONF_VARS']['FE']['hidePagesIfNotTranslatedByDefault'] > 0) {
 			$sql_array['FROM'] = 'pages, pages_language_overlay';
-			$sql_array['WHERE'] = 'pages_language_overlay.pid = pages.uid AND ('.$this->getPostsInRootLine().') '.$this->cObj->enableFields('pages').' AND pages.doktype != ' . $this->blog_doktype_id . ' ' . $this->typo3BlogFunc->getWhereFilterQuery();
+			$sql_array['WHERE'] = 'pages_language_overlay.pid = pages.uid AND ('.$this->getPostsInRootLine().') '.$this->cObj->enableFields('pages').' AND pages.doktype = 1 ' . $this->typo3BlogFunc->getWhereFilterQuery();
 			$sql_array['ORDERBY'] = 'pages_language_overlay.tx_typo3blog_create_datetime DESC';
 		}
 		//$GLOBALS['TYPO3_DB']->store_lastBuiltQuery = true;

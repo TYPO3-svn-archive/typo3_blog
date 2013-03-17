@@ -8,13 +8,13 @@ require_once(t3lib_extMgm::extPath('typo3_blog') . 'hooks/class.tx_typo3blog_com
 t3lib_div::loadTCA('tt_content');
 $TCA['tt_content']['types']['list']['subtypes_excludelist'][$_EXTKEY.'_pi1']='layout,select_key,pages';
 
-
+/*
 t3lib_extMgm::addPlugin(array(
 	'LLL:EXT:typo3_blog/locallang_db.xml:tt_content.list_type_pi1',
 	$_EXTKEY . '_pi1',
 	t3lib_extMgm::extRelPath($_EXTKEY) . 'ext_icon.gif'
 ),'list_type');
-
+*/
 
 if (TYPO3_MODE == 'BE') {
 
@@ -149,6 +149,5 @@ $GLOBALS['TYPO3_CONF_VARS']['BE']['defaultUserTSconfig'] .= ' options.pageTree {
 
 
 t3lib_extMgm::addStaticFile($_EXTKEY,'typoscript/', 'Typo3Blog Setup');
-t3lib_extMgm::addStaticFile($_EXTKEY,'typoscript/layout', 'Typo3Blog Setup Sample layout');
 
 ?>

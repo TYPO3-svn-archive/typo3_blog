@@ -30,7 +30,6 @@ plugin.tx_typo3blog_pi1 {
 			# additionalheader setup for templatemarker '###ADDITIONALHEADER###'
 			additionalheader = COA
 			additionalheader {
-
 			}
 
 			# page field title setup for templatemarker '###TITLE###'
