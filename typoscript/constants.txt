@@ -34,9 +34,6 @@ plugin.tx_typo3blog_pi1 {
 	# cat=plugin.typo3blog: Basic/basic/110; type=string; label=Column from table pages with tags   (see manual!)
 	columnWithTags = tx_typo3blog_tags
 
-	# cat=plugin.typo3blog: Basic/basic/120; type=string; label=Entry Level: The entrylevel to the root-template (distance to root)
-	entryLevel = 0
-
 	# cat=plugin.typo3blog: Basic/basic/130; type=string; label=Date format with strftime dd.mm.yyyy (see manual!)
 	dateFromat = %d.%m.%Y
 

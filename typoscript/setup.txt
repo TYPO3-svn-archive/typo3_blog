@@ -27,7 +27,6 @@ plugin.tx_typo3blog_pi1 {
 
 	startPid = {$plugin.tx_typo3blog_pi1.startPid}
 	searchPid = {$plugin.tx_typo3blog_pi1.searchPid}
-	entryLevel = {$plugin.tx_typo3blog_pi1.entryLevel}
 }
 
 plugin.tx_pagebrowse_pi1 {
