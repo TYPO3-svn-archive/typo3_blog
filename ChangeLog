@@ -1,12 +1,16 @@
-2013-01-14 Roland Hensch  <rsch73@gmail.com>
+2013-01-27 Roland Hensch  <rsch73@gmail.com>
+
 	* Change stdWrap to baseWrap in widgets
 	* Remove sample layout
-	* Move all widgets from sample layout to widgets folder
+	* Remove widgets for comments, vge_tagcloud, pagehits, form4_pages_rss
  	* [BUG #42210] Add tab "Blog Settings in translated pages"
- 	* [Task #42210] Make typo3_blog reade for TYPO3 6.0
+ 	* [Task #42210] Make typo3_blog ready for TYPO3 6.0
  	* Optimize PHP code and Fix small bugs
+ 	* Add new extension manual
+
 
 2012-10-19 Roland Hensch  <rsch73@gmail.com>
+
 	* Change stdWrap in widgets for simlar usage in typoscript
 	* Update bootstrap 2.1.1 and update css stylesheet
  	* [Task #39036]   Implement multilanguage
