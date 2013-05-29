@@ -30,8 +30,8 @@
 			<label index="tx_typo3blog_views">Aufrufe</label>
 			<label index="tx_typo3blog_widget_archive.title">Archiv</label>
             <label index="tx_typo3blog_widget_commentsList.title">Kommentar(e)</label>
-			<label index="tx_typo3blog_widget_latestcomments.title">Neuste Kommentare</label>
-			<label index="tx_typo3blog_widget_latestposts.title">Neuste Posts</label>
+			<label index="tx_typo3blog_widget_latestcomments.title">Neueste Kommentare</label>
+			<label index="tx_typo3blog_widget_latestposts.title">Neueste Posts</label>
 			<label index="tx_typo3blog_widget_relatedposts.title">Verwandte Posts</label>
 			<label index="tx_typo3blog_widget_tagcloud.title">Wortwolke</label>
 			<label index="tx_typo3blog_widget_blogroll.title">Blogrolle</label>

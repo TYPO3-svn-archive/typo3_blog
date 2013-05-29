@@ -14,26 +14,26 @@ plugin.tx_typo3blog_pi1 {
 			outerWrap = <div class="tx-typo3blog-pi1 outer"> | </div>
 		}
 
-# Menu for single navigation next up preview order by tx_typo3blog_create_datetime desc
-singleNav = HMENU
-singleNav {
-	special = browse
-	special {
-		items = prev|up|next
-		items.prevnextToSection =
-		prev.fields.data = page:title
-		up.fields.data = page:title
-		next.fields.data = page:title
+	# Menu for single navigation next up preview order by tx_typo3blog_create_datetime desc
+	singleNav = HMENU
+	singleNav {
+		special = browse
+		special {
+			items = prev|up|next
+			items.prevnextToSection =
+			prev.fields.data = page:title
+			up.fields.data = page:title
+			next.fields.data = page:title
+		}
+		1 = TMENU
+		1.wrap = <ul>|</ul>
+		1.alternativeSortingField = tx_typo3blog_create_datetime desc
+		1.NO {
+			linkWrap = <li>|</li>
+			stdWrap.htmlSpecialChars = 1
+			ATagTitle.field = subtitle // title
+		}
 	}
-	1 = TMENU
-	1.wrap = <ul>|</ul>
-	1.alternativeSortingField = tx_typo3blog_create_datetime desc
-	1.NO {
-		linkWrap = <li>|</li>
-		stdWrap.htmlSpecialChars = 1
-		ATagTitle.field = subtitle // title
-	}
-}
 
 		# SECTION TEMPLATE MARKER FOR BLOGSINGLE TEMPLATE
 		#----------------------------------------------------
