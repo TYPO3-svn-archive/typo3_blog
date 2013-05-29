@@ -138,7 +138,7 @@ class tx_typo3blog_widget_blogsingle extends tslib_pibase
 		);
 
 		// Execute the sql and each all selected fields
-		while ($row = mysql_fetch_assoc($sql)) {
+		while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($sql)) {
 			if (is_array($row) && $this->typo3BlogFunc->getSysLanguageUid() > 0) {
 				$row = $GLOBALS['TSFE']->sys_page->getPageOverlay($row, $this->typo3BlogFunc->getSysLanguageUid());
 			}
