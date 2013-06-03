@@ -1,3 +1,9 @@
+2013-06-03 Roland Hensch  <rsch73@gmail.com>
+	* [FIX] Display Template blogsingle widget
+	* Small changes in locallang.xml
+	* Remove unused includes in setup.txt
+
+
 2013-03-27 Roland Hensch  <rsch73@gmail.com>
 	* Change stdWrap to baseWrap in widgets
 	* Remove sample layout
@@ -6,6 +12,7 @@
  	* [Task #42210] Make typo3_blog ready for TYPO3 6.0
  	* Optimize PHP code and Fix small bugs
  	* Add new extension manual
+
 
 2012-10-19 Roland Hensch  <rsch73@gmail.com>
 	* Change stdWrap in widgets for simlar usage in typoscript
