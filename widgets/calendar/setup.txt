@@ -35,5 +35,30 @@ plugin.tx_typo3blog_pi1 {
 			10 = TEXT
 			10.wrap = <div id="tx_typo3blog_widget_calendar"> | </div>
 		}
+
+		marker {
+            # link setup for template marker ###LINK###
+			link = TEXT
+			link {
+				typolink {
+					parameter = {$plugin.tx_typo3blog_pi1.startPid}
+					additionalParams.cObject = COA
+					additionalParams.cObject {
+						10 = TEXT
+						10 {
+							field = day
+							wrap = &tx_typo3blog_pi1[datefrom]=|
+						}
+						20 = TEXT
+						20 {
+							field = day
+							wrap = &tx_typo3blog_pi1[dateto]=|
+						}
+					}
+					useCacheHash = 1
+					returnLast = url
+				}
+			}
+		}
 	}
 }

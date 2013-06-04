@@ -148,15 +148,13 @@ class tx_typo3blog_widget_calendar extends tslib_pibase
 
 		while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($sql)) {
 
-			$link = $this->pi_getPageLink($this->page_uid, '', array(
-				$this->prefixId.'[datefrom]' => $row['day'],
-				$this->prefixId.'[dateto]'   => $row['day'],
-			));
+			// add data to ts template
+			$this->cObj->data = $row;
 
 			$markerArray = array();
 			$markerArray["KEY"] = $key;
 			$markerArray["DATE"] = $row['day'];
-			$markerArray["LINK"] = t3lib_div::getIndpEnv("TYPO3_SITE_URL") . $link;
+			$markerArray["LINK"] = $this->cObj->cObjGetSingle($this->conf['marker.']['link'], $this->conf['marker.']['link.']);
 			$markerArray["COUNT"] = $row['counter'];
 			$markerArray["DATE_TO"] = $this->piVars['dateto'];
 			$class = '';
