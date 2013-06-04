@@ -363,7 +363,7 @@ class tx_typo3blog_widget_bloglist extends tslib_pibase
 			}
 
 			if (($datefrom != false) && ($dateto != false)) {
-				if ($this->typo3BlogFunc->getSysLanguageUid() > 0) {
+				if ($this->typo3BlogFunc->getSysLanguageUid() > 0 && $GLOBALS['TYPO3_CONF_VARS']['FE']['hidePagesIfNotTranslatedByDefault']) {
 					$where .= " AND DATE(FROM_UNIXTIME(pages_language_overlay.tx_typo3blog_create_datetime)) >= '".$datefrom."' AND DATE(FROM_UNIXTIME(pages_language_overlay.tx_typo3blog_create_datetime)) <= '".$dateto."'";
 				} else {
 					$where .= " AND DATE(FROM_UNIXTIME(tx_typo3blog_create_datetime)) >= '".$datefrom."' AND DATE(FROM_UNIXTIME(tx_typo3blog_create_datetime)) <= '".$dateto."'";
