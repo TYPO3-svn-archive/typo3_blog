@@ -154,7 +154,7 @@ class tx_typo3blog_widget_calendar extends tslib_pibase
 			$markerArray = array();
 			$markerArray["KEY"] = $key;
 			$markerArray["DATE"] = $row['day'];
-			$markerArray["LINK"] = $this->cObj->cObjGetSingle($this->conf['marker.']['link'], $this->conf['marker.']['link.']);
+			$markerArray["LINK"] = t3lib_div::getIndpEnv("TYPO3_SITE_URL") . $this->cObj->cObjGetSingle($this->conf['marker.']['link'], $this->conf['marker.']['link.']);
 			$markerArray["COUNT"] = $row['counter'];
 			$markerArray["DATE_TO"] = $this->piVars['dateto'];
 			$class = '';

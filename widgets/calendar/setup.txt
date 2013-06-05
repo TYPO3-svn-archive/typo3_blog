@@ -1,5 +1,5 @@
 plugin.tx_typo3blog_pi1 {
-	calendar = USER
+	calendar = USER_INT
 	calendar {
 		includeLibs = EXT:typo3_blog/widgets/calendar/class.tx_typo3blog_widget_calendar.php
 		userFunc = tx_typo3blog_widget_calendar->main
