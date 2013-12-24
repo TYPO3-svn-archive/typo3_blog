@@ -85,7 +85,7 @@ plugin.tx_typo3blog_pi1 {
 			tx_typo3blog_create_datetime = TEXT
 			tx_typo3blog_create_datetime {
 				field = tx_typo3blog_create_datetime
-				strftime = {$plugin.tx_typo3blog_pi1.dateFromat}
+				strftime = {$plugin.tx_typo3blog_pi1.dateFormat}
 				wrap = <li> | </li>
 				required = 1
 			}

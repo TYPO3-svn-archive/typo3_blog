@@ -35,7 +35,7 @@ plugin.tx_typo3blog_pi1 {
 	columnWithTags = tx_typo3blog_tags
 
 	# cat=plugin.typo3blog: Basic/basic/130; type=string; label=Date format with strftime dd.mm.yyyy (see manual!)
-	dateFromat = %d.%m.%Y
+	dateFormat = %d.%m.%Y
 
 
 
