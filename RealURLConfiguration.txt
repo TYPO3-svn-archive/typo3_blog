@@ -24,6 +24,22 @@ Copy the following part ('typo3blog') in to the postVarSets section/array of you
 				'GETvar' => 'tx_typo3blog_pi1[page]',
 			)
 		),
+		'blog-author' => array (
+			array(
+				'GETvar' => 'tx_typo3blog_pi1[author]',
+				'lookUpTable' => array(
+					'table' => 'be_users',
+					'id_field' => 'uid',
+					'alias_field' => 'realName',
+					'addWhereClause' => ' AND NOT deleted',
+					'useUniqueCache' => 1,
+					'useUniqueCache_conf' => array(
+					    'strtolower' => 1,
+					    'spaceCharacter' => '-',
+					),
+				),
+			)
+		),
 	<<<< SNAP >>>>
 
 
