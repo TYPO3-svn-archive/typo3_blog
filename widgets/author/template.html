@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>typo3_blog author example template</title>
+</head>
+
+<body>
+
+<h1>AUTHOR TEMPLATES</h1>
+<h2>EXAMPLE</h2>
+
+
+
+
+
+
+<br />
+<br />
+<br />
+<strong>Global markers, as set up in TypoScript:</strong>
+These are substituted throughout the whole template.
+
+<em>Markers:</em>
+ADDITIONALHEADER               - marker for additional header content
+BE_USER_REALNAME               - marker for be-user realname
+BE_USER_USERNAME               - marker for be-user username
+BE_USER_EMAIL                  - marker for be-user email
+BE_USER_EMAIL_SECURE           - marker for be-user email as md5 hash
+ADDITIONALFOOTER               - marker for additional footer content
+
+
+<br /><br /><br /><br /><hr />
+<br />
+<h3>Author_TEMPLATE</h3>
+<em>This is the template for the list of posts, typically displayed on a frontpage.</em>
+<br />
+<br />
+<br />
+<br />
+
+
+<!-- ###AUTHOR_TEMPLATE### begin-->
+###ADDITIONALHEADER###
+
+<!--###ITEM### begin -->
+###BE_USER_REALNAME###
+
+<!--###ITEM### end -->
+###ADDITIONALFOOTER###
+<!-- ###AUTHOR_TEMPLATE### end -->
+
+
+</body>
+</html>

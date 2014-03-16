@@ -1,0 +1,52 @@
+#
+# Setup typo3blog author
+#
+plugin.tx_typo3blog_pi1 {
+	author = USER_INT
+	author {
+		includeLibs = EXT:typo3_blog/widgets/author/class.tx_typo3blog_widget_author.php
+		userFunc = tx_typo3blog_widget_author->main
+
+		# SECTION AUTHOR SETTINGS
+		#----------------------------------------------------
+
+		# latestPosts template file
+		templateFile = {$plugin.tx_typo3blog_pi1.author.templateFile}
+
+
+		baseWrap {
+			outerWrap = <div class="tx-typo3blog-pi1"> | </div>
+			dataWrap = <h3 class="title">{LLL:EXT:typo3_blog/pi1/locallang.xml:tx_typo3blog_widget_author.title}</h3>
+			wrap = <ul>|</ul>
+		}
+
+		# SECTION TEMPLATE MARKER FOR AUTHOR TEMPLATE
+		#----------------------------------------------------
+		marker {
+
+			# additionalheader setup for templatemarker '###ADDITIONALHEADER###'
+			additionalheader = COA
+			additionalheader {
+			}
+
+			# page field title setup for templatemarker '###BE_USER_REALNAME###'
+			be_user_realName = TEXT
+			be_user_realName {
+				wrap = <li>|</li>
+				field = be_user_realName
+				typolink {
+					parameter.dataWrap = {$plugin.tx_typo3blog_pi1.startPid}
+					additionalParams.dataWrap = &tx_typo3blog_pi1[author]={field:be_user_uid}
+					title.field = be_user_realName // be_user_username
+					useCacheHash = 1
+				}
+			}
+
+			# additionalfooter setup for templatemarker '###ADDITIONALFOOTER###'
+			additionalfooter = COA
+			additionalfooter {
+
+			}
+		}
+	}
+}
