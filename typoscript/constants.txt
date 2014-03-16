@@ -88,4 +88,8 @@ plugin.tx_typo3blog_pi1 {
 
 	# cat=plugin.typo3blog: widget relatedPosts/basic/020; type=string; label=Items to display for relatedPosts   (see manual!)
 	relatedPosts.itemsToDisplay = 5
+
+
+	# cat=plugin.typo3blog: widget Author/basic/020; type=string; label=Template location for latestPosts widget  (see manual!)
+	author.templateFile = EXT:typo3_blog/widgets/author/template.html
 }

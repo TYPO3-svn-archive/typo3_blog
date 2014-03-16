@@ -50,7 +50,7 @@ include_once(PATH_site . 'typo3/sysext/cms/tslib/class.tslib_content.php');
 /**
  * Plugin 'Typo3 Blog bloglist' for the 'typo3_blog' extension.
  *
- * @author			Roland Schmidt <rsch73@gmail.com>
+ * @author			Roland Hensch <rsch73@gmail.com>
  * @package			TYPO3
  * @subpackage		tx_typo3blog
  */
@@ -161,6 +161,7 @@ class tx_typo3blog_widget_bloglist extends tslib_pibase
 
 				// add additional data to ts template
 				$row_user = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($sql_user);
+                $row['be_user_uid']          = $row_user['uid'];
 				$row['be_user_username']     = $row_user['username'];
 				$row['be_user_realName']     = $row_user['realName'];
 				$row['be_user_email']        = $row_user['email'];
@@ -281,7 +282,7 @@ class tx_typo3blog_widget_bloglist extends tslib_pibase
 		$sql_array = array(
 			'SELECT'  => 'pages.*',
 			'FROM'    => 'pages',
-			'WHERE'   => '('.$this->getPostsInRootLine().') '.$this->cObj->enableFields('pages').' AND pages.doktype = 1 ' . $this->typo3BlogFunc->getWhereFilterQuery().' '.$this->getDateWhere().' '. $this->typo3BlogFunc->getWhereTagsearchFilterQuery(),
+			'WHERE'   => '('.$this->getPostsInRootLine().') '.$this->cObj->enableFields('pages').' AND pages.doktype = 1 ' . $this->typo3BlogFunc->getWhereFilterQuery().' '.$this->getDateWhere().' '.$this->getAuthorWhere().' '. $this->typo3BlogFunc->getWhereTagsearchFilterQuery(),
 			'GROUPBY' => '',
 			'ORDERBY' => 'pages.tx_typo3blog_create_datetime DESC',
 			'LIMIT'   => intval($this->getPageBrowseLimit()) . ',' . intval($this->conf['itemsToDisplay'])
@@ -289,7 +290,7 @@ class tx_typo3blog_widget_bloglist extends tslib_pibase
 
 		if ($this->typo3BlogFunc->getSysLanguageUid() > 0 && $GLOBALS['TYPO3_CONF_VARS']['FE']['hidePagesIfNotTranslatedByDefault'] > 0) {
 			$sql_array['FROM'] = 'pages, pages_language_overlay';
-			$sql_array['WHERE'] = 'pages_language_overlay.pid = pages.uid AND ('.$this->getPostsInRootLine().') '.$this->cObj->enableFields('pages').' AND pages.doktype = 1 ' . $this->typo3BlogFunc->getWhereFilterQuery().' '.$this->getDateWhere().' '. $this->typo3BlogFunc->getWhereTagsearchFilterQuery();
+			$sql_array['WHERE'] = 'pages_language_overlay.pid = pages.uid AND ('.$this->getPostsInRootLine().') '.$this->cObj->enableFields('pages').' AND pages.doktype = 1 ' . $this->typo3BlogFunc->getWhereFilterQuery().' '.$this->getDateWhere().' '.$this->getAuthorWhere().' '. $this->typo3BlogFunc->getWhereTagsearchFilterQuery();
 			$sql_array['ORDERBY'] = 'pages_language_overlay.tx_typo3blog_create_datetime DESC';
 		}
 		//$GLOBALS['TYPO3_DB']->store_lastBuiltQuery = true;
@@ -325,7 +326,7 @@ class tx_typo3blog_widget_bloglist extends tslib_pibase
 		$sql_array = array(
 			'SELECT'	=> 'pages.uid',
 			'FROM'		=> 'pages',
-			'WHERE'		=> '('.$this->getPostsInRootLine().') '.$this->cObj->enableFields('pages').' AND pages.doktype = 1 ' . $this->typo3BlogFunc->getWhereFilterQuery().' '.$this->getDateWhere().' '. $this->typo3BlogFunc->getWhereTagsearchFilterQuery(),
+			'WHERE'		=> '('.$this->getPostsInRootLine().') '.$this->cObj->enableFields('pages').' AND pages.doktype = 1 ' . $this->typo3BlogFunc->getWhereFilterQuery().' '.$this->getDateWhere().' '.$this->getAuthorWhere().' '. $this->typo3BlogFunc->getWhereTagsearchFilterQuery(),
 			'GROUPBY'	=> '',
 			'ORDERBY'	=> '',
 			'LIMIT'		=> ''
@@ -333,7 +334,7 @@ class tx_typo3blog_widget_bloglist extends tslib_pibase
 
 		if ($this->typo3BlogFunc->getSysLanguageUid() > 0 && $GLOBALS['TYPO3_CONF_VARS']['FE']['hidePagesIfNotTranslatedByDefault'])	{
 			$sql_array['FROM']    = 'pages, pages_language_overlay';
-			$sql_array['WHERE']   = 'pages_language_overlay.pid = pages.uid AND ('.$this->getPostsInRootLine().') '.$this->cObj->enableFields('pages').' AND pages.doktype = 1 ' . $this->typo3BlogFunc->getWhereFilterQuery().' '.$this->getDateWhere().' '. $this->typo3BlogFunc->getWhereTagsearchFilterQuery();
+			$sql_array['WHERE']   = 'pages_language_overlay.pid = pages.uid AND ('.$this->getPostsInRootLine().') '.$this->cObj->enableFields('pages').' AND pages.doktype = 1 ' . $this->typo3BlogFunc->getWhereFilterQuery().' '.$this->getDateWhere().' '.$this->getAuthorWhere().' '. $this->typo3BlogFunc->getWhereTagsearchFilterQuery();
 			$sql_array['ORDERBY'] = '';
 		}
 
@@ -347,9 +348,8 @@ class tx_typo3blog_widget_bloglist extends tslib_pibase
 	/**
 	 * Return SQL date where
 	 *
-	 * @return	$where		SQL datefrom and dateto
-	 * @access private
-	 */
+	 * @return string $where        SQL datefrom and dateto@access private
+	*/
 	private function getDateWhere()	{
 		$where = '';
 		// Get GET param datefrom and dateto from url
@@ -372,6 +372,36 @@ class tx_typo3blog_widget_bloglist extends tslib_pibase
 		}
 		return $where;
 	}
+
+    /**
+     * Return SQL autor where
+     *
+     * @return string $where        SQL datefrom and dateto
+     * @access private
+     */
+    private function getAuthorWhere()	{
+        $where = '';
+        // Get GET param datefrom and dateto from url
+        if (strlen($this->piVars['author']) > 0) {
+            if ($this->typo3BlogFunc->getSysLanguageUid() > 0 && $GLOBALS['TYPO3_CONF_VARS']['FE']['hidePagesIfNotTranslatedByDefault']) {
+                $author = $GLOBALS['TYPO3_DB']->quoteStr(trim($this->piVars['author']), 'pages_language_overlay');
+            } else {
+                $author = $GLOBALS['TYPO3_DB']->quoteStr(trim($this->piVars['author']), 'pages');
+            }
+
+            if (($author != false)) {
+                if ($this->typo3BlogFunc->getSysLanguageUid() > 0 && $GLOBALS['TYPO3_CONF_VARS']['FE']['hidePagesIfNotTranslatedByDefault']) {
+                    $where .= " AND pages_language_overlay.tx_typo3blog_author = ".$author;
+                } else {
+                    $where .= " AND pages.tx_typo3blog_author = ".$author;
+                }
+            }
+        }
+
+        //echo $where;exit;
+        return $where;
+    }
+
 
 }
 

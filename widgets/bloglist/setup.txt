@@ -57,6 +57,12 @@ plugin.tx_typo3blog_pi1 {
 				field = be_user_realName
 				wrap = <li> | </li>
 				required = 1
+				typolink {
+					parameter.dataWrap = {$plugin.tx_typo3blog_pi1.startPid}
+					additionalParams.dataWrap = &tx_typo3blog_pi1[author]={field:be_user_uid}
+					title.field = be_user_realName // be_user_username
+					useCacheHash = 1
+				}
 			}
 
 			# table be_users field email setup for templatemarker '###AUTHOR_EMAIL###'
