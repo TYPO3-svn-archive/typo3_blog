@@ -1,6 +1,7 @@
 2014-03-16 Roland Hensch <rsch73@gmail.com>
-	* Update typo3 version 6.1
-	* Add Author widget
+	* [TASK #56158] typo3_blog ready for TYPO3 6.1
+	* [FEATURE #47334] New Author widget
+	* [CHANGES] Realurl configuration
 
 
 2013-06-03 Roland Hensch  <rsch73@gmail.com>
