@@ -1,7 +1,13 @@
+2014-03-16 Roland Hensch <rsch73@gmail.com>
+	* Update typo3 version 6.1
+	* Add Author widget
+
+
 2013-06-03 Roland Hensch  <rsch73@gmail.com>
-	* [FIX] Display Template blogsingle widget
-	* Small changes in locallang.xml
-	* Remove unused includes in setup.txt
+	* Make typo3_blog ready for Typo3 6.1 thx Harald Eisner and Matt Buechler
+	* Fix bugs in Calender Widget, thx Harald Eisner
+	* Small changes in locallang.xml, thx Harald Eisner
+	* Remove includes in setup.txt, thx Harald Eisner
 
 
 2013-03-27 Roland Hensch  <rsch73@gmail.com>
